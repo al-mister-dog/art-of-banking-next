@@ -1,0 +1,191 @@
+createAccount:
+  createAccount function takes 4 parameters
+
+  subordinate party (customer)
+  superior party (bank)
+  instrument type (e.g customer deposits, bank deposts, loan?)
+  amount (optional) starting amount put in by customer
+
+  adds an account object with the following details
+  accountId
+  customerId (subordinate)
+  bankId (superior)
+  instrument type
+  current balance
+
+  adds account id to both parties
+
+  increments account id for the next time an account is added
+
+
+HIERARCHIES
+customer transfers
+
+One Transfer
+c1 >50 c2
+
+actual changes
+c1-b1 account -50
+c2-b2 account +50
+
+inferred changes (using functions)
+b1 decreases liability with c1
+c1 decreases assets with b1
+
+b1 increases liability with c1
+c1 increases assets with b1
+
+depending on system...
+National System
+b1 increases liability with b2
+b2 increases asset with b1
+settled with actual payment
+no netting (for our purposes)
+
+Correspondent System
+b1 increases liability with b2
+b2 increases asset with b1
+deferred through correspondent transfer
+can be settled with actual payment
+optional netting
+
+Clearing House System
+b1 increases liability with clearing house
+b2 increases asset with clearing house
+deferred through netting and receipt of clearing house system
+(can be settled with actual payment but breaks the system)
+
+Central Bank System
+b1 increases liability with central bank
+b2 increases asset with central bank
+deferred through correspondent fed funds
+deferred through repurchase agreements (repos)
+
+
+
+system seems to depend on how accounts are created
+
+
+when does an account show a liability
+if party is the superior and balance > 0
+if party is subordinate and balance < 0
+
+when does an account show an asset
+if party is superior and balance < 0
+if party is subordinate and balance > 0
+
+
+does this hold true for everything?
+
+c1-b1: customerDeposits +50
+c1 is subordinate and balance > 0 (asset) //customerDeposits
+b1 is superior and balance > 0 (liability) //customerDeposits
+
+c1-b1: customerDeposits -50
+c1 is subordinate and balance < 0 (liability) //customerOverdrafts
+b1 is superior and balance < 0 (asset)  //customerOverdrafts
+
+
+b1-b2: bankDeposits +50
+b1 is subordinate and balance > 0 (asset)
+b2 is superior and balance > 0 (liability)
+
+b1-b2: bankDeposits -50
+b1 is subordinate and balance < 0 (liability)
+b2 is superior and balance < 0 (asset)
+
+
+In some cases if a balance is negative it represents an overdraft
+
+if (customerDeposit or bankDeposit) {
+  if (<0) {
+    deposit = overdraft
+  }
+}
+
+
+
+
+
+
+
+
+
+[ { id: 0,
+    customerId: 2,
+    bankId: 0,
+    type: 'customerOverdrafts',
+    balance: 50 } ]
+  ​​​​​at ​​​​​​​​getLiabilities(alex)​​​ ​quokka.ts:362:1​
+
+[] ​​​​​at ​​​​​​​​getLiabilities(herbie)​​​ ​quokka.ts:363:1​
+
+[ { id: 1,
+    customerId: 3,
+    bankId: 0,
+    type: 'customerDeposits',
+    balance: 150 } ]
+  ​​​​​at ​​​​​​​​getLiabilities(barclays)​​​ ​quokka.ts:364:1​
+
+[] ​​​​​at ​​​​​​​​getAssets(alex)​​​ ​quokka.ts:365:1​
+
+[ { id: 1,
+    customerId: 3,
+    bankId: 0,
+    type: 'customerDeposits',
+    balance: 150 } ]
+  ​​​​​at ​​​​​​​​getAssets(herbie)​​​ ​quokka.ts:366:1​
+
+[ { id: 0,
+    customerId: 2,
+    bankId: 0,
+    type: 'customerOverdrafts',
+    balance: 50 } ]
+  ​​​​​at ​​​​​​​​getAssets(barclays)​​​ ​quokka.ts:367:1
+
+
+
+
+
+
+
+
+[ { id: 0,
+    customerId: 2,
+    bankId: 0,
+    type: 'customerOverdrafts',
+    balance: 50 } ]
+  ​​​​​at ​​​​​​​​getLiabilities(alex)​​​ ​quokka.ts:367:1​
+
+[] ​​​​​at ​​​​​​​​getLiabilities(herbie)​​​ ​quokka.ts:368:1​
+
+[ { id: 1,
+    customerId: 3,
+    bankId: 0,
+    type: 'customerDeposits',
+    balance: 150 } ]
+  ​​​​​at ​​​​​​​​getLiabilities(barclays)​​​ ​quokka.ts:369:1​
+
+[] ​​​​​at ​​​​​​​​getAssets(alex)​​​ ​quokka.ts:370:1​
+
+[ { id: 1,
+    customerId: 3,
+    bankId: 0,
+    type: 'customerDeposits',
+    balance: 150 } ]
+  ​​​​​at ​​​​​​​​getAssets(herbie)​​​ ​quokka.ts:371:1​
+
+[ { id: 0,
+    customerId: 2,
+    bankId: 0,
+    type: 'customerOverdrafts',
+    balance: 50 } ]
+  ​​​​​at ​​​​​​​​getAssets(barclays)
+
+
+dues and system
+
+banks will be liable to either other banks, the clearing house or the central bank depending
+on the system.
+
+this would need to be specified as soon as an account is opened

@@ -1,0 +1,31 @@
+import { useAppSelector, useAppDispatch } from "../../../app/hooks";
+import {
+  selectSettings,
+  setReserveRequirement,
+} from "../../../features/settings/settingsSlice";
+import { Box, Slider, Text } from "@mantine/core";
+
+export default function ReserveRequirementSlider({
+  disabled,
+}: {
+  disabled: boolean;
+}) {
+  const dispatch = useAppDispatch();
+  const { reserveRequirement } = useAppSelector(selectSettings);
+
+  function handleChange(e: { num?: number }) {
+    dispatch(setReserveRequirement({ num: e.num }));
+  }
+  return (
+    <Box>
+      <Text>Reserve Requirement</Text>
+      <Slider
+        color="violet"
+        label={`${reserveRequirement}%`}
+        value={reserveRequirement}
+        onChange={(num) => handleChange({ num })}
+        disabled={disabled}
+      />
+    </Box>
+  );
+}
