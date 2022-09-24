@@ -64,7 +64,6 @@ export const banksSlice = createSlice({
       } else {
         Customer.transfer(amount, c1, c2, b1);
       }
-
       banksSlice.caseReducers.setState(state);
     },
     getLoan: (state, { payload }) => {

@@ -1,3 +1,4 @@
+import { Clearinghouse } from "./clearinghouse";
 import { CreditAccounts } from "./credit-accounts";
 import { Reserves } from "./reserves";
 import {
@@ -22,27 +23,28 @@ export const Dues = {
     )[0];
   },
   getCorresponding(bank1: Bank, bank2: Bank) {
-    if (System.getSystem() === "clearinghouse") {
-      return creditData.allIds
-        .map((id) => creditData.creditAccounts[id])
-        .filter(
-          (account) =>
-            (account.subordinateId === bank1.id &&
-              account.superiorId === bank2.id) ||
-            (account.superiorId === bank1.id &&
-              account.subordinateId === bank2.id &&
-              account.category === "dues")
-        );
-    } else {
-      return mapFilter(
-        bank1,
-        (account) =>
-          (account.subordinateId === bank1.id &&
-            account.superiorId === bank2.id) ||
-          (account.superiorId === bank1.id &&
-            account.subordinateId === bank2.id)
-      );
-    }
+    // if (System.getSystem() === "clearinghouse") {
+    //   return creditData.allIds
+    //     .map((id) => creditData.creditAccounts[id])
+    //     .filter(
+    //       (account) =>
+    //         (account.subordinateId === bank1.id &&
+    //           account.superiorId === bank2.id) ||
+    //         (account.superiorId === bank1.id &&
+    //           account.subordinateId === bank2.id &&
+    //           account.category === "dues")
+    //     );
+    // } else {
+    return mapFilter(
+      bank1,
+      (account) =>
+        (account.subordinateId === bank1.id &&
+          account.superiorId === bank2.id) ||
+        (account.superiorId === bank1.id &&
+          account.subordinateId === bank2.id &&
+          account.category === "dues")
+    );
+    // }
   },
   getById(id: number) {
     const allDues = creditData.allIds.map(
@@ -152,9 +154,7 @@ export const Dues = {
   },
 
   netClearingHouse(bank1: Bank) {
-    const clearinghouse = Object.keys(bankData.banks)
-      .map((key) => bankData.banks[key])
-      .filter((bank) => bank.type === "clearinghouse")[0];
+    const clearinghouse = Clearinghouse.get();
 
     const owedByBank1 = Dues.get(bank1, clearinghouse);
     const owedByBank2 = Dues.get(clearinghouse, bank1);
@@ -181,6 +181,9 @@ export const Dues = {
 
   netAndSet(bank1: Bank, bank2: Bank, amount: number) {
     const account = Dues.get(bank1, bank2);
+    // CreditAccounts.set(account, amount);
+    
+    
     const newAccount = { ...account, netted: true };
     CreditAccounts.set(newAccount, amount);
   },

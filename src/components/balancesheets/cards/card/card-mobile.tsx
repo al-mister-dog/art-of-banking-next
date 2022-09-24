@@ -1,18 +1,29 @@
-import { createStyles } from "@mantine/core";
+import { createContext, useContext, useState } from "react";
+
+export const DrawerContext = createContext((v: boolean) => {});
+
 import {
-  ActionIcon,
   Card,
   Center,
   SimpleGrid,
   Text,
   Title,
+  createStyles,
+  Drawer,
 } from "@mantine/core";
-import { Dots } from "tabler-icons-react";
-import { CardInfo } from "../types";
-import SideUI from "./side";
+
+import SideUI from "../side-flash";
+import BankDetail from "../../bank-detail/mobile";
+
+import { CardInfo } from "../../types";
 
 const useStyles = createStyles((theme) => ({
-  card: { paddingBottom: "0px", backgroundColor: theme.colors.violet[1] },
+  card: {
+    backgroundColor: theme.colors.violet[1],
+    paddingBottom: "0px",
+    width: "90%",
+    margin: "auto",
+  },
   header: { padding: "5px", cursor: "pointer" },
   grape: {
     backgroundColor: theme.colors.grape,
@@ -40,13 +51,10 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface Props {
-  bank: CardInfo;
-  setBankDetail: (v: CardInfo) => void;
-}
-export default function CardUI({ bank, setBankDetail }: Props) {
+export default function CardUI({ bank }: { bank: CardInfo }) {
+  const [opened, setOpened] = useState(false);
   const { classes } = useStyles();
-  
+
   return (
     <Card
       key={bank.cardInfo.id}
@@ -57,7 +65,7 @@ export default function CardUI({ bank, setBankDetail }: Props) {
     >
       <Card.Section
         className={`${classes.header} ${classes[bank.color]}`}
-        onClick={() => setBankDetail(bank)}
+        onClick={() => setOpened(true)}
       >
         <Center>
           <Title order={4} color="white">
@@ -88,13 +96,18 @@ export default function CardUI({ bank, setBankDetail }: Props) {
           })}
         </div>
       </SimpleGrid>
-      {/* <ActionIcon
-        color="teal"
-        variant="transparent"
-        style={{ marginLeft: "auto" }}
-      >
-        <Dots />
-      </ActionIcon> */}
+
+      <DrawerContext.Provider value={setOpened}>
+        <Drawer
+          opened={opened}
+          onClose={() => setOpened(false)}
+          title={`${bank.cardInfo.name}: ${bank.cardInfo.type}`}
+          padding="xl"
+          size="lg"
+        >
+          <BankDetail bank={bank} />
+        </Drawer>
+      </DrawerContext.Provider>
     </Card>
   );
 }

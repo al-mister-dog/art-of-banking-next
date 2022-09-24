@@ -1,4 +1,4 @@
-import { forwardRef, useContext, useState } from "react";
+import { forwardRef, useContext } from "react";
 import { useMediaQuery } from "../../../../../hooks/useMediaQuery";
 import {
   Button,
@@ -9,9 +9,8 @@ import {
   Text,
   useMantineTheme,
 } from "@mantine/core";
-import { CurrencyDollar } from "tabler-icons-react";
 import { CardInfo } from "../../../types";
-import { DrawerContext } from "../../../cards/cardmobile";
+import { DrawerContext } from "../../../cards/card/card-mobile";
 
 interface Props {
   bank: CardInfo;

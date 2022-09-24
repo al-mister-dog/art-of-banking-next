@@ -90,20 +90,6 @@ export const BalanceSheets = {
   },
 
   getCreditAssets(bank: Bank) {
-    if (bank.type === "clearinghouse") {
-      const creditAccounts = creditData.allIds
-        .map((id) => creditData.creditAccounts[id])
-        .filter(
-          (account) => account.superiorId === bank.id && account.balance > 0
-        )
-        .map((account) => {
-          return {
-            ...account,
-            category: correspondingCreditInstruments[account.category].assets,
-          };
-        });
-        return creditAccounts
-    }
     const creditAccounts: CreditAccount[] = CreditAccounts.getAll(bank);
 
     const dueToAccounts = creditAccounts
@@ -199,61 +185,3 @@ function mapFilter(party: Bank, cb: (account: Account) => boolean) {
     })
     .filter((account) => cb(account));
 }
-
-const data = [
-  {
-    id: 0,
-    name: "Bank 1",
-    assets: [{ id: 0, cashReserves: 200, category: "reserves" }],
-    liabilities: [
-      {
-        id: 0,
-        subordinateId: 1,
-        superiorId: 0,
-        type: "customerDeposits",
-        balance: 100,
-        category: "customerDeposits",
-      },
-      {
-        id: 1,
-        subordinateId: 2,
-        superiorId: 0,
-        type: "customerDeposits",
-        balance: 100,
-        category: "customerDeposits",
-      },
-    ],
-  },
-  {
-    id: 1,
-    name: "Customer 1",
-    assets: [
-      {
-        id: 0,
-        subordinateId: 1,
-        superiorId: 0,
-        type: "customerDeposits",
-        balance: 100,
-        category: "customerDeposits",
-      },
-      { id: 1, cashReserves: 0, category: "reserves" },
-    ],
-    liabilities: [],
-  },
-  {
-    id: 2,
-    name: "Customer 2",
-    assets: [
-      {
-        id: 1,
-        subordinateId: 2,
-        superiorId: 0,
-        type: "customerDeposits",
-        balance: 100,
-        category: "customerDeposits",
-      },
-      { id: 2, cashReserves: 0, category: "reserves" },
-    ],
-    liabilities: [],
-  },
-];

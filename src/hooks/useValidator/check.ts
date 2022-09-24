@@ -134,5 +134,16 @@ export const check = {
       };
     }
     return this;
+  },
+  isPayed(amount: number) {
+    if (amount <= 0) {
+      this.checks = {
+        ...this.checks,
+        error: false,
+        errorMessage: ``,
+        disabled: true,
+      };
+    }
+    return this;
   }
 };

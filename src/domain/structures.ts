@@ -106,6 +106,7 @@ export interface DuesAccount {
   type: string;
   balance: number;
   category: string;
+  netted?: boolean
 }
 
 export type PossibleDuesAccount = DuesAccount | undefined;
@@ -173,8 +174,15 @@ export const BankData = {
   },
   assignCreditIds(bank1: Bank, bank2: Bank, creditId: number) {
     let newBankData = JSON.parse(JSON.stringify(bankData));
-    newBankData.banks[bank1.id].creditIds = [...bank1.creditIds, creditId];
-    newBankData.banks[bank2.id].creditIds = [...bank2.creditIds, creditId];
+    newBankData.banks[bank1.id].creditIds = [
+      ...newBankData.banks[bank1.id].creditIds,
+      creditId,
+    ];
+    newBankData.banks[bank2.id].creditIds = [
+      ...newBankData.banks[bank2.id].creditIds,
+      creditId,
+    ];
+    
     this.assign(newBankData);
   },
 };

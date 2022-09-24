@@ -24,7 +24,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { CurrencyDollar } from "tabler-icons-react";
-import { DrawerContext } from "../../../cards/cardmobile";
+import {DrawerContext} from "../../../cards/card/card-mobile"
 import { CardInfo } from "../../../types";
 import { Dues } from "../../../../../domain/dues";
 import { System } from "../../../../../domain/system";
@@ -245,7 +245,7 @@ function NextStepCH({ bank, selectedBank }) {
     const bankName = otherBank.name;
     settlementInfo = `${bankName} owes you $${accountInfo.balance}`;
   }
-
+  
   const validation = useValidator("settleDues", bank, amount, selectedBank);
   function payDuesPayload() {
     if (isDebtor) {

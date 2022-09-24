@@ -1,17 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { AppState } from "../../app/store";
-import { overdraft, reserveRequirement, interestRate } from "./initialState";
+import {
+  overdraft,
+  reserveRequirement,
+  interestRate,
+  ColorSettings,
+  colorSettings,
+} from "./initialState";
 
 export interface SettingsState {
   overdraft: number;
   reserveRequirement: number;
   interestRate: number;
+  colorSettings: ColorSettings;
 }
 
 const initialState: SettingsState = {
   overdraft,
   reserveRequirement,
   interestRate,
+  colorSettings,
 };
 
 export const settingsSlice = createSlice({
@@ -35,6 +43,16 @@ export const settingsSlice = createSlice({
       state.reserveRequirement = 0;
       state.interestRate = 0;
     },
+    setColors: (state, { payload }) => {
+      const key: keyof ColorSettings = payload.key;
+      let resetColorSettings = {
+        static: false,
+        flash: false,
+        off: false,
+      };
+      const newColorSettings = {...resetColorSettings, [key]: true }
+      state.colorSettings = newColorSettings;
+    },
   },
 });
 
@@ -43,6 +61,7 @@ export const {
   setReserveRequirement,
   setInterestRate,
   refreshSettings,
+  setColors,
 } = settingsSlice.actions;
 
 export const selectSettings = (state: AppState) => state.settings;

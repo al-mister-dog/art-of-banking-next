@@ -7,7 +7,7 @@ import { partsTexts } from "../../config/parts";
 import { getRouteObjectData } from "../../helpers/routeMethods";
 import { createStyles } from "@mantine/core";
 import Article from "../../components/article/article";
-import BalanceSheets from "../../components/balancesheets/cards/card-group";
+import BalanceSheets from "../../components/balancesheets/cards/card-list";
 import Charts from "../../components/charts/tabs";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
 import KeyTerms from "../../components/article/lecture-index/key-terms";

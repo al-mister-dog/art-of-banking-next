@@ -5,11 +5,17 @@ import { creditData } from "../../domain/structures";
 import { getTransferDetails, getWithdrawDetails } from "../../helpers/getters";
 import { check } from "./check";
 
-const validatorsByLecture = {
+const validatorsByLecture = (
+  customer: CardInfo,
+  amount: number,
+  selectedBank: string,
+  overdraft: number,
+  reserveRequirement: number
+) => ({
   simple: {
     bank: {},
     customer: {
-      deposit(customer: CardInfo, amount: number, selectedBank: string) {
+      deposit() {
         const customerReserves = Reserves.getReservesById(customer.cardInfo.id);
         return check
           .requiredFields(selectedBank, amount)
@@ -20,7 +26,7 @@ const validatorsByLecture = {
           )
           .validate();
       },
-      withdraw(customer: CardInfo, amount: number, selectedBank: string) {
+      withdraw() {
         const { customerDeposits, bankReserves, bank } =
           getWithdrawDetails(customer);
         return check
@@ -31,7 +37,7 @@ const validatorsByLecture = {
           .sufficentDeposits(customerDeposits, amount, customer.cardInfo.name)
           .validate();
       },
-      transfer(customer: CardInfo, amount: number, selectedBank: string) {
+      transfer() {
         const { customerDeposits, bankReserves, bank } =
           getTransferDetails(customer);
         return check
@@ -47,7 +53,7 @@ const validatorsByLecture = {
   simpleOverdraft: {
     bank: {},
     customer: {
-      deposit(customer: CardInfo, amount: number, selectedBank: string) {
+      deposit() {
         const customerReserves = Reserves.getReservesById(customer.cardInfo.id);
         return check
           .requiredFields(selectedBank, amount)
@@ -58,12 +64,7 @@ const validatorsByLecture = {
           )
           .validate();
       },
-      withdraw(
-        customer: CardInfo,
-        amount: number,
-        selectedBank: string,
-        overdraft: number
-      ) {
+      withdraw() {
         const { customerDeposits, bankReserves, bank } =
           getWithdrawDetails(customer);
 
@@ -75,12 +76,7 @@ const validatorsByLecture = {
           .isOverdraftLimit(customerDeposits, overdraft, amount)
           .validate();
       },
-      transfer(
-        customer: CardInfo,
-        amount: number,
-        selectedBank: string,
-        overdraft: number
-      ) {
+      transfer() {
         const { customerDeposits, bankReserves, bank } =
           getTransferDetails(customer);
         return check
@@ -95,7 +91,7 @@ const validatorsByLecture = {
   loans: {
     bank: {},
     customer: {
-      deposit(customer: CardInfo, amount: number, selectedBank: string) {
+      deposit() {
         const customerReserves = Reserves.getReservesById(customer.cardInfo.id);
         return check
           .requiredFields(selectedBank, amount)
@@ -106,12 +102,7 @@ const validatorsByLecture = {
           )
           .validate();
       },
-      withdraw(
-        customer: CardInfo,
-        amount: number,
-        selectedBank: string,
-        overdraft: number
-      ) {
+      withdraw() {
         const { customerDeposits, bankReserves, bank } =
           getWithdrawDetails(customer);
 
@@ -123,12 +114,7 @@ const validatorsByLecture = {
           .isOverdraftLimit(customerDeposits, overdraft, amount)
           .validate();
       },
-      transfer(
-        customer: CardInfo,
-        amount: number,
-        selectedBank: string,
-        overdraft: number
-      ) {
+      transfer() {
         const { customerDeposits, bankReserves, bank } =
           getTransferDetails(customer);
         return check
@@ -138,12 +124,7 @@ const validatorsByLecture = {
           .isOverdraftLimit(customerDeposits, overdraft, amount)
           .validate();
       },
-      getLoan(
-        customer: CardInfo,
-        amount: number,
-        selectedBank: string,
-        overdraft: number
-      ) {
+      getLoan() {
         const { customerDeposits, bankReserves, bank } =
           getTransferDetails(customer);
         return check
@@ -153,12 +134,7 @@ const validatorsByLecture = {
           .isReasonableAmount(amount)
           .validate();
       },
-      repayLoan(
-        customer: CardInfo,
-        amount: number,
-        selectedBank: string,
-        overdraft: number
-      ) {
+      repayLoan() {
         const loan = creditData.allIds
           .map((id) => creditData.creditAccounts[id])
           .filter(
@@ -187,7 +163,7 @@ const validatorsByLecture = {
   simpleOverdraftReserveRequirement: {
     bank: {},
     customer: {
-      deposit(customer: CardInfo, amount: number, selectedBank: string) {
+      deposit() {
         const customerReserves = Reserves.getReservesById(customer.cardInfo.id);
         return check
           .requiredFields(selectedBank, amount)
@@ -198,13 +174,7 @@ const validatorsByLecture = {
           )
           .validate();
       },
-      withdraw(
-        customer: CardInfo,
-        amount: number,
-        selectedBank: string,
-        overdraft: number,
-        reserveRequirement: number
-      ) {
+      withdraw() {
         const { customerDeposits, bankReserves, bank } =
           getWithdrawDetails(customer);
 
@@ -217,13 +187,7 @@ const validatorsByLecture = {
           .isOverdraftLimit(customerDeposits, overdraft, amount)
           .validate();
       },
-      transfer(
-        customer: CardInfo,
-        amount: number,
-        selectedBank: string,
-        overdraft: number,
-        reserveRequirement: number
-      ) {
+      transfer() {
         const { customerDeposits, bankReserves, bank } =
           getTransferDetails(customer);
         return check
@@ -238,12 +202,12 @@ const validatorsByLecture = {
   },
   dues1: {
     bank: {
-      payDues(bank: CardInfo, amount: number, selectedBank: string) {
+      payDues() {
         const dues = creditData.allIds
           .map((id) => creditData.creditAccounts[id])
           .filter(
             (account) =>
-              account.subordinateId === bank.cardInfo.id &&
+              account.subordinateId === customer.cardInfo.id &&
               account.superiorId === parseInt(selectedBank) &&
               account.category === "dues"
           );
@@ -265,13 +229,7 @@ const validatorsByLecture = {
       },
     },
     customer: {
-      transfer(
-        customer: CardInfo,
-        amount: number,
-        selectedBank: string,
-        overdraft: number,
-        reserveRequirement: number
-      ) {
+      transfer() {
         const { customerDeposits, bankReserves, bank } =
           getTransferDetails(customer);
         return check
@@ -289,17 +247,17 @@ const validatorsByLecture = {
       netDues() {
         return check.validate();
       },
-      settleDues(bank: CardInfo, amount: number) {
+      settleDues() {
         return check.isPayed(amount).validate();
       },
     },
     bank: {
-      settleDues(bank: CardInfo, amount: number, selectedBank: string) {
+      settleDues() {
         const dues = creditData.allIds
           .map((id) => creditData.creditAccounts[id])
           .filter(
             (account) =>
-              account.subordinateId === bank.cardInfo.id &&
+              account.subordinateId === customer.cardInfo.id &&
               account.superiorId === parseInt(selectedBank) &&
               account.category === "dues"
           );
@@ -318,18 +276,12 @@ const validatorsByLecture = {
             .isPositiveAmount(amount)
             .validate();
       },
-      netDues(bank: CardInfo, amount: number, selectedBank: string) {
+      netDues() {
         return check.validate();
       },
     },
     customer: {
-      transfer(
-        customer: CardInfo,
-        amount: number,
-        selectedBank: string,
-        overdraft: number,
-        reserveRequirement: number
-      ) {
+      transfer() {
         const { customerDeposits, bankReserves, bank } =
           getTransferDetails(customer);
         return (
@@ -346,19 +298,56 @@ const validatorsByLecture = {
       },
     },
   },
-};
+});
 
-export const validatorsById = {
-  0: validatorsByLecture.simple,
-  1: validatorsByLecture.simple,
-  2: validatorsByLecture.simple,
-  3: validatorsByLecture.simpleOverdraft,
-  4: validatorsByLecture.loans,
-  5: validatorsByLecture.simpleOverdraftReserveRequirement,
-  6: validatorsByLecture.simple,
-  7: validatorsByLecture.simple,
-  8: validatorsByLecture.simple,
-  9: validatorsByLecture.dues1,
-  10: validatorsByLecture.dues2,
-  11: validatorsByLecture.dues2,
-};
+export const validatorsById = (
+  customer: CardInfo,
+  amount: number,
+  selectedBank: string,
+  overdraft: number,
+  reserveRequirement: number
+) => ({
+  validate: validatorsByLecture(
+    customer,
+    amount,
+    selectedBank,
+    overdraft,
+    reserveRequirement
+  ),
+  0() {
+    this.validate.simple;
+  },
+  1() {
+    this.validate.simple;
+  },
+  2() {
+    this.validate.simple;
+  },
+  3() {
+    this.validate.simpleOverdraft;
+  },
+  4() {
+    this.validate.loans;
+  },
+  5() {
+    this.validate.simpleOverdraftReserveRequirement;
+  },
+  6() {
+    this.validate.simple;
+  },
+  7() {
+    this.validate.simple;
+  },
+  8() {
+    this.validate.simple;
+  },
+  9() {
+    this.validate.dues1;
+  },
+  10() {
+    this.validate.dues2;
+  },
+  11() {
+    this.validate.dues2;
+  },
+});

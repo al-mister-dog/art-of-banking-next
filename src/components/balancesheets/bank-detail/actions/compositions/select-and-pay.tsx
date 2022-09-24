@@ -10,7 +10,7 @@ import {
 } from "@mantine/core";
 import { CurrencyDollar } from "tabler-icons-react";
 import { CardInfo } from "../../../types";
-import { DrawerContext } from "../../../cards/cardmobile";
+import {DrawerContext} from "../../../cards/card/card-mobile"
 
 interface Props {
   bank: CardInfo;

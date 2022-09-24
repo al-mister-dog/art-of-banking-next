@@ -2,6 +2,7 @@ import { BankingSystem } from "./banking-system";
 import { Dues } from "./dues";
 import { Bank, bankData, SystemType } from "./structures";
 import { Accounts } from "./accounts";
+import { Clearinghouse } from "./clearinghouse";
 export let system: SystemType = "national";
 
 type SystemObjectFunctions = {
@@ -45,10 +46,7 @@ export const System = {
         Dues.increase(bank1, bank2, "customerDeposits", amount);
       },
       clearinghouse: function (): void {
-        
-        const clearinghouse = Object.keys(bankData.banks)
-          .map((key) => bankData.banks[key])
-          .filter((bank) => bank.type === "clearinghouse")[0];
+        const clearinghouse = Clearinghouse.get()
 
         Dues.increase(bank1, clearinghouse, "ch certificates", amount);
         Dues.increase(clearinghouse, bank2, "ch certificates", amount);

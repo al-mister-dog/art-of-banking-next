@@ -1,8 +1,4 @@
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import {
-  selectSettings,
-  setOverdraft,
-} from "../../features/settings/settingsSlice";
+import { useAppSelector } from "../../app/hooks";
 import { selectLectures } from "../../features/lectures/lecturesSlice";
 import { sliderSettings } from "../../features/settings/initialState";
 import {
@@ -10,30 +6,19 @@ import {
   Center,
   Grid,
   Title,
-  Text,
   useMantineTheme,
-  ActionIcon,
-  Box,
-  Slider,
-  Accordion,
-  Radio,
 } from "@mantine/core";
 import LineChart from "../charts/linechart";
-import { Refresh } from "tabler-icons-react";
-import { useState } from "react";
 import RefreshBalanceSheets from "./settings/refresh";
 import OverdraftSlider from "./settings/slider-overdraft";
 import ReserveRequirementSlider from "./settings/slider-reserve-requirement";
 import InterestRateSlider from "./settings/slider-interest-rate";
-import DisplayRadioGroup from "./settings/display-radio-group";
-import ColorsRadioGroup from "./settings/colors-radio-group";
+import DisplayRadioGroup from "./settings/radio-group-display";
+import ColorsRadioGroup from "./settings/radio-group-colors";
 
 export default function Desktop() {
   const { currentLectureId } = useAppSelector(selectLectures);
   const theme = useMantineTheme();
-  const [value, setValue] = useState(40);
-  const [display, setDisplay] = useState("accounts");
-  const [colorCoding, setColorCoding] = useState("flash");
   const slidersDisabled = sliderSettings[currentLectureId];
   
   return (

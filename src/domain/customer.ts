@@ -45,8 +45,6 @@ export const Customer = {
     if (bank2) {
       Accounts.decreaseCorrespondingBalance(customer1, bank1, amount);
       Accounts.increaseCorrespondingBalance(customer2, bank2, amount);
-      //bank1 decreases its own balance but is owed by clearinghouse
-      //bank2
       System.handleDues(bank1, bank2, amount);
     } else {
       Accounts.decreaseCorrespondingBalance(customer1, bank1, amount);

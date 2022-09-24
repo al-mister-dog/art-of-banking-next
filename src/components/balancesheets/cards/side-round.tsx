@@ -5,15 +5,19 @@ const useStyles = createStyles((theme) => ({
   text: {
     transition: "all 0.5s ease-in",
     color: "black",
-    // padding: "20px",
+    padding: "0px 3px",
   },
   decrease: {
-    background: "red",
+    transition: "all 0.5s ease-in",
+    background: theme.colors.red[5],
     color: "white",
+    padding: "0px 3px",
   },
   increase: {
-    background: "green",
+    transition: "all 0.5s ease-in",
+    background: theme.colors.green[5],
     color: "white",
+    padding: "0px 3px",
   },
 }));
 
@@ -30,12 +34,22 @@ export default function SideUI({ side }) {
   );
 }
 
-function Balance({ account }) {
+const Balance = ({ account }) => {
   const { classes } = useStyles();
   const [prevBalance, setPrevBalance] = useState(account.balance);
   const prevCountRef = useRef(account.balance);
 
+  // useEffect(() => {
+  //   if (account.balance !== prevCountRef.current) {
+  //     prevCountRef.current = account.balance;
+  //   }
+  // }, [account.balance]);
+console.log("REND")
   useEffect(() => {
+    console.log("ROUND")
+    console.log(`account.balance: ${account.balance}`)
+    console.log(`prevCountRef: ${prevCountRef.current}`)
+    console.log(`prevState: ${prevBalance}`)
     prevCountRef.current = account.balance;
     setPrevBalance(prevCountRef.current);
   }, [account.balance]);
@@ -45,9 +59,9 @@ function Balance({ account }) {
       size="xs"
       weight="bold"
       align="left"
-      className={`${account.balance === prevBalance && classes.text} ${
-        account.balance < prevBalance && classes.decrease
-      } ${account.balance > prevBalance && classes.increase}`}
+      className={`${account.balance === prevCountRef.current && classes.text} ${
+        account.balance < prevCountRef.current && classes.decrease
+      } ${account.balance > prevCountRef.current && classes.increase}`}
     >
       {account.thirdPartyDetail?.name
         ? `${account.thirdPartyDetail.name}: `
@@ -55,4 +69,6 @@ function Balance({ account }) {
       ${account.balance}
     </Text>
   );
-}
+};
+
+//if no change then keep color you already have

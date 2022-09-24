@@ -2,6 +2,20 @@ export const overdraft = 0;
 export const reserveRequirement = 0;
 export const interestRate = 0;
 
+export interface ColorSettings {
+  round: boolean;
+  static: boolean;
+  flash: boolean;
+  off: boolean;
+}
+
+export const colorSettings: ColorSettings = {
+  round: true,
+  static: false,
+  flash: false,
+  off: false,
+};
+
 export const sliderSettings = {
   0: {
     overdraft: true,

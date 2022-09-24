@@ -20,7 +20,7 @@ export const CreditAccounts = {
     type: string,
     category: string
   ) {
-    const newAccount = {
+    let newAccount: CreditAccount = {
       id: creditData.id,
       subordinateId: subordinate.id,
       superiorId: superior.id,
@@ -28,6 +28,9 @@ export const CreditAccounts = {
       balance,
       category,
     };
+    if (category === "dues") {
+      newAccount = {...newAccount, netted: false}
+    }
     const newCreditData = JSON.parse(JSON.stringify(creditData));
     newCreditData.creditAccounts[newCreditData.id] = newAccount;
     newCreditData.id++;
@@ -63,9 +66,13 @@ export const CreditAccounts = {
   },
 
   increaseCorrespondingCredit(account: CreditAccount, amount: number) {
-    const newCreditAccount = { ...account };
+    let newCreditAccount = { ...account };
+    
+    if (newCreditAccount.balance === 0) {
+      newCreditAccount = {...newCreditAccount, netted: false}
+    }
     newCreditAccount.balance += amount;
-
+    
     let creditAccounts = { ...creditData.creditAccounts };
     creditAccounts = { ...creditAccounts, [account.id]: newCreditAccount };
     CreditData.assignAccounts(creditAccounts);
@@ -81,9 +88,14 @@ export const CreditAccounts = {
   },
 
   set(account: CreditAccount, amount: number) {
-    // console.log(account)
-    const newCreditAccount = { ...account };
+    
+    let newCreditAccount = { ...account };
     newCreditAccount.balance = amount;
+    // if (newCreditAccount.balance === 0) {
+    //   newCreditAccount = {...newCreditAccount, netted: true}
+    // } else {
+    //   newCreditAccount = {...newCreditAccount, netted: false}
+    // }
     let creditAccounts = creditData.creditAccounts;
     creditAccounts = { ...creditAccounts, [account.id]: newCreditAccount };
     CreditData.assignAccounts(creditAccounts);
