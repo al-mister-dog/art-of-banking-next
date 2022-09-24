@@ -37,31 +37,24 @@ export default function SideUI({ side }) {
 const Balance = ({ account }) => {
   const { classes } = useStyles();
   const prevCountRef = useRef(account.balance);
+  const prevClass = useRef("text");
 
-  useEffect(() => {
-    
-    if (account.type === "customerDeposits" && account.id === 3) {
-      console.log("ROUND USE EFFECT")
-      console.log("account.balance: " + account.balance);
-      console.log("prevCountRef: " + prevCountRef.current);
+  if (account.balance !== prevCountRef.current) {
+    if (account.balance > prevCountRef.current) {
+      prevClass.current = "increase";
     }
-    if (account.balance !== prevCountRef.current) {
-      prevCountRef.current = account.balance;
+    if (account.balance < prevCountRef.current) {
+      prevClass.current = "decrease";
     }
-  }, [account.balance]);
-  if (account.type === "customerDeposits" && account.id === 3) {
-    console.log("ROUND USE STATE")
-    console.log("account.balance: " + account.balance);
-    console.log("prevCountRef: " + prevCountRef.current);
+    prevCountRef.current = account.balance; //*
   }
+
   return (
     <Text
       size="xs"
       weight="bold"
       align="left"
-      className={`${account.balance === prevCountRef.current && classes.text} ${
-        account.balance < prevCountRef.current && classes.decrease
-      } ${account.balance > prevCountRef.current && classes.increase}`}
+      className={classes[prevClass.current]}
     >
       {account.thirdPartyDetail?.name
         ? `${account.thirdPartyDetail.name}: `
@@ -71,4 +64,12 @@ const Balance = ({ account }) => {
   );
 };
 
-const MemoizedBalance = React.memo(Balance)
+const MemoizedBalance = React.memo(Balance);
+
+/**
+ * if the balance has changed we want to display this with a color
+ * if balance has increased color changes green
+ * if balance has decreased color changes red
+ * then previous balance is set to current balance
+ * if no change has occured th previous balance does not need to be set
+ */

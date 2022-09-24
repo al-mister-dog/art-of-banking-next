@@ -12,6 +12,7 @@ export default function LayoutDesktop({
   const [bankDetail, setBankDetail] = useState(banksArray[0]);
   useEffect(() => {
     setBankDetail(banksArray[0]);
+    console.log("something changed")
   }, [banksArray]);
 
   const handleSetBankDetail = useCallback((bank) => {
