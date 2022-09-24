@@ -12,6 +12,7 @@ import Charts from "../../components/charts/tabs";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
 import KeyTerms from "../../components/article/lecture-index/key-terms";
 import { useEffect } from "react";
+import { setupFunctions } from "../../config/setup-functions/setupFunctions";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {
@@ -75,6 +76,7 @@ export async function getServerSideProps(context: { query: { slug: any } }) {
     let data = getRouteObjectData(slug);
     const { id, title, path, lectureId, keyTermsIds } = data;
     const introductoryTexts = partsTexts[id];
+
     return {
       props: {
         routeData: {

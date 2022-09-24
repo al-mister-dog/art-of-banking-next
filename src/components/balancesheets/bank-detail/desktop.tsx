@@ -32,7 +32,7 @@ export default function SidePanel({ bank }: { bank: CardInfo }) {
     <Card
       shadow="sm"
       p="sm"
-      radius="sm"
+      radius="xs"
       style={{
         paddingBottom: "0px",
         minHeight: "450px",

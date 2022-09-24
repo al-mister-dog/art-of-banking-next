@@ -14,7 +14,7 @@ import initialBankData from "./inititalState";
 import { Totals } from "../../domain/displays/totals";
 import { Dues } from "../../domain/dues";
 import { Banks } from "../../domain/bank";
-
+console.log("bankSlice")
 export interface BanksState {
   banks: any;
   accounts: any;

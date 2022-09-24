@@ -27,8 +27,8 @@ export default function SideUI({ side }) {
       <Text size="xs" weight="bold" align="left">
         {side.instrument}
       </Text>
-      {side.accounts.map((account) => {
-        return <MemoizedBalance key={account.id} account={account} />;
+      {side.accounts.map((account, i) => {
+        return <MemoizedBalance key={i} account={account} />;
       })}
     </div>
   );

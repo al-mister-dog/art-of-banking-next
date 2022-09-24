@@ -60,7 +60,7 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
       key={bank.cardInfo.id}
       shadow="sm"
       p="sm"
-      radius="sm"
+      radius="xs"
       className={classes.card}
     >
       <Card.Section

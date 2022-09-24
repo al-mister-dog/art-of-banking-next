@@ -7,18 +7,21 @@ const useStyles = createStyles((theme) => ({
     transition: "all 0.5s ease-in",
     color: "black",
     padding: "0px 3px",
+    borderRadius: "3px"
   },
   decrease: {
     transition: "all 0.5s ease-in",
     background: theme.colors.red[5],
     color: "white",
     padding: "0px 3px",
+    borderRadius: "3px"
   },
   increase: {
     transition: "all 0.5s ease-in",
     background: theme.colors.green[5],
     color: "white",
     padding: "0px 3px",
+    borderRadius: "3px"
   },
 }));
 
@@ -36,7 +39,6 @@ export default function SideUI({ side }) {
 }
 
 const Balance = ({ account }) => {
-  console.log("HELLO")
   const { classes } = useStyles();
   const prevCountRef = useRef(account.balance);
 
