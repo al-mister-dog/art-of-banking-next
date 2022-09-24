@@ -38,4 +38,5 @@ function CardGrid({ group, handleSetBankDetail }) {
   }
   
   export default React.memo(CardGrid);
+  // export default CardGrid
   

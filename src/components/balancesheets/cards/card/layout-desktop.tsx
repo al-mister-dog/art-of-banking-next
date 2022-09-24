@@ -1,16 +1,19 @@
 import { Grid } from "@mantine/core";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { CardInfo } from "../../types";
 import CardGrid from "./card-grid-desktop";
 import BankDetail from "../../bank-detail/desktop";
 
-export function LayoutDesktop({ banksArray }: { banksArray: CardInfo[] }) {
+export default function LayoutDesktop({
+  banksArray,
+}: {
+  banksArray: CardInfo[];
+}) {
   const [bankDetail, setBankDetail] = useState(banksArray[0]);
-  if (
-    !banksArray.map((bank) => bank.cardInfo.id).includes(bankDetail.cardInfo.id)
-  ) {
+  useEffect(() => {
     setBankDetail(banksArray[0]);
-  }
+  }, [banksArray]);
+
   const handleSetBankDetail = useCallback((bank) => {
     setBankDetail(bank);
   }, []);

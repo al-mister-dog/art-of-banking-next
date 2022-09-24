@@ -1,6 +1,7 @@
 import { createStyles, Text } from "@mantine/core";
 import { useEffect, useRef } from "react";
 
+
 const useStyles = createStyles((theme) => ({
   text: {
     transition: "all 0.5s ease-in",
@@ -35,6 +36,7 @@ export default function SideUI({ side }) {
 }
 
 const Balance = ({ account }) => {
+  console.log("HELLO")
   const { classes } = useStyles();
   const prevCountRef = useRef(account.balance);
 

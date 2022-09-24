@@ -1,5 +1,5 @@
 import { createStyles, Text } from "@mantine/core";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 const useStyles = createStyles((theme) => ({
   text: {
@@ -28,7 +28,7 @@ export default function SideUI({ side }) {
         {side.instrument}
       </Text>
       {side.accounts.map((account) => {
-        return <Balance key={account.id} account={account} />;
+        return <MemoizedBalance key={account.id} account={account} />;
       })}
     </div>
   );
@@ -36,24 +36,24 @@ export default function SideUI({ side }) {
 
 const Balance = ({ account }) => {
   const { classes } = useStyles();
-  const [prevBalance, setPrevBalance] = useState(account.balance);
   const prevCountRef = useRef(account.balance);
 
-  // useEffect(() => {
-  //   if (account.balance !== prevCountRef.current) {
-  //     prevCountRef.current = account.balance;
-  //   }
-  // }, [account.balance]);
-console.log("REND")
   useEffect(() => {
-    console.log("ROUND")
-    console.log(`account.balance: ${account.balance}`)
-    console.log(`prevCountRef: ${prevCountRef.current}`)
-    console.log(`prevState: ${prevBalance}`)
-    prevCountRef.current = account.balance;
-    setPrevBalance(prevCountRef.current);
+    
+    if (account.type === "customerDeposits" && account.id === 3) {
+      console.log("ROUND USE EFFECT")
+      console.log("account.balance: " + account.balance);
+      console.log("prevCountRef: " + prevCountRef.current);
+    }
+    if (account.balance !== prevCountRef.current) {
+      prevCountRef.current = account.balance;
+    }
   }, [account.balance]);
-
+  if (account.type === "customerDeposits" && account.id === 3) {
+    console.log("ROUND USE STATE")
+    console.log("account.balance: " + account.balance);
+    console.log("prevCountRef: " + prevCountRef.current);
+  }
   return (
     <Text
       size="xs"
@@ -71,4 +71,4 @@ console.log("REND")
   );
 };
 
-//if no change then keep color you already have
+const MemoizedBalance = React.memo(Balance)

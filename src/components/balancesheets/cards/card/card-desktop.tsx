@@ -12,7 +12,7 @@ import {
 import { useCallback, useMemo } from "react";
 import { Dots } from "tabler-icons-react";
 import { CardInfo } from "../../types";
-import SideRound from "../side-static";
+import SideRound from "../side-round";
 import SideStatic from "../side-static";
 import SideFlash from "../side-flash";
 import SideOff from "../side-off";
