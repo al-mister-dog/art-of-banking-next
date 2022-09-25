@@ -16,6 +16,7 @@ import SideRound from "../side-round";
 import SideStatic from "../side-static";
 import SideFlash from "../side-flash";
 import SideOff from "../side-off";
+import { creditData } from "../../../../domain/structures";
 
 const useStyles = createStyles((theme) => ({
   card: { paddingBottom: "0px", backgroundColor: theme.colors.violet[1] },
@@ -56,6 +57,7 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
   const onSelectBank = useCallback((bank) => {
     handleSetBankDetail(bank);
   }, []);
+  
   return (
     <Card
       key={bank.cardInfo.id}

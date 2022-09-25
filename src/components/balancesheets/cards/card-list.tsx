@@ -4,7 +4,7 @@ import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { MantineProvider } from "@mantine/core";
 import { CardInfo } from "../types";
 import { Display } from "../../../domain/display";
-import { Bank } from "../../../domain/structures";
+import { Bank, creditData } from "../../../domain/structures";
 import LayoutMobile from "./card/layout-mobile";
 import LayoutDesktop from "./card/layout-desktop";
 import { useRef, useState } from "react";
@@ -24,10 +24,12 @@ export default function BalanceSheetsContainer() {
     centralbank: "indigo",
     clearinghouse: "pink",
   };
-
+  
   function getCardInfo(bank: Bank): CardInfo {
     const cardInfo = { ...bank };
-    const balanceSheet = Display.balanceSheet(bank);
+    const balanceSheet = Display.balanceSheet(cardInfo);
+    // console.log(bank.id)
+    // console.log(balanceSheet.liabilities)
     const color = colors[`${bank.type}`] as keyof Colors;
     return { cardInfo, balanceSheet, color };
   }

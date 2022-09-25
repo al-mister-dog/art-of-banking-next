@@ -30,6 +30,7 @@ export const Display = {
   },
 
   balanceSheet(bank: Bank) {
+    
     const { assets, liabilities } =
       BalanceSheets.getAssetsAndLiabilitiesPlusReserves(bank);
     const assetsDetailed = this.addDetails(bank, assets);
