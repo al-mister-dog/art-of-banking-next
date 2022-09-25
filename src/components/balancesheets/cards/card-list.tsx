@@ -7,6 +7,8 @@ import { Display } from "../../../domain/display";
 import { Bank } from "../../../domain/structures";
 import LayoutMobile from "./card/layout-mobile";
 import LayoutDesktop from "./card/layout-desktop";
+import { useRef, useState } from "react";
+import { selectLectures } from "../../../features/lectures/lecturesSlice";
 
 interface Colors {
   [index: string]: any;

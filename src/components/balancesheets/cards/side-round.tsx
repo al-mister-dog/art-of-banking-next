@@ -1,5 +1,6 @@
 import { createStyles, Text } from "@mantine/core";
-import React, { useEffect, useRef } from "react";
+import React from "react";
+import useColorSettings from "../../../hooks/useColorSettings";
 
 const useStyles = createStyles((theme) => ({
   text: {
@@ -36,26 +37,10 @@ export default function SideUI({ side }) {
 
 const Balance = ({ account }) => {
   const { classes } = useStyles();
-  const prevCountRef = useRef(account.balance);
-  const prevClass = useRef("text");
-
-  if (account.balance !== prevCountRef.current) {
-    if (account.balance > prevCountRef.current) {
-      prevClass.current = "increase";
-    }
-    if (account.balance < prevCountRef.current) {
-      prevClass.current = "decrease";
-    }
-    prevCountRef.current = account.balance; //*
-  }
+  const color = useColorSettings(account.balance);
 
   return (
-    <Text
-      size="xs"
-      weight="bold"
-      align="left"
-      className={classes[prevClass.current]}
-    >
+    <Text size="xs" weight="bold" align="left" className={classes[color]}>
       {account.thirdPartyDetail?.name
         ? `${account.thirdPartyDetail.name}: `
         : ""}
@@ -65,11 +50,3 @@ const Balance = ({ account }) => {
 };
 
 const MemoizedBalance = React.memo(Balance);
-
-/**
- * if the balance has changed we want to display this with a color
- * if balance has increased color changes green
- * if balance has decreased color changes red
- * then previous balance is set to current balance
- * if no change has occured th previous balance does not need to be set
- */

@@ -11,8 +11,9 @@ import BalanceSheets from "../../components/balancesheets/cards/card-list";
 import Charts from "../../components/charts/tabs";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
 import KeyTerms from "../../components/article/lecture-index/key-terms";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { setupFunctions } from "../../config/setup-functions/setupFunctions";
+import { clearBankData } from "../../domain/structures";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {
@@ -35,13 +36,15 @@ export default function LecturesPart({ routeData }) {
   const { paragraphs, assignment } = introductoryTexts;
   const dispatch = useAppDispatch();
   const { classes } = useStyles();
+  const [tick, setTick] = useState(1)
 
   useEffect(() => {
     dispatch(setup({ id }));
     dispatch(setActions({ id }));
     dispatch(refreshSettings());
+    setTick(tick + 1)
   }, [id]);
-
+  
   return (
     <>
       <Article

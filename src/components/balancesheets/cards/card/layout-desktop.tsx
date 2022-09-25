@@ -17,7 +17,7 @@ export default function LayoutDesktop({
   useEffect(() => {
     setBankDetail(banksArray[0]);
   }, [currentLectureId]);
-
+  
   const handleSetBankDetail = useCallback((bank) => {
     setBankDetail(bank);
   }, []);
