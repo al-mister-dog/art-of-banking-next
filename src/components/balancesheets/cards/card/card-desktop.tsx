@@ -1,22 +1,20 @@
 import { useAppSelector } from "../../../../app/hooks";
 import { selectSettings } from "../../../../features/settings/settingsSlice";
-import { createStyles } from "@mantine/core";
+import { useCallback } from "react";
 import {
-  ActionIcon,
   Card,
   Center,
   SimpleGrid,
   Text,
   Title,
+  createStyles,
 } from "@mantine/core";
-import { useCallback, useMemo } from "react";
-import { Dots } from "tabler-icons-react";
 import { CardInfo } from "../../types";
-import SideRound from "../side-round";
-import SideStatic from "../side-static";
-import SideFlash from "../side-flash";
-import SideOff from "../side-off";
-import { creditData } from "../../../../domain/structures";
+
+import Round from "../balances/round";
+import Static from "../balances/static";
+import Off from "../balances/off";
+import Flash from "../balances/flash";
 
 const useStyles = createStyles((theme) => ({
   card: { paddingBottom: "0px", backgroundColor: theme.colors.violet[1] },
@@ -46,7 +44,6 @@ const useStyles = createStyles((theme) => ({
     },
   },
 }));
-
 interface Props {
   bank: CardInfo;
   handleSetBankDetail: (v: CardInfo) => void;
@@ -54,10 +51,10 @@ interface Props {
 export default function CardUI({ bank, handleSetBankDetail }: Props) {
   const { colorSettings } = useAppSelector(selectSettings);
   const { classes } = useStyles();
-  const onSelectBank = useCallback((bank) => {
+  const onSelectBank = useCallback((bank: CardInfo) => {
     handleSetBankDetail(bank);
   }, []);
-  
+
   return (
     <Card
       key={bank.cardInfo.id}
@@ -91,32 +88,32 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
         <div>
           {bank.balanceSheet.assets.map((asset: any) => {
             if (colorSettings.round) {
-              return <SideRound key={asset.instrument} side={asset} />;
+              return <Round key={asset.instrument} side={asset} />;
             }
             if (colorSettings.static) {
-              return <SideStatic key={asset.instrument} side={asset} />;
+              return <Static key={asset.instrument} side={asset} />;
             }
             if (colorSettings.flash) {
-              return <SideFlash key={asset.instrument} side={asset} />;
+              return <Flash key={asset.instrument} side={asset} />;
             }
             if (colorSettings.off) {
-              return <SideOff key={asset.instrument} side={asset} />;
+              return <Off key={asset.instrument} side={asset} />;
             }
           })}
         </div>
         <div>
           {bank.balanceSheet.liabilities.map((liability: any) => {
             if (colorSettings.round) {
-              return <SideRound key={liability.instrument} side={liability} />;
+              return <Round key={liability.instrument} side={liability} />;
             }
             if (colorSettings.static) {
-              return <SideStatic key={liability.instrument} side={liability} />;
+              return <Static key={liability.instrument} side={liability} />;
             }
             if (colorSettings.flash) {
-              return <SideFlash key={liability.instrument} side={liability} />;
+              return <Flash key={liability.instrument} side={liability} />;
             }
             if (colorSettings.off) {
-              return <SideOff key={liability.instrument} side={liability} />;
+              return <Off key={liability.instrument} side={liability} />;
             }
           })}
         </div>

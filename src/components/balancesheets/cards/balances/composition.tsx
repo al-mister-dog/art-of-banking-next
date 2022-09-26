@@ -1,6 +1,6 @@
 import { createStyles, Text } from "@mantine/core";
 import React from "react";
-import useColorSettings from "../../../hooks/useColorSettings";
+import useColorSettings from "../../../../hooks/useColorSettings";
 
 const useStyles = createStyles((theme) => ({
   text: {
@@ -22,14 +22,14 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function SideUI({ side }) {
+export default function Balances({ side }) {
   return (
     <div style={{ marginBottom: "1.5px" }}>
       <Text size="xs" weight="bold" align="left">
         {side.instrument}
       </Text>
-      {side.accounts.map((account, i) => {
-        return <MemoizedBalance key={i} account={account} />;
+      {side.accounts.map((account) => {
+        return <MemoizedBalance key={account.id} account={account} />;
       })}
     </div>
   );

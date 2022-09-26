@@ -34,19 +34,20 @@ const useStyles = createStyles((theme) => ({
 export default function LecturesPart({ routeData }) {
   const { introductoryTexts, title, keyTermsIds, slug, id } = routeData;
   const prevId = useRef(id);
-
   const { paragraphs, assignment } = introductoryTexts;
   const dispatch = useAppDispatch();
   const { classes } = useStyles();
-  const [tick, setTick] = useState(1);
-  
+  const [renderedId, setRenderedId] = useState(id);
+
   useEffect(() => {
     dispatch(setup({ id }));
     dispatch(setActions({ id }));
     dispatch(refreshSettings());
-    // setTick(tick + 1);
+    setRenderedId(id);
   }, [id]);
-
+  if (renderedId !== id) {
+    return <>Loading...</>
+  }
   return (
     <>
       <Article

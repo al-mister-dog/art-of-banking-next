@@ -9,6 +9,7 @@ export const setupFunctions: SetupFunctions = {
   0() {},
   1() {
     clearBankData();
+    System.setSystem("national");
     BankingSystem.createBank("Bank 1", "bank");
     BankingSystem.createBank("Customer 1", "customer", 200);
     Customer.createAccount(bankData.banks[1], bankData.banks[0], 100);
@@ -16,6 +17,7 @@ export const setupFunctions: SetupFunctions = {
 
   2() {
     clearBankData();
+    System.setSystem("national");
     BankingSystem.createBank("Bank 1", "bank");
     BankingSystem.createBank("Customer 1", "customer", 200);
     BankingSystem.createBank("Customer 2", "customer", 200);
@@ -24,6 +26,7 @@ export const setupFunctions: SetupFunctions = {
   },
   3() {
     clearBankData();
+    System.setSystem("national");
     BankingSystem.createBank("Bank 1", "bank");
     BankingSystem.createBank("Customer 1", "customer", 100);
     BankingSystem.createBank("Customer 2", "customer", 100);
@@ -32,6 +35,7 @@ export const setupFunctions: SetupFunctions = {
   },
   4() {
     clearBankData();
+    System.setSystem("national");
     BankingSystem.createBank("Bank 1", "bank", 100);
     BankingSystem.createBank("Customer 1", "customer", 150);
     BankingSystem.createBank("Customer 2", "customer", 150);
@@ -40,6 +44,7 @@ export const setupFunctions: SetupFunctions = {
   },
   5() {
     clearBankData();
+    System.setSystem("national");
     BankingSystem.createBank("Bank 1", "bank", 100);
     BankingSystem.createBank("Customer 1", "customer", 100);
     BankingSystem.createBank("Customer 2", "customer", 100);
@@ -48,6 +53,7 @@ export const setupFunctions: SetupFunctions = {
   },
   6() {
     clearBankData();
+    System.setSystem("national");
     BankingSystem.createBank("Bank 1", "bank");
     BankingSystem.createBank("Customer 1", "customer", 100);
     BankingSystem.createBank("Customer 2", "customer", 100);
@@ -56,9 +62,8 @@ export const setupFunctions: SetupFunctions = {
   },
   7() {},
   8() {
-    
     clearBankData();
-    System.setSystem("national")
+    System.setSystem("national");
     BankingSystem.createBank("Bank 1", "bank");
     BankingSystem.createBank("Customer 1", "customer", 100);
     BankingSystem.createBank("Customer 2", "customer", 100);
@@ -68,10 +73,10 @@ export const setupFunctions: SetupFunctions = {
     Customer.createAccount(bankData.banks[2], bankData.banks[0]);
     Customer.createAccount(bankData.banks[3], bankData.banks[0], 50);
     Customer.createAccount(bankData.banks[4], bankData.banks[0], 50);
-    
   },
   9() {
     clearBankData();
+    System.setSystem("national");
     BankingSystem.createBank("Bank 1", "bank");
     BankingSystem.createBank("Bank 2", "bank");
     BankingSystem.createBank("Customer 1", "customer", 50);
@@ -153,11 +158,23 @@ export const setupFunctions: SetupFunctions = {
     BankingSystem.createBank("Customer 2", "customer", 100);
     BankingSystem.createBank("Bank 1", "bank");
     BankingSystem.createBank("Bank 2", "bank");
-    
+
     Customer.createAccount(bankData.banks[1], bankData.banks[3], 100);
     Customer.createAccount(bankData.banks[2], bankData.banks[4], 100);
-    Customer.transfer(40, bankData.banks[1], bankData.banks[2], bankData.banks[3], bankData.banks[4])
-    Customer.transfer(50, bankData.banks[2], bankData.banks[1], bankData.banks[4], bankData.banks[3])
+    Customer.transfer(
+      40,
+      bankData.banks[1],
+      bankData.banks[2],
+      bankData.banks[3],
+      bankData.banks[4]
+    );
+    Customer.transfer(
+      50,
+      bankData.banks[2],
+      bankData.banks[1],
+      bankData.banks[4],
+      bankData.banks[3]
+    );
   },
   12() {
     clearBankData();

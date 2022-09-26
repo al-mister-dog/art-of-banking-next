@@ -24,12 +24,10 @@ export default function BalanceSheetsContainer() {
     centralbank: "indigo",
     clearinghouse: "pink",
   };
-  
+
   function getCardInfo(bank: Bank): CardInfo {
     const cardInfo = { ...bank };
     const balanceSheet = Display.balanceSheet(cardInfo);
-    // console.log(bank.id)
-    // console.log(balanceSheet.liabilities)
     const color = colors[`${bank.type}`] as keyof Colors;
     return { cardInfo, balanceSheet, color };
   }

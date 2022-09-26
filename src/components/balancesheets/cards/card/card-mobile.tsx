@@ -1,3 +1,5 @@
+import { useAppSelector } from "../../../../app/hooks";
+import { selectSettings } from "../../../../features/settings/settingsSlice";
 import { createContext, useContext, useState } from "react";
 
 export const DrawerContext = createContext((v: boolean) => {});
@@ -12,12 +14,16 @@ import {
   Drawer,
 } from "@mantine/core";
 
-import SideUI from "../side-flash";
 import BankDetail from "../../bank-detail/mobile";
+
+import Round from "../balances/round";
+import Static from "../balances/static";
+import Off from "../balances/off";
+import Flash from "../balances/flash";
 
 import { CardInfo } from "../../types";
 
-const useStyles = createStyles((theme) => ({
+export const useStyles = createStyles((theme) => ({
   card: {
     backgroundColor: theme.colors.violet[1],
     paddingBottom: "0px",
@@ -52,6 +58,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function CardUI({ bank }: { bank: CardInfo }) {
+  const { colorSettings } = useAppSelector(selectSettings);
   const [opened, setOpened] = useState(false);
   const { classes } = useStyles();
 
@@ -87,12 +94,34 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
       <SimpleGrid cols={2} style={{ height: "110px", overflowX: "hidden" }}>
         <div>
           {bank.balanceSheet.assets.map((asset: any) => {
-            return <SideUI key={asset.instrument} side={asset} />;
+            if (colorSettings.round) {
+              return <Round key={asset.instrument} side={asset} />;
+            }
+            if (colorSettings.static) {
+              return <Static key={asset.instrument} side={asset} />;
+            }
+            if (colorSettings.flash) {
+              return <Flash key={asset.instrument} side={asset} />;
+            }
+            if (colorSettings.off) {
+              return <Off key={asset.instrument} side={asset} />;
+            }
           })}
         </div>
         <div>
           {bank.balanceSheet.liabilities.map((liability: any) => {
-            return <SideUI key={liability.instrument} side={liability} />;
+            if (colorSettings.round) {
+              return <Round key={liability.instrument} side={liability} />;
+            }
+            if (colorSettings.static) {
+              return <Static key={liability.instrument} side={liability} />;
+            }
+            if (colorSettings.flash) {
+              return <Flash key={liability.instrument} side={liability} />;
+            }
+            if (colorSettings.off) {
+              return <Off key={liability.instrument} side={liability} />;
+            }
           })}
         </div>
       </SimpleGrid>
