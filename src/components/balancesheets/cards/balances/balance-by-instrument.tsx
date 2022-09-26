@@ -14,23 +14,24 @@ export default function SideUI({ side, id }) {
     <div style={{ marginBottom: "1.5px" }}>
       <Text size="xs" weight="bold" align="left">
         {displaySettings.taccounts ? "" : `${side.instrument}`}
-        {/* {side.instrument} */}
       </Text>
       {side.accounts.map((account) => {
-        if (colorSettings.round) {
-          return (
-            <BalanceEachRound key={account.id} account={account} id={id} />
-          );
-        }
-        if (colorSettings.static) {
-          return <BalanceEachTurn key={account.id} account={account} />;
-        }
-        if (colorSettings.flash) {
-          return <BalanceFlash key={account.id} account={account} />;
-        }
-        if (colorSettings.off) {
-          return <BalanceOff key={account.id} account={account} />;
-        }
+        return (
+          <>
+            {colorSettings.round && (
+              <BalanceEachRound key={account.id} account={account} id={id} />
+            )}
+            {colorSettings.static && (
+              <BalanceEachTurn key={account.id} account={account} id={id} />
+            )}
+            {colorSettings.flash && (
+              <BalanceFlash key={account.id} account={account} id={id} />
+            )}
+            {colorSettings.off && (
+              <BalanceOff key={account.id} account={account} />
+            )}
+          </>
+        );
       })}
     </div>
   );

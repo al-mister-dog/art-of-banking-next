@@ -1,4 +1,4 @@
-import { Bank, BankData, bankData, reservesData } from "./structures";
+import { Bank, BankData, bankData, records, reservesData } from "./structures";
 import { System } from "./system";
 export const BankingSystem = {
   createBank(name: string, type: string, reserves: number = 0) {
@@ -15,6 +15,12 @@ export const BankingSystem = {
       category: "reserves",
     };
     let newBankData = JSON.parse(JSON.stringify(bankData));
+
+    records.parties[newBankData.id] = {
+      id: newBankData.id,
+      records: { assets: [], liabilities: [] },
+    };
+    
     let banks = newBankData.banks;
     banks = { ...banks, [newBank.id]: newBank };
     newBankData.banks = banks;
@@ -22,8 +28,9 @@ export const BankingSystem = {
     newBankData.id++;
     BankData.assign(newBankData);
     reservesData.reserves[reservesData.id] = newReserves;
-    reservesData.allIds.push(reservesData.id)
+    reservesData.allIds.push(reservesData.id);
     reservesData.id++;
+    
     System.joinSystem(newBank);
   },
   getBank(bank: Bank) {

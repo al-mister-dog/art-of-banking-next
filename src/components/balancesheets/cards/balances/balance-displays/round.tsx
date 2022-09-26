@@ -1,9 +1,9 @@
+import React from "react";
 import { useAppSelector } from "../../../../../app/hooks";
 import { selectSettings } from "../../../../../features/settings/settingsSlice";
 import { createStyles, Text } from "@mantine/core";
-import React from "react";
 import useColorSettings from "../../../../../hooks/useColorSettings";
-import useSymbolSettings from "../../../../../hooks/useSymbolSettings";
+import { setAsSpreadSheet, setAsTAccount } from "./utils/balance-display";
 
 const useStyles = createStyles((theme) => ({
   text: {
@@ -26,27 +26,17 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const Balance = ({ account, id }) => {
-  const { classes } = useStyles();
   const { displaySettings } = useAppSelector(selectSettings);
+  const { classes } = useStyles();
   const color = useColorSettings(account.balance);
-  const symbol = useSymbolSettings(account.balance);
-  let info = "";
-  if (account.category === "reserves") {
-    info = `${symbol}${account.balance} ${account.category}`;
-  }
-  if (account.subordinateId === id) {
-    info = `${symbol}${account.balance} ${account.type} at ${account.thirdPartyDetail.name}`;
-  }
-  if (account.superiorId === id) {
-    info = `${symbol}${account.balance} ${account.type} from ${account.thirdPartyDetail.name}`;
-  }
-  const info2 = `${
-    account.thirdPartyDetail?.name ? `${account.thirdPartyDetail.name}: ` : ""
-  }$${account.balance}`;
+  let tAccountDisplay = setAsTAccount(account, id);
+  let spreadSheetDisplay = setAsSpreadSheet(account);
 
   return (
     <Text size="xs" weight="bold" align="left" className={classes[color]}>
-      {displaySettings.taccounts ? `${info}` : `${info2}`}
+      {displaySettings.taccounts
+        ? `${tAccountDisplay}`
+        : `${spreadSheetDisplay}`}
     </Text>
   );
 };

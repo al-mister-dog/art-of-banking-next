@@ -106,7 +106,7 @@ export interface DuesAccount {
   type: string;
   balance: number;
   category: string;
-  netted?: boolean
+  netted?: boolean;
 }
 
 export type PossibleDuesAccount = DuesAccount | undefined;
@@ -182,7 +182,7 @@ export const BankData = {
       ...newBankData.banks[bank2.id].creditIds,
       creditId,
     ];
-    
+
     this.assign(newBankData);
   },
 };
@@ -220,4 +220,25 @@ export const CreditData = {
   assignAccounts(creditAccounts: CreditAccounts) {
     creditData = { ...creditData, creditAccounts };
   },
+};
+
+type RecordDetail = {
+  instrumentType: string;
+  notationType: string;
+  amount: number;
+  id: number;
+  symbol: string;
+} | null;
+interface Record {
+  id: number;
+  records: { assets: RecordDetail[]; liabilities: RecordDetail[] };
+}
+
+interface Records {
+  [key: string]: Record;
+}
+
+export const records = {
+  parties: {} as Records,
+  allIds: [],
 };

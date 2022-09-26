@@ -63,7 +63,7 @@ export const settingsSlice = createSlice({
       let resetDisplaySettings = {
         balances: false,
         taccounts: false,
-        clavaro: false,
+        clavero: false,
       };
       const newColorSettings = { ...resetDisplaySettings, [key]: true };
       state.displaySettings = newColorSettings;

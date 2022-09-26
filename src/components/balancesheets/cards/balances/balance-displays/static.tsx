@@ -1,6 +1,27 @@
+import { useAppSelector } from "../../../../../app/hooks";
+import { selectSettings } from "../../../../../features/settings/settingsSlice";
 import { createStyles, Text } from "@mantine/core";
 import React, { useEffect, useRef } from "react";
+import { setAsSpreadSheet, setAsTAccount } from "./utils/balance-display";
 
+function useColors(balance: number) {
+  const prevBalance = useRef(balance);
+  useEffect(() => {
+    if (balance !== prevBalance.current) {
+      prevBalance.current = balance;
+    }
+  }, [balance]);
+
+  if (balance === prevBalance.current) {
+    return "text";
+  }
+  if (balance < prevBalance.current) {
+    return "decrease";
+  }
+  if (balance > prevBalance.current) {
+    return "increase";
+  }
+}
 const useStyles = createStyles((theme) => ({
   text: {
     transition: "all 0.5s ease-in",
@@ -24,29 +45,18 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const Balance = ({ account }) => {
+const Balance = ({ account, id }) => {
+  const { displaySettings } = useAppSelector(selectSettings);
   const { classes } = useStyles();
-  const prevCountRef = useRef(account.balance);
-
-  useEffect(() => {
-    if (account.balance !== prevCountRef.current) {
-      prevCountRef.current = account.balance;
-    }
-  }, [account.balance]);
+  const color = useColors(account.balance);
+  let tAccountDisplay = setAsTAccount(account, id);
+  let spreadSheetDisplay = setAsSpreadSheet(account);
 
   return (
-    <Text
-      size="xs"
-      weight="bold"
-      align="left"
-      className={`${account.balance === prevCountRef.current && classes.text} ${
-        account.balance < prevCountRef.current && classes.decrease
-      } ${account.balance > prevCountRef.current && classes.increase}`}
-    >
-      {account.thirdPartyDetail?.name
-        ? `${account.thirdPartyDetail.name}: `
-        : ""}
-      ${account.balance}
+    <Text size="xs" weight="bold" align="left" className={classes[color]}>
+      {displaySettings.taccounts
+        ? `${tAccountDisplay}`
+        : `${spreadSheetDisplay}`}
     </Text>
   );
 };

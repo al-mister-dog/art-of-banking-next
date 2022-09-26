@@ -14,6 +14,8 @@ import initialBankData from "./inititalState";
 import { Totals } from "../../domain/displays/totals";
 import { Dues } from "../../domain/dues";
 import { Banks } from "../../domain/bank";
+import { Display } from "../../domain/display";
+import { Record } from "../../domain/Records";
 
 export interface BanksState {
   banks: any;
@@ -51,11 +53,13 @@ export const banksSlice = createSlice({
       const { amount, c1, b1 } = payload;
       Customer.deposit(c1, b1, amount);
       banksSlice.caseReducers.setState(state);
+      banksSlice.caseReducers.updateRecords(state)
     },
     withdraw: (state, { payload }) => {
       const { amount, c1, b1 } = payload;
       Customer.withdraw(c1, b1, amount);
       banksSlice.caseReducers.setState(state);
+      banksSlice.caseReducers.updateRecords(state)
     },
     transfer: (state, { payload }) => {
       const { amount, c1, c2, b1, b2 } = payload;
@@ -65,11 +69,13 @@ export const banksSlice = createSlice({
         Customer.transfer(amount, c1, c2, b1);
       }
       banksSlice.caseReducers.setState(state);
+      banksSlice.caseReducers.updateRecords(state)
     },
     getLoan: (state, { payload }) => {
       const { amount, c1, b1 } = payload;
       Customer.getLoan(c1, b1, amount);
       banksSlice.caseReducers.setState(state);
+      banksSlice.caseReducers.updateRecords(state)
     },
     repayLoan: (state, { payload }) => {
       const { amount, c1, b1, paymentType } = payload;
@@ -80,17 +86,20 @@ export const banksSlice = createSlice({
         Customer.repayLoanCash(c1, b1, amount);
       }
       banksSlice.caseReducers.setState(state);
+      banksSlice.caseReducers.updateRecords(state)
     },
     payDues: (state, { payload }) => {
       const { amount, b1, b2 } = payload;
       Dues.decrease(b1, b2, "customerDeposits", amount);
       banksSlice.caseReducers.setState(state);
+      banksSlice.caseReducers.updateRecords(state)
     },
     creditClearinghouse: (state, { payload }) => {
       const { amount, b1, b2 } = payload;
       Banks.creditAccount(b1, b2, amount);
       Dues.settle(b1, b2);
       banksSlice.caseReducers.setState(state);
+      banksSlice.caseReducers.updateRecords(state)
     },
     debitClearinghouse: (state, { payload }) => {
       const { amount, b1, b2 } = payload;
@@ -98,17 +107,20 @@ export const banksSlice = createSlice({
       Banks.debitAccount(b1, b2, amount);
       Dues.settle(b1, b2);
       banksSlice.caseReducers.setState(state);
+      banksSlice.caseReducers.updateRecords(state)
     },
     netDues: (state, { payload }) => {
       const { b1, b2 } = payload;
       Dues.net(b1, b2);
       banksSlice.caseReducers.setState(state);
+      banksSlice.caseReducers.updateRecords(state)
     },
     creditBank: (state, { payload }) => {
       const { amount, b1, b2 } = payload;
       Banks.creditAccount(b1, b2, amount);
       Dues.settle(b1, b2);
       banksSlice.caseReducers.setState(state);
+      banksSlice.caseReducers.updateRecords(state)
     },
     debitBank: (state, { payload }) => {
       const { amount, b1, b2 } = payload;
@@ -116,6 +128,7 @@ export const banksSlice = createSlice({
       Banks.debitAccount(b1, b2, amount);
       Dues.settle(b1, b2);
       banksSlice.caseReducers.setState(state);
+      banksSlice.caseReducers.updateRecords(state)
     },
 
     setState: (state) => {
@@ -144,6 +157,10 @@ export const banksSlice = createSlice({
         newReservesData,
       ];
     },
+    updateRecords: (state) => {
+      // console.log(JSON.stringify(Record.getAll()))
+      Record.setRound()
+    }
   },
 });
 

@@ -7,6 +7,7 @@ import {
   BankData,
 } from "./structures";
 import { mapObject } from "./helpers";
+import { Record } from "./Records";
 export const Accounts = {
   createAccount(
     subordinate: Bank,
@@ -84,6 +85,7 @@ export const Accounts = {
       let newAccounts = { ...accountData.accounts };
       newAccounts = { ...newAccounts, [account.id]: newAccount };
       AccountData.assignAccounts(newAccounts);
+      // Record.increaseBalance(customer, bank, amount);
     }
   },
 
@@ -95,6 +97,7 @@ export const Accounts = {
       let newAccounts = { ...accountData.accounts };
       newAccounts = { ...newAccounts, [account.id]: newAccount };
       AccountData.assignAccounts(newAccounts);
+      // Record.decreaseBalance(customer, bank, amount);
     }
   },
 };

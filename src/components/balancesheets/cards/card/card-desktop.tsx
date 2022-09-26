@@ -1,3 +1,5 @@
+import { useAppSelector } from "../../../../app/hooks";
+import { selectSettings } from "../../../../features/settings/settingsSlice";
 import { useCallback } from "react";
 import {
   Card,
@@ -8,9 +10,9 @@ import {
   createStyles,
 } from "@mantine/core";
 import { CardInfo } from "../../types";
-
 import BalanceByInstrument from "../balances/balance-by-instrument";
-import { Display } from "../../../../domain/display";
+import { Record } from "../../../../domain/Records";
+import Clavero from "../balances/balance-displays/clavero";
 
 const useStyles = createStyles((theme) => ({
   card: { paddingBottom: "0px", backgroundColor: theme.colors.violet[1] },
@@ -45,13 +47,14 @@ interface Props {
   handleSetBankDetail: (v: CardInfo) => void;
 }
 export default function CardUI({ bank, handleSetBankDetail }: Props) {
+  const { displaySettings } = useAppSelector(selectSettings);
   const { classes } = useStyles();
   const onSelectBank = useCallback((bank: CardInfo) => {
     handleSetBankDetail(bank);
   }, []);
 
-  Display.tAccount(bank.cardInfo);
-
+  const { assets, liabilities } = Record.get(bank.cardInfo.id);
+  // console.log(JSON.stringify({ assets, liabilities }));
   return (
     <Card
       key={bank.cardInfo.id}
@@ -81,30 +84,51 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
           Liabilities
         </Text>
       </SimpleGrid>
-      <SimpleGrid cols={2} style={{ height: "110px", overflowX: "hidden" }}>
-        <div>
-          {bank.balanceSheet.assets.map((asset: any) => {
-            return (
-              <BalanceByInstrument
-                key={asset.instrument}
-                side={asset}
-                id={bank.cardInfo.id}
-              />
-            );
-          })}
-        </div>
-        <div>
-          {bank.balanceSheet.liabilities.map((lbys: any) => {
-            return (
-              <BalanceByInstrument
-                key={lbys.instrument}
-                side={lbys}
-                id={bank.cardInfo.id}
-              />
-            );
-          })}
-        </div>
-      </SimpleGrid>
+      {displaySettings.clavero ? (
+        <Card.Section>
+          <SimpleGrid
+            cols={2}
+            spacing={0}
+            style={{ height: "110px", overflowX: "hidden" }}
+          >
+            <div>
+              {assets.map((record: any, index) => {
+                return <Clavero key={index} record={record} />;
+              })}
+            </div>
+            <div>
+              {liabilities.map((record: any, index) => {
+                return <Clavero key={index} record={record} />;
+              })}
+            </div>
+          </SimpleGrid>
+        </Card.Section>
+      ) : (
+        <SimpleGrid cols={2} style={{ height: "110px", overflowX: "hidden" }}>
+          <div>
+            {bank.balanceSheet.assets.map((asset: any) => {
+              return (
+                <BalanceByInstrument
+                  key={asset.instrument}
+                  side={asset}
+                  id={bank.cardInfo.id}
+                />
+              );
+            })}
+          </div>
+          <div>
+            {bank.balanceSheet.liabilities.map((lbys: any) => {
+              return (
+                <BalanceByInstrument
+                  key={lbys.instrument}
+                  side={lbys}
+                  id={bank.cardInfo.id}
+                />
+              );
+            })}
+          </div>
+        </SimpleGrid>
+      )}
     </Card>
   );
 }

@@ -46,7 +46,7 @@ export const Display = {
   tAccount(bank: Bank) {
     const { assets, liabilities } =
       BalanceSheets.getAssetsAndLiabilitiesPlusReserves(bank);
-    console.log(JSON.stringify({assets, liabilities}));
+    return {assets, liabilities}
   },
   balanceSheetObject(bank: Bank) {
     const { assets, liabilities } =

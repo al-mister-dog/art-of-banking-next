@@ -37,7 +37,7 @@ const Balance = ({ account, id }) => {
   if (account.superiorId === id) {
     info = `${symbol}${account.balance} ${account.type} from ${account.thirdPartyDetail.name}`;
   }
-  console.log(info);
+  
   return (
     <Text size="xs" weight="bold" align="left" className={classes[color]}>
      {info}

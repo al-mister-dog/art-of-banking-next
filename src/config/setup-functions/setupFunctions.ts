@@ -1,6 +1,7 @@
 import { Banks } from "../../domain/bank";
 import { BankingSystem } from "../../domain/banking-system";
 import { Customer } from "../../domain/customer";
+import { Display } from "../../domain/display";
 import { bankData, clearBankData } from "../../domain/structures";
 import { System } from "../../domain/system";
 
@@ -92,6 +93,7 @@ export const setupFunctions: SetupFunctions = {
   },
   10() {
     clearBankData();
+    const round = []
     System.setSystem("correspondent");
     BankingSystem.createBank("Bank 1", "bank");
     BankingSystem.createBank("Bank 2", "bank");
@@ -115,6 +117,7 @@ export const setupFunctions: SetupFunctions = {
       bankData.banks[0],
       bankData.banks[1]
     );
+    round.push(bankData.allIds.map(id => Display.balanceSheet(bankData.banks[id])))
     Customer.transfer(
       15,
       bankData.banks[4],
@@ -122,6 +125,7 @@ export const setupFunctions: SetupFunctions = {
       bankData.banks[1],
       bankData.banks[0]
     );
+    round.push(bankData.allIds.map(id => Display.balanceSheet(bankData.banks[id])))
     Customer.transfer(
       20,
       bankData.banks[4],
@@ -129,6 +133,7 @@ export const setupFunctions: SetupFunctions = {
       bankData.banks[1],
       bankData.banks[2]
     );
+    round.push(bankData.allIds.map(id => Display.balanceSheet(bankData.banks[id])))
     Customer.transfer(
       10,
       bankData.banks[5],
@@ -136,6 +141,7 @@ export const setupFunctions: SetupFunctions = {
       bankData.banks[2],
       bankData.banks[1]
     );
+    round.push(bankData.allIds.map(id => Display.balanceSheet(bankData.banks[id])))
     Customer.transfer(
       20,
       bankData.banks[3],
@@ -143,6 +149,7 @@ export const setupFunctions: SetupFunctions = {
       bankData.banks[0],
       bankData.banks[2]
     );
+    round.push(bankData.allIds.map(id => Display.balanceSheet(bankData.banks[id])))
     Customer.transfer(
       10,
       bankData.banks[5],
@@ -150,9 +157,12 @@ export const setupFunctions: SetupFunctions = {
       bankData.banks[2],
       bankData.banks[0]
     );
+    round.push(bankData.allIds.map(id => Display.balanceSheet(bankData.banks[id])))
+    // console.log(JSON.stringify(round))
   },
   11() {
     clearBankData();
+    const round = []
     System.setSystem("clearinghouse");
     BankingSystem.createBank("Customer 1", "customer", 100);
     BankingSystem.createBank("Customer 2", "customer", 100);
@@ -168,6 +178,7 @@ export const setupFunctions: SetupFunctions = {
       bankData.banks[3],
       bankData.banks[4]
     );
+    round.push(bankData.allIds.map(id => Display.balanceSheet(bankData.banks[id])))
     Customer.transfer(
       50,
       bankData.banks[2],
@@ -175,6 +186,8 @@ export const setupFunctions: SetupFunctions = {
       bankData.banks[4],
       bankData.banks[3]
     );
+    round.push(bankData.allIds.map(id => Display.balanceSheet(bankData.banks[id])))
+    // console.log(JSON.stringify(round))
   },
   12() {
     clearBankData();

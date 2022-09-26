@@ -1,10 +1,11 @@
 import { Accounts } from "./accounts";
 import { Reserves } from "./reserves";
 import { Dues } from "./dues";
-import { Bank, bankData } from "./structures";
+import { Bank, bankData, records } from "./structures";
 import { System } from "./system";
 import { Loans } from "./loans";
 import { mapObject } from "./helpers";
+import { Record } from "./Records";
 
 export const Customer = {
   get() {
@@ -28,11 +29,13 @@ export const Customer = {
     Accounts.increaseCorrespondingBalance(customer, bank, amount);
     Reserves.decreaseReserves(customer, amount);
     Reserves.increaseReserves(bank, amount);
+    Record.customerDeposit(customer, bank, amount);
   },
   withdraw(customer: Bank, bank: Bank, amount: number) {
     Accounts.decreaseCorrespondingBalance(customer, bank, amount);
     Reserves.increaseReserves(customer, amount);
     Reserves.decreaseReserves(bank, amount);
+    Record.customerWithdraw(customer, bank, amount);
   },
 
   transfer(
@@ -46,10 +49,13 @@ export const Customer = {
       Accounts.decreaseCorrespondingBalance(customer1, bank1, amount);
       Accounts.increaseCorrespondingBalance(customer2, bank2, amount);
       System.handleDues(bank1, bank2, amount);
+      Record.transferMultiple(amount, customer1, customer2, bank1, bank2);
     } else {
       Accounts.decreaseCorrespondingBalance(customer1, bank1, amount);
       Accounts.increaseCorrespondingBalance(customer2, bank1, amount);
+      Record.transferSingle(amount, customer1, customer2, bank1);
     }
+    
   },
 
   getLoan(customer: Bank, bank: Bank, amount: number) {

@@ -12,7 +12,7 @@ export interface ColorSettings {
 export interface DisplaySettings {
   balances: boolean,
   taccounts: boolean,
-  clavaro: boolean,
+  clavero: boolean,
 };
 
 export const colorSettings: ColorSettings = {
@@ -25,7 +25,7 @@ export const colorSettings: ColorSettings = {
 export const displaySettings: DisplaySettings = {
   balances: true,
   taccounts: false,
-  clavaro: false,
+  clavero: false,
   
 };
 
