@@ -1,4 +1,5 @@
 import { createStyles, Text } from "@mantine/core";
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 
 const useStyles = createStyles((theme) => ({
@@ -18,19 +19,6 @@ const useStyles = createStyles((theme) => ({
     padding: "0px 3px",
   },
 }));
-
-export default function SideUI({ side }) {
-  return (
-    <div style={{ marginBottom: "1.5px" }}>
-      <Text size="xs" weight="bold" align="left">
-        {side.instrument}
-      </Text>
-      {side.accounts.map((account) => {
-        return <Balance key={account.id} account={account} />;
-      })}
-    </div>
-  );
-}
 
 function Balance({ account }) {
   const { classes } = useStyles();
@@ -58,3 +46,6 @@ function Balance({ account }) {
     </Text>
   );
 }
+
+const MemoizedBalance = React.memo(Balance);
+export default MemoizedBalance;

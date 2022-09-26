@@ -6,6 +6,8 @@ import {
   interestRate,
   ColorSettings,
   colorSettings,
+  DisplaySettings,
+  displaySettings,
 } from "./initialState";
 
 export interface SettingsState {
@@ -13,6 +15,7 @@ export interface SettingsState {
   reserveRequirement: number;
   interestRate: number;
   colorSettings: ColorSettings;
+  displaySettings: DisplaySettings;
 }
 
 const initialState: SettingsState = {
@@ -20,6 +23,7 @@ const initialState: SettingsState = {
   reserveRequirement,
   interestRate,
   colorSettings,
+  displaySettings,
 };
 
 export const settingsSlice = createSlice({
@@ -46,12 +50,23 @@ export const settingsSlice = createSlice({
     setColors: (state, { payload }) => {
       const key: keyof ColorSettings = payload.key;
       let resetColorSettings = {
+        round: false,
         static: false,
         flash: false,
         off: false,
       };
-      const newColorSettings = {...resetColorSettings, [key]: true }
+      const newColorSettings = { ...resetColorSettings, [key]: true };
       state.colorSettings = newColorSettings;
+    },
+    setDisplay: (state, { payload }) => {
+      const key: keyof ColorSettings = payload.key;
+      let resetDisplaySettings = {
+        balances: false,
+        taccounts: false,
+        clavaro: false,
+      };
+      const newColorSettings = { ...resetDisplaySettings, [key]: true };
+      state.displaySettings = newColorSettings;
     },
   },
 });
@@ -62,6 +77,7 @@ export const {
   setInterestRate,
   refreshSettings,
   setColors,
+  setDisplay,
 } = settingsSlice.actions;
 
 export const selectSettings = (state: AppState) => state.settings;

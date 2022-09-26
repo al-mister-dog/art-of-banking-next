@@ -9,11 +9,24 @@ export interface ColorSettings {
   off: boolean;
 }
 
+export interface DisplaySettings {
+  balances: boolean,
+  taccounts: boolean,
+  clavaro: boolean,
+};
+
 export const colorSettings: ColorSettings = {
   round: true,
   static: false,
   flash: false,
   off: false,
+};
+
+export const displaySettings: DisplaySettings = {
+  balances: true,
+  taccounts: false,
+  clavaro: false,
+  
 };
 
 export const sliderSettings = {

@@ -1,6 +1,6 @@
 import { createStyles, Text } from "@mantine/core";
 import React from "react";
-import useColorSettings from "../../../../hooks/useColorSettings";
+import { useEffect, useRef, useState } from "react";
 
 const useStyles = createStyles((theme) => ({
   text: {
@@ -9,44 +9,43 @@ const useStyles = createStyles((theme) => ({
     padding: "0px 3px",
   },
   decrease: {
-    transition: "all 0.5s ease-in",
     background: theme.colors.red[5],
     color: "white",
     padding: "0px 3px",
   },
   increase: {
-    transition: "all 0.5s ease-in",
     background: theme.colors.green[5],
     color: "white",
     padding: "0px 3px",
   },
 }));
 
-export default function Balances({ side }) {
-  return (
-    <div style={{ marginBottom: "1.5px" }}>
-      <Text size="xs" weight="bold" align="left">
-        {side.instrument}
-      </Text>
-      {side.accounts.map((account) => {
-        return <MemoizedBalance key={account.id} account={account} />;
-      })}
-    </div>
-  );
-}
-
-const Balance = ({ account }) => {
+function Balance({ account }) {
   const { classes } = useStyles();
-  const color = useColorSettings(account.balance);
+  const [prevBalance, setPrevBalance] = useState(account.balance);
+  const prevCountRef = useRef(account.balance);
+
+  useEffect(() => {
+    prevCountRef.current = account.balance;
+    setPrevBalance(prevCountRef.current);
+  }, [account.balance]);
 
   return (
-    <Text size="xs" weight="bold" align="left" className={classes[color]}>
+    <Text
+      size="xs"
+      weight="bold"
+      align="left"
+      className={`${account.balance === prevBalance && classes.text} ${
+        account.balance < prevBalance && classes.decrease
+      } ${account.balance > prevBalance && classes.increase}`}
+    >
       {account.thirdPartyDetail?.name
         ? `${account.thirdPartyDetail.name}: `
         : ""}
       ${account.balance}
     </Text>
   );
-};
+}
 
 const MemoizedBalance = React.memo(Balance);
+export default MemoizedBalance;

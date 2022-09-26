@@ -30,7 +30,6 @@ export const Display = {
   },
 
   balanceSheet(bank: Bank) {
-    
     const { assets, liabilities } =
       BalanceSheets.getAssetsAndLiabilitiesPlusReserves(bank);
     const assetsDetailed = this.addDetails(bank, assets);
@@ -42,6 +41,12 @@ export const Display = {
       assets: getNestedArray(mappedAssets),
       liabilities: getNestedArray(mappedLiabilities),
     };
+  },
+
+  tAccount(bank: Bank) {
+    const { assets, liabilities } =
+      BalanceSheets.getAssetsAndLiabilitiesPlusReserves(bank);
+    console.log(JSON.stringify({assets, liabilities}));
   },
   balanceSheetObject(bank: Bank) {
     const { assets, liabilities } =

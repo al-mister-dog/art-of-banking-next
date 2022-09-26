@@ -1,6 +1,7 @@
 import { createStyles, Text } from "@mantine/core";
 import React from "react";
-import useColorSettings from "../../../../hooks/useColorSettings";
+import useColorSettings from "../../../../../hooks/useColorSettings";
+import useSymbolSettings from "../../../../../hooks/useSymbolSettings";
 
 const useStyles = createStyles((theme) => ({
   text: {
@@ -22,31 +23,31 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function Balances({ side }) {
-  return (
-    <div style={{ marginBottom: "1.5px" }}>
-      <Text size="xs" weight="bold" align="left">
-        {side.instrument}
-      </Text>
-      {side.accounts.map((account) => {
-        return <MemoizedBalance key={account.id} account={account} />;
-      })}
-    </div>
-  );
-}
-
-const Balance = ({ account }) => {
+const Balance = ({ account, id }) => {
   const { classes } = useStyles();
   const color = useColorSettings(account.balance);
-
+  const symbol = useSymbolSettings(account.balance);
+  let info = "";
+  if (account.category === "reserves") {
+    info = `${symbol}${account.balance} ${account.category}`
+  }
+  if (account.subordinateId === id) {
+    info = `${symbol}${account.balance} ${account.type} at ${account.thirdPartyDetail.name}`;
+  }
+  if (account.superiorId === id) {
+    info = `${symbol}${account.balance} ${account.type} from ${account.thirdPartyDetail.name}`;
+  }
+  console.log(info);
   return (
     <Text size="xs" weight="bold" align="left" className={classes[color]}>
-      {account.thirdPartyDetail?.name
+     {info}
+      {/* {account.thirdPartyDetail?.name
         ? `${account.thirdPartyDetail.name}: `
         : ""}
-      ${account.balance}
+      {symbol} */}
     </Text>
   );
 };
 
 const MemoizedBalance = React.memo(Balance);
+export default MemoizedBalance;

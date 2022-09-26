@@ -15,11 +15,7 @@ import {
 } from "@mantine/core";
 
 import BankDetail from "../../bank-detail/mobile";
-
-import Round from "../balances/round";
-import Static from "../balances/static";
-import Off from "../balances/off";
-import Flash from "../balances/flash";
+import BalanceByInstrument from "../balances/balance-by-instrument";
 
 import { CardInfo } from "../../types";
 
@@ -92,38 +88,16 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
         </Text>
       </SimpleGrid>
       <SimpleGrid cols={2} style={{ height: "110px", overflowX: "hidden" }}>
-        <div>
+        {/* <div>
           {bank.balanceSheet.assets.map((asset: any) => {
-            if (colorSettings.round) {
-              return <Round key={asset.instrument} side={asset} />;
-            }
-            if (colorSettings.static) {
-              return <Static key={asset.instrument} side={asset} />;
-            }
-            if (colorSettings.flash) {
-              return <Flash key={asset.instrument} side={asset} />;
-            }
-            if (colorSettings.off) {
-              return <Off key={asset.instrument} side={asset} />;
-            }
+            return <BalanceByInstrument key={asset.instrument} side={asset} />;
           })}
         </div>
         <div>
-          {bank.balanceSheet.liabilities.map((liability: any) => {
-            if (colorSettings.round) {
-              return <Round key={liability.instrument} side={liability} />;
-            }
-            if (colorSettings.static) {
-              return <Static key={liability.instrument} side={liability} />;
-            }
-            if (colorSettings.flash) {
-              return <Flash key={liability.instrument} side={liability} />;
-            }
-            if (colorSettings.off) {
-              return <Off key={liability.instrument} side={liability} />;
-            }
+          {bank.balanceSheet.liabilities.map((lbys: any) => {
+            return <BalanceByInstrument key={lbys.instrument} side={lbys} />;
           })}
-        </div>
+        </div> */}
       </SimpleGrid>
 
       <DrawerContext.Provider value={setOpened}>
