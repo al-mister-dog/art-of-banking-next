@@ -158,7 +158,6 @@ export const banksSlice = createSlice({
       ];
     },
     updateRecords: (state) => {
-      // console.log(JSON.stringify(Record.getAll()))
       Record.setRound()
     }
   },

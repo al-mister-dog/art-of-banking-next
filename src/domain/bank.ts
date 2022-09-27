@@ -5,10 +5,16 @@ import { Bank, bankData, accountData } from "./structures";
 import { system, System } from "./system";
 import { Loans } from "./loans";
 import { mapObject } from "./helpers";
+import { Record } from "./Records";
 
 export const Banks = {
   createAccount(bank1: Bank, bank2: Bank, amount: number = 0) {
     Accounts.createAccount(bank1, bank2, "bankDeposits", amount);
+    if (amount) {
+      Reserves.decreaseReserves(bank1, amount);
+      Reserves.increaseReserves(bank2, amount);
+      Record.deposit(bank1, bank2, amount)
+    }
   },
   get() {
     return mapObject(bankData.banks).filter((bank) => bank.type === "bank");
@@ -44,6 +50,7 @@ export const Banks = {
     Accounts.increaseCorrespondingBalance(bank1, bank2, amount);
     Reserves.decreaseReserves(bank1, amount);
     Reserves.increaseReserves(bank2, amount);
+    Record.deposit(bank1, bank2, amount);
   },
   withdraw(bank1: Bank, bank2: Bank, amount: number) {
     Accounts.decreaseCorrespondingBalance(bank1, bank2, amount);
@@ -58,10 +65,12 @@ export const Banks = {
 
   creditAccount(bank1: Bank, bank2: Bank, amount: number) {
     Accounts.increaseCorrespondingBalance(bank1, bank2, amount);
+    Record.creditAccount(bank1, bank2, amount)
   },
 
   debitAccount(bank1: Bank, bank2: Bank, amount: number) {
     Accounts.decreaseCorrespondingBalance(bank1, bank2, amount);
+    Record.debitAccount(bank1, bank2, amount)
   },
 
   getLoan(bank1: Bank, bank2: Bank, amount: number) {

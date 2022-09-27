@@ -190,8 +190,6 @@ export const Dues = {
 };
 
 function mapFilter(party: Bank, cb: (account: CreditAccount) => boolean) {
-  // console.log("mapFilter");
-  // console.log(party);
   return party.creditIds
     .map((id) => creditData.creditAccounts[id])
     .filter((account) => cb(account) && account.category === "dues");

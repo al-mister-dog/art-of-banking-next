@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../../../app/hooks";
 import { selectSettings } from "../../../../features/settings/settingsSlice";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import {
   Card,
   Center,
@@ -13,6 +13,7 @@ import { CardInfo } from "../../types";
 import BalanceByInstrument from "../balances/balance-by-instrument";
 import { Record } from "../../../../domain/Records";
 import Clavero from "../balances/balance-displays/clavero";
+import ClaveroList from "../balances/balance-displays/clavero-list";
 
 const useStyles = createStyles((theme) => ({
   card: { paddingBottom: "0px", backgroundColor: theme.colors.violet[1] },
@@ -54,7 +55,7 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
   }, []);
 
   const { assets, liabilities } = Record.get(bank.cardInfo.id);
-  // console.log(JSON.stringify({ assets, liabilities }));
+
   return (
     <Card
       key={bank.cardInfo.id}
@@ -84,25 +85,8 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
           Liabilities
         </Text>
       </SimpleGrid>
-      {displaySettings.clavero ? (
-        <Card.Section>
-          <SimpleGrid
-            cols={2}
-            spacing={0}
-            style={{ height: "110px", overflowX: "hidden" }}
-          >
-            <div>
-              {assets.map((record: any, index) => {
-                return <Clavero key={index} record={record} />;
-              })}
-            </div>
-            <div>
-              {liabilities.map((record: any, index) => {
-                return <Clavero key={index} record={record} />;
-              })}
-            </div>
-          </SimpleGrid>
-        </Card.Section>
+      {displaySettings.clavero && assets !== undefined ? (
+        <ClaveroList assets={assets} liabilities={liabilities} />
       ) : (
         <SimpleGrid cols={2} style={{ height: "110px", overflowX: "hidden" }}>
           <div>

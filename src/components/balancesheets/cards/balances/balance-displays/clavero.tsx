@@ -33,11 +33,9 @@ const Balance = ({ record }) => {
   const { classes } = useStyles();
   if (record === null) {
     return (
-      <Text
-        size="xs"
-        weight="bold"
-        align="left"
-      ></Text>
+      <Text size="xs" weight="bold" align="left">
+        <br></br>
+      </Text>
     );
   }
   return (

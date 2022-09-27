@@ -239,6 +239,8 @@ interface Records {
 }
 
 export const records = {
+  id: 0,
   parties: {} as Records,
+  rounds: {}, 
   allIds: [],
 };

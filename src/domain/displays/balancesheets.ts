@@ -60,8 +60,6 @@ export const BalanceSheets = {
   },
 
   getAccountAssets(bank: Bank) {
-    // console.log(bank.name)
-    // console.log(bank.accountIds)
     const accounts = bank.accountIds.map((id) => {
       return accountData.accounts[id];
     });

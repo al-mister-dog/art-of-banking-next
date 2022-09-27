@@ -23,13 +23,14 @@ export const Customer = {
     if (amount) {
       Reserves.decreaseReserves(customer, amount);
       Reserves.increaseReserves(bank, amount);
+      Record.deposit(customer, bank, amount)
     }
   },
   deposit(customer: Bank, bank: Bank, amount: number) {
     Accounts.increaseCorrespondingBalance(customer, bank, amount);
     Reserves.decreaseReserves(customer, amount);
     Reserves.increaseReserves(bank, amount);
-    Record.customerDeposit(customer, bank, amount);
+    Record.deposit(customer, bank, amount);
   },
   withdraw(customer: Bank, bank: Bank, amount: number) {
     Accounts.decreaseCorrespondingBalance(customer, bank, amount);
