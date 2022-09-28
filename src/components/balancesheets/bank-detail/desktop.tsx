@@ -30,7 +30,7 @@ export default function SidePanel({ bank }: { bank: CardInfo }) {
   
   return (
     <Card
-      shadow="sm"
+      // shadow="sm"
       p="sm"
       radius="xs"
       style={{

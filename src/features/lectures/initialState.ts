@@ -43,6 +43,18 @@ const actionLists = {
     bank: [],
     customer: [{ value: "transfer", label: "Transfer Money to Someone" }],
   },
+  6: {
+    centralbank: [
+      { value: "settleDues", label: "Settle Dues with Banks" },
+      { value: "netDues", label: "Net Dues with Banks" },
+    ],
+    bank: [
+      { value: "bankTransfer", label: "Transfer Money to Bank" },
+      { value: "getLoan", label: "Settle Dues with Bank" },
+      { value: "netDues", label: "Net Dues with Bank" },
+    ],
+    customer: [],
+  },
 };
 
 export const actions = {
@@ -58,6 +70,11 @@ export const actions = {
   9: actionLists[3],
   10: actionLists[4],
   11: actionLists[5],
+  12: actionLists[5],
+  13: actionLists[5],
+  14: actionLists[5],
+  15: actionLists[6],
+  16: actionLists[5],
 };
 
 const initialActionData = actions[0];

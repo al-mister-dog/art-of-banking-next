@@ -8,6 +8,8 @@ import {
   colorSettings,
   DisplaySettings,
   displaySettings,
+  claveroSettings,
+  ClaveroSettings,
 } from "./initialState";
 
 export interface SettingsState {
@@ -16,6 +18,7 @@ export interface SettingsState {
   interestRate: number;
   colorSettings: ColorSettings;
   displaySettings: DisplaySettings;
+  claveroSettings: ClaveroSettings;
 }
 
 const initialState: SettingsState = {
@@ -24,6 +27,7 @@ const initialState: SettingsState = {
   interestRate,
   colorSettings,
   displaySettings,
+  claveroSettings,
 };
 
 export const settingsSlice = createSlice({
@@ -65,8 +69,18 @@ export const settingsSlice = createSlice({
         taccounts: false,
         clavero: false,
       };
-      const newColorSettings = { ...resetDisplaySettings, [key]: true };
-      state.displaySettings = newColorSettings;
+      const newDisplaySettings = { ...resetDisplaySettings, [key]: true };
+      state.displaySettings = newDisplaySettings;
+    },
+    setClaveroDisplay: (state, { payload }) => {
+      const key: keyof ClaveroSettings = payload.key;
+      let resetClaveroSettings = {
+        latest: false,
+        lastTwo: false,
+        all: false,
+      };
+      const newClaveroSettings = { ...resetClaveroSettings, [key]: true };
+      state.claveroSettings = newClaveroSettings;
     },
   },
 });
@@ -78,6 +92,7 @@ export const {
   refreshSettings,
   setColors,
   setDisplay,
+  setClaveroDisplay
 } = settingsSlice.actions;
 
 export const selectSettings = (state: AppState) => state.settings;

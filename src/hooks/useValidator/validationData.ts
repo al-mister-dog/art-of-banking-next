@@ -346,6 +346,32 @@ const validatorsByLecture = {
       },
     },
   },
+  fed: {
+    centralbank: {},
+    bank: {
+      bankTransfer(
+        customer: CardInfo,
+        amount: number,
+        selectedBank: string,
+        overdraft: number,
+        reserveRequirement: number
+      ) {
+        const { customerDeposits, bankReserves, bank } =
+          getTransferDetails(customer);
+        return (
+          check
+            .isAmount(amount)
+            .isSelectedBank(selectedBank)
+            .isPositiveAmount(amount)
+            .isOverdraftLimit(customerDeposits, overdraft, amount)
+            .isRequiredReserves(bankReserves, reserveRequirement, amount, bank)
+            // .sufficientReserves(bankReserves, amount, bank.name)
+            // .sufficentDeposits(customerDeposits, amount, customer.cardInfo.name)
+            .validate()
+        );
+      },
+    },
+  },
 };
 
 export const validatorsById = {
@@ -361,4 +387,9 @@ export const validatorsById = {
   9: validatorsByLecture.dues1,
   10: validatorsByLecture.dues2,
   11: validatorsByLecture.dues2,
+  12: validatorsByLecture.dues2,
+  13: validatorsByLecture.dues2,
+  14: validatorsByLecture.simple,
+  15: validatorsByLecture.fed,
+  16: validatorsByLecture.simple,
 };

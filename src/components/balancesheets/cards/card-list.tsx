@@ -4,7 +4,7 @@ import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { MantineProvider } from "@mantine/core";
 import { CardInfo } from "../types";
 import { Display } from "../../../domain/display";
-import { Bank, creditData } from "../../../domain/structures";
+import { Bank, creditData, records } from "../../../domain/structures";
 import LayoutMobile from "./card/layout-mobile";
 import LayoutDesktop from "./card/layout-desktop";
 import { useRef, useState } from "react";
@@ -21,7 +21,7 @@ export default function BalanceSheetsContainer() {
   const colors: Colors = {
     customer: "grape",
     bank: "violet",
-    centralbank: "indigo",
+    centralbank: "teal",
     clearinghouse: "pink",
   };
 

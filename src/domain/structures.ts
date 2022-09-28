@@ -145,6 +145,7 @@ export function clearBankData() {
     creditAccounts: {} as CreditAccounts,
     allIds: [] as number[],
   };
+  records = { id: 0, parties: {} as Records, rounds: {}, allIds: [] };
 }
 
 export const AccountData = {
@@ -222,13 +223,14 @@ export const CreditData = {
   },
 };
 
-type RecordDetail = {
+export type RecordDetail = {
   instrumentType: string;
   notationType: string;
   amount: number;
   id: number;
   symbol: string;
 } | null;
+
 interface Record {
   id: number;
   records: { assets: RecordDetail[]; liabilities: RecordDetail[] };
@@ -238,9 +240,9 @@ interface Records {
   [key: string]: Record;
 }
 
-export const records = {
+export let records = {
   id: 0,
   parties: {} as Records,
-  rounds: {}, 
+  rounds: {},
   allIds: [],
 };

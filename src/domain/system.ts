@@ -28,7 +28,9 @@ export const System = {
       national: function (): void {
         return;
       },
-      centralbank: function (): void {},
+      centralbank: function (): void {
+        BankingSystem.createBank("centralbank", "centralbank", 300);
+      },
       correspondent: function (): void {},
       chips: function (): void {},
     };
@@ -46,14 +48,11 @@ export const System = {
         Dues.increase(bank1, bank2, "customerDeposits", amount);
       },
       clearinghouse: function (): void {
-        const clearinghouse = Clearinghouse.get()
-
+        const clearinghouse = Clearinghouse.get();
         Dues.increase(bank1, clearinghouse, "ch certificates", amount);
         Dues.increase(clearinghouse, bank2, "ch certificates", amount);
       },
-      centralbank: function (): void {
-        throw new Error("Function not implemented.");
-      },
+      centralbank: function (): void {},
       chips: function (): void {
         throw new Error("Function not implemented.");
       },
@@ -97,15 +96,15 @@ export const System = {
       clearinghouse: function (): void {
         if (bank.type === "bank") {
           const clearinghouse = bankData.banks[0];
-          Accounts.createAccount(
-            bank,
-            clearinghouse,
-            "ch certificates",
-            100
-          );
+          Accounts.createAccount(bank, clearinghouse, "ch certificates", 100);
         }
       },
-      centralbank: function (): void {},
+      centralbank: function (): void {
+        if (bank.type === "bank") {
+          const centralbank = bankData.banks[0];
+          Accounts.createAccount(bank, centralbank, "bank deposits", 100);
+        }
+      },
       chips: function (): void {},
     };
     systemType[system]();

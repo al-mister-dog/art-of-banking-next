@@ -29,7 +29,7 @@ export const Analytics = {
       .map((account) => {
         return account.balance;
       })
-      .reduce((acc, cur) => acc + cur);
+      .reduce((acc, cur) => {return acc + cur}, 0);
     return {
       data: assetData,
       total: assetTotals,

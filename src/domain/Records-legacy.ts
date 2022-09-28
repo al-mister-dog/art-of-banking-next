@@ -1,11 +1,4 @@
-import { Bank, RecordDetail, records } from "./structures";
-import { System } from "./system";
-
-const creditInstrumentsBySystem = {
-  national: "deposits",
-  correspondent: "deposits",
-  clearinghouse: "ch certs",
-};
+import { Bank, records } from "./structures";
 
 export const Record = {
   deposit(bank1: Bank, bank2: Bank, amount: number) {
@@ -41,10 +34,19 @@ export const Record = {
       symbol: "+",
       name: bank1.name,
     };
-    insertAssetsEntry(bank1.id, reservesAssetRecord1);
-    insertAssetsEntry(bank1.id, depositAssetRecord);
-    insertAssetsEntry(bank2.id, reservesAssetRecord2);
-    insertLiabilitiesEntry(bank2.id, depositLiabilityRecord);
+    insertAssetsEntry(bank1.id, reservesAssetRecord1)
+    insertAssetsEntry(bank1.id, depositAssetRecord)
+    insertAssetsEntry(bank2.id, reservesAssetRecord2)
+    insertLiabilitiesEntry(bank2.id, depositLiabilityRecord)
+    // for (const party in records.parties) {
+    //   if (records.parties[party].id === bank1.id) {
+    //     records.parties[party].records.assets.push(reservesAssetRecord1);
+    //     records.parties[party].records.assets.push(depositAssetRecord);
+    //   } else if (records.parties[party].id === bank2.id) {
+    //     records.parties[party].records.assets.push(reservesAssetRecord2);
+    //     records.parties[party].records.liabilities.push(depositLiabilityRecord);
+    //   }
+    // }
   },
   customerDeposit(bank1: Bank, bank2: Bank, amount: number) {
     const reservesAssetRecord1 = {
@@ -80,10 +82,15 @@ export const Record = {
       name: bank1.name,
     };
 
-    insertAssetsEntry(bank1.id, reservesAssetRecord1);
-    insertAssetsEntry(bank1.id, depositAssetRecord);
-    insertAssetsEntry(bank2.id, reservesAssetRecord2);
-    insertLiabilitiesEntry(bank2.id, depositLiabilityRecord);
+    for (const party in records.parties) {
+      if (records.parties[party].id === bank1.id) {
+        records.parties[party].records.assets.push(reservesAssetRecord1);
+        records.parties[party].records.assets.push(depositAssetRecord);
+      } else if (records.parties[party].id === bank2.id) {
+        records.parties[party].records.assets.push(reservesAssetRecord2);
+        records.parties[party].records.liabilities.push(depositLiabilityRecord);
+      }
+    }
   },
   customerWithdraw(bank1: Bank, bank2: Bank, amount: number) {
     const reservesAssetRecord1 = {
@@ -119,10 +126,15 @@ export const Record = {
       name: bank1.name,
     };
 
-    insertAssetsEntry(bank1.id, reservesAssetRecord1);
-    insertAssetsEntry(bank1.id, depositAssetRecord);
-    insertAssetsEntry(bank2.id, reservesAssetRecord2);
-    insertLiabilitiesEntry(bank2.id, depositLiabilityRecord);
+    for (const party in records.parties) {
+      if (records.parties[party].id === bank1.id) {
+        records.parties[party].records.assets.push(reservesAssetRecord1);
+        records.parties[party].records.assets.push(depositAssetRecord);
+      } else if (records.parties[party].id === bank2.id) {
+        records.parties[party].records.assets.push(reservesAssetRecord2);
+        records.parties[party].records.liabilities.push(depositLiabilityRecord);
+      }
+    }
   },
   decreaseBalance(bank1: Bank, bank2: Bank, amount: number) {
     const depositAssetRecord = {
@@ -141,33 +153,40 @@ export const Record = {
       symbol: "-",
       name: bank1.name,
     };
-    insertAssetsEntry(bank1.id, depositAssetRecord);
-    insertLiabilitiesEntry(bank2.id, depositLiabilityRecord);
+
+    for (const party in records.parties) {
+      if (records.parties[party].id === bank1.id) {
+        records.parties[party].records.assets.push(depositAssetRecord);
+      } else if (records.parties[party].id === bank2.id) {
+        records.parties[party].records.liabilities.push(depositLiabilityRecord);
+      }
+    }
   },
   increaseBalance(bank1: Bank, bank2: Bank, amount: number) {
-    let type = "deposits";
-    if (bank1.name === "clearinghouse" || bank2.name === "clearinghouse") {
-      type = "ch certs";
-    }
     const depositAssetRecord = {
-      instrumentType: type,
+      instrumentType: "deposits",
       notationType: "novation",
       amount: amount,
       id: bank2.id,
       symbol: "+",
-      name: bank2.name === "clearinghouse" ? "CH" : bank2.name,
+      name: bank2.name,
     };
     const depositLiabilityRecord = {
-      instrumentType: type,
+      instrumentType: "deposits",
       notationType: "novation",
       amount: amount,
       id: bank1.id,
       symbol: "+",
-      name: bank1.name === "clearinghouse" ? "CH" : bank1.name,
+      name: bank1.name,
     };
 
-    insertAssetsEntry(bank1.id, depositAssetRecord);
-    insertLiabilitiesEntry(bank2.id, depositLiabilityRecord);
+    for (const party in records.parties) {
+      if (records.parties[party].id === bank1.id) {
+        records.parties[party].records.assets.push(depositAssetRecord);
+      } else if (records.parties[party].id === bank2.id) {
+        records.parties[party].records.liabilities.push(depositLiabilityRecord);
+      }
+    }
   },
   transferMultiple(
     amount: number,
@@ -208,10 +227,17 @@ export const Record = {
       symbol: "+",
       name: customer2.name,
     };
-    insertAssetsEntry(customer1.id, customer1Record);
-    insertAssetsEntry(customer2.id, customer2Record);
-    insertLiabilitiesEntry(bank1.id, bank1Record);
-    insertLiabilitiesEntry(bank2.id, bank2Record);
+    for (const party in records.parties) {
+      if (records.parties[party].id === customer1.id) {
+        records.parties[party].records.assets.push(customer1Record);
+      } else if (records.parties[party].id === customer2.id) {
+        records.parties[party].records.assets.push(customer2Record);
+      } else if (records.parties[party].id === bank1.id) {
+        records.parties[party].records.liabilities.push(bank1Record);
+      } else if (records.parties[party].id === bank2.id) {
+        records.parties[party].records.liabilities.push(bank2Record);
+      }
+    }
   },
   transferSingle(
     amount: number,
@@ -252,16 +278,20 @@ export const Record = {
       name: customer2.name,
     };
 
-    insertAssetsEntry(customer1.id, customer1Record);
-    insertAssetsEntry(customer2.id, customer2Record);
-    insertLiabilitiesEntry(bank1.id, bank1Record);
-    insertLiabilitiesEntry(bank1.id, bank2Record);
+    for (const party in records.parties) {
+      if (records.parties[party].id === customer1.id) {
+        records.parties[party].records.assets.push(customer1Record);
+      } else if (records.parties[party].id === customer2.id) {
+        records.parties[party].records.assets.push(customer2Record);
+      } else if (records.parties[party].id === bank1.id) {
+        records.parties[party].records.liabilities.push(bank1Record);
+        records.parties[party].records.liabilities.push(bank2Record);
+      }
+    }
   },
   creditAccount(bank1, bank2, amount) {
-    const system = System.getSystem();
-
     const bank1Record = {
-      instrumentType: creditInstrumentsBySystem[system],
+      instrumentType: "deposits",
       notationType: "issuance",
       amount: amount,
       id: bank2.id,
@@ -269,20 +299,24 @@ export const Record = {
       name: bank2.name,
     };
     const bank2Record = {
-      instrumentType: creditInstrumentsBySystem[system],
+      instrumentType: "deposits",
       notationType: "issuance",
       amount: amount,
       id: bank1.id,
       symbol: "+",
       name: bank1.name,
     };
-    insertAssetsEntry(bank2.id, bank2Record);
-    insertLiabilitiesEntry(bank1.id, bank1Record);
+    for (const party in records.parties) {
+      if (records.parties[party].id === bank1.id) {
+        records.parties[party].records.liabilities.push(bank1Record);
+      } else if (records.parties[party].id === bank2.id) {
+        records.parties[party].records.assets.push(bank2Record);
+      }
+    }
   },
   debitAccount(bank1, bank2, amount) {
-    const system = System.getSystem();
     const bank1Record = {
-      instrumentType: creditInstrumentsBySystem[system],
+      instrumentType: "deposits",
       notationType: "setOff",
       amount: amount,
       id: bank2.id,
@@ -290,58 +324,20 @@ export const Record = {
       name: bank2.name,
     };
     const bank2Record = {
-      instrumentType: creditInstrumentsBySystem[system],
+      instrumentType: "deposits",
       notationType: "setOff",
       amount: amount,
       id: bank1.id,
       symbol: "-",
       name: bank1.name,
     };
-    insertAssetsEntry(bank1.id, bank1Record);
-    insertLiabilitiesEntry(bank2.id, bank2Record);
-  },
-  increaseDues(bank1, bank2, amount) {
-    const system = System.getSystem();
-    const duesLiabilityRecord1 = {
-      instrumentType: creditInstrumentsBySystem[system],
-      notationType: "issuance",
-      amount: amount,
-      id: bank2.id,
-      symbol: "+",
-      name: bank2.name,
-    };
-    const duesAssetRecord2 = {
-      instrumentType: creditInstrumentsBySystem[system],
-      notationType: "issuance",
-      amount: amount,
-      id: bank1.id,
-      symbol: "+",
-      name: bank1.name,
-    };
-
-    insertLiabilitiesEntry(bank1.id, duesLiabilityRecord1);
-    insertAssetsEntry(bank2.id, duesAssetRecord2);
-  },
-  decreaseDues(bank1, bank2, amount) {
-    const system = System.getSystem();
-    const duesLiabilityRecord1 = {
-      instrumentType: creditInstrumentsBySystem[system],
-      notationType: "setOff",
-      amount: amount,
-      id: bank2.id,
-      symbol: "-",
-      name: bank2.name,
-    };
-    const duesAssetRecord2 = {
-      instrumentType: creditInstrumentsBySystem[system],
-      notationType: "setOff",
-      amount: amount,
-      id: bank1.id,
-      symbol: "-",
-      name: bank1.name,
-    };
-    insertLiabilitiesEntry(bank1.id, duesLiabilityRecord1);
-    insertAssetsEntry(bank2.id, duesAssetRecord2);
+    for (const party in records.parties) {
+      if (records.parties[party].id === bank1.id) {
+        records.parties[party].records.assets.push(bank1Record);
+      } else if (records.parties[party].id === bank2.id) {
+        records.parties[party].records.liabilities.push(bank2Record);
+      }
+    }
   },
   get(id) {
     if (records.id === 0) {
@@ -349,63 +345,11 @@ export const Record = {
     }
 
     const partyRecords = records.rounds[records.id - 1];
+
     return {
       assets: partyRecords.round[id].records.assets,
       liabilities: partyRecords.round[id].records.liabilities,
     };
-  },
-  getByRound(id) {
-    if (records.id === 0) {
-      return { assets: undefined, liabilities: undefined };
-    }
-
-    const partyRecords = records.rounds[records.id - 1];
-    return {
-      assets: partyRecords.round[id].records.assets,
-      liabilities: partyRecords.round[id].records.liabilities,
-    };
-  },
-  getLastTwo(id) {
-    if (records.id === 0) {
-      return { assets: undefined, liabilities: undefined };
-    } else if (records.id === 1) {
-      return this.getByRound(id);
-    }
-    const partyRecords1 = records.rounds[records.id - 2];
-    const partyRecords2 = records.rounds[records.id - 1];
-    return {
-      assets: [
-        ...partyRecords1.round[id].records.assets,
-        ...partyRecords2.round[id].records.assets,
-      ],
-      liabilities: [
-        ...partyRecords1.round[id].records.liabilities,
-        ...partyRecords2.round[id].records.liabilities,
-      ],
-    };
-  },
-  getAllTransactions(id) {
-    if (records.id === 0) {
-      return { assets: undefined, liabilities: undefined };
-    }
-    if (records.id === 1) {
-      return this.getByRound(id);
-    }
-    let allAssets = [];
-    let allLiabilities = [];
-    for (const round in records.rounds) {
-      const rounds = records.rounds[round];
-      allAssets.push(rounds.round[id].records.assets);
-      allLiabilities.push(rounds.round[id].records.liabilities);
-    }
-    const flattenedAssets = allAssets.reduce((a, c) => {
-      return a.concat(c);
-    }, []);
-    const flattenedLiabilities = allLiabilities.reduce((a, c) => {
-      return a.concat(c);
-    }, []);
-
-    return { assets: flattenedAssets, liabilities: flattenedLiabilities };
   },
   getAll() {
     return records.parties;
@@ -413,23 +357,15 @@ export const Record = {
   setRound() {
     const thisRecords = this.getAll();
     const round = populateRound(thisRecords);
-    records.rounds[records.id] = {
-      id: records.id,
-      round: JSON.parse(JSON.stringify(round)),
-    };
-    resetRecords();
+    records.rounds[records.id] = { id: records.id, round };
     records.id++;
   },
 };
-function resetRecords() {
-  for (const party in records.parties) {
-    records.parties[party].records = { assets: [], liabilities: [] };
-  }
-}
-function insertAssetsEntry(id1: number, assetRecord: RecordDetail) {
+
+function insertAssetsEntry(id1, assetRecord) {
   records.parties[id1].records.assets.push(assetRecord);
 }
-function insertLiabilitiesEntry(id1: number, liabilityRecord: RecordDetail) {
+function insertLiabilitiesEntry(id1, liabilityRecord) {
   records.parties[id1].records.liabilities.push(liabilityRecord);
 }
 
@@ -470,10 +406,3 @@ function populateRound(round) {
   );
   return round;
 }
-
-export const recs = {
-  id: 0,
-  parties: {},
-  rounds: {},
-  allIds: [],
-};

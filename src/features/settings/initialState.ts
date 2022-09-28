@@ -10,10 +10,10 @@ export interface ColorSettings {
 }
 
 export interface DisplaySettings {
-  balances: boolean,
-  taccounts: boolean,
-  clavero: boolean,
-};
+  balances: boolean;
+  taccounts: boolean;
+  clavero: boolean;
+}
 
 export const colorSettings: ColorSettings = {
   round: true,
@@ -26,7 +26,18 @@ export const displaySettings: DisplaySettings = {
   balances: true,
   taccounts: false,
   clavero: false,
-  
+};
+
+export interface ClaveroSettings {
+  latest: boolean;
+  lastTwo: boolean;
+  all: boolean;
+}
+
+export const claveroSettings: ClaveroSettings = {
+  latest: true,
+  lastTwo: false,
+  all: false,
 };
 
 export const sliderSettings = {
@@ -86,6 +97,31 @@ export const sliderSettings = {
     interestRate: true,
   },
   11: {
+    overdraft: false,
+    reserveRequirement: true,
+    interestRate: true,
+  },
+  12: {
+    overdraft: false,
+    reserveRequirement: true,
+    interestRate: true,
+  },
+  13: {
+    overdraft: false,
+    reserveRequirement: true,
+    interestRate: true,
+  },
+  14: {
+    overdraft: false,
+    reserveRequirement: true,
+    interestRate: true,
+  },
+  15: {
+    overdraft: false,
+    reserveRequirement: true,
+    interestRate: true,
+  },
+  16: {
     overdraft: false,
     reserveRequirement: true,
     interestRate: true,

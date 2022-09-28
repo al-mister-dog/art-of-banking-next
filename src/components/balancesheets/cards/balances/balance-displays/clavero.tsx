@@ -33,7 +33,9 @@ const Balance = ({ record }) => {
   const { classes } = useStyles();
   if (record === null) {
     return (
-      <Text size="xs" weight="bold" align="left">
+      <Text size="xs" 
+      style={{borderTop: "1px solid #828282"}}
+      >
         <br></br>
       </Text>
     );
@@ -44,9 +46,10 @@ const Balance = ({ record }) => {
       weight="bold"
       align="left"
       className={classes[record.notationType]}
+      style={{borderTop: "1px solid #828282"}}
     >
       {record.symbol}
-      {record.amount} {record.instrumentType} {record.name}
+      {record.amount} {record.instrumentType} {record.name === "clearinghouse" ? "CH" : record.name}
     </Text>
   );
 };

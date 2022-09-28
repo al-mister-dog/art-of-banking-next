@@ -14,6 +14,7 @@ import KeyTerms from "../../components/article/lecture-index/key-terms";
 import { useEffect, useRef, useState } from "react";
 import { setupFunctions } from "../../config/setup-functions/setupFunctions";
 import { clearBankData, creditData } from "../../domain/structures";
+import DayTimer from "../../components/widgets/day-timer";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {
@@ -33,12 +34,12 @@ const useStyles = createStyles((theme) => ({
 
 export default function LecturesPart({ routeData }) {
   const { introductoryTexts, title, keyTermsIds, slug, id } = routeData;
-  const prevId = useRef(id);
+  
   const { paragraphs, assignment } = introductoryTexts;
   const dispatch = useAppDispatch();
   const { classes } = useStyles();
   const [renderedId, setRenderedId] = useState(id);
-
+  
   useEffect(() => {
     dispatch(setup({ id }));
     dispatch(setActions({ id }));
@@ -60,6 +61,7 @@ export default function LecturesPart({ routeData }) {
       {title !== "Introduction" && (
         <div className={classes.assignmentContainer}>
           <div className={classes.balanceSheets}>
+            <DayTimer />
             <BalanceSheets />
             <div style={{ height: "25px" }} />
             <ChartsAndSettings />

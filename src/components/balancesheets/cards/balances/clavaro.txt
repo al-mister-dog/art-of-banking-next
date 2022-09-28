@@ -3,101 +3,31 @@ Green: Payment by issuance (Issuing a new liability)
 Red: Payment by set-off (Repaying a liability that is owed)
 Blue: Payment by novation (Receiving a liability from another balance sheet)
 
--asset -liability = set-off (debitting liabilities)
-+asset +liability = novation (creditting liabilities)
-
-A -asset deposits with B: B -liability deposits with A: A subordinate B superior = set-off
-A +asset deposits with B: B +liability deposits with A: A subordinate B superior = issuance
-A -liability deposits with a: a -asset deposits with A: A superior a subordinate = novation
-A +liability deposits with b: b +asset deposits with A: A superior b subordinate = novation 
-
-
-
-export const paymentTypes = {
-  assignment: "",
-  issuance: "",
-  set: "",
-  novation: "",
-};
-
+issues
 1
-can we tell just form looking at the balance sheet what is the payment type?
-CUSTOMER DEPOSIT
-two accounts change. reserves and deposits
-a customer deposit could have come from depositing cash or via transfer
-if by depositing cash it is NOVATION(yellow)
-if by transfer it is ASSIGNMENT(yellow)
+when moving to a new page, radio group state is set to 'balance'
+but the display is still clavero
 
-cash reserves come in
+this is because component state is set back to 'balance' on render
+could wrap it in memo??
+DOESNT WORK
 
-/**these are NOT balances. so cannot be recorded in the same way!
- * instead they will have to be added to a new object. RECORDS?
- * give it a go!!
- */
-
-on customer deposit at bank...
-
-const recordsByEntity = {
-  0: [
-
-  ]
-}
-
-Record.create(amount) {
-  const customerAsset = {
-    instrumentType: "cash",
-    notationType: "assignment"
-    amount: amount,
-  }
-  const record1 = {...newAsset, id: bank.id, symbol: "-"}
-  const record2 = {...newAsset, id: customer.id, symbol: "+"}
-
-  recordsByEntity[customer.id].push(record1)
-  recordsByEntity[bank.id].push(record1)
-}
+set state to redux state on mount using use-effect?
+or set redux state to component state on mount? // this i think
 
 
+2 
+records are not reset on page change
+fixed i think
 
-2
-after one event a new record is created
-could get this from the balance sheets?
+3
+pay dues
 
-this could be slightly easier than thought
+4
+question mark next to clavero and an explanation
 
-a transfer is always ASSIGNMENT
-a deposit is always ASSIGNMENT + ISSUANCE
-a withdrawal is always NOVATION + ASSIGNMENT
-getLoan is always NOVATION + ISSUANCE
-payLoan is always SET-OFF
+5
+pagination
 
-transfer: {
-  type: assignment,
-  p1: 
-
-},
-deposit: {
-  type: 
-}
-
-idea
-create records where needed
-after event. check each record length. if record length is small than another, add a null value
-
-case: transfer
-c1, c2, b1, b2
-c1: {
-  assignment: b1 (c1 transfers deposit asset to c2),
-}
-c2: {
-  assignment: c1 (c2 receives deposit asset from c1)
-  
-}
-b1: {
-  issuance: b2 (b1 issues due-to to b2)
-  issuance: b2 (b1 issues deposit liability to c2)
-}
-b2: {
-  issuance: (b2 receives due-to liability from c2)
-  issuance: (b1 issues deposit liability to c2)
-}
-
+6 
+modal showing all balance sheets next to each other

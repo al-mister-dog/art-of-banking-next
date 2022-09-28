@@ -12,7 +12,6 @@ import {
 import { CardInfo } from "../../types";
 import BalanceByInstrument from "../balances/balance-by-instrument";
 import { Record } from "../../../../domain/Records";
-import Clavero from "../balances/balance-displays/clavero";
 import ClaveroList from "../balances/balance-displays/clavero-list";
 
 const useStyles = createStyles((theme) => ({
@@ -42,24 +41,36 @@ const useStyles = createStyles((theme) => ({
       backgroundColor: theme.colors.pink[3],
     },
   },
+  teal: {
+    backgroundColor: theme.colors.teal,
+    "&:hover": {
+      backgroundColor: theme.colors.teal[3],
+    },
+  }
 }));
 interface Props {
   bank: CardInfo;
   handleSetBankDetail: (v: CardInfo) => void;
 }
 export default function CardUI({ bank, handleSetBankDetail }: Props) {
-  const { displaySettings } = useAppSelector(selectSettings);
+  const { displaySettings, claveroSettings } = useAppSelector(selectSettings);
   const { classes } = useStyles();
   const onSelectBank = useCallback((bank: CardInfo) => {
     handleSetBankDetail(bank);
   }, []);
-
-  const { assets, liabilities } = Record.get(bank.cardInfo.id);
-
+  
+  let claveroBalances = { assets: undefined, liabilities: undefined };
+  if (claveroSettings.latest) {
+    claveroBalances = Record.get(bank.cardInfo.id);
+  } else if (claveroSettings.lastTwo) {
+    claveroBalances = Record.getLastTwo(bank.cardInfo.id);
+  } else if (claveroSettings.all) {
+    claveroBalances = Record.getAllTransactions(bank.cardInfo.id);
+  }
   return (
     <Card
       key={bank.cardInfo.id}
-      shadow="sm"
+      // shadow="sm"
       p="sm"
       radius="xs"
       className={classes.card}
@@ -85,8 +96,11 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
           Liabilities
         </Text>
       </SimpleGrid>
-      {displaySettings.clavero && assets !== undefined ? (
-        <ClaveroList assets={assets} liabilities={liabilities} />
+      {displaySettings.clavero && claveroBalances.assets !== undefined ? (
+        <ClaveroList
+          assets={claveroBalances.assets}
+          liabilities={claveroBalances.liabilities}
+        />
       ) : (
         <SimpleGrid cols={2} style={{ height: "110px", overflowX: "hidden" }}>
           <div>

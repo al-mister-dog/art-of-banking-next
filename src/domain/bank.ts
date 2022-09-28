@@ -1,7 +1,7 @@
 import { Accounts } from "./accounts";
 import { Reserves } from "./reserves";
 import { Dues } from "./dues";
-import { Bank, bankData, accountData } from "./structures";
+import { Bank, bankData, accountData, BankData } from "./structures";
 import { system, System } from "./system";
 import { Loans } from "./loans";
 import { mapObject } from "./helpers";
@@ -13,7 +13,7 @@ export const Banks = {
     if (amount) {
       Reserves.decreaseReserves(bank1, amount);
       Reserves.increaseReserves(bank2, amount);
-      Record.deposit(bank1, bank2, amount)
+      Record.deposit(bank1, bank2, amount);
     }
   },
   get() {
@@ -25,7 +25,11 @@ export const Banks = {
   getById(id: number) {
     const bank = bankData.allIds
       .map((id) => bankData.banks[id])
-      .filter((bank) => (bank.type === "bank" || bank.type === "clearinghouse") && bank.id === id);
+      .filter(
+        (bank) =>
+          (bank.type === "bank" || bank.type === "clearinghouse") &&
+          bank.id === id
+      );
     return { ...bank[0] };
   },
   getByCustomerId(id: number) {
@@ -44,7 +48,7 @@ export const Banks = {
     const banksById = sharedAccounts.map(
       (account) => bankData.banks[account.superiorId]
     );
-    return banksById
+    return banksById;
   },
   deposit(bank1: Bank, bank2: Bank, amount: number) {
     Accounts.increaseCorrespondingBalance(bank1, bank2, amount);
@@ -59,18 +63,26 @@ export const Banks = {
   },
 
   transfer(bank1: Bank, bank2: Bank, amount: number) {
-    Accounts.increaseCorrespondingBalance(bank1, bank2, amount);
-    System.handleAfterTransfer(bank1, bank2, amount, true);
+    const system = System.getSystem();
+    if (system === "centralbank") {
+      const centralbank = bankData.banks[0];
+      
+      Accounts.increaseCorrespondingBalance(bank2, centralbank, amount);
+      Accounts.decreaseCorrespondingBalance(bank1, centralbank, amount);
+      // System.handleAfterTransfer(bank1, bank2, amount, true);
+    }
+    // Accounts.increaseCorrespondingBalance(bank1, bank2, amount);
+    // System.handleAfterTransfer(bank1, bank2, amount, true);
   },
 
   creditAccount(bank1: Bank, bank2: Bank, amount: number) {
     Accounts.increaseCorrespondingBalance(bank1, bank2, amount);
-    Record.creditAccount(bank1, bank2, amount)
+    Record.creditAccount(bank1, bank2, amount);
   },
 
   debitAccount(bank1: Bank, bank2: Bank, amount: number) {
     Accounts.decreaseCorrespondingBalance(bank1, bank2, amount);
-    Record.debitAccount(bank1, bank2, amount)
+    Record.debitAccount(bank1, bank2, amount);
   },
 
   getLoan(bank1: Bank, bank2: Bank, amount: number) {

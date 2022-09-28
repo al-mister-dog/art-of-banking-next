@@ -1,5 +1,6 @@
 import { Clearinghouse } from "./clearinghouse";
 import { CreditAccounts } from "./credit-accounts";
+import { Record } from "./Records";
 import { Reserves } from "./reserves";
 import {
   Bank,
@@ -23,18 +24,6 @@ export const Dues = {
     )[0];
   },
   getCorresponding(bank1: Bank, bank2: Bank) {
-    // if (System.getSystem() === "clearinghouse") {
-    //   return creditData.allIds
-    //     .map((id) => creditData.creditAccounts[id])
-    //     .filter(
-    //       (account) =>
-    //         (account.subordinateId === bank1.id &&
-    //           account.superiorId === bank2.id) ||
-    //         (account.superiorId === bank1.id &&
-    //           account.subordinateId === bank2.id &&
-    //           account.category === "dues")
-    //     );
-    // } else {
     return mapFilter(
       bank1,
       (account) =>
@@ -44,7 +33,6 @@ export const Dues = {
           account.subordinateId === bank2.id &&
           account.category === "dues")
     );
-    // }
   },
   getById(id: number) {
     const allDues = creditData.allIds.map(
@@ -100,6 +88,7 @@ export const Dues = {
     } else {
       Dues.create(bank1, bank2, amount, type);
     }
+    Record.increaseDues(bank1, bank2, amount);
   },
 
   decrease(bank1: Bank, bank2: Bank, type: string, amount: number) {
@@ -112,6 +101,7 @@ export const Dues = {
     } else {
       Dues.create(bank1, bank2, amount, type);
     }
+    Record.decreaseDues(bank1, bank2, amount);
   },
 
   settle(bank1: Bank, bank2: Bank) {
@@ -141,13 +131,16 @@ export const Dues = {
           const amountDue = owedByBank1.balance - owedByBank2.balance;
           this.netAndSet(bank1, bank2, amountDue);
           this.netAndSet(bank2, bank1, 0);
+          Record.decreaseDues(bank1, bank2, amountDue);
         } else if (owedByBank2.balance > owedByBank1.balance) {
           const amountDue = owedByBank2.balance - owedByBank1.balance;
           this.netAndSet(bank2, bank1, amountDue);
           this.netAndSet(bank1, bank2, 0);
+          Record.decreaseDues(bank1, bank2, amountDue);
         } else {
           this.netAndSet(bank2, bank1, 0);
           this.netAndSet(bank1, bank2, 0);
+          Record.decreaseDues(bank1, bank2, owedByBank1);
         }
       }
     }
@@ -173,6 +166,10 @@ export const Dues = {
       }
     }
   },
+  //record algorithm
+  /**
+   * one due decrease
+   */
 
   set(bank1: Bank, bank2: Bank, amount: number) {
     const account = Dues.get(bank1, bank2);
@@ -182,8 +179,7 @@ export const Dues = {
   netAndSet(bank1: Bank, bank2: Bank, amount: number) {
     const account = Dues.get(bank1, bank2);
     // CreditAccounts.set(account, amount);
-    
-    
+
     const newAccount = { ...account, netted: true };
     CreditAccounts.set(newAccount, amount);
   },

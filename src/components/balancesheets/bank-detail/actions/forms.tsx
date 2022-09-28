@@ -3,13 +3,13 @@ import WithdrawFromBank from "./list/withdrawFromBank";
 import DepositIntoBank from "./list/depositIntoBank";
 import TakeOutLoan from "./list/takeOutLoan";
 import RepayLoan from "./list/repayLoan";
-import NetDues from "./list/netDues"
+import NetDues from "./list/netDues";
 import PayDues from "./list/payDues";
 import SettleDues from "./list/settleDues";
 import { CardInfo } from "../../types";
 
 import { useValidator } from "../../../../hooks/useValidator/useValidator";
-
+import TransferToBank from "./list/transferToBank";
 
 export default function ActionForms({
   action,
@@ -27,6 +27,10 @@ export default function ActionForms({
 
   if (action === "transfer") {
     return <TransferToCustomer bank={bank} />;
+  }
+
+  if (action === "bankTransfer") {
+    return <TransferToBank bank={bank} />;
   }
 
   if (action === "withdraw") {

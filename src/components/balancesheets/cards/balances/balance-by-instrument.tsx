@@ -1,6 +1,5 @@
 import { useAppSelector } from "../../../../app/hooks";
 import { selectSettings } from "../../../../features/settings/settingsSlice";
-import BalanceTAccounts from "./t-accounts/round";
 import BalanceEachRound from "./balance-displays/round";
 import BalanceEachTurn from "./balance-displays/static";
 import BalanceFlash from "./balance-displays/flash";
@@ -17,7 +16,7 @@ export default function SideUI({ side, id }) {
       </Text>
       {side.accounts.map((account) => {
         return (
-          <>
+          <div key={account.id}>
             {colorSettings.round && (
               <BalanceEachRound key={account.id} account={account} id={id} />
             )}
@@ -30,7 +29,7 @@ export default function SideUI({ side, id }) {
             {colorSettings.off && (
               <BalanceOff key={account.id} account={account} />
             )}
-          </>
+          </div>
         );
       })}
     </div>

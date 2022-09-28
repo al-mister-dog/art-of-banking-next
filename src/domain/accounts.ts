@@ -85,7 +85,6 @@ export const Accounts = {
       let newAccounts = { ...accountData.accounts };
       newAccounts = { ...newAccounts, [account.id]: newAccount };
       AccountData.assignAccounts(newAccounts);
-      // Record.increaseBalance(customer, bank, amount);
     }
   },
 
@@ -97,7 +96,6 @@ export const Accounts = {
       let newAccounts = { ...accountData.accounts };
       newAccounts = { ...newAccounts, [account.id]: newAccount };
       AccountData.assignAccounts(newAccounts);
-      // Record.decreaseBalance(customer, bank, amount);
     }
   },
 };

@@ -9,6 +9,7 @@ import {
 } from "../structures";
 import { CreditAccounts } from "../credit-accounts";
 import { Banks } from "../bank";
+import { System } from "../system";
 
 interface CorrespondingInstruments {
   [key: string]: string;
@@ -23,7 +24,10 @@ interface CorrespondingCreditInstruments {
 const correspondingInstruments: CorrespondingInstruments = {
   customerDeposits: "customerOverdrafts",
   customerOverdrafts: "customerDeposits",
-  bankDeposits: "bankOverdrafts",
+  "bank deposits":
+    System.getSystem() === "centralbank"
+      ? "daylight overdrafts"
+      : "bank overdrafts",
   bankOverdrafts: "bankDeposits",
   "ch certificates": "ch loans",
   "ch loans": "ch certificates",

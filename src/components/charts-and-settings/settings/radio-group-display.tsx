@@ -1,7 +1,8 @@
 import { useAppDispatch } from "../../../app/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { setDisplay } from "../../../features/settings/settingsSlice";
 import { Box, Radio } from "@mantine/core";
+import ClaveroMenu from "./clavero-menu";
 
 export default function DisplayRadioGroup() {
   const dispatch = useAppDispatch();
@@ -12,6 +13,12 @@ export default function DisplayRadioGroup() {
     dispatch(setDisplay({ key: value }));
     setDisplayButton(value);
   }
+
+  // this sets display back to "balances" on page change
+  useEffect(() => {
+    dispatch(setDisplay({ key: displayButton }));
+  }, []);
+
   return (
     <Box mt="lg">
       <Radio.Group
@@ -22,7 +29,9 @@ export default function DisplayRadioGroup() {
       >
         <Radio color="violet" value="balances" label="Balances" />
         <Radio color="violet" value="taccounts" label="T-Accounts" />
-        <Radio color="violet" value="clavero" label="Clavero" />
+        <ClaveroMenu>
+          <Radio color="violet" value="clavero" label="Clavero" />
+        </ClaveroMenu>
       </Radio.Group>
     </Box>
   );

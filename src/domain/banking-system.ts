@@ -20,7 +20,8 @@ export const BankingSystem = {
       id: newBankData.id,
       records: { assets: [], liabilities: [] },
     };
-    
+    // records.allIds.push(newBankData.id);
+
     let banks = newBankData.banks;
     banks = { ...banks, [newBank.id]: newBank };
     newBankData.banks = banks;
@@ -30,7 +31,7 @@ export const BankingSystem = {
     reservesData.reserves[reservesData.id] = newReserves;
     reservesData.allIds.push(reservesData.id);
     reservesData.id++;
-    
+
     System.joinSystem(newBank);
   },
   getBank(bank: Bank) {
