@@ -29,7 +29,7 @@ export const System = {
         return;
       },
       centralbank: function (): void {
-        BankingSystem.createBank("centralbank", "centralbank", 300);
+        BankingSystem.createBank("centralbank", "centralbank");
       },
       correspondent: function (): void {},
       chips: function (): void {},
@@ -89,7 +89,7 @@ export const System = {
     };
     systemType[system]();
   },
-  joinSystem(bank: Bank) {
+  joinSystem(bank: Bank, initialDeposit?: number) {
     const systemType: SystemObjectFunctions = {
       national: function (): void {},
       correspondent: function (): void {},
@@ -102,7 +102,7 @@ export const System = {
       centralbank: function (): void {
         if (bank.type === "bank") {
           const centralbank = bankData.banks[0];
-          Accounts.createAccount(bank, centralbank, "bank deposits", 100);
+          Accounts.createAccount(bank, centralbank, "bank deposits", initialDeposit);
         }
       },
       chips: function (): void {},

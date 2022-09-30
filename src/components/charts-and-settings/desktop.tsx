@@ -1,13 +1,7 @@
 import { useAppSelector } from "../../app/hooks";
-import { selectLectures } from "../../features/lectures/lecturesSlice";
+import { selectActions } from "../../features/actions/actionsSlice";
 import { sliderSettings } from "../../features/settings/initialState";
-import {
-  Card,
-  Center,
-  Grid,
-  Title,
-  useMantineTheme,
-} from "@mantine/core";
+import { Card, Center, Grid, Title, useMantineTheme } from "@mantine/core";
 import LineChart from "../charts/linechart";
 import RefreshBalanceSheets from "./settings/refresh";
 import OverdraftSlider from "./settings/slider-overdraft";
@@ -17,10 +11,12 @@ import DisplayRadioGroup from "./settings/radio-group-display";
 import ColorsRadioGroup from "./settings/radio-group-colors";
 
 export default function Desktop() {
-  const { currentLectureId } = useAppSelector(selectLectures);
+  const { currentLectureId } = useAppSelector(selectActions);
   const theme = useMantineTheme();
-  const slidersDisabled = sliderSettings[currentLectureId];
-  
+  const slidersDisabled = sliderSettings[currentLectureId].sliderSettings;
+  const overdraftValue =
+    sliderSettings[currentLectureId].sliderFixtures?.overdraft || 0;
+
   return (
     <Grid grow>
       <Grid.Col span={1}>
@@ -29,8 +25,13 @@ export default function Desktop() {
             <Title order={4}>Settings</Title>
           </Center>
           <RefreshBalanceSheets />
-          <OverdraftSlider disabled={slidersDisabled.overdraft} />
-          <ReserveRequirementSlider disabled={slidersDisabled.reserveRequirement} />
+          <OverdraftSlider
+            disabled={slidersDisabled.overdraft}
+            overdraftValue={overdraftValue}
+          />
+          <ReserveRequirementSlider
+            disabled={slidersDisabled.reserveRequirement}
+          />
           <InterestRateSlider disabled={slidersDisabled.interestRate} />
           <DisplayRadioGroup />
           <ColorsRadioGroup />

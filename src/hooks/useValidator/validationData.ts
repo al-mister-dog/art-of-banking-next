@@ -363,8 +363,50 @@ const validatorsByLecture = {
             .isAmount(amount)
             .isSelectedBank(selectedBank)
             .isPositiveAmount(amount)
+            // .isOverdraftLimit(customerDeposits, overdraft, amount)
+            // .isRequiredReserves(bankReserves, reserveRequirement, amount, bank)
+            // .sufficientReserves(bankReserves, amount, bank.name)
+            // .sufficentDeposits(customerDeposits, amount, customer.cardInfo.name)
+            .validate()
+        );
+      },
+      getFedFundsLoan(
+        customer: CardInfo,
+        amount: number,
+        selectedBank: string,
+        overdraft: number,
+        reserveRequirement: number
+      ) {
+        const { customerDeposits, bankReserves, bank } =
+          getTransferDetails(customer);
+        return (
+          check
+            .isAmount(amount)
+            .isSelectedBank(selectedBank)
+            .isPositiveAmount(amount)
+            // .isOverdraftLimit(customerDeposits, overdraft, amount)
+            // .isRequiredReserves(bankReserves, reserveRequirement, amount, bank)
+            // .sufficientReserves(bankReserves, amount, bank.name)
+            // .sufficentDeposits(customerDeposits, amount, customer.cardInfo.name)
+            .validate()
+        );
+      },
+      payFedFundsLoan(
+        customer: CardInfo,
+        amount: number,
+        selectedBank: string,
+        overdraft: number,
+        reserveRequirement: number
+      ) {
+        const { customerDeposits, bankReserves, bank } =
+          getTransferDetails(customer);
+        return (
+          check
+            .isAmount(amount)
+            .isSelectedBank(selectedBank)
+            .isPositiveAmount(amount)
             .isOverdraftLimit(customerDeposits, overdraft, amount)
-            .isRequiredReserves(bankReserves, reserveRequirement, amount, bank)
+            // .isRequiredReserves(bankReserves, reserveRequirement, amount, bank)
             // .sufficientReserves(bankReserves, amount, bank.name)
             // .sufficentDeposits(customerDeposits, amount, customer.cardInfo.name)
             .validate()

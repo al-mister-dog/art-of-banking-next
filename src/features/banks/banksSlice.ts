@@ -6,6 +6,7 @@ import { Customer } from "../../domain/customer";
 import { BalanceSheets } from "../../domain/displays/balancesheets";
 import {
   accountData,
+  analytics,
   bankData,
   creditData,
   records,
@@ -17,6 +18,9 @@ import { Dues } from "../../domain/dues";
 import { Banks } from "../../domain/bank";
 import { Display } from "../../domain/display";
 import { Record } from "../../domain/Records";
+import { CentralBank } from "../../domain/centralbank";
+import { System } from "../../domain/system";
+import { GraphData } from "../../domain/graph-data";
 
 export interface BanksState {
   banks: any;
@@ -31,14 +35,7 @@ const initialState: BanksState = {
   accounts: initialBankData.accounts,
   creditAccounts: initialBankData.creditAccounts,
   reserves: initialBankData.reserves,
-  analytics: {
-    records: {},
-    balances: {},
-    graphs: {
-      credit: [],
-      reserves: [],
-    },
-  },
+  analytics: analytics,
 };
 let count = 0;
 export const banksSlice = createSlice({
@@ -49,6 +46,7 @@ export const banksSlice = createSlice({
       setupFunctions[payload.id]();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.resetGraphData(state);
+      banksSlice.caseReducers.updateAnalytics(state);
     },
     deposit: (state, { payload }) => {
       const { amount, c1, b1 } = payload;
@@ -75,8 +73,8 @@ export const banksSlice = createSlice({
     bankTransfer: (state, { payload }) => {
       const { amount, b1, b2 } = payload;
 
-      Banks.transfer(b1, b2, amount);
-
+      CentralBank.transfer(b1, b2, amount);
+      GraphData.setCentralBankGraphData();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);
     },
@@ -140,7 +138,22 @@ export const banksSlice = createSlice({
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);
     },
-
+    getFedFundsLoan: (state, { payload }) => {
+      const { amount, b1, b2 } = payload;
+      CentralBank.getLoan(b1, b2, amount);
+      CentralBank.transfer(b2, b1, amount);
+      GraphData.setCentralBankGraphData();
+      banksSlice.caseReducers.setState(state);
+      banksSlice.caseReducers.updateRecords(state);
+    },
+    repayFedFundsLoan: (state, { payload }) => {
+      const { amount, b1, b2 } = payload;
+      CentralBank.repayLoan(b1, b2, amount);
+      CentralBank.transfer(b1, b2, amount);
+      GraphData.setCentralBankGraphData();
+      banksSlice.caseReducers.setState(state);
+      banksSlice.caseReducers.updateRecords(state);
+    },
     setState: (state) => {
       state.banks = bankData.banks;
       state.accounts = accountData.accounts;
@@ -153,19 +166,17 @@ export const banksSlice = createSlice({
       state.analytics.graphs = {
         credit: [],
         reserves: [],
+        privateCredit: [],
       };
     },
     updateAnalytics: (state) => {
-      const newCreditData = Analytics.getCreditTotal();
-      const newReservesData = Totals.getTotalReserves();
-      state.analytics.graphs.credit = [
-        ...state.analytics.graphs.credit,
-        newCreditData,
-      ];
-      state.analytics.graphs.reserves = [
-        ...state.analytics.graphs.reserves,
-        newReservesData,
-      ];
+      console.log(JSON.stringify(analytics.graphs.reserves));
+      state.analytics.graphs.credit = [...analytics.graphs.credit];
+      state.analytics.graphs.reserves = [...analytics.graphs.reserves];
+      if (System.getSystem() === "centralbank") {
+        state.analytics.graphs.privateCredit = [...analytics.graphs.privateCredit];
+      }
+      console.log(JSON.stringify(state.analytics.graphs));
     },
     updateRecords: (state) => {
       Record.setRound();
@@ -187,6 +198,8 @@ export const {
   debitBank,
   creditClearinghouse,
   debitClearinghouse,
+  getFedFundsLoan,
+  repayFedFundsLoan,
 } = banksSlice.actions;
 
 export const selectBanks = (state: AppState) => state.banks;

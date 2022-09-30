@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../../app/hooks";
-import { selectLectures } from "../../../../features/lectures/lecturesSlice";
+import { selectActions } from "../../../../features/actions/actionsSlice";
 import { Text } from "@mantine/core";
 import { useState } from "react";
 import { Stack } from "@mantine/core";
@@ -9,7 +9,7 @@ import ActionForms from "./forms";
 import { useValidator } from "../../../../hooks/useValidator/useValidator";
 
 export default function ActionsPanel({ bank }: { bank: CardInfo }) {
-  const { actions } = useAppSelector(selectLectures);
+  const { actions } = useAppSelector(selectActions);
   const [action, setAction] = useState<string | null>(null);
 
   // let actionData = [];

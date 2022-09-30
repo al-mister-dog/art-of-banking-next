@@ -5,10 +5,13 @@ import BalanceEachTurn from "./balance-displays/static";
 import BalanceFlash from "./balance-displays/flash";
 import BalanceOff from "./balance-displays/off";
 import { Text } from "@mantine/core";
+import { System } from "../../../../domain/system";
 
 export default function SideUI({ side, id }) {
   const { colorSettings, displaySettings } = useAppSelector(selectSettings);
-
+  if (System.getSystem() === "centralbank" && side.instrument === "reserves") {
+    return;
+  }
   return (
     <div style={{ marginBottom: "1.5px" }}>
       <Text size="xs" weight="bold" align="left">

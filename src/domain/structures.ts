@@ -229,6 +229,7 @@ export type RecordDetail = {
   amount: number;
   id: number;
   symbol: string;
+  name: string;
 } | null;
 
 interface Record {
@@ -245,4 +246,21 @@ export let records = {
   parties: {} as Records,
   rounds: {},
   allIds: [],
+};
+
+//GRAPH DATA
+export let analytics = {
+  records: {},
+  balances: {},
+  graphs: {
+    credit: [],
+    reserves: [],
+    privateCredit: [],
+  },
+};
+
+export const AnalyticsData = {
+  assignGraph(graphs) {
+    analytics = { ...analytics, graphs };
+  },
 };

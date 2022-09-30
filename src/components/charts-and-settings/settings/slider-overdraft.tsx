@@ -3,24 +3,30 @@ import {
   selectSettings,
   setOverdraft,
 } from "../../../features/settings/settingsSlice";
-import { selectLectures } from "../../../features/lectures/lecturesSlice";
+import { selectActions } from "../../../features/actions/actionsSlice";
 import { Box, Slider, Text } from "@mantine/core";
 import { Totals } from "../../../domain/displays/totals";
+import { useEffect } from "react";
 
 //NEEDS TO BE RANGE
 export default function OverdraftSlider({
   disabled,
+  overdraftValue,
 }: {
   disabled: boolean;
+  overdraftValue?: number;
 }) {
   const dispatch = useAppDispatch();
   const { overdraft } = useAppSelector(selectSettings);
-  
 
   function handleChange(e: { num?: number }) {
     dispatch(setOverdraft({ num: e.num }));
   }
-
+  useEffect(() => {
+    if (overdraftValue > 0) {
+      dispatch(setOverdraft({ num: overdraftValue }));
+    }
+  }, []);
   return (
     <Box>
       <Text>Overdraft Limit</Text>
@@ -28,7 +34,10 @@ export default function OverdraftSlider({
         color="violet"
         label={`$${overdraft}`}
         min={0}
-        max={Totals.getTotalReserves()}
+        max={
+          // Totals.getTotalReserves()
+          100
+        }
         value={overdraft}
         onChange={(num) => handleChange({ num })}
         disabled={disabled}

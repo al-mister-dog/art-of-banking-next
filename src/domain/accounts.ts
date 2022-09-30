@@ -79,6 +79,7 @@ export const Accounts = {
 
   increaseCorrespondingBalance(customer: Bank, bank: Bank, amount: number) {
     let account = Accounts.getAccount(customer, bank);
+    
     if (account) {
       let newAccount = { ...account };
       newAccount.balance += amount;

@@ -2,17 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { AppState } from "../../app/store";
 import initialActionData, { actions } from "./initialState";
 
-export interface LecturesState {
+export interface ActionsState {
   actions: any;
   currentLectureId: number;
 }
 
-const initialState: LecturesState = {
+const initialState: ActionsState = {
   actions: initialActionData,
   currentLectureId: 0,
 };
 
-export const lecturesSlice = createSlice({
+export const actionsSlice = createSlice({
   name: "lectures",
   initialState,
   reducers: {
@@ -24,8 +24,8 @@ export const lecturesSlice = createSlice({
   },
 });
 
-export const { setActions } = lecturesSlice.actions;
+export const { setActions } = actionsSlice.actions;
 
-export const selectLectures = (state: AppState) => state.lectures;
+export const selectActions = (state: AppState) => state.lectures;
 
-export default lecturesSlice.reducer;
+export default actionsSlice.reducer;

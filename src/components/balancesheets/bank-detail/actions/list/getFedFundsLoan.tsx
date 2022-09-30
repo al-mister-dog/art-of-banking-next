@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../../../../../app/hooks";
-import { getLoan } from "../../../../../features/banks/banksSlice";
+import { getFedFundsLoan } from "../../../../../features/banks/banksSlice";
 
 import { useState } from "react";
 
@@ -11,31 +11,39 @@ import { CardInfo } from "../../../types";
 import SelectAndPay from "../compositions/select-and-pay";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
 
-export default function TakeOutLoan({ bank }: { bank: CardInfo }) {
+export default function GetFedFundsLoan({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
   const [amount, setAmount] = useState<number>(0);
-  
+
   function getLoanPayload() {
     const payload = {
       amount,
-      c1: Customer.getById(bank.cardInfo.id),
-      b1: Banks.getByCustomerId(bank.cardInfo.id),
+      b1: Banks.getById(bank.cardInfo.id),
+      b2: Banks.getById(parseInt(selectedBank)),
     };
-    dispatch(getLoan(payload));
+    dispatch(getFedFundsLoan(payload));
   }
 
-  const banks = Banks.getAllByCustomerId(bank.cardInfo.id).map((bank) => {
-    return { value: `${bank.id}`, label: bank.name };
-  });
+  const thisBankId = bank.cardInfo.id;
+  const banks = Banks.getAll()
+    .filter((bank) => bank.type === "bank" && bank.id !== thisBankId)
+    .map((bank) => {
+      return { value: `${bank.id}`, label: bank.name };
+    });
 
-  const validation = useValidator("getLoan", bank, amount, selectedBank);
+  const validation = useValidator(
+    "getFedFundsLoan",
+    bank,
+    amount,
+    selectedBank
+  );
 
   return (
     <SelectAndPay
       bank={bank}
       label="Get Loan From"
-      placeholder="Pick a Bank"
+      placeholder="Pick a Bank With Excess Reserves"
       value={selectedBank}
       data={banks}
       setSubject={setSelectedBank}

@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import { useAppSelector } from "../app/hooks";
-import { selectLectures } from "../features/lectures/lecturesSlice";
+import { selectActions } from "../features/actions/actionsSlice";
 
 export default function useColorSettings(balance: number) {
-  const { currentLectureId } = useAppSelector(selectLectures);
+  const { currentLectureId } = useAppSelector(selectActions);
   const prevBalance = useRef(balance);
   const prevClass = useRef("text");
   const prevLectureId = useRef(currentLectureId);
@@ -27,7 +27,7 @@ export default function useColorSettings(balance: number) {
 }
 
 function useColorSettingsRound(balance: number) {
-  const { currentLectureId } = useAppSelector(selectLectures);
+  const { currentLectureId } = useAppSelector(selectActions);
   const prevBalance = useRef(balance);
   const prevClass = useRef("text");
   const prevLectureId = useRef(currentLectureId);

@@ -1,7 +1,7 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 
 import banksReducer from "../features/banks/banksSlice";
-import lecturesReducer from "../features/lectures/lecturesSlice";
+import lecturesReducer from "../features/actions/actionsSlice";
 import settingsReducer from "../features/settings/settingsSlice";
 
 export function makeStore() {

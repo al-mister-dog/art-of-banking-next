@@ -2,8 +2,9 @@ import { Banks } from "../../domain/bank";
 import { BankingSystem } from "../../domain/banking-system";
 import { Customer } from "../../domain/customer";
 import { Display } from "../../domain/display";
+import { GraphData } from "../../domain/graph-data";
 import { Record } from "../../domain/Records";
-import { bankData, clearBankData } from "../../domain/structures";
+import { analytics, bankData, clearBankData } from "../../domain/structures";
 import { System } from "../../domain/system";
 
 export type SetupFunctions = { [key: string]: any };
@@ -242,18 +243,22 @@ export const setupFunctions: SetupFunctions = {
     Customer.createAccount(bankData.banks[1], bankData.banks[0], 100);
   },
   15() {
-    clearBankData()
+    clearBankData();
     System.setSystem("centralbank");
-    BankingSystem.createBank("Bank 1", "bank", 100);
-    BankingSystem.createBank("Bank 2", "bank", 100);
-    BankingSystem.createBank("Bank 3", "bank", 100);
-    Record.setRound()
+    BankingSystem.createBank("Bank 1", "bank", 0);
+    BankingSystem.createBank("Bank 2", "bank", 0, 20);
+    BankingSystem.createBank("Bank 3", "bank", 0, 20);
+    GraphData.setCentralBankGraphData();
+
+    Record.setRound();
   },
   16() {
     clearBankData();
-    BankingSystem.createBank("Bank 1", "bank");
-    BankingSystem.createBank("Customer 1", "customer");
-    Customer.createAccount(bankData.banks[1], bankData.banks[0], 100);
+    System.setSystem("centralbank");
+    BankingSystem.createBank("Bank 1", "bank", 0, 100);
+    BankingSystem.createBank("Bank 2", "bank", 0, 100);
+    BankingSystem.createBank("Bank 3", "bank", 0, 100);
+    Record.setRound();
   },
   17() {
     clearBankData();

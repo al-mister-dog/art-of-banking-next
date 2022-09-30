@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../app/hooks";
-import { selectLectures } from "../../features/lectures/lecturesSlice";
+import { selectActions } from "../../features/actions/actionsSlice";
 import { selectSettings } from "../../features/settings/settingsSlice";
 import { CardInfo } from "../../components/balancesheets/types";
 import { validatorsById } from "./validationData";
@@ -16,7 +16,7 @@ export function useValidator(
   amount?: number,
   selectedBank?: string
 ): ValidationObject {
-  const { currentLectureId } = useAppSelector(selectLectures);
+  const { currentLectureId } = useAppSelector(selectActions);
   const { overdraft, reserveRequirement } = useAppSelector(selectSettings);
 
   return validatorsById[currentLectureId][bank.cardInfo.type][action](

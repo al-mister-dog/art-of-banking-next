@@ -51,7 +51,7 @@ const Balance = ({ account, id }) => {
   const color = useColors(account.balance);
   let tAccountDisplay = setAsTAccount(account, id);
   let spreadSheetDisplay = setAsSpreadSheet(account);
-
+ 
   return (
     <Text size="xs" weight="bold" align="left" className={classes[color]}>
       {displaySettings.taccounts

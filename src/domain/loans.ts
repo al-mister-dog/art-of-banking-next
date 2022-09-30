@@ -1,9 +1,19 @@
 import { CreditAccounts } from "./credit-accounts";
+import { Record } from "./Records";
 import { Bank, creditData, CreditData, CreditAccount } from "./structures";
 
 export const Loans = {
   create(subordinate: Bank, superior: Bank, amount: number, type: string) {
     CreditAccounts.create(subordinate, superior, amount, type, "loans");
+  },
+
+  createFedFunds(
+    subordinate: Bank,
+    superior: Bank,
+    amount: number,
+    type: string
+  ) {
+    CreditAccounts.create(subordinate, superior, amount, type, "fed funds");
   },
 
   getAll(bank: Bank) {

@@ -10,6 +10,8 @@ import { CardInfo } from "../../types";
 
 import { useValidator } from "../../../../hooks/useValidator/useValidator";
 import TransferToBank from "./list/transferToBank";
+import GetFedFundsLoan from "./list/getFedFundsLoan";
+import PayFedFundsLoan from "./list/payFedFundsLoan";
 
 export default function ActionForms({
   action,
@@ -41,7 +43,7 @@ export default function ActionForms({
     return <DepositIntoBank bank={bank} />;
   }
 
-  if (action === "loan") {
+  if (action === "getLoan") {
     return <TakeOutLoan bank={bank} />;
   }
 
@@ -59,5 +61,13 @@ export default function ActionForms({
 
   if (action === "settleDues") {
     return <SettleDues bank={bank} />;
+  }
+
+  if (action === "getFedFundsLoan") {
+    return <GetFedFundsLoan bank={bank} />;
+  }
+
+  if (action === "payFedFundsLoan") {
+    return <PayFedFundsLoan bank={bank} />;
   }
 }

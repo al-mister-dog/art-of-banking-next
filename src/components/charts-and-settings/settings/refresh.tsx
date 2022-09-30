@@ -1,15 +1,15 @@
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import {
-  selectLectures,
+  selectActions,
   setActions,
-} from "../../../features/lectures/lecturesSlice";
+} from "../../../features/actions/actionsSlice";
 import { setup } from "../../../features/banks/banksSlice";
 import { ActionIcon, Box, Text, useMantineTheme } from "@mantine/core";
 import { Refresh } from "tabler-icons-react";
 
 export default function RefreshBalanceSheets() {
   const dispatch = useAppDispatch();
-  const { currentLectureId } = useAppSelector(selectLectures);
+  const { currentLectureId } = useAppSelector(selectActions);
 
   function handleRefresh() {
     dispatch(setup({ id: currentLectureId }));

@@ -1,3 +1,4 @@
+import { Accounts } from "./accounts";
 import { Bank, RecordDetail, records } from "./structures";
 import { System } from "./system";
 
@@ -213,6 +214,210 @@ export const Record = {
     insertLiabilitiesEntry(bank1.id, bank1Record);
     insertLiabilitiesEntry(bank2.id, bank2Record);
   },
+  // transferMultipleCB(
+  //   amount: number,
+  //   bank1: Bank,
+  //   bank2: Bank,
+  //   centralbank: Bank
+  // ) {
+  //   //decrease an asset in a transfer B1> ASSIGNMENT
+  //   //increase a liability in a transfer B1> ISSUANCE
+
+  //   //increase an asset in a transfer >B2 ISSUANCE
+  //   //decrease a liability in a transfer > B2 ASSIGNMENT
+
+  //   //novation occurs when there is no contraction or expansion of a balance sheet
+  //   const b1CbAccount = Accounts.getAccountByIds(bank1.id, centralbank.id);
+  //   const b2CbAccount = Accounts.getAccountByIds(bank2.id, centralbank.id);
+  //   const balance1 = b1CbAccount.balance - amount;
+  //   const balance2 = b2CbAccount.balance + amount;
+
+  //   const increasesLiabilityOfB1 = balance1 < 0;
+  //   const decreasesAssetOfB1 = balance1 > 0;
+  //   const increasesAssetOfB2 = balance2 > 0;
+  //   const decreasesLiabilityOfB2 = balance2 < 0;
+
+  //   const bank1Record = {
+  //     instrumentType: balance1 > 0 ? "deposits" : "overdrafts",
+  //     notationType: balance1 > 0 ? "assignment" : "issuance",
+  //     amount,
+  //     symbol: balance1 > 0 ? "-" : "+",
+  //     id: centralbank.id,
+  //     name: "C-Bank",
+  //   };
+  //   const bank2Record = {
+  //     instrumentType: balance2 > 0 ? "deposits" : "overdrafts",
+  //     notationType: balance1 > 0 ? "assignment" : "issuance",
+  //     amount,
+  //     symbol: balance2 > 0 ? "+" : "-",
+  //     id: centralbank.id,
+  //     name: "C-Bank",
+  //   };
+
+  //   const centralbankRecord1 = {
+  //     instrumentType: balance1 > 0 ? "deposits" : "overdrafts",
+  //     notationType: balance1 > 0 ? "novation" : "issuance",
+  //     amount,
+  //     symbol: balance1 > 0 ? "-" : "+",
+  //     id: bank1.id,
+  //     name: bank1.name,
+  //   };
+  //   const centralbankRecord2 = {
+  //     instrumentType: balance2 > 0 ? "deposits" : "overdrafts",
+  //     notationType: balance1 > 0 ? "novation" : "issuance",
+  //     amount,
+  //     symbol: balance2 > 0 ? "+" : "-",
+  //     id: bank2.id,
+  //     name: bank2.name,
+  //   };
+  //   if (balance1 < 0) {
+  //     insertAssetsEntry(centralbank.id, centralbankRecord1);
+  //     insertLiabilitiesEntry(bank1.id, bank1Record);
+  //   }
+  //   if (balance1 >= 0) {
+  //     insertAssetsEntry(bank1.id, bank1Record);
+  //     insertLiabilitiesEntry(centralbank.id, centralbankRecord1);
+  //   }
+  //   if (balance2 < 0) {
+  //     insertLiabilitiesEntry(bank2.id, bank2Record);
+  //     insertAssetsEntry(centralbank.id, centralbankRecord2);
+  //   }
+  //   if (balance2 >= 0) {
+  //     insertAssetsEntry(bank2.id, bank2Record);
+  //     insertLiabilitiesEntry(centralbank.id, centralbankRecord2);
+  //   }
+  // },
+  transferMultipleCB(
+    amount: number,
+    bank1: Bank,
+    bank2: Bank,
+    centralbank: Bank
+  ) {
+    //decrease an asset in a transfer B1> ASSIGNMENT
+    //increase a liability in a transfer B1> ISSUANCE
+
+    //increase an asset in a transfer >B2 ISSUANCE
+    //decrease a liability in a transfer > B2 ASSIGNMENT
+
+    //novation occurs when there is no contraction or expansion of a balance sheet
+    const b1CbAccount = Accounts.getAccountByIds(bank1.id, centralbank.id);
+    const b2CbAccount = Accounts.getAccountByIds(bank2.id, centralbank.id);
+    const balance1 = b1CbAccount.balance - amount;
+    const balance2 = b2CbAccount.balance + amount;
+
+    //IN TRANSACTION TWO THIS IS BANK 2
+    const bank1Record = {
+      instrumentType: balance1 >= 0 ? "deposits" : "overdrafts",
+      notationType: balance1 >= 0 ? "assignment" : "issuance",
+      amount,
+      symbol: balance1 >= 0 ? "-" : "+",
+      id: centralbank.id,
+      name: "C-Bank",
+    };
+    const bank2Record = {
+      instrumentType: balance2 >= 0 ? "deposits" : "overdrafts",
+      notationType: balance1 >= 0 ? "assignment" : "issuance",
+      amount,
+      symbol: balance2 >= 0 ? "+" : "-",
+      id: centralbank.id,
+      name: "C-Bank",
+    };
+
+    const centralbankRecord1 = {
+      instrumentType: balance1 >= 0 ? "deposits" : "overdrafts",
+      notationType: balance1 >= 0 ? "novation" : "issuance",
+      amount,
+      symbol: balance1 >= 0 ? "-" : "+",
+      id: bank1.id,
+      name: bank1.name,
+    };
+    const centralbankRecord2 = {
+      instrumentType: balance2 >= 0 ? "deposits" : "overdrafts",
+      notationType: balance1 >= 0 ? "novation" : "issuance",
+      amount,
+      symbol: balance2 >= 0 ? "+" : "-",
+      id: bank2.id,
+      name: bank2.name,
+    };
+
+    if (balance1 < 0) {
+      insertAssetsEntry(centralbank.id, centralbankRecord1);
+      insertLiabilitiesEntry(bank1.id, bank1Record);
+    }
+    if (balance1 >= 0) {
+      insertAssetsEntry(bank1.id, bank1Record);
+      insertLiabilitiesEntry(centralbank.id, centralbankRecord1);
+    }
+    if (balance2 < 0) {
+      insertLiabilitiesEntry(bank2.id, bank2Record);
+      insertAssetsEntry(centralbank.id, centralbankRecord2);
+    }
+    if (balance2 >= 0) {
+      insertAssetsEntry(bank2.id, bank2Record);
+      insertLiabilitiesEntry(centralbank.id, centralbankRecord2);
+    }
+
+    checkOverdraft(bank2, centralbank, b2CbAccount.balance, balance1, amount);
+  },
+  // checkOverdraft(bank, centralbank, balance1, balance2, amount) {
+  //   this.setRound();
+  //   if (balance1 < 0 && balance2 > 0) {
+  //     const bank2Record2 = {
+  //       instrumentType: "overdrafts",
+  //       notationType: "setOff",
+  //       amount,
+  //       symbol: "-",
+  //       id: centralbank.id,
+  //       name: "C-Bank",
+  //     };
+  //     const bank2Record3 = {
+  //       instrumentType: "deposits",
+  //       notationType: "setOff",
+  //       amount,
+  //       symbol: "-",
+  //       id: centralbank.id,
+  //       name: "C-Bank",
+  //     };
+  //     const centralBankRecord3 = {
+  //       instrumentType: "overdrafts",
+  //       notationType: "setOff",
+  //       amount,
+  //       symbol: "-",
+  //       id: bank.id,
+  //       name: bank.name,
+  //     };
+  //     const centralBankRecord4 = {
+  //       instrumentType: "deposits",
+  //       notationType: "setOff",
+  //       amount,
+  //       symbol: "-",
+  //       id: bank.id,
+  //       name: bank.name,
+  //     };
+  //     insertLiabilitiesEntry(bank.id, bank2Record2);
+  //     insertAssetsEntry(bank.id, bank2Record3);
+  //     insertAssetsEntry(centralbank.id, centralBankRecord3);
+  //     insertLiabilitiesEntry(centralbank.id, centralBankRecord4);
+  //   }
+  // },
+  getFedFundsLoan(amount: number, bank1: Bank, bank2: Bank, centralbank: Bank) {
+    const b1CbAccount = Accounts.getAccountByIds(bank1.id, centralbank.id);
+    const b2CbAccount = Accounts.getAccountByIds(bank2.id, centralbank.id);
+    const balance1 = b1CbAccount.balance;
+    const balance2 = b2CbAccount.balance;
+    const bank1Record = {
+      instrumentType: balance1 > 0 ? "deposits" : "overdrafts",
+      notationType: "novation",
+      amount,
+      symbol: "+",
+    };
+    const bank2Record = {
+      instrumentType: balance2 > 0 ? "deposits" : "overdrafts",
+      notationType: "novation",
+      amount,
+      symbol: "+",
+    };
+  },
   transferSingle(
     amount: number,
     customer1: Bank,
@@ -334,6 +539,46 @@ export const Record = {
     };
     const duesAssetRecord2 = {
       instrumentType: creditInstrumentsBySystem[system],
+      notationType: "setOff",
+      amount: amount,
+      id: bank1.id,
+      symbol: "-",
+      name: bank1.name,
+    };
+    insertLiabilitiesEntry(bank1.id, duesLiabilityRecord1);
+    insertAssetsEntry(bank2.id, duesAssetRecord2);
+  },
+  fedFundsLoan(bank1, bank2, amount) {
+    const duesLiabilityRecord1 = {
+      instrumentType: "fed funds",
+      notationType: "issuance",
+      amount: amount,
+      id: bank2.id,
+      symbol: "+",
+      name: bank2.name,
+    };
+    const duesAssetRecord2 = {
+      instrumentType: "fed funds",
+      notationType: "issuance",
+      amount: amount,
+      id: bank1.id,
+      symbol: "+",
+      name: bank1.name,
+    };
+    insertLiabilitiesEntry(bank1.id, duesLiabilityRecord1);
+    insertAssetsEntry(bank2.id, duesAssetRecord2);
+  },
+  repayFedFundsLoan(bank1, bank2, amount) {
+    const duesLiabilityRecord1 = {
+      instrumentType: "fed funds",
+      notationType: "setOff",
+      amount: amount,
+      id: bank2.id,
+      symbol: "-",
+      name: bank2.name,
+    };
+    const duesAssetRecord2 = {
+      instrumentType: "fed funds",
       notationType: "setOff",
       amount: amount,
       id: bank1.id,
@@ -477,3 +722,44 @@ export const recs = {
   rounds: {},
   allIds: [],
 };
+function checkOverdraft(bank, centralbank, balance1, balance2, amount) {
+  Record.setRound();
+  if (balance1 < 0 && balance2 > 0) {
+    const bank2Record2 = {
+      instrumentType: "overdrafts",
+      notationType: "setOff",
+      amount,
+      symbol: "-",
+      id: centralbank.id,
+      name: "C-Bank",
+    };
+    const bank2Record3 = {
+      instrumentType: "deposits",
+      notationType: "setOff",
+      amount,
+      symbol: "-",
+      id: centralbank.id,
+      name: "C-Bank",
+    };
+    const centralBankRecord3 = {
+      instrumentType: "overdrafts",
+      notationType: "setOff",
+      amount,
+      symbol: "-",
+      id: bank.id,
+      name: bank.name,
+    };
+    const centralBankRecord4 = {
+      instrumentType: "deposits",
+      notationType: "setOff",
+      amount,
+      symbol: "-",
+      id: bank.id,
+      name: bank.name,
+    };
+    insertLiabilitiesEntry(bank.id, bank2Record2);
+    insertAssetsEntry(bank.id, bank2Record3);
+    insertAssetsEntry(centralbank.id, centralBankRecord3);
+    insertLiabilitiesEntry(centralbank.id, centralBankRecord4);
+  }
+}

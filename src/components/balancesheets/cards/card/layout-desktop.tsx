@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../../app/hooks";
-import { selectLectures } from "../../../../features/lectures/lecturesSlice";
+import { selectActions } from "../../../../features/actions/actionsSlice";
 import { useState, useCallback, useEffect } from "react";
 import { Grid } from "@mantine/core";
 import { CardInfo } from "../../types";
@@ -11,7 +11,7 @@ export default function LayoutDesktop({
 }: {
   banksArray: CardInfo[];
 }) {
-  const { currentLectureId } = useAppSelector(selectLectures);
+  const { currentLectureId } = useAppSelector(selectActions);
   const [bankDetail, setBankDetail] = useState(banksArray[0]);
 
   useEffect(() => {

@@ -1,0 +1,12 @@
+each lecture page should be able to set its own overdraft rate, interest rate etc
+
+CHARTS
+the graph system needs to be more dynamic. it should add data from setup-function transactions
+the data should depend on the currentLectureId
+
+move graph objects into structures
+they can then be updated in setup functions
+what count as reserves depends on the system
+GO
+
+you did the basics for this. now it has to be applied across each reducer function

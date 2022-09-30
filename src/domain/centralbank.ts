@@ -1,13 +1,20 @@
 import { Accounts } from "./accounts";
 import { Reserves } from "./reserves";
 import { Dues } from "./dues";
-import { Bank, bankData, accountData, BankData } from "./structures";
+import {
+  Bank,
+  bankData,
+  accountData,
+  BankData,
+  creditData,
+} from "./structures";
 import { system, System } from "./system";
 import { Loans } from "./loans";
 import { mapObject } from "./helpers";
 import { Record } from "./Records";
+import { CreditAccounts } from "./credit-accounts";
 
-export const Banks = {
+export const CentralBank = {
   createAccount(bank1: Bank, bank2: Bank, amount: number = 0) {
     Accounts.createAccount(bank1, bank2, "bankDeposits", amount);
     if (amount) {
@@ -63,17 +70,10 @@ export const Banks = {
   },
 
   transfer(bank1: Bank, bank2: Bank, amount: number) {
-    const system = System.getSystem();
-    if (system === "centralbank") {
-      const centralbank = bankData.banks[0];
-      Record.transferMultipleCB(amount, bank1, bank2, centralbank);
-      Accounts.increaseCorrespondingBalance(bank2, centralbank, amount);
-      Accounts.decreaseCorrespondingBalance(bank1, centralbank, amount);
-      // System.handleAfterTransfer(bank1, bank2, amount, true);
-      
-    }
-    // Accounts.increaseCorrespondingBalance(bank1, bank2, amount);
-    // System.handleAfterTransfer(bank1, bank2, amount, true);
+    const centralbank = bankData.banks[0];
+    Record.transferMultipleCB(amount, bank1, bank2, centralbank);
+    Accounts.increaseCorrespondingBalance(bank2, centralbank, amount);
+    Accounts.decreaseCorrespondingBalance(bank1, centralbank, amount);
   },
 
   creditAccount(bank1: Bank, bank2: Bank, amount: number) {
@@ -87,10 +87,20 @@ export const Banks = {
   },
 
   getLoan(bank1: Bank, bank2: Bank, amount: number) {
-    Loans.create(bank1, bank2, amount, "bank1Deposits");
-    Accounts.increaseCorrespondingBalance(bank1, bank2, amount);
+    Loans.createFedFunds(bank1, bank2, amount, "fed funds");
+    Record.fedFundsLoan(bank1, bank2, amount);
   },
-  repayLoanFromAccount(bank1: Bank, bank2: Bank, amount: number) {
-    Loans.decrease(bank1, bank2, amount, "bank1Deposits");
+  repayLoan(bank1: Bank, bank2: Bank, amount: number) {
+    const account = Object.keys(creditData.creditAccounts)
+      .map((id) => creditData.creditAccounts[id])
+      .filter(
+        (account) =>
+          account.subordinateId === bank1.id && account.superiorId === bank2.id
+      );
+
+    if (account) {
+      CreditAccounts.decreaseCorrespondingCredit(account[0], amount);
+      Record.repayFedFundsLoan(bank1, bank2, amount);
+    }
   },
 };

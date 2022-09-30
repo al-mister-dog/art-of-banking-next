@@ -21,34 +21,42 @@ interface CorrespondingCreditInstruments {
   };
 }
 
-const correspondingInstruments: CorrespondingInstruments = {
-  customerDeposits: "customerOverdrafts",
-  customerOverdrafts: "customerDeposits",
-  "bank deposits":
-    System.getSystem() === "centralbank"
-      ? "daylight overdrafts"
-      : "bank overdrafts",
-  bankOverdrafts: "bankDeposits",
-  "ch certificates": "ch loans",
-  "ch loans": "ch certificates",
-};
-
 const correspondingCreditInstruments: CorrespondingCreditInstruments = {
   dues: {
     assets: "dueFroms",
     liabilities: "dueTos",
   },
   loans: {
-    assets: "loanTo",
-    liabilities: "loanFrom",
+    assets: "loan to",
+    liabilities: "loan from",
+  },
+  "fed funds": {
+    assets: "fed funds to",
+    liabilities: "fed funds from",
   },
 };
 
 export const BalanceSheets = {
+  getCorrespondingInstruments(type) {
+    const correspondingInstruments: CorrespondingInstruments = {
+      customerDeposits: "customerOverdrafts",
+      customerOverdrafts: "customerDeposits",
+      "bank deposits":
+        System.getSystem() === "centralbank"
+          ? "daylight overdrafts"
+          : "bank overdrafts",
+      "daylight overdrafts": "bank deposits",
+      bankOverdrafts: "bank deposits",
+      "ch certificates": "ch loans",
+      "ch loans": "ch certificates",
+    };
+    return correspondingInstruments[type];
+  },
+
   parseOverdraft(account: Account) {
     return {
       ...account,
-      category: correspondingInstruments[account.type],
+      category: this.getCorrespondingInstruments(account.type),
       balance: -account.balance,
     };
   },
@@ -57,7 +65,7 @@ export const BalanceSheets = {
     return accounts.map((account) => {
       return {
         ...account,
-        category: correspondingInstruments[account.type],
+        category: this.getCorrespondingInstruments(account.type),
         balance: -account.balance,
       };
     });

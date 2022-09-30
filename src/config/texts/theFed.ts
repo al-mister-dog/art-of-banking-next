@@ -52,8 +52,11 @@ export const theFedText = {
       incurring overdraft fees, and the lender bank has used idle reserves in order to make a profit by 
       lending them out.`,
     ],
-    assignment: `Bank 1 has gone into its daylight overdraft with the Fed. Find a bank with an excess
-    reserve position and get a loan in order to settle.`,
+    assignment: `Imagine that Bank 1 needs to send a payment of $10 to Bank1 (try it out). This will incur 
+    an overdraft with the fed. After this get Bank 1 to take out a fed funds loan from bank 2 in order to 
+    settle with the Fed. Pay attention to the credit graph as well as the color coded payments. What happens
+    if you reverse the order of payments, taking out a loan with bank 2 and then transfering to bank 2? Please note that at this
+    stage in the lectures, bank deposits and reserves are the same thing to commercial banks.`,
   },
   step3: {
     lectureTitle: `Fed Funds`,
@@ -86,7 +89,7 @@ export const theFedText = {
       investments. If the Fed Funds Rate is high then a bank may think twice about doing that 
       requires them to take a loan with another bank, as the interest on that loan will be much higher.
       Conversely the rate may be decreased during recessions to allow banks the freedom to make more
-      investments and payments in order to kick start the economy.`
+      investments and payments in order to kick start the economy.`,
     ],
     assignment: `Get banks to take out loans, get into overdrafts and settle payments. This may need
     to be preceeded by customer transfers. Also increase or decrease the Fed Funds Rate. Would you 
@@ -156,9 +159,7 @@ export const theFedText = {
   step6: {
     lectureTitle: `Clearing House`,
     title: `Sand Box`,
-    paragraphs: [
-      ``,
-    ],
+    paragraphs: [``],
     assignment: `Below are banks and customers who have done a day of trading and are now ready to net
     and settle dues with the clearinghouse. Net dues at the Clearing House and follow who owes who. 
     Then settle dues and see what happens to the banks' certificate accounts.`,

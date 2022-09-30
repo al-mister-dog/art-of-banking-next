@@ -43,6 +43,7 @@ export default function ClaveroMenu({ children }) {
       >
         <div style={{ height: "60px" }}>
           <Button
+          color="violet"
             style={{ position: "fixed", margin: "5px" }}
             onClick={() => setSpreadSheetOpened(false)}
           >

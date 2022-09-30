@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useAppDispatch } from "../../app/hooks";
 import { setup } from "../../features/banks/banksSlice";
-import { setActions } from "../../features/lectures/lecturesSlice";
+import { setActions } from "../../features/actions/actionsSlice";
 import { refreshSettings } from "../../features/settings/settingsSlice";
 import { partsTexts } from "../../config/parts";
 import { getRouteObjectData } from "../../helpers/routeMethods";
@@ -15,6 +15,7 @@ import { useEffect, useRef, useState } from "react";
 import { setupFunctions } from "../../config/setup-functions/setupFunctions";
 import { clearBankData, creditData } from "../../domain/structures";
 import DayTimer from "../../components/widgets/day-timer";
+import SystemDynamics from "../../components/widgets/system-dynamics";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {
@@ -34,12 +35,12 @@ const useStyles = createStyles((theme) => ({
 
 export default function LecturesPart({ routeData }) {
   const { introductoryTexts, title, keyTermsIds, slug, id } = routeData;
-  
+
   const { paragraphs, assignment } = introductoryTexts;
   const dispatch = useAppDispatch();
   const { classes } = useStyles();
   const [renderedId, setRenderedId] = useState(id);
-  
+
   useEffect(() => {
     dispatch(setup({ id }));
     dispatch(setActions({ id }));
@@ -47,8 +48,9 @@ export default function LecturesPart({ routeData }) {
     setRenderedId(id);
   }, [id]);
   if (renderedId !== id) {
-    return <>Loading...</>
+    return <>Loading...</>;
   }
+
   return (
     <>
       <Article
@@ -61,7 +63,6 @@ export default function LecturesPart({ routeData }) {
       {title !== "Introduction" && (
         <div className={classes.assignmentContainer}>
           <div className={classes.balanceSheets}>
-            <DayTimer />
             <BalanceSheets />
             <div style={{ height: "25px" }} />
             <ChartsAndSettings />

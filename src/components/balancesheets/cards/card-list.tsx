@@ -8,7 +8,7 @@ import { Bank, creditData, records } from "../../../domain/structures";
 import LayoutMobile from "./card/layout-mobile";
 import LayoutDesktop from "./card/layout-desktop";
 import { useRef, useState } from "react";
-import { selectLectures } from "../../../features/lectures/lecturesSlice";
+import { selectActions } from "../../../features/actions/actionsSlice";
 
 interface Colors {
   [index: string]: any;
@@ -31,7 +31,7 @@ export default function BalanceSheetsContainer() {
     const color = colors[`${bank.type}`] as keyof Colors;
     return { cardInfo, balanceSheet, color };
   }
-
+  
   const banksArray: CardInfo[] = Object.keys(banks)
     .map((bank) => banks[bank])
     .map((bank) => getCardInfo(bank));
