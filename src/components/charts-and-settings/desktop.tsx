@@ -3,7 +3,7 @@ import { selectActions } from "../../features/actions/actionsSlice";
 import { sliderSettings } from "../../features/settings/initialState";
 import { Card, Center, Grid, Title, useMantineTheme } from "@mantine/core";
 import ChartPrivateCredit from "./charts/linechart-private-credit";
-import ChartBalances from "./charts/linechart-balances";
+import ChartBalances from "./charts/barchart-balances";
 import ChartCredit from "./charts/linechart-credit";
 import RefreshBalanceSheets from "./settings/refresh";
 import OverdraftSlider from "./settings/slider-overdraft";
@@ -20,6 +20,8 @@ export default function Desktop() {
   const slidersDisabled = sliderSettings[currentLectureId].sliderSettings;
   const overdraftValue =
     sliderSettings[currentLectureId].sliderFixtures?.overdraft || 0;
+
+  console.log(currentLectureId)
 
   return (
     <Grid grow>

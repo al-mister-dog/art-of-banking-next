@@ -10,7 +10,7 @@ import ReserveRequirementSlider from "./settings/slider-reserve-requirement";
 import InterestRateSlider from "./settings/slider-interest-rate";
 import DisplayRadioGroup from "./settings/radio-group-display";
 import ColorsRadioGroup from "./settings/radio-group-colors";
-import BarChart from "./charts/barchart";
+import BarChart from "./charts/barchart-balances";
 import { Bar } from "react-chartjs-2";
 import { charts } from "../../config/charts";
 

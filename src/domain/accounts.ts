@@ -40,7 +40,13 @@ export const Accounts = {
     );
     return accounts;
   },
-
+  getFirstSubordinateAccount(bank: Bank) {
+    const subordinateAccounts: Account[] = mapFilter(
+      bank,
+      (account) => account.subordinateId === bank.id
+    );
+    return subordinateAccounts[0];
+  },
   getAllSubordinateAccounts(bank: Bank) {
     const subordinateAccounts: Account[] = mapFilter(
       bank,
@@ -79,7 +85,7 @@ export const Accounts = {
 
   increaseCorrespondingBalance(customer: Bank, bank: Bank, amount: number) {
     let account = Accounts.getAccount(customer, bank);
-    
+
     if (account) {
       let newAccount = { ...account };
       newAccount.balance += amount;

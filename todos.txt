@@ -14,6 +14,8 @@ you did the basics for this. now it has to be applied across each reducer functi
 
 all done... a few edge cases
 
+chart data should be pre filled
+
 
 
 
