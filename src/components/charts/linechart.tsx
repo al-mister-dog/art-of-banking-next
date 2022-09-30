@@ -25,18 +25,23 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top" as const,
-    },
-    title: {
-      display: true,
-      text: "Credit vs Reserves",
-    },
-  },
-};
+// export const options = {
+//   responsive: true,
+//   scales: {
+//     y: {
+//       beginAtZero: true,
+//     },
+//   },
+//   plugins: {
+//     legend: {
+//       position: "top" as const,
+//     },
+//     title: {
+//       display: true,
+//       text: "Credit vs Reserves",
+//     },
+//   },
+// };
 
 export default function LineChart() {
   const { analytics } = useAppSelector(selectBanks);
@@ -58,7 +63,26 @@ export default function LineChart() {
         ...analytics.graphs.privateCredit,
       ];
   }
-  
+
+  const options = {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+        suggestedMax: reservesData[0] * 2,
+      },
+    },
+    plugins: {
+      legend: {
+        position: "top" as const,
+      },
+      title: {
+        display: true,
+        text: "Credit vs Reserves",
+      },
+    },
+  };
+
   const labels = creditData.map((c, i) => i);
   const data = {
     labels,
@@ -70,6 +94,7 @@ export default function LineChart() {
         backgroundColor: theme.colors.pink[3],
       },
       {
+        // fill: true,
         label: "Reserves",
         data: reservesData,
         borderColor: theme.colors.cyan[7],

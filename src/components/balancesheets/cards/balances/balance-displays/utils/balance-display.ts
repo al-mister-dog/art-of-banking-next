@@ -14,6 +14,7 @@ export function setAsTAccount(account: any, id: number) {
   }
   return info;
 }
+
 export function setAsSpreadSheet(account: any) {
   let info = `${
     account.thirdPartyDetail?.name ? `${account.thirdPartyDetail.name}: ` : ""

@@ -26,8 +26,7 @@ export const GraphData = {
 
     const privateCredit = newCreditData.data
       .filter(
-        (acc) =>
-          acc.type === "fed funds" || acc.category === "bank deposits"
+        (acc) => acc.type === "fed funds" || acc.category === "bank deposits"
       )
       .reduce(
         (a, c) => {
@@ -36,8 +35,29 @@ export const GraphData = {
         { balance: 0 }
       ).balance;
 
-    this.update(reservesData, creditData, privateCredit);
+    const totalCredit = newCreditData.data.reduce(
+      (a, c) => {
+        return { balance: a.balance + c.balance };
+      },
+      { balance: 0 }
+    ).balance;
+    console.log(totalCredit);
+
+    //this.update()
+    let newReserves = [...analytics.graphs.reserves, reservesData];
+    let newCredit = [...analytics.graphs.credit, creditData];
+    let newPrivateCredit = [...analytics.graphs.privateCredit, privateCredit];
+    let graphs = {
+      ...analytics.graphs,
+      reserves: newReserves,
+      credit: newCredit,
+      privateCredit: newPrivateCredit,
+    };
+
+    AnalyticsData.assignGraph(graphs);
   },
+  setClearinghouseGraphData() {},
+
   update(reservesData, creditData, privateCredit) {
     let newReserves = [...analytics.graphs.reserves, reservesData];
     let newCredit = [...analytics.graphs.credit, creditData];
