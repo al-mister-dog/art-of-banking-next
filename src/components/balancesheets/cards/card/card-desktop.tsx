@@ -12,7 +12,7 @@ import {
 import { CardInfo } from "../../types";
 import BalanceByInstrument from "../balances/balance-by-instrument";
 import { Record } from "../../../../domain/Records";
-import ClaveroList from "../balances/balance-displays/clavero-list";
+import SpreadsheetList from "../balances/balance-displays/spreadsheet-list";
 
 const useStyles = createStyles((theme) => ({
   card: { paddingBottom: "0px", backgroundColor: theme.colors.violet[1] },
@@ -53,18 +53,18 @@ interface Props {
   handleSetBankDetail: (v: CardInfo) => void;
 }
 export default function CardUI({ bank, handleSetBankDetail }: Props) {
-  const { displaySettings, claveroSettings } = useAppSelector(selectSettings);
+  const { displaySettings, spreadsheetSettings } = useAppSelector(selectSettings);
   const { classes } = useStyles();
   const onSelectBank = useCallback((bank: CardInfo) => {
     handleSetBankDetail(bank);
   }, []);
   
   let claveroBalances = { assets: undefined, liabilities: undefined };
-  if (claveroSettings.latest) {
+  if (spreadsheetSettings.latest) {
     claveroBalances = Record.get(bank.cardInfo.id);
-  } else if (claveroSettings.lastTwo) {
+  } else if (spreadsheetSettings.lastTwo) {
     claveroBalances = Record.getLastTwo(bank.cardInfo.id);
-  } else if (claveroSettings.all) {
+  } else if (spreadsheetSettings.all) {
     claveroBalances = Record.getAllTransactions(bank.cardInfo.id);
   }
   return (

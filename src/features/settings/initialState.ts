@@ -34,7 +34,7 @@ export interface ClaveroSettings {
   all: boolean;
 }
 
-export const claveroSettings: ClaveroSettings = {
+export const spreadsheetSettings: ClaveroSettings = {
   latest: true,
   lastTwo: false,
   all: false,

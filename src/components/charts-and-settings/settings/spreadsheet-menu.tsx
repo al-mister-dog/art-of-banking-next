@@ -2,10 +2,9 @@ import { useAppDispatch } from "../../../app/hooks";
 import { useState } from "react";
 import { setClaveroDisplay } from "../../../features/settings/settingsSlice";
 import { Button, Menu, Modal, Text, useMantineTheme } from "@mantine/core";
-import ClaveroSpreadSheet from "../../displays/clavero";
-import Link from "next/link";
+import Spreadsheet from "../../displays/spreadsheet";
 
-export default function ClaveroMenu({ children }) {
+export default function SpreadsheetMenu({ children }) {
   const dispatch = useAppDispatch();
   const theme = useMantineTheme();
   const [spreadSheetOpened, setSpreadSheetOpened] = useState(false);
@@ -50,7 +49,7 @@ export default function ClaveroMenu({ children }) {
             Close
           </Button>
         </div>
-        <SpreadsheetSpreadSheet />
+        <Spreadsheet />
       </Modal>
       <Modal
         opened={aboutOpened}
@@ -99,10 +98,3 @@ export default function ClaveroMenu({ children }) {
     </>
   );
 }
-
-/**
-- Yellow — Payment by assignment (Passing an asset to another balance sheet)
-- Green — Payment by issuance (Issuing a new liability)
-- Red — Payment by set off (Repaying a liability that is owed)
-- Blue — Payment by novation (Receiving a liability from another balance sheet)
- */

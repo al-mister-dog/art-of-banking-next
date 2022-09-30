@@ -2,7 +2,7 @@ import { useAppDispatch } from "../../../app/hooks";
 import { useEffect, useState } from "react";
 import { setDisplay } from "../../../features/settings/settingsSlice";
 import { Box, Radio } from "@mantine/core";
-import ClaveroMenu from "./clavero-menu";
+import ClaveroMenu from "./spreadsheet-menu";
 
 export default function DisplayRadioGroup() {
   const dispatch = useAppDispatch();

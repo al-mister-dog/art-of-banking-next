@@ -7,8 +7,8 @@ import {
   createStyles,
 } from "@mantine/core";
 import { Record } from "../../domain/Records";
-import Clavero from "../balancesheets/cards/balances/balance-displays/clavero";
-import ClaveroList from "../balancesheets/cards/balances/balance-displays/clavero-list";
+import Spreadsheet from "../balancesheets/cards/balances/balance-displays/spreadsheet";
+import SpreadsheetList from "../balancesheets/cards/balances/balance-displays/spreadsheet-list";
 
 const useStyles = createStyles((theme) => ({
   card: {

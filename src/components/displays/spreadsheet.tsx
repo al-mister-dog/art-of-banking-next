@@ -3,9 +3,9 @@ import { Display } from "../../domain/display";
 import { Bank } from "../../domain/structures";
 import { selectBanks } from "../../features/banks/banksSlice";
 import { CardInfo } from "../balancesheets/types";
-import ClaveroCard from "./clavero-card";
+import SpreadsheetCard from "./spreadsheet-card";
 
-export default function ClaveroSpreadSheet() {
+export default function SpreadSheet() {
   const { banks } = useAppSelector(selectBanks);
   const colors = {
     customer: "grape",

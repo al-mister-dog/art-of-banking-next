@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 import { Card, SimpleGrid } from "@mantine/core";
 
-import Clavero from "./clavero";
+import Spreadsheet from "./spreadsheet";
 import { ClassNames } from "@emotion/react";
 
 export default function ClaveroList({ assets, liabilities }) {
