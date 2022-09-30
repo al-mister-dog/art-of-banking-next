@@ -2,16 +2,16 @@ import { useAppSelector } from "../../app/hooks";
 import { selectActions } from "../../features/actions/actionsSlice";
 import { sliderSettings } from "../../features/settings/initialState";
 import { Card, Center, Grid, Title, useMantineTheme } from "@mantine/core";
-import ChartPrivateCredit from "./charts/linechart-private-credit";
-import ChartBalances from "./charts/linechart-balances";
-import ChartCredit from "./charts/linechart-credit";
+import LineChart from "./charts/linechart-private-credit";
+import LineChartNational from "./charts/linechart-balances";
 import RefreshBalanceSheets from "./settings/refresh";
 import OverdraftSlider from "./settings/slider-overdraft";
 import ReserveRequirementSlider from "./settings/slider-reserve-requirement";
 import InterestRateSlider from "./settings/slider-interest-rate";
 import DisplayRadioGroup from "./settings/radio-group-display";
 import ColorsRadioGroup from "./settings/radio-group-colors";
-
+import BarChart from "./charts/barchart";
+import { Bar } from "react-chartjs-2";
 import { charts } from "../../config/charts";
 
 export default function Desktop() {
@@ -43,11 +43,9 @@ export default function Desktop() {
       </Grid.Col>
       <Grid.Col span={4}>
         <Card style={{ backgroundColor: theme.colors.violet[1] }}>
-          {charts[currentLectureId] === "balances" && <ChartBalances />}
-          {charts[currentLectureId] === "credit" && <ChartCredit />}
-          {charts[currentLectureId] === "private credit" && (
-            <ChartPrivateCredit />
-          )}
+          {charts[currentLectureId] === "balances" && <BarChart />}
+          {charts[currentLectureId] === "credit" && <LineChart />}
+          {charts[currentLectureId] === "private credit" && <LineChart />}
         </Card>
       </Grid.Col>
     </Grid>

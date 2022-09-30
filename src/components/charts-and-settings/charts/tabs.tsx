@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Tabs, useMantineTheme } from "@mantine/core";
-import LineChart from "./linechart";
+import LineChart from "./linechart-private-credit";
 import VerticalBarChart from "./verticalbarcharts";
 import MultiAxisLineChart from "./multiaxislinechart";
 

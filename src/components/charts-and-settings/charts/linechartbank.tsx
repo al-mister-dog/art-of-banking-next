@@ -9,8 +9,8 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { Totals } from "../../domain/displays/totals";
-import { BankingSystem } from "../../domain/banking-system";
+import { Totals } from "../../../domain/displays/totals";
+import { BankingSystem } from "../../../domain/banking-system";
 
 
 ChartJS.register(
@@ -38,7 +38,7 @@ export const options = {
 
 export default function LineChart({ bank }) {
   const selectedBank = BankingSystem.getBankById(bank.cardInfo.id);
-  const totals = Totals.getTotalAssets(selectedBank);
+  const totals = Totals.getTotalAssetsAndReserves(selectedBank);
   const deposits = [0];
   deposits.push(totals);
   const labels = deposits.map((n) => "");

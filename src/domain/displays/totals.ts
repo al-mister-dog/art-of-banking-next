@@ -27,9 +27,14 @@ export const Totals = {
 
     return depositAccounts;
   },
-  getTotalAssets(bank: Bank) {
+  getTotalAssetsAndReserves(bank: Bank) {
     const allAssets = BalanceSheets.getAssetsPlusReserves(bank);
     const total = mapReduceBalanceAndReserves(allAssets);
+    return total;
+  },
+  getTotalAssets(bank: Bank) {
+    const allAssets = BalanceSheets.getAssets(bank);
+    const total = mapReduceBalance(allAssets);
     return total;
   },
   getTotalLiabilities(bank: Bank) {
@@ -67,6 +72,7 @@ export const Totals = {
       .reduce((acc, cur) => acc + cur);
     return totalReserves;
   },
+
   getTotalCredit() {
     const allBanks = Banks.getAll();
 
@@ -83,7 +89,6 @@ export const Totals = {
 };
 
 function mapReduceBalance(accounts: Account[] | DuesAccount[]) {
-  
   return accounts
     .map((account) => {
       return account.balance;

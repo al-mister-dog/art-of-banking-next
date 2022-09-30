@@ -146,6 +146,16 @@ export function clearBankData() {
     allIds: [] as number[],
   };
   records = { id: 0, parties: {} as Records, rounds: {}, allIds: [] };
+  analytics = {
+    records: {},
+    balances: {},
+    graphs: {
+      credit: [],
+      reserves: [],
+      privateCredit: [],
+      nationalData: {},
+    },
+  };
 }
 
 export const AccountData = {
@@ -256,11 +266,30 @@ export let analytics = {
     credit: [],
     reserves: [],
     privateCredit: [],
+    nationalData: {},
   },
 };
 
 export const AnalyticsData = {
-  assignGraph(graphs) {
+  addIdToNationalData(id) {
+    const newNationalData = { ...analytics.graphs.nationalData };
+    newNationalData[id] = [];
+    const newGraphs = { ...analytics.graphs, nationalData: newNationalData };
+    analytics = { ...analytics, graphs: newGraphs };
+  },
+  addDataToNationalData(id, data) {
+    const newDataArray = [...analytics.graphs.nationalData[id]];
+    newDataArray.push(data);
+    const newNationalData = {
+      ...analytics.graphs.nationalData,
+      [id]: newDataArray,
+    };
+    const newGraphs = { ...analytics.graphs, nationalData: newNationalData };
+    analytics = { ...analytics, graphs: newGraphs };
+  },
+  assignNationalData(graphs) {},
+
+  assignCreditData(graphs) {
     analytics = { ...analytics, graphs };
   },
 };

@@ -10,3 +10,77 @@ what count as reserves depends on the system
 GO
 
 you did the basics for this. now it has to be applied across each reducer function
+1hr
+
+
+
+
+MOBILE VERSION
+sort out ui for mobile VERSION
+1hr
+
+
+SETTINGS
+could reorganise SETTINGS
+clavero renamed to spread-sheet
+spreadsheet: {
+    colors: {
+        color-notation: true,
+        off: false,
+    },
+    display: {
+        eachTransaction: true,
+        all: false,
+    },
+    asSpreadSheet: false
+}
+balances: {
+    colors: {
+        eachTransaction: true,
+        allTransactions: false,
+        off: false,
+    }
+}
+tAccounts: {
+    colors: {
+        eachTransaction: true,
+        allTransactions: false,
+        off: false,
+    }
+}
+
+
+lectures: {
+    part1: {
+        fundamentals: {},
+        moneyAndState: {},
+        clearinghouse: {},
+        fed: {
+            mortgage
+            dealer function
+        },
+        repos: {},
+        euroDollars: {},
+        cityOfLondon: {},
+        dealers: {},
+        liquidity: {}
+    }
+    part2: {
+        keyCurrencies: {},
+        globalFinance: {},
+        globalLiquidity: {},
+        forex: {},
+        directAndIndirectFinance: {},
+        forwardsAndFutures: {},
+        interestRateSwaps: {},
+        creditDefaultSwaps: {},
+        shadowBanking: {},
+    }
+}
+
+
+graphDataByLecture: {
+    1: barChart,
+    2: barChart,
+
+}

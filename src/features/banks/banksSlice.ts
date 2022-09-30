@@ -51,12 +51,16 @@ export const banksSlice = createSlice({
     deposit: (state, { payload }) => {
       const { amount, c1, b1 } = payload;
       Customer.deposit(c1, b1, amount);
+      GraphData.setBalanceData();
+      GraphData.setCreditData();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);
     },
     withdraw: (state, { payload }) => {
       const { amount, c1, b1 } = payload;
       Customer.withdraw(c1, b1, amount);
+      GraphData.setBalanceData();
+      GraphData.setCreditData();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);
     },
@@ -67,6 +71,8 @@ export const banksSlice = createSlice({
       } else {
         Customer.transfer(amount, c1, c2, b1);
       }
+      GraphData.setBalanceData();
+      GraphData.setCreditData();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);
     },
@@ -82,6 +88,7 @@ export const banksSlice = createSlice({
     getLoan: (state, { payload }) => {
       const { amount, c1, b1 } = payload;
       Customer.getLoan(c1, b1, amount);
+      GraphData.setCreditData();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);
     },
@@ -93,12 +100,14 @@ export const banksSlice = createSlice({
       if (paymentType === "cash") {
         Customer.repayLoanCash(c1, b1, amount);
       }
+      GraphData.setCreditData();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);
     },
     payDues: (state, { payload }) => {
       const { amount, b1, b2 } = payload;
       Dues.decrease(b1, b2, "customerDeposits", amount);
+      GraphData.setCreditData();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);
     },
@@ -106,6 +115,7 @@ export const banksSlice = createSlice({
       const { amount, b1, b2 } = payload;
       Banks.creditAccount(b1, b2, amount);
       Dues.settle(b1, b2);
+      GraphData.setCreditData();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);
     },
@@ -114,12 +124,14 @@ export const banksSlice = createSlice({
 
       Banks.debitAccount(b1, b2, amount);
       Dues.settle(b1, b2);
+      GraphData.setCreditData();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);
     },
     netDues: (state, { payload }) => {
       const { b1, b2 } = payload;
       Dues.net(b1, b2);
+      GraphData.setCreditData();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);
     },
@@ -127,6 +139,7 @@ export const banksSlice = createSlice({
       const { amount, b1, b2 } = payload;
       Banks.creditAccount(b1, b2, amount);
       Dues.settle(b1, b2);
+      GraphData.setCreditData();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);
     },
@@ -135,6 +148,7 @@ export const banksSlice = createSlice({
 
       Banks.debitAccount(b1, b2, amount);
       Dues.settle(b1, b2);
+      GraphData.setCreditData();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);
     },
@@ -170,13 +184,14 @@ export const banksSlice = createSlice({
       };
     },
     updateAnalytics: (state) => {
-      console.log(JSON.stringify(analytics.graphs.reserves));
       state.analytics.graphs.credit = [...analytics.graphs.credit];
       state.analytics.graphs.reserves = [...analytics.graphs.reserves];
       if (System.getSystem() === "centralbank") {
-        state.analytics.graphs.privateCredit = [...analytics.graphs.privateCredit];
+        state.analytics.graphs.privateCredit = [
+          ...analytics.graphs.privateCredit,
+        ];
       }
-      console.log(JSON.stringify(state.analytics.graphs));
+      state.analytics.graphs.nationalData = analytics.graphs.nationalData;
     },
     updateRecords: (state) => {
       Record.setRound();

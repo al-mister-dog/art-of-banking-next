@@ -8,7 +8,7 @@ import {
 } from "@mantine/core";
 import { CardInfo } from "../types";
 import ActionsPanel from "./actions/panel";
-import LineChart from "../../charts/linechartbank";
+import LineChart from "../../charts-and-settings/charts/linechartbank";
 
 const useStyles = createStyles((theme) => ({
   header: { padding: "5px" },
