@@ -29,9 +29,9 @@ export default function DisplayRadioGroup() {
       >
         <Radio color="violet" value="balances" label="Balances" />
         <Radio color="violet" value="taccounts" label="T-Accounts" />
-        <ClaveroMenu>
+        <SpreadsheetMenu>
           <Radio color="violet" value="clavero" label="Clavero" />
-        </ClaveroMenu>
+        </SpreadsheetMenu>
       </Radio.Group>
     </Box>
   );

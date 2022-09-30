@@ -97,7 +97,7 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
         </Text>
       </SimpleGrid>
       {displaySettings.clavero && claveroBalances.assets !== undefined ? (
-        <ClaveroList
+        <SpreadsheetList
           assets={claveroBalances.assets}
           liabilities={claveroBalances.liabilities}
         />

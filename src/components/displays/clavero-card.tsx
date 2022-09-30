@@ -80,12 +80,12 @@ export default function ClaveroCard({ bank }) {
         <SimpleGrid cols={2} spacing={0}>
           <div>
             {assets.map((record: any, index) => {
-              return <Clavero key={index} record={record} />;
+              return <Spreadsheet key={index} record={record} />;
             })}
           </div>
           <div>
             {liabilities.map((record: any, index) => {
-              return <Clavero key={index} record={record} />;
+              return <Spreadsheet key={index} record={record} />;
             })}
           </div>
         </SimpleGrid>

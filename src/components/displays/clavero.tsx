@@ -27,7 +27,7 @@ export default function ClaveroSpreadSheet() {
   return (
     <div style={{ display: "flex" }}>
       {banksArray.map((bank) => (
-        <ClaveroCard bank={bank} />
+        <SpreadsheetCard bank={bank} />
       ))}
     </div>
   );

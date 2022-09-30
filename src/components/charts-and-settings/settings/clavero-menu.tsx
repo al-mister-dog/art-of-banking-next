@@ -50,7 +50,7 @@ export default function ClaveroMenu({ children }) {
             Close
           </Button>
         </div>
-        <ClaveroSpreadSheet />
+        <SpreadsheetSpreadSheet />
       </Modal>
       <Modal
         opened={aboutOpened}

@@ -2,7 +2,7 @@ import { useAppDispatch } from "../../../app/hooks";
 import { useEffect, useState } from "react";
 import { setDisplay } from "../../../features/settings/settingsSlice";
 import { Box, Radio } from "@mantine/core";
-import ClaveroMenu from "./clavero-menu";
+import SpreadsheetMenu from "./clavero-menu";
 
 export default function DisplayRadioGroup() {
   const dispatch = useAppDispatch();
@@ -29,9 +29,9 @@ export default function DisplayRadioGroup() {
       >
         <Radio color="violet" value="balances" label="Balances" />
         <Radio color="violet" value="taccounts" label="T-Accounts" />
-        <ClaveroMenu>
-          <Radio color="violet" value="clavero" label="Clavero" />
-        </ClaveroMenu>
+        <SpreadsheetMenu>
+          <Radio color="violet" value="spreadsheet" label="Spreadsheet" />
+        </SpreadsheetMenu>
       </Radio.Group>
     </Box>
   );

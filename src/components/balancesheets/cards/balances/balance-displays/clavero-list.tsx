@@ -15,12 +15,12 @@ export default function ClaveroList({ assets, liabilities }) {
       >
         <div>
           {assets.map((record: any, index) => {
-            return <Clavero key={index} record={record} />;
+            return <Spreadsheet key={index} record={record} />;
           })}
         </div>
         <div>
           {liabilities.map((record: any, index) => {
-            return <Clavero key={index} record={record} />;
+            return <Spreadsheet key={index} record={record} />;
           })}
         </div>
       </SimpleGrid>
