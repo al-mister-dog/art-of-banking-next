@@ -1,3 +1,4 @@
+SETTINGS
 each lecture page should be able to set its own overdraft rate, interest rate etc
 
 CHARTS
@@ -14,88 +15,15 @@ you did the basics for this. now it has to be applied across each reducer functi
 
 all done... a few edge cases
 
-chart data should be pre filled
+maxrange:
+work on an algorithm that makes the best looking min max range
 
 
-
+LAYOUT
+breakpoints between interactive components needs sorting out
 
 MOBILE VERSION
 sort out ui for mobile VERSION
 1hr
+chart comes out of the screen
 
-
-SETTINGS
-could reorganise SETTINGS
-clavero renamed to spread-sheet
-spreadsheet: {
-    colors: {
-        color-notation: true,
-        off: false,
-    },
-    display: {
-        eachTransaction: true,
-        all: false,
-    },
-    asSpreadSheet: false
-}
-balances: {
-    colors: {
-        eachTransaction: true,
-        allTransactions: false,
-        off: false,
-    }
-}
-tAccounts: {
-    colors: {
-        eachTransaction: true,
-        allTransactions: false,
-        off: false,
-    }
-}
-
-
-lectures: {
-    part1: {
-        fundamentals: {},
-        moneyAndState: {},
-        clearinghouse: {},
-        fed: {
-            mortgage
-            dealer function
-        },
-        repos: {},
-        euroDollars: {},
-        cityOfLondon: {},
-        dealers: {},
-        liquidity: {}
-    }
-    part2: {
-        keyCurrencies: {},
-        globalFinance: {},
-        globalLiquidity: {},
-        forex: {},
-        directAndIndirectFinance: {},
-        forwardsAndFutures: {},
-        interestRateSwaps: {},
-        creditDefaultSwaps: {},
-        shadowBanking: {},
-    }
-}
-
-
-graphDataByLecture: {
-    1: barChart,
-    2: barChart,
-
-}
-
-
-spreadsheet: {
-    bugs: {
-        doesnt always display data on "this transaction",
-        change name to "spreadsheet"
-    },
-    todos: {
-        make full spreadsheet printable
-    }
-} 

@@ -36,6 +36,7 @@ export default function LineChart() {
     reservesData = [0];
   } else {
     creditData = [analytics.graphs.credit[0], ...analytics.graphs.credit];
+    console.log(creditData);
     reservesData = [analytics.graphs.reserves[0], ...analytics.graphs.reserves];
   }
 
@@ -69,7 +70,6 @@ export default function LineChart() {
         backgroundColor: theme.colors.pink[3],
       },
       {
-        // fill: true,
         label: "Reserves",
         data: reservesData,
         borderColor: theme.colors.cyan[7],
@@ -77,5 +77,9 @@ export default function LineChart() {
       },
     ],
   };
+
+  if (analytics.graphs.credit.length === 0) {
+    return <>Waiting For Graph Data</>;
+  }
   return <Line options={options} data={data} />;
 }

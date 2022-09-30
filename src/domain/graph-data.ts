@@ -2,7 +2,7 @@ import { Accounts } from "./accounts";
 import { Analytics } from "./displays/analytics";
 import { Totals } from "./displays/totals";
 import { Reserves } from "./reserves";
-import { analytics, AnalyticsData, bankData } from "./structures";
+import { analytics, AnalyticsData, bankData, reservesData } from "./structures";
 
 export const GraphData = {
   setBalanceData() {
@@ -51,7 +51,7 @@ export const GraphData = {
         },
         { balance: 0 }
       ).balance;
-    const reservesData = newCreditData.data
+    const newReservesData = newCreditData.data
       .filter((acc) => acc.category === "bank deposits")
       .reduce(
         (a, c) => {
@@ -79,7 +79,7 @@ export const GraphData = {
     ).balance;
 
     //this.update()
-    let newReserves = [...analytics.graphs.reserves, reservesData];
+    let newReserves = [...analytics.graphs.reserves, newReservesData];
     let newCredit = [...analytics.graphs.credit, creditData];
     let newPrivateCredit = [...analytics.graphs.privateCredit, privateCredit];
     let graphs = {
@@ -93,7 +93,21 @@ export const GraphData = {
   },
   setCreditData() {
     let newCreditData = Analytics.getCreditTotal();
-    const reservesData = Totals.getTotalReserves();
+    const newReservesData = Totals.getTotalReserves();
+
+    const parties = bankData.allIds.map((id) => bankData.banks[id]);
+    const banks = parties.filter((party) => party.type === "bank");
+    const bankReservesData = banks
+      .map((bank) => {
+        return reservesData.reserves[bank.id];
+      })
+      .reduce(
+        (a, c) => {
+          return { cashReserves: a.cashReserves + c.cashReserves };
+        },
+        { cashReserves: 0 }
+      ).cashReserves;
+
     const creditData = newCreditData.data.reduce(
       (a, c) => {
         return { balance: a.balance + c.balance };
@@ -101,7 +115,7 @@ export const GraphData = {
       { balance: 0 }
     ).balance;
 
-    let newReserves = [...analytics.graphs.reserves, reservesData];
+    let newReserves = [...analytics.graphs.reserves, bankReservesData];
     let newCredit = [...analytics.graphs.credit, creditData];
 
     let graphs = {

@@ -1,8 +1,7 @@
 import { useAppSelector } from "../../../../app/hooks";
 import { selectActions } from "../../../../features/actions/actionsSlice";
-import { Text } from "@mantine/core";
 import { useState } from "react";
-import { Stack } from "@mantine/core";
+import { Text, Center, Stack } from "@mantine/core";
 import { CardInfo } from "../../types";
 import ActionSelections from "./selections";
 import ActionForms from "./forms";
@@ -20,12 +19,20 @@ export default function ActionsPanel({ bank }: { bank: CardInfo }) {
   //   actionData = actions.customer;
   // }
   let actionData = actions[bank.cardInfo.type];
-  
+
   if (actionData === undefined) {
-    return <Text>No Actions To Perform</Text>;
+    return (
+      <Center>
+        <Text weight="bold">No Actions to Perform in This Lecture</Text>
+      </Center>
+    );
   }
   if (actionData.length === 0) {
-    return <Text>No Actions To Perform</Text>;
+    return (
+      <Center>
+        <Text weight="bold">No Actions to Perform in This Lecture</Text>
+      </Center>
+    );
   }
   return (
     <Stack spacing="xl">

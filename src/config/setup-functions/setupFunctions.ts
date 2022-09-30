@@ -41,17 +41,19 @@ export const setupFunctions: SetupFunctions = {
     Customer.createAccount(bankData.banks[1], bankData.banks[0], 100);
     Record.setRound();
     Customer.createAccount(bankData.banks[2], bankData.banks[0], 100);
+    GraphData.setCreditData()
     Record.setRound();
   },
   4() {
     clearBankData();
     System.setSystem("national");
-    BankingSystem.createBank("Bank 1", "bank", 100);
+    BankingSystem.createBank("Bank 1", "bank");
     BankingSystem.createBank("Customer 1", "customer", 150);
     BankingSystem.createBank("Customer 2", "customer", 150);
     Customer.createAccount(bankData.banks[1], bankData.banks[0], 100);
     Record.setRound();
     Customer.createAccount(bankData.banks[2], bankData.banks[0], 100);
+    GraphData.setCreditData()
     Record.setRound();
   },
   5() {
@@ -63,6 +65,7 @@ export const setupFunctions: SetupFunctions = {
     Customer.createAccount(bankData.banks[1], bankData.banks[0], 100);
     Record.setRound();
     Customer.createAccount(bankData.banks[2], bankData.banks[0], 100);
+    GraphData.setCreditData()
     Record.setRound();
   },
   6() {
@@ -74,6 +77,7 @@ export const setupFunctions: SetupFunctions = {
     Customer.createAccount(bankData.banks[1], bankData.banks[0], 100);
     Record.setRound();
     Customer.createAccount(bankData.banks[2], bankData.banks[0], 100);
+    GraphData.setCreditData()
     Record.setRound();
   },
   7() {},
@@ -92,6 +96,7 @@ export const setupFunctions: SetupFunctions = {
     Customer.createAccount(bankData.banks[3], bankData.banks[0], 50);
     Record.setRound();
     Customer.createAccount(bankData.banks[4], bankData.banks[0], 50);
+    GraphData.setCreditData()
     Record.setRound();
   },
   9() {
@@ -104,14 +109,15 @@ export const setupFunctions: SetupFunctions = {
     Customer.createAccount(bankData.banks[2], bankData.banks[0], 50);
     Record.setRound();
     Customer.createAccount(bankData.banks[3], bankData.banks[1], 50);
+    GraphData.setCreditData()
     Record.setRound();
   },
   10() {
     clearBankData();
     System.setSystem("correspondent");
-    BankingSystem.createBank("Bank 1", "bank");
-    BankingSystem.createBank("Bank 2", "bank");
-    BankingSystem.createBank("Bank 3", "bank");
+    BankingSystem.createBank("Bank 1", "bank", 200);
+    BankingSystem.createBank("Bank 2", "bank", 200);
+    BankingSystem.createBank("Bank 3", "bank", 200);
     Banks.createAccount(bankData.banks[0], bankData.banks[1], 100);
     Banks.createAccount(bankData.banks[0], bankData.banks[2], 100);
     Banks.createAccount(bankData.banks[1], bankData.banks[0], 100);
@@ -171,7 +177,9 @@ export const setupFunctions: SetupFunctions = {
       bankData.banks[2],
       bankData.banks[0]
     );
+
     Record.setRound();
+    GraphData.setCreditData()
   },
   11() {
     clearBankData();
@@ -225,18 +233,21 @@ export const setupFunctions: SetupFunctions = {
       bankData.banks[3]
     );
     Record.setRound();
+    GraphData.setCreditData()
   },
   13() {
     clearBankData();
     BankingSystem.createBank("Bank 1", "bank");
     BankingSystem.createBank("Customer 1", "customer");
     Customer.createAccount(bankData.banks[1], bankData.banks[0], 100);
+    GraphData.setCreditData()
   },
   14() {
     clearBankData();
     BankingSystem.createBank("Bank 1", "bank");
     BankingSystem.createBank("Customer 1", "customer");
     Customer.createAccount(bankData.banks[1], bankData.banks[0], 100);
+    GraphData.setCreditData()
   },
   15() {
     clearBankData();
