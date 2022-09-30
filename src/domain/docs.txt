@@ -3,7 +3,7 @@ createAccount:
 
   subordinate party (customer)
   superior party (bank)
-  instrument type (e.g customer deposits, bank deposts, loan?)
+  instrument type (e.g customerDeposits, bank deposts, loan?)
   amount (optional) starting amount put in by customer
 
   adds an account object with the following details
@@ -77,13 +77,13 @@ if party is subordinate and balance > 0
 
 does this hold true for everything?
 
-c1-b1: customerDeposits +50
-c1 is subordinate and balance > 0 (asset) //customerDeposits
-b1 is superior and balance > 0 (liability) //customerDeposits
+c1-b1: customer deposits +50
+c1 is subordinate and balance > 0 (asset) //customer deposits
+b1 is superior and balance > 0 (liability) //customer deposits
 
-c1-b1: customerDeposits -50
-c1 is subordinate and balance < 0 (liability) //customerOverdrafts
-b1 is superior and balance < 0 (asset)  //customerOverdrafts
+c1-b1: customer deposits -50
+c1 is subordinate and balance < 0 (liability) //customer overdrafts
+b1 is superior and balance < 0 (asset)  //customer overdrafts
 
 
 b1-b2: bankDeposits +50
@@ -114,7 +114,7 @@ if (customerDeposit or bankDeposit) {
 [ { id: 0,
     customerId: 2,
     bankId: 0,
-    type: 'customerOverdrafts',
+    type: 'customer overdrafts',
     balance: 50 } ]
   ​​​​​at ​​​​​​​​getLiabilities(alex)​​​ ​quokka.ts:362:1​
 
@@ -123,7 +123,7 @@ if (customerDeposit or bankDeposit) {
 [ { id: 1,
     customerId: 3,
     bankId: 0,
-    type: 'customerDeposits',
+    type: 'customer deposits',
     balance: 150 } ]
   ​​​​​at ​​​​​​​​getLiabilities(barclays)​​​ ​quokka.ts:364:1​
 
@@ -132,14 +132,14 @@ if (customerDeposit or bankDeposit) {
 [ { id: 1,
     customerId: 3,
     bankId: 0,
-    type: 'customerDeposits',
+    type: 'customer deposits',
     balance: 150 } ]
   ​​​​​at ​​​​​​​​getAssets(herbie)​​​ ​quokka.ts:366:1​
 
 [ { id: 0,
     customerId: 2,
     bankId: 0,
-    type: 'customerOverdrafts',
+    type: 'customer overdrafts',
     balance: 50 } ]
   ​​​​​at ​​​​​​​​getAssets(barclays)​​​ ​quokka.ts:367:1
 
@@ -153,7 +153,7 @@ if (customerDeposit or bankDeposit) {
 [ { id: 0,
     customerId: 2,
     bankId: 0,
-    type: 'customerOverdrafts',
+    type: 'customer overdrafts',
     balance: 50 } ]
   ​​​​​at ​​​​​​​​getLiabilities(alex)​​​ ​quokka.ts:367:1​
 
@@ -162,7 +162,7 @@ if (customerDeposit or bankDeposit) {
 [ { id: 1,
     customerId: 3,
     bankId: 0,
-    type: 'customerDeposits',
+    type: 'customer deposits',
     balance: 150 } ]
   ​​​​​at ​​​​​​​​getLiabilities(barclays)​​​ ​quokka.ts:369:1​
 
@@ -171,14 +171,14 @@ if (customerDeposit or bankDeposit) {
 [ { id: 1,
     customerId: 3,
     bankId: 0,
-    type: 'customerDeposits',
+    type: 'customer deposits',
     balance: 150 } ]
   ​​​​​at ​​​​​​​​getAssets(herbie)​​​ ​quokka.ts:371:1​
 
 [ { id: 0,
     customerId: 2,
     bankId: 0,
-    type: 'customerOverdrafts',
+    type: 'customer overdrafts',
     balance: 50 } ]
   ​​​​​at ​​​​​​​​getAssets(barclays)
 

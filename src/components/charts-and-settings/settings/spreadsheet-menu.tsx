@@ -15,23 +15,21 @@ export default function SpreadsheetMenu({ children }) {
   }
   return (
     <>
-      <Menu shadow="md" width={200}>
+      <Menu shadow="md" width={200} zIndex={99999}>
         <Menu.Target>{children}</Menu.Target>
 
         <Menu.Dropdown>
           <Menu.Label>Display Transactions</Menu.Label>
-          <Menu.Item onClick={() => handleClickMenuItem("latest")}>
-            Latest
-          </Menu.Item>
           <Menu.Item onClick={() => handleClickMenuItem("lastTwo")}>
-            Last Two
+            Each Transaction
           </Menu.Item>
-          <Menu.Item onClick={() => handleClickMenuItem("all")}>All</Menu.Item>
-          <Menu.Item onClick={() => setSpreadSheetOpened(true)}>
-            As Spread Sheet
-          </Menu.Item>
+          <Menu.Item onClick={() => handleClickMenuItem("all")}>All Transactions</Menu.Item>
+
           <Menu.Divider />
-          <Menu.Item onClick={() => setAboutOpened(true)}>About</Menu.Item>
+          <Menu.Item onClick={() => setSpreadSheetOpened(true)}>
+            Full Page
+          </Menu.Item>
+          <Menu.Item onClick={() => setAboutOpened(true)}>About Color-Coding</Menu.Item>
         </Menu.Dropdown>
       </Menu>
       <Modal
@@ -42,7 +40,7 @@ export default function SpreadsheetMenu({ children }) {
       >
         <div style={{ height: "60px" }}>
           <Button
-          color="violet"
+            color="violet"
             style={{ position: "fixed", margin: "5px" }}
             onClick={() => setSpreadSheetOpened(false)}
           >

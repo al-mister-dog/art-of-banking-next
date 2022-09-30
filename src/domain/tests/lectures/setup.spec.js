@@ -131,7 +131,7 @@ const balancesheet = {
           id: 1,
           subordinateId: 1,
           superiorId: 0,
-          type: 'customerDeposits',
+          type: 'customer deposits',
           balance: 40,
           category: 'dueFroms',
           thirdPartyDetail: {
@@ -151,15 +151,15 @@ const balancesheet = {
   ],
   liabilities: [
     {
-      instrument: 'customerDeposits',
+      instrument: 'customer deposits',
       accounts: [
         {
           id: 0,
           subordinateId: 2,
           superiorId: 0,
-          type: 'customerDeposits',
+          type: 'customer deposits',
           balance: 50,
-          category: 'customerDeposits',
+          category: 'customer deposits',
           thirdPartyDetail: {
             id: 2,
             name: 'alex',
@@ -172,9 +172,9 @@ const balancesheet = {
           id: 1,
           subordinateId: 3,
           superiorId: 0,
-          type: 'customerDeposits',
+          type: 'customer deposits',
           balance: 140,
-          category: 'customerDeposits',
+          category: 'customer deposits',
           thirdPartyDetail: {
             id: 3,
             name: 'emma',
@@ -192,7 +192,7 @@ const balancesheet = {
           id: 0,
           subordinateId: 0,
           superiorId: 1,
-          type: 'customerDeposits',
+          type: 'customer deposits',
           balance: 50,
           category: 'dueTos',
           thirdPartyDetail: {

@@ -67,7 +67,7 @@ export const settingsSlice = createSlice({
       let resetDisplaySettings = {
         balances: false,
         taccounts: false,
-        clavero: false,
+        spreadsheet: false,
       };
       const newDisplaySettings = { ...resetDisplaySettings, [key]: true };
       state.displaySettings = newDisplaySettings;

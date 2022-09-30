@@ -53,7 +53,7 @@ export default function Desktop() {
         >
           <Radio color="violet" value="balances" label="Balances" />
           <Radio color="violet" value="taccounts" label="T-Accounts" />
-          <Radio color="violet" value="clavero" label="Clavero" />
+          <Radio color="violet" value="spreadsheet" label="Spreadsheet" />
         </Radio.Group>
       </Box>
       <Box mt="lg">

@@ -17,7 +17,7 @@ export const theFed = {
         "daylightOverdrafts",
         "bankLoans",
         "customer deposits",
-        "customerOverdrafts",
+        "customer overdrafts",
       ],
       text: theFedText.step2,
       state: theFedState.daylightOverdraft,

@@ -16,15 +16,15 @@ export default function ColorsRadioGroup() {
   }
   return (
     <Box mt="lg">
-      {!displaySettings.clavero && (
+      {!displaySettings.spreadsheet && (
         <Radio.Group
           value={colorCoding}
           onChange={(value) => handleOnChange(value)}
           name="ColorCoding"
-          label="Color Coding"
+          label="Transaction Color Coding"
         >
-          <Radio color="violet" value="round" label="Round" />
-          <Radio color="violet" value="static" label="Static" />
+          <Radio color="violet" value="round" label="All" />
+          <Radio color="violet" value="static" label="Each" />
           <Radio color="violet" value="flash" label="Flash" />
           <Radio color="violet" value="off" label="Off" />
         </Radio.Group>

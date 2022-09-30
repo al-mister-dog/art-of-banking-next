@@ -59,13 +59,13 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
     handleSetBankDetail(bank);
   }, []);
   
-  let claveroBalances = { assets: undefined, liabilities: undefined };
+  let spreadsheetBalances = { assets: undefined, liabilities: undefined };
   if (spreadsheetSettings.latest) {
-    claveroBalances = Record.get(bank.cardInfo.id);
+    spreadsheetBalances = Record.get(bank.cardInfo.id);
   } else if (spreadsheetSettings.lastTwo) {
-    claveroBalances = Record.getLastTwo(bank.cardInfo.id);
+    spreadsheetBalances = Record.getLastTwo(bank.cardInfo.id);
   } else if (spreadsheetSettings.all) {
-    claveroBalances = Record.getAllTransactions(bank.cardInfo.id);
+    spreadsheetBalances = Record.getAllTransactions(bank.cardInfo.id);
   }
   return (
     <Card
@@ -96,10 +96,10 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
           Liabilities
         </Text>
       </SimpleGrid>
-      {displaySettings.clavero && claveroBalances.assets !== undefined ? (
+      {displaySettings.spreadsheet && spreadsheetBalances.assets !== undefined ? (
         <SpreadsheetList
-          assets={claveroBalances.assets}
-          liabilities={claveroBalances.liabilities}
+          assets={spreadsheetBalances.assets}
+          liabilities={spreadsheetBalances.liabilities}
         />
       ) : (
         <SimpleGrid cols={2} style={{ height: "110px", overflowX: "hidden" }}>

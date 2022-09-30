@@ -39,8 +39,8 @@ const correspondingCreditInstruments: CorrespondingCreditInstruments = {
 export const BalanceSheets = {
   getCorrespondingInstruments(type) {
     const correspondingInstruments: CorrespondingInstruments = {
-      customerDeposits: "customerOverdrafts",
-      customerOverdrafts: "customer deposits",
+      "customer deposits": "customer overdrafts",
+      "customer overdrafts": "customer deposits",
       "bank deposits":
         System.getSystem() === "centralbank"
           ? "daylight overdrafts"

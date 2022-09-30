@@ -1,13 +1,13 @@
 export const balanceSheetDisplay1 = {
   assets: {
-    customerOverdrafts: [
+    customer overdrafts: [
       {
         id: 2,
         subordinateId: 4,
         superiorId: 0,
-        type: 'customerOverdrafts',
+        type: 'customer overdrafts',
         balance: 25,
-        category: 'customerOverdrafts',
+        category: 'customer overdrafts',
       },
     ],
     dueTos: [
@@ -15,21 +15,21 @@ export const balanceSheetDisplay1 = {
         id: 1,
         subordinateId: 1,
         superiorId: 0,
-        type: 'customerDeposits',
+        type: 'customer deposits',
         balance: 10,
         category: 'dueTos',
       },
     ],
   },
   liabilities: {
-    customerDeposits: [
+    customer deposits: [
       {
         id: 0,
         subordinateId: 2,
         superiorId: 0,
-        type: 'customerDeposits',
+        type: 'customer deposits',
         balance: 35,
-        category: 'customerDeposits',
+        category: 'customer deposits',
       },
     ],
     dueTos: [
@@ -37,7 +37,7 @@ export const balanceSheetDisplay1 = {
         id: 0,
         subordinateId: 0,
         superiorId: 1,
-        type: 'customerDeposits',
+        type: 'customer deposits',
         balance: 100,
         category: 'dueTos',
       },
@@ -47,12 +47,12 @@ export const balanceSheetDisplay1 = {
 
 export const balanceSheetDisplay2 = {
   assets: {
-    customerOverdrafts: [
+    customer overdrafts: [
       {
         id: 2,
         subordinateId: 4,
         superiorId: 0,
-        type: 'customerOverdrafts',
+        type: 'customer overdrafts',
         balance: 25,
         thirdPartyDetail: {
           id: 4,
@@ -61,7 +61,7 @@ export const balanceSheetDisplay2 = {
           accountIds: [2],
           duesIds: [],
         },
-        category: 'customerOverdrafts',
+        category: 'customer overdrafts',
       },
     ],
     dueTos: [
@@ -69,7 +69,7 @@ export const balanceSheetDisplay2 = {
         id: 1,
         subordinateId: 1,
         superiorId: 0,
-        type: 'customerDeposits',
+        type: 'customer deposits',
         balance: 10,
         thirdPartyDetail: {
           id: 1,
@@ -83,12 +83,12 @@ export const balanceSheetDisplay2 = {
     ],
   },
   liabilities: {
-    customerDeposits: [
+    customer deposits: [
       {
         id: 0,
         subordinateId: 2,
         superiorId: 0,
-        type: 'customerDeposits',
+        type: 'customer deposits',
         balance: 35,
         thirdPartyDetail: {
           id: 2,
@@ -97,7 +97,7 @@ export const balanceSheetDisplay2 = {
           accountIds: [0],
           duesIds: [],
         },
-        category: 'customerDeposits',
+        category: 'customer deposits',
       },
     ],
     dueTos: [
@@ -105,7 +105,7 @@ export const balanceSheetDisplay2 = {
         id: 0,
         subordinateId: 0,
         superiorId: 1,
-        type: 'customerDeposits',
+        type: 'customer deposits',
         balance: 100,
         thirdPartyDetail: {
           id: 1,
@@ -122,12 +122,12 @@ export const balanceSheetDisplay2 = {
 
 export const balanceSheetDisplay3 = {
   assets: {
-    customerOverdrafts: [
+    customer overdrafts: [
       {
         id: 2,
         subordinateId: 4,
         superiorId: 0,
-        type: 'customerOverdrafts',
+        type: 'customer overdrafts',
         balance: 25,
         thirdPartyDetail: {
           id: 4,
@@ -136,7 +136,7 @@ export const balanceSheetDisplay3 = {
           accountIds: [2],
           duesIds: [],
         },
-        category: 'customerOverdrafts',
+        category: 'customer overdrafts',
       },
     ],
     dueTos: [
@@ -144,7 +144,7 @@ export const balanceSheetDisplay3 = {
         id: 1,
         subordinateId: 1,
         superiorId: 0,
-        type: 'customerDeposits',
+        type: 'customer deposits',
         balance: 10,
         thirdPartyDetail: {
           id: 1,
@@ -161,12 +161,12 @@ export const balanceSheetDisplay3 = {
     ],
   },
   liabilities: {
-    customerDeposits: [
+    customer deposits: [
       {
         id: 0,
         subordinateId: 2,
         superiorId: 0,
-        type: 'customerDeposits',
+        type: 'customer deposits',
         balance: 35,
         thirdPartyDetail: {
           id: 2,
@@ -175,7 +175,7 @@ export const balanceSheetDisplay3 = {
           accountIds: [0],
           duesIds: [],
         },
-        category: 'customerDeposits',
+        category: 'customer deposits',
       },
     ],
     dueTos: [
@@ -183,7 +183,7 @@ export const balanceSheetDisplay3 = {
         id: 0,
         subordinateId: 0,
         superiorId: 1,
-        type: 'customerDeposits',
+        type: 'customer deposits',
         balance: 100,
         thirdPartyDetail: {
           id: 1,
@@ -201,15 +201,15 @@ export const balanceSheetDisplay3 = {
 export const balanceSheetDisplay4 = {
   assets: [
     {
-      instrument: 'customerOverdrafts',
+      instrument: 'customer overdrafts',
       accounts: [
         {
           id: 2,
           subordinateId: 4,
           superiorId: 0,
-          type: 'customerDeposits',
+          type: 'customer deposits',
           balance: 25,
-          category: 'customerOverdrafts',
+          category: 'customer overdrafts',
           thirdPartyDetail: {
             id: 4,
             name: 'emma',
@@ -228,7 +228,7 @@ export const balanceSheetDisplay4 = {
           id: 1,
           subordinateId: 1,
           superiorId: 0,
-          type: 'customerDeposits',
+          type: 'customer deposits',
           balance: 10,
           category: 'dueFroms',
           thirdPartyDetail: {
@@ -251,15 +251,15 @@ export const balanceSheetDisplay4 = {
   ],
   liabilities: [
     {
-      instrument: 'customerDeposits',
+      instrument: 'customer deposits',
       accounts: [
         {
           id: 0,
           subordinateId: 2,
           superiorId: 0,
-          type: 'customerDeposits',
+          type: 'customer deposits',
           balance: 35,
-          category: 'customerDeposits',
+          category: 'customer deposits',
           thirdPartyDetail: {
             id: 2,
             name: 'alex',
@@ -278,7 +278,7 @@ export const balanceSheetDisplay4 = {
           id: 0,
           subordinateId: 0,
           superiorId: 1,
-          type: 'customerDeposits',
+          type: 'customer deposits',
           balance: 100,
           category: 'dueTos',
           thirdPartyDetail: {
@@ -298,15 +298,15 @@ export const balanceSheetDisplay4 = {
 export const balanceSheetDisplay5 = {
   assets: [
     {
-      instrument: 'customerOverdrafts',
+      instrument: 'customer overdrafts',
       accounts: [
         {
           id: 2,
           subordinateId: 4,
           superiorId: 0,
-          type: 'customerDeposits',
+          type: 'customer deposits',
           balance: 25,
-          category: 'customerOverdrafts',
+          category: 'customer overdrafts',
           thirdPartyDetail: {
             id: 4,
             name: 'emma',
@@ -324,7 +324,7 @@ export const balanceSheetDisplay5 = {
           id: 1,
           subordinateId: 1,
           superiorId: 0,
-          type: 'customerDeposits',
+          type: 'customer deposits',
           balance: 10,
           category: 'dueFroms',
           thirdPartyDetail: {
@@ -346,15 +346,15 @@ export const balanceSheetDisplay5 = {
   ],
   liabilities: [
     {
-      instrument: 'customerDeposits',
+      instrument: 'customer deposits',
       accounts: [
         {
           id: 0,
           subordinateId: 2,
           superiorId: 0,
-          type: 'customerDeposits',
+          type: 'customer deposits',
           balance: 35,
-          category: 'customerDeposits',
+          category: 'customer deposits',
           thirdPartyDetail: {
             id: 2,
             name: 'alex',
@@ -372,7 +372,7 @@ export const balanceSheetDisplay5 = {
           id: 0,
           subordinateId: 0,
           superiorId: 1,
-          type: 'customerDeposits',
+          type: 'customer deposits',
           balance: 100,
           category: 'dueTos',
           thirdPartyDetail: {
