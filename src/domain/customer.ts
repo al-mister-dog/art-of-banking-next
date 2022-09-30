@@ -19,7 +19,7 @@ export const Customer = {
     return { ...bank[0] };
   },
   createAccount(customer: Bank, bank: Bank, amount?: number) {
-    Accounts.createAccount(customer, bank, "customerDeposits", amount);
+    Accounts.createAccount(customer, bank, "customer deposits", amount);
     if (amount) {
       Reserves.decreaseReserves(customer, amount);
       Reserves.increaseReserves(bank, amount);
@@ -60,15 +60,15 @@ export const Customer = {
   },
 
   getLoan(customer: Bank, bank: Bank, amount: number) {
-    Loans.create(customer, bank, amount, "customerDeposits");
+    Loans.create(customer, bank, amount, "customer deposits");
     Accounts.increaseCorrespondingBalance(customer, bank, amount);
   },
   repayLoanFromAccount(customer: Bank, bank: Bank, amount: number) {
-    Loans.decrease(customer, bank, amount, "customerDeposits");
+    Loans.decrease(customer, bank, amount, "customer deposits");
     Accounts.decreaseCorrespondingBalance(customer, bank, amount);
   },
   repayLoanCash(customer: Bank, bank: Bank, amount: number) {
-    Loans.decrease(customer, bank, amount, "customerDeposits");
+    Loans.decrease(customer, bank, amount, "customer deposits");
     Reserves.decreaseReserves(customer, amount);
     Reserves.increaseReserves(bank, amount);
   },

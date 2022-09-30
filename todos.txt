@@ -10,7 +10,9 @@ what count as reserves depends on the system
 GO
 
 you did the basics for this. now it has to be applied across each reducer function
-1hr
+1hr actual time (4hrs)
+
+all done... a few edge cases
 
 
 
@@ -84,3 +86,14 @@ graphDataByLecture: {
     2: barChart,
 
 }
+
+
+spreadsheet: {
+    bugs: {
+        doesnt always display data on "this transaction",
+        change name to "spreadsheet"
+    },
+    todos: {
+        make full spreadsheet printable
+    }
+} 
