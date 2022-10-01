@@ -8,14 +8,10 @@ import { getRouteObjectData } from "../../helpers/routeMethods";
 import { createStyles } from "@mantine/core";
 import Article from "../../components/article/article";
 import BalanceSheets from "../../components/balancesheets/cards/card-list";
-import Charts from "../../components/charts-and-settings/charts/tabs";
+
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
 import KeyTerms from "../../components/article/lecture-index/key-terms";
-import { useEffect, useRef, useState } from "react";
-import { setupFunctions } from "../../config/setup-functions/setupFunctions";
-import { clearBankData, creditData } from "../../domain/structures";
-import DayTimer from "../../components/widgets/day-timer";
-import SystemDynamics from "../../components/widgets/system-dynamics";
+import { useEffect, useState } from "react";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {
@@ -108,3 +104,4 @@ export async function getServerSideProps(context: { query: { slug: any } }) {
     };
   }
 }
+//253

@@ -1,6 +1,6 @@
 export const balanceSheetDisplay1 = {
   assets: {
-    customer overdrafts: [
+    customerOverdrafts: [
       {
         id: 2,
         subordinateId: 4,
@@ -22,7 +22,7 @@ export const balanceSheetDisplay1 = {
     ],
   },
   liabilities: {
-    customer deposits: [
+    customerDeposits: [
       {
         id: 0,
         subordinateId: 2,
@@ -47,7 +47,7 @@ export const balanceSheetDisplay1 = {
 
 export const balanceSheetDisplay2 = {
   assets: {
-    customer overdrafts: [
+    customerOverdrafts: [
       {
         id: 2,
         subordinateId: 4,
@@ -83,7 +83,7 @@ export const balanceSheetDisplay2 = {
     ],
   },
   liabilities: {
-    customer deposits: [
+    customerDeposits: [
       {
         id: 0,
         subordinateId: 2,
@@ -122,7 +122,7 @@ export const balanceSheetDisplay2 = {
 
 export const balanceSheetDisplay3 = {
   assets: {
-    customer overdrafts: [
+    customerOverdrafts: [
       {
         id: 2,
         subordinateId: 4,
@@ -161,7 +161,7 @@ export const balanceSheetDisplay3 = {
     ],
   },
   liabilities: {
-    customer deposits: [
+    customerDeposits: [
       {
         id: 0,
         subordinateId: 2,

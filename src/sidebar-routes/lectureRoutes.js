@@ -1,5 +1,3 @@
-import { setupLecture } from "../domain/config/create-lecture";
-import { fundamentals } from "../config/setup-functions/setupFunctions";
 export const lectureRoutes = {
   heading: true,
   path: "",

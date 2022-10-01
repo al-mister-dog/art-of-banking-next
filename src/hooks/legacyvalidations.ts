@@ -132,7 +132,7 @@ const validatorsByLecture = {
             disabled: true,
           };
         }
-        if (customer deposits < amount) {
+        if (customerDeposits < amount) {
           return {
             error: true,
             errorMessage: `${customer.cardInfo.name} Has Insufficient Deposits`,
@@ -177,7 +177,7 @@ const validatorsByLecture = {
             disabled: true,
           };
         }
-        if (customer deposits < amount) {
+        if (customerDeposits < amount) {
           return {
             error: true,
             errorMessage: `${customer.cardInfo.name} Has Insufficient Deposits`,
