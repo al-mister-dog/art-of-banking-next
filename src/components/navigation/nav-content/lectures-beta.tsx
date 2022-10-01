@@ -29,14 +29,14 @@ export default function LecturesContent({
         return (
           <Accordion.Item value={title} key={id}>
             <Accordion.Control>
-              <Link
+              {/* <Link
                 href={{
                   pathname: path,
                   query: { id },
                 }}
-              >
-                {title}
-              </Link>
+              > */}
+              {title}
+              {/* </Link> */}
             </Accordion.Control>
             <Accordion.Panel>
               <List listStyleType="none">
@@ -58,7 +58,11 @@ export default function LecturesContent({
                         className={classes.listItem}
                         style={{ cursor: "pointer" }}
                       >
-                        <Link href={`/lectures${path}`} passHref>
+                        <Link
+                          href={{ pathname: `/lectures/lecture`, query: { id } }}
+                          as={`/lectures${path}`}
+                          passHref
+                        >
                           <Text size="sm">{title}</Text>
                         </Link>
                       </List.Item>

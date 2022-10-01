@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useAppDispatch } from "../../app/hooks";
 import { setup } from "../../features/banks/banksSlice";
 import { setActions } from "../../features/actions/actionsSlice";
@@ -12,6 +13,7 @@ import BalanceSheets from "../../components/balancesheets/cards/card-list";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
 import KeyTerms from "../../components/article/lecture-index/key-terms";
 import { useEffect, useState } from "react";
+import { lectureRoutes } from "../../sidebar-routes/lectureRoutes";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {
@@ -30,9 +32,10 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function LecturesPart({ routeData }) {
-  const { introductoryTexts, title, keyTermsIds, slug, id } = routeData;
-
-  const { paragraphs, assignment } = introductoryTexts;
+  // const { introductoryTexts, title, keyTermsIds, slug } = routeData;
+  const router = useRouter();
+  const id = router.query.id;
+  // const { paragraphs, assignment } = introductoryTexts;
   const dispatch = useAppDispatch();
   const { classes } = useStyles();
   const [renderedId, setRenderedId] = useState(id);
@@ -49,14 +52,14 @@ export default function LecturesPart({ routeData }) {
 
   return (
     <>
-      <Article
+      {/* <Article
         slug={slug}
         title={title}
         text={paragraphs}
         assignment={assignment}
-      />
+      /> */}
 
-      {title !== "Introduction" && (
+      { (
         <div className={classes.assignmentContainer}>
           <div className={classes.balanceSheets}>
             <BalanceSheets />
@@ -67,7 +70,7 @@ export default function LecturesPart({ routeData }) {
       )}
 
       <div className={classes.keyTermsContainer}>
-        <KeyTerms ids={keyTermsIds} />
+        {/* <KeyTerms ids={keyTermsIds} /> */}
       </div>
       <Link href="/lectures/fundamentals/deposit-transfers">Next</Link>
     </>
