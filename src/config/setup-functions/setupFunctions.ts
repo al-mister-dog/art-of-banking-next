@@ -124,12 +124,14 @@ export const setupFunctions: SetupFunctions = {
     Banks.createAccount(bankData.banks[1], bankData.banks[2], 100);
     Banks.createAccount(bankData.banks[2], bankData.banks[0], 100);
     Banks.createAccount(bankData.banks[2], bankData.banks[1], 100);
+    GraphData.setCreditData()
     BankingSystem.createBank("Customer 1", "customer", 100);
     BankingSystem.createBank("Customer 2", "customer", 100);
     BankingSystem.createBank("Customer 3", "customer", 100);
     Customer.createAccount(bankData.banks[3], bankData.banks[0], 100);
     Customer.createAccount(bankData.banks[4], bankData.banks[1], 100);
     Customer.createAccount(bankData.banks[5], bankData.banks[2], 100);
+    GraphData.setCreditData()
     Customer.transfer(
       20,
       bankData.banks[3],
@@ -206,9 +208,11 @@ export const setupFunctions: SetupFunctions = {
       bankData.banks[4],
       bankData.banks[3]
     );
+    GraphData.setCreditData()
     Record.setRound();
   },
   12() {
+    clearBankData();
     System.setSystem("clearinghouse");
     BankingSystem.createBank("Customer 1", "customer", 100);
     BankingSystem.createBank("Customer 2", "customer", 100);
@@ -232,8 +236,8 @@ export const setupFunctions: SetupFunctions = {
       bankData.banks[4],
       bankData.banks[3]
     );
-    Record.setRound();
     GraphData.setCreditData()
+    Record.setRound();
   },
   13() {
     clearBankData();

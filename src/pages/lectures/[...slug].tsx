@@ -44,7 +44,7 @@ export default function LecturesPart({ routeData }) {
     setRenderedId(id);
   }, [id]);
   if (renderedId !== id) {
-    return <>Loading...</>;
+    return <></>;
   }
 
   return (
