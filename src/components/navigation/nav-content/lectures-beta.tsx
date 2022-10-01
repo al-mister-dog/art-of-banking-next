@@ -59,7 +59,10 @@ export default function LecturesContent({
                         style={{ cursor: "pointer" }}
                       >
                         <Link
-                          href={{ pathname: `/lectures/lecture`, query: { id } }}
+                          href={{
+                            pathname: `/lectures${path}`,
+                            query: { path, id },
+                          }}
                           as={`/lectures${path}`}
                           passHref
                         >

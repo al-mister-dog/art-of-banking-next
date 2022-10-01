@@ -35,7 +35,7 @@ export default function BalanceSheetsContainer() {
   const banksArray: CardInfo[] = Object.keys(banks)
     .map((bank) => banks[bank])
     .map((bank) => getCardInfo(bank));
-
+  console.log(banks)
   return (
     <>
       <MantineProvider theme={{ fontFamily: `"Poppins"` }}>

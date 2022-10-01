@@ -28,7 +28,6 @@ const useStyles = createStyles((theme) => ({
 
 export default function LecturesPart({ routeData }) {
   const { introductoryTexts, title, keyTermsIds, slug, id } = routeData;
-
   const { paragraphs, assignment } = introductoryTexts;
   const dispatch = useAppDispatch();
   const { classes } = useStyles();

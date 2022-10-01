@@ -28,11 +28,10 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function LecturesPart() {
-  // const { introductoryTexts, title, keyTermsIds, slug, id } = routeData;
-  const router = useRouter();
-  const { id } = router.query;
-  // const { paragraphs, assignment } = introductoryTexts;
+export default function LecturesPart({ routeData }) {
+  const { introductoryTexts, title, keyTermsIds, slug, id } = routeData;
+
+  const { paragraphs, assignment } = introductoryTexts;
   const dispatch = useAppDispatch();
   const { classes } = useStyles();
   const [renderedId, setRenderedId] = useState(id);

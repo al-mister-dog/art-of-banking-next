@@ -28,6 +28,7 @@ export interface BanksState {
   creditAccounts: any;
   reserves: any;
   analytics: any;
+  loading: boolean;
 }
 
 const initialState: BanksState = {
@@ -36,6 +37,7 @@ const initialState: BanksState = {
   creditAccounts: initialBankData.creditAccounts,
   reserves: initialBankData.reserves,
   analytics: analytics,
+  loading: true,
 };
 let count = 0;
 export const banksSlice = createSlice({
@@ -47,6 +49,7 @@ export const banksSlice = createSlice({
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.resetGraphData(state);
       banksSlice.caseReducers.updateAnalytics(state);
+      state.loading = false
     },
     deposit: (state, { payload }) => {
       const { amount, c1, b1 } = payload;

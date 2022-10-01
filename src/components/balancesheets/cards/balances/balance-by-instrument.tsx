@@ -7,7 +7,7 @@ import BalanceOff from "./balance-displays/off";
 import { Text } from "@mantine/core";
 import { System } from "../../../../domain/system";
 
-export default function SideUI({ side, id }) {
+export default function BalanceByInstrument({ side, id }) {
   const { colorSettings, displaySettings } = useAppSelector(selectSettings);
   if (System.getSystem() === "centralbank" && side.instrument === "reserves") {
     return;
@@ -17,9 +17,9 @@ export default function SideUI({ side, id }) {
       <Text size="xs" weight="bold" align="left">
         {displaySettings.taccounts ? "" : `${side.instrument}`}
       </Text>
-      {side.accounts.map((account) => {
+      {side.accounts.map((account, i) => {
         return (
-          <div key={account.id}>
+          <div key={i}>
             {colorSettings.round && (
               <BalanceEachRound key={account.id} account={account} id={id} />
             )}
