@@ -36,7 +36,6 @@ export default function LineChart() {
     reservesData = [0];
   } else {
     creditData = [analytics.graphs.credit[0], ...analytics.graphs.credit];
-    console.log(creditData);
     reservesData = [analytics.graphs.reserves[0], ...analytics.graphs.reserves];
   }
 

@@ -21,7 +21,7 @@ export default function Desktop() {
   const overdraftValue =
     sliderSettings[currentLectureId].sliderFixtures?.overdraft || 0;
 
-  console.log(currentLectureId)
+  
 
   return (
     <Grid grow>

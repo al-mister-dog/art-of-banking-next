@@ -116,35 +116,8 @@ export default function LineChart() {
     };
   }
 
-  console.log(JSON.stringify(data));
-  //   const labels = creditData.map((c, i) => i);
-  //   const data = {
-  //     labels,
-  //     datasets: [
-  //       {
-  //         label: "Credit",
-  //         data: creditData,
-  //         borderColor: theme.colors.pink[7],
-  //         backgroundColor: theme.colors.pink[3],
-  //       },
-  //       {
-  //         // fill: true,
-  //         label: "Reserves",
-  //         data: reservesData,
-  //         borderColor: theme.colors.cyan[7],
-  //         backgroundColor: theme.colors.cyan[3],
-  //       },
-  //       {
-  //         label: "Private Credit",
-  //         data: privateCreditData,
-  //         borderColor: theme.colors.yellow[7],
-  //         backgroundColor: theme.colors.yellow[3],
-  //       },
-  //     ],
-  //   };
   if (Object.keys(analytics.graphs.nationalData).length === 0) {
     return <>Loading...</>;
   }
   return <Line options={options} data={data} />;
-  // return <></>;
 }

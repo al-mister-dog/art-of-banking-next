@@ -11,8 +11,6 @@ export const GraphData = {
     const banks = parties.filter((party) => party.type === "bank");
 
     customers.forEach((customer) => {
-      console.log(Accounts.getFirstSubordinateAccount(customer));
-
       const customerTs = {
         reserves: Reserves.getReserves(customer).cashReserves,
         deposits: Accounts.getAllSubordinateAccounts(customer)[0].balance,
