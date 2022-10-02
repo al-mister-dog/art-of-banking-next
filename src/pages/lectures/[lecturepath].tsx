@@ -1,67 +1,34 @@
-import Article from "../../components/article/article";
-import { partsTexts } from "../../config/parts";
-import { getRouteObjectData } from "../../helpers/routeMethods";
 import { lectureRoutes } from "../../config/sidebar-routes/lectureRoutes";
+import { homeTexts } from "../../config/homeTexts";
+import Intro from "../../components/article/intro";
 
-import BalanceSheets from "../../components/balancesheets/cards/card-list";
-import ChartsAndSettings from "../../components/charts-and-settings/desktop";
-import { createStyles } from "@mantine/core";
-import KeyTerms from "../../components/article/lecture-index/key-terms";
-import Link from "next/link";
-import { useLectureContent } from "../../hooks/useLectureContent";
-const useStyles = createStyles((theme) => ({
-  assignmentContainer: {
-    backgroundColor: theme.colors.violet[0],
-    paddingBottom: "200px",
-    marginBottom: -25,
-  },
-  keyTermsContainer: {
-    backgroundColor: theme.colors.red[0],
-    paddingBottom: "50px",
-  },
-  balanceSheets: {
-    padding: 16,
-    paddingTop: "50px",
-  },
-}));
-
-export default function LecturePath(props) {
-  console.log(props);
-  // const { paragraphs, assignment } = introductoryTexts;
-  // const { classes } = useStyles();
-  // useLectureContent(id);
+export default function LecturePath({ id, title, nextPath }) {
+  const { text } = homeTexts[id];
 
   return (
     <>
-      {/* <Article
-        slug={path}
-        title={title}
-        text={paragraphs}
-        assignment={assignment}
-      /> */}
+      <Intro title={title} text={text} nextPath={nextPath} />
     </>
   );
 }
 
 export async function getStaticProps(context) {
-  const { lecturePath } = context.params;
+  const { lecturepath } = context.params;
 
-  // const data = getRouteObjectData(path);
-  let foundRoute;
-  let found = lectureRoutes.routes.find(
-    (rt) => rt.path === `/lectures/${lecturePath}}`
-  );
-  if (found) {
-    foundRoute = found;
-  }
+  const data = lectureRoutes.routes
+    .map((route) => {
+      const { id, title, path, routes } = route;
+      return { id, title, path, nextPath: routes[0].path };
+    })
+    .find((route) => route.path.split("/")[2] === lecturepath);
 
-  //   const { id,
-  //     title, keyTermsIds
-  // } = data;
-  //   const introductoryTexts = partsTexts[id];
+  const { id, title, path, nextPath } = data;
   return {
     props: {
-      foundRoute,
+      id,
+      title,
+      path,
+      nextPath,
     },
   };
 }
@@ -70,10 +37,8 @@ export async function getStaticPaths() {
   const paths = lectureRoutes.routes.flatMap((route) => {
     return {
       params: { lecturepath: route.path.split("/")[2] },
-      // params: { lecturepath: route.path },
     };
   });
-  console.log(paths);
 
   return {
     paths,

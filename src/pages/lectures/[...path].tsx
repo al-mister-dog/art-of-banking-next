@@ -1,14 +1,13 @@
-import Article from "../../components/article/article";
+import { createStyles } from "@mantine/core";
+import { useLectureContent } from "../../hooks/useLectureContent";
 import { partsTexts } from "../../config/parts";
 import { getRouteObjectData } from "../../helpers/routeMethods";
 import { lectureRoutes } from "../../config/sidebar-routes/lectureRoutes";
-
+import Article from "../../components/article/article";
 import BalanceSheets from "../../components/balancesheets/cards/card-list";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
-import { createStyles } from "@mantine/core";
 import KeyTerms from "../../components/article/lecture-index/key-terms";
-import Link from "next/link";
-import { useLectureContent } from "../../hooks/useLectureContent";
+
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {
     backgroundColor: theme.colors.violet[0],
@@ -44,7 +43,6 @@ export default function LecturePath({
         text={paragraphs}
         assignment={assignment}
       />
-
       {title !== "Introduction" && (
         <>
           <div className={classes.assignmentContainer}>
@@ -54,13 +52,11 @@ export default function LecturePath({
               <ChartsAndSettings />
             </div>
           </div>
-
           <div className={classes.keyTermsContainer}>
             <KeyTerms ids={keyTermsIds} />
           </div>
         </>
       )}
-      <Link href="/lectures/fundamentals/deposit-transfers">Next</Link>
     </>
   );
 }

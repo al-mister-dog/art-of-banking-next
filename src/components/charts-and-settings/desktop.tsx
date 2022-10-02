@@ -1,57 +1,55 @@
 import { useAppSelector } from "../../app/hooks";
 import { selectActions } from "../../features/actions/actionsSlice";
-import { sliderSettings } from "../../features/settings/initialState";
-import { Card, Center, Grid, Title, useMantineTheme } from "@mantine/core";
+import { Card, Grid, useMantineTheme } from "@mantine/core";
 import ChartPrivateCredit from "./charts/linechart-private-credit";
 import ChartBalances from "./charts/barchart-balances";
 import ChartCredit from "./charts/linechart-credit";
-import RefreshBalanceSheets from "./settings/refresh";
-import OverdraftSlider from "./settings/slider-overdraft";
-import ReserveRequirementSlider from "./settings/slider-reserve-requirement";
-import InterestRateSlider from "./settings/slider-interest-rate";
-import DisplayRadioGroup from "./settings/radio-group-display";
-import ColorsRadioGroup from "./settings/radio-group-colors";
-
+import SettingsDesktop from "./settings/container-desktop";
+import SettingsMobile from "./settings/container-mobile";
 import { charts } from "../../config/charts";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+
 
 export default function Desktop() {
   const { currentLectureId } = useAppSelector(selectActions);
   const theme = useMantineTheme();
-  const slidersDisabled = sliderSettings[currentLectureId].sliderSettings;
-  const overdraftValue =
-    sliderSettings[currentLectureId].sliderFixtures?.overdraft || 0;
-
-  
-
+  const isMobile = useMediaQuery();
   return (
-    <Grid grow>
-      <Grid.Col span={1}>
-        <Card style={{ backgroundColor: theme.colors.violet[1] }}>
-          <Center>
-            <Title order={4}>Settings</Title>
-          </Center>
-          <RefreshBalanceSheets />
-          <OverdraftSlider
-            disabled={slidersDisabled.overdraft}
-            overdraftValue={overdraftValue}
-          />
-          <ReserveRequirementSlider
-            disabled={slidersDisabled.reserveRequirement}
-          />
-          <InterestRateSlider disabled={slidersDisabled.interestRate} />
-          <DisplayRadioGroup />
-          <ColorsRadioGroup />
-        </Card>
-      </Grid.Col>
-      <Grid.Col span={4}>
-        <Card style={{ backgroundColor: theme.colors.violet[1] }}>
-          {charts[currentLectureId] === "balances" && <ChartBalances />}
-          {charts[currentLectureId] === "credit" && <ChartCredit />}
-          {charts[currentLectureId] === "private credit" && (
-            <ChartPrivateCredit />
-          )}
-        </Card>
-      </Grid.Col>
-    </Grid>
+    <>
+      {isMobile ? (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <SettingsMobile />
+
+          <div
+            style={{
+              position: "relative",
+              height: `${isMobile ? "50vh" : "inherit"}`,
+              marginTop: "30px",
+            }}
+          >
+            {charts[currentLectureId] === "balances" && <ChartBalances />}
+            {charts[currentLectureId] === "credit" && <ChartCredit />}
+            {charts[currentLectureId] === "private credit" && (
+              <ChartPrivateCredit />
+            )}
+          </div>
+        </div>
+      ) : (
+        <Grid grow>
+          <Grid.Col span={1}>
+            <SettingsDesktop />
+          </Grid.Col>
+          <Grid.Col span={4}>
+            <Card style={{ backgroundColor: theme.colors.violet[1] }}>
+              {charts[currentLectureId] === "balances" && <ChartBalances />}
+              {charts[currentLectureId] === "credit" && <ChartCredit />}
+              {charts[currentLectureId] === "private credit" && (
+                <ChartPrivateCredit />
+              )}
+            </Card>
+          </Grid.Col>
+        </Grid>
+      )}
+    </>
   );
 }

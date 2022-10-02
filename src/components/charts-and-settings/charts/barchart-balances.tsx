@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { analytics, bankData } from "../../../domain/structures";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 
 ChartJS.register(
   CategoryScale,
@@ -24,6 +25,7 @@ ChartJS.register(
 
 export default function BarChart() {
   const { analytics } = useAppSelector(selectBanks);
+  const isMobile = useMediaQuery();
   const banks = Object.keys(analytics.graphs.nationalData).map((id) => {
     return bankData.banks[id];
   });
@@ -51,6 +53,7 @@ export default function BarChart() {
   }
   const options = {
     responsive: true,
+    maintainAspectRatio: isMobile ? false : true,
     plugins: {
       legend: {
         position: "top" as const,
