@@ -8,7 +8,7 @@ import { creditData } from "../../../../../domain/structures";
 import FixedAction from "../compositions/fixed-action";
 import { Text } from "@mantine/core";
 
-export default function WithdrawFromBank({ bank }: { bank: CardInfo }) {
+export default function NetDues({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
   const [amount, setAmount] = useState<number>(0);

@@ -11,7 +11,7 @@ import { CardInfo } from "../../../types";
 import SelectAndPay from "../compositions/select-and-pay";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
 
-export default function WithdrawFromBank({ bank }: { bank: CardInfo }) {
+export default function DepositIntoBank({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
   const [amount, setAmount] = useState<number>(0);

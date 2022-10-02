@@ -9,7 +9,7 @@ import { creditData } from "../../../../../domain/structures";
 import FixedAmount from "../compositions/fixed-amount";
 import { Text } from "@mantine/core";
 
-export default function WithdrawFromBank({ bank }: { bank: CardInfo }) {
+export default function PayDues({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
   const [amount, setAmount] = useState<number>(0);
