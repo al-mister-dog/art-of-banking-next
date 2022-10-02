@@ -16,7 +16,7 @@ export default function ActionsPanel({ bank }: { bank: CardInfo }) {
   const [action, setAction] = useState<string | null>(null);
 
   const currentAction = useRef(action);
-  useCurrentAction(actions, currentAction, setAction);
+  // useCurrentAction(actions, currentAction, setAction);
   // const actionInActions = Object.keys(actions)
   //   .flatMap((acn) => actions[acn])
   //   .find((acn) => acn.value === currentAction.current);

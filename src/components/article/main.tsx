@@ -1,4 +1,5 @@
 import { Spoiler, Text } from "@mantine/core";
+import React from "react";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 interface IntroProps {
@@ -22,3 +23,5 @@ export default function Main({ text }: IntroProps) {
     </Spoiler>
   );
 }
+
+

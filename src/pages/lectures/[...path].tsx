@@ -7,6 +7,7 @@ import Article from "../../components/article/article";
 import BalanceSheets from "../../components/balancesheets/cards/card-list";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
 import KeyTerms from "../../components/article/lecture-index/key-terms";
+import Test from "../../components/test";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {
@@ -37,6 +38,7 @@ export default function LecturePath({
 
   return (
     <>
+      {/* <Test /> */}
       <Article
         slug={path}
         title={title}
@@ -67,7 +69,7 @@ export async function getStaticProps(context) {
   const { id, title, keyTermsIds } = data;
   const introductoryTexts = partsTexts[id];
   return {
-    props: { id, title, keyTermsIds, introductoryTexts, path },
+    props: { id, title, keyTermsIds, introductoryTexts, path, key: path },
   };
 }
 
