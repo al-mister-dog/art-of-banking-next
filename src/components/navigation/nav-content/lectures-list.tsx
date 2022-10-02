@@ -1,5 +1,5 @@
 import { createStyles } from "@mantine/core";
-import { lectureRoutes } from "../../../sidebar-routes/lectureRoutes";
+import { lectureRoutes } from "../../../config/sidebar-routes/lectureRoutes";
 import { Accordion, List, Text } from "@mantine/core";
 import { useRouter } from "next/router";
 import Link from "next/link";

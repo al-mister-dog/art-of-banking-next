@@ -1,10 +1,10 @@
-import { Breadcrumbs, Text } from "@mantine/core";
+import { Breadcrumbs, Text, Title } from "@mantine/core";
 import Link from "next/link";
 
-export default function Title({ slug, title }) {
+export default function LectureTitle({ slug, title }) {
   return (
     <>
-      <Breadcrumbs>
+      <Breadcrumbs style={{marginBottom: "25px", fontWeight: "bold"}}>
         {[
           <Link href="/lectures" key={1}>
             <Text>Lectures</Text>
@@ -14,7 +14,7 @@ export default function Title({ slug, title }) {
           </Link>,
         ]}
       </Breadcrumbs>
-      <h1>{title}</h1>
+      <Title>{title}</Title>
     </>
   );
 }

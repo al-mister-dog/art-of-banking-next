@@ -25,62 +25,55 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function LecturePath({
-  id,
-  path,
-  title,
-  keyTermsIds,
-  introductoryTexts,
-}) {
-  const { paragraphs, assignment } = introductoryTexts;
-  const { classes } = useStyles();
-  useLectureContent(id);
+export default function LecturePath(props) {
+  console.log(props);
+  // const { paragraphs, assignment } = introductoryTexts;
+  // const { classes } = useStyles();
+  // useLectureContent(id);
 
   return (
     <>
-      <Article
+      {/* <Article
         slug={path}
         title={title}
         text={paragraphs}
         assignment={assignment}
-      />
-
-      {title !== "Introduction" && (
-        <>
-          <div className={classes.assignmentContainer}>
-            <div className={classes.balanceSheets}>
-              <BalanceSheets />
-              <div style={{ height: "25px" }} />
-              <ChartsAndSettings />
-            </div>
-          </div>
-
-          <div className={classes.keyTermsContainer}>
-            <KeyTerms ids={keyTermsIds} />
-          </div>
-        </>
-      )}
-      <Link href="/lectures/fundamentals/deposit-transfers">Next</Link>
+      /> */}
     </>
   );
 }
 
 export async function getStaticProps(context) {
-  const { path } = context.params;
-  const data = getRouteObjectData(path);
-  const { id, title, keyTermsIds } = data;
-  const introductoryTexts = partsTexts[id];
+  const { lecturePath } = context.params;
+
+  // const data = getRouteObjectData(path);
+  let foundRoute;
+  let found = lectureRoutes.routes.find(
+    (rt) => rt.path === `/lectures/${lecturePath}}`
+  );
+  if (found) {
+    foundRoute = found;
+  }
+
+  //   const { id,
+  //     title, keyTermsIds
+  // } = data;
+  //   const introductoryTexts = partsTexts[id];
   return {
-    props: { id, title, keyTermsIds, introductoryTexts, path },
+    props: {
+      foundRoute,
+    },
   };
 }
 
 export async function getStaticPaths() {
   const paths = lectureRoutes.routes.flatMap((route) => {
-    return route.routes.map((r) => ({
-      params: { path: r.path.split("/").slice(1, 3) },
-    }));
+    return {
+      params: { lecturepath: route.path.split("/")[2] },
+      // params: { lecturepath: route.path },
+    };
   });
+  console.log(paths);
 
   return {
     paths,

@@ -49,7 +49,7 @@ export const banksSlice = createSlice({
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.resetGraphData(state);
       banksSlice.caseReducers.updateAnalytics(state);
-      state.loading = false
+      state.loading = false;
     },
     deposit: (state, { payload }) => {
       const { amount, c1, b1 } = payload;
@@ -196,6 +196,9 @@ export const banksSlice = createSlice({
       }
       state.analytics.graphs.nationalData = analytics.graphs.nationalData;
     },
+    setLoading: (state) => {
+      state.loading = true;
+    },
     updateRecords: (state) => {
       Record.setRound();
     },
@@ -218,6 +221,7 @@ export const {
   debitClearinghouse,
   getFedFundsLoan,
   repayFedFundsLoan,
+  setLoading,
 } = banksSlice.actions;
 
 export const selectBanks = (state: AppState) => state.banks;

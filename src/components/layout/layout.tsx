@@ -5,7 +5,6 @@ import NavbarDesktop from "./navbar-desktop";
 import NavbarMobile from "./navbar-mobile";
 import HeaderUi from "./header";
 
-
 export default function Layout(props: any) {
   const [opened, setOpened] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -20,14 +19,14 @@ export default function Layout(props: any) {
           padding: 0,
         },
       }}
-      navbarOffsetBreakpoint="sm"
-      asideOffsetBreakpoint="sm"
+      // navbarOffsetBreakpoint="sm"
+      // asideOffsetBreakpoint="sm"
       fixed={isMobile}
       navbar={
-        !isMobile ? (
-          <NavbarDesktop opened={opened} />
-        ) : (
+        isMobile ? (
           <NavbarMobile mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+        ) : (
+          <NavbarDesktop opened={opened} />
         )
       }
       header={

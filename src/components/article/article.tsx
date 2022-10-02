@@ -13,14 +13,21 @@ const useStyles = createStyles((theme) => ({
 export default function Article({ slug, title, text, assignment }) {
   const { classes } = useStyles();
   const isMobile = useMediaQuery();
-  const sidePadding = `${isMobile ? "0px" : "200px"}`;
+  const paddingRight = `${isMobile ? "0px" : "200px"}`;
+  const paddingLeft = `${isMobile ? "10px" : "50px"}`;
+
   return (
     <>
       <div
-        style={{ padding: `0px ${sidePadding} 0px 16px`, marginTop: "50px" }}
+        style={{
+          padding: `0px ${paddingRight} 0px ${paddingLeft}`,
+          marginTop: "200px",
+        }}
       >
         <Title slug={slug} title={title} />
-        <Main text={text} />
+        <div style={{ marginTop: "25px" }}>
+          <Main text={text} />
+        </div>
       </div>
 
       <div className={classes.assignmentContainer}>

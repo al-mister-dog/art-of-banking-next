@@ -13,7 +13,7 @@ import BalanceSheets from "../../components/balancesheets/cards/card-list";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
 import KeyTerms from "../../components/article/lecture-index/key-terms";
 import { useEffect, useState } from "react";
-import { lectureRoutes } from "../../sidebar-routes/lectureRoutes";
+import { lectureRoutes } from "../../config/sidebar-routes/lectureRoutes";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {

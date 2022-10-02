@@ -1,5 +1,5 @@
 import { Tabs } from "@mantine/core";
-import LecturesContent from "./nav-content/lectures-beta";
+import LecturesContent from "./nav-content/lectures-list";
 
 export default function TabsUi({
   setMobileOpen,

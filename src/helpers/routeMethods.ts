@@ -1,4 +1,4 @@
-import { lectureRoutes } from "../sidebar-routes/lectureRoutes";
+import { lectureRoutes } from "../config/sidebar-routes/lectureRoutes";
 
 interface RouteObject {
   id: number;
