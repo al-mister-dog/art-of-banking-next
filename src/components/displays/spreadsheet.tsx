@@ -27,7 +27,7 @@ export default function SpreadSheet() {
   return (
     <div style={{ display: "flex" }}>
       {banksArray.map((bank) => (
-        <SpreadsheetCard bank={bank} />
+        <SpreadsheetCard key={bank.cardInfo.id} bank={bank} />
       ))}
     </div>
   );

@@ -321,6 +321,9 @@ const validatorsByLecture = {
       netDues(bank: CardInfo, amount: number, selectedBank: string) {
         return check.validate();
       },
+      payDues() {
+        return check.validate();
+      },
     },
     customer: {
       transfer(

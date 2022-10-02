@@ -9,6 +9,7 @@ import {
 import { CardInfo } from "../types";
 import ActionsPanel from "./actions/panel";
 import LineChart from "../../charts-and-settings/charts/linechartbank";
+import React from "react";
 
 const useStyles = createStyles((theme) => ({
   header: { padding: "5px" },
@@ -24,10 +25,9 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function SidePanel({ bank }: { bank: CardInfo }) {
+function SidePanel({ bank }: { bank: CardInfo }) {
   const { classes } = useStyles();
   const theme = useMantineTheme();
-  
   return (
     <Card
       // shadow="sm"
@@ -69,3 +69,5 @@ export default function SidePanel({ bank }: { bank: CardInfo }) {
     </Card>
   );
 }
+
+export default React.memo(SidePanel)

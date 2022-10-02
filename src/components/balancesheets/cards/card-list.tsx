@@ -33,19 +33,19 @@ function BalanceSheetsContainer() {
   const banksArray: CardInfo[] = Object.keys(banks)
     .map((bank) => banks[bank])
     .map((bank) => getCardInfo(bank));
-  // console.log(banks)
-
-  return (
-    <>
-      <MantineProvider theme={{ fontFamily: `"Poppins"` }}>
-        {isMobile ? (
-          <LayoutMobile banksArray={banksArray} />
-        ) : (
-          <LayoutDesktop banksArray={banksArray} />
-        )}
-      </MantineProvider>
-    </>
-  );
+  if (banksArray.length > 0) {
+    return (
+      <>
+        <MantineProvider theme={{ fontFamily: `"Poppins"` }}>
+          {isMobile ? (
+            <LayoutMobile banksArray={banksArray} />
+          ) : (
+            <LayoutDesktop banksArray={banksArray} />
+          )}
+        </MantineProvider>
+      </>
+    );
+  }
 }
 
 const Memoized = React.memo(BalanceSheetsContainer);
