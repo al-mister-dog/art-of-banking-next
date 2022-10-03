@@ -3,7 +3,12 @@ import { setActions } from "../../features/actions/actionsSlice";
 import { setup } from "../../features/banks/banksSlice";
 import { refreshSettings } from "../../features/settings/settingsSlice";
 import { useEffect } from "react";
-import { createStyles } from "@mantine/core";
+import {
+  ActionIcon,
+  createStyles,
+  Popover,
+  useMantineTheme,
+} from "@mantine/core";
 import { introductoryTexts } from "../../config/parts";
 import { getRouteObjectData } from "../../helpers/routeMethods";
 import { lectureRoutes } from "../../config/sidebar-routes/lectureRoutes";
@@ -12,6 +17,9 @@ import BalanceSheets from "../../components/balancesheets/cards/card-list";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
 import KeyTerms from "../../components/article/lecture-index/key-terms";
 import RefreshBalanceSheets from "../../components/charts-and-settings/settings/refresh";
+import Settings from "../../components/charts-and-settings/mobile";
+import { Dots, DotsVertical } from "tabler-icons-react";
+import Toolbar from "../../components/charts-and-settings/toolbar";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {
@@ -36,6 +44,7 @@ export default function LecturePath({
   introductoryTexts,
   keyTermsIds,
 }) {
+  const theme = useMantineTheme();
   const { paragraphs, assignment } = introductoryTexts;
   const { classes } = useStyles();
   const dispatch = useAppDispatch();
@@ -57,11 +66,20 @@ export default function LecturePath({
         <>
           <div className={classes.assignmentContainer}>
             <div className={classes.balanceSheets}>
-              <div style={{ marginTop: "5px", marginBottom: "25px" }}>
-                <RefreshBalanceSheets />
+              <div
+                style={{
+                  marginTop: "5px",
+                  marginBottom: "25px",
+                  padding: "5px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                {" "}
+                <Toolbar />
               </div>
-              <BalanceSheets />
 
+              <BalanceSheets />
               <ChartsAndSettings />
             </div>
           </div>

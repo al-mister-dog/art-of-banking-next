@@ -9,7 +9,6 @@ import SettingsMobile from "./settings/container-mobile";
 import { charts } from "../../config/charts";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 
-
 export default function Desktop() {
   const { currentLectureId } = useAppSelector(selectActions);
   const theme = useMantineTheme();
@@ -17,22 +16,18 @@ export default function Desktop() {
   return (
     <>
       {isMobile ? (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <SettingsMobile />
-
-          <div
-            style={{
-              position: "relative",
-              height: `${isMobile ? "50vh" : "inherit"}`,
-              marginTop: "30px",
-            }}
-          >
-            {charts[currentLectureId] === "balances" && <ChartBalances />}
-            {charts[currentLectureId] === "credit" && <ChartCredit />}
-            {charts[currentLectureId] === "private credit" && (
-              <ChartPrivateCredit />
-            )}
-          </div>
+        <div
+          style={{
+            position: "relative",
+            height: `${isMobile ? "50vh" : "inherit"}`,
+            marginTop: "30px",
+          }}
+        >
+          {charts[currentLectureId] === "balances" && <ChartBalances />}
+          {charts[currentLectureId] === "credit" && <ChartCredit />}
+          {charts[currentLectureId] === "private credit" && (
+            <ChartPrivateCredit />
+          )}
         </div>
       ) : (
         <Grid grow>

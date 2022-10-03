@@ -27,7 +27,7 @@ export const useStyles = createStyles((theme) => ({
     backgroundColor: theme.colors.violet[1],
     paddingBottom: "0px",
     width: "100%",
-    height: "13.75rem",
+    height: "11.75rem",
     margin: "auto",
   },
   header: { padding: "3px", cursor: "pointer" },
