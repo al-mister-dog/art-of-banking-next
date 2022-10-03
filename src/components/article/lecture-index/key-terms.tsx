@@ -53,9 +53,16 @@ export default function KeyTerms({ ids }) {
   return (
     <>
       <div style={{ backgroundColor: theme.colors.violet[0] }}>
-        <Title className={classes.title} order={1}>
-          Key Terms
-        </Title>
+      <Title
+        className={classes.title}
+        order={2}
+        style={{
+          paddingLeft: "50px",
+          paddingRight: "50px",
+        }}
+      >
+        Key Terms
+      </Title>
       </div>
 
       <div style={{ padding: "25px" }}>
