@@ -14,7 +14,7 @@ export default function BalanceByInstrument({ side, id }) {
   }
   return (
     <div style={{ marginBottom: "1.5px" }}>
-      <Text size="xs" weight="bold" align="left">
+      <Text size="sm" weight="bold" align="left">
         {displaySettings.taccounts ? "" : `${side.instrument}`}
       </Text>
       {side.accounts.map((account, i) => {

@@ -11,6 +11,7 @@ import Article from "../../components/article/article";
 import BalanceSheets from "../../components/balancesheets/cards/card-list";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
 import KeyTerms from "../../components/article/lecture-index/key-terms";
+import RefreshBalanceSheets from "../../components/charts-and-settings/settings/refresh";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {
@@ -50,8 +51,11 @@ export default function LecturePath({ slug, id, title, keyTermsIds }) {
         <>
           <div className={classes.assignmentContainer}>
             <div className={classes.balanceSheets}>
+              <div style={{ marginTop: "5px", marginBottom: "25px" }}>
+                <RefreshBalanceSheets />
+              </div>
               <BalanceSheets />
-              <div style={{ height: "25px" }} />
+
               <ChartsAndSettings />
             </div>
           </div>

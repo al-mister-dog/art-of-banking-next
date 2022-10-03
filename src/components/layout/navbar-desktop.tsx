@@ -8,7 +8,7 @@ export default function NavbarUi({opened}) {
       p="md"
       hiddenBreakpoint="sm"
       hidden={!opened}
-      width={{ sm: 200, lg: 300 }}
+      width={{ sm: 200, lg: 270 }}
       style={{position: "sticky", top: 0, left: 0}}
     >
       <TabsUi />

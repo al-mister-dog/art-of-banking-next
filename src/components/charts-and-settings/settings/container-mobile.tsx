@@ -18,7 +18,7 @@ export default function Desktop() {
 
   return (
     // <Card style={{ backgroundColor: theme.colors.violet[1] }}>
-      <Accordion defaultValue="customization">
+      <Accordion>
         <Accordion.Item value="customization" style={{ backgroundColor: theme.colors.violet[1] }}>
           <Accordion.Control>
           <Title order={4}>Settings</Title>

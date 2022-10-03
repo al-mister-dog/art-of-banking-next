@@ -4,8 +4,8 @@ import {
   setActions,
 } from "../../../features/actions/actionsSlice";
 import { setup } from "../../../features/banks/banksSlice";
-import { ActionIcon, Box, Text, useMantineTheme } from "@mantine/core";
-import { Refresh } from "tabler-icons-react";
+import { ActionIcon, Box, Text, Tooltip, useMantineTheme } from "@mantine/core";
+import { RefreshDot } from "tabler-icons-react";
 
 export default function RefreshBalanceSheets() {
   const dispatch = useAppDispatch();
@@ -18,11 +18,10 @@ export default function RefreshBalanceSheets() {
 
   const theme = useMantineTheme();
   return (
-    <Box style={{ display: "flex" }}>
-      <ActionIcon onClick={handleRefresh}>
-        <Refresh color={`${theme.colors.violet[9]}`} />
+    <Tooltip color="violet" label="Reset Balancesheets">
+      <ActionIcon size="lg" onClick={handleRefresh}>
+        <RefreshDot size={40} color={`${theme.colors.violet[9]}`} />
       </ActionIcon>
-      <Text>Refresh</Text>
-    </Box>
+    </Tooltip>
   );
 }

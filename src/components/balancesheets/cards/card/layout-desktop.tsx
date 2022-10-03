@@ -14,15 +14,14 @@ export default function LayoutDesktop({
   const { currentLectureId } = useAppSelector(selectActions);
   const [bankDetail, setBankDetail] = useState(banksArray[0]);
 
-  
   useEffect(() => {
     setBankDetail(banksArray[0]);
   }, [currentLectureId]);
-  
-  const handleSetBankDetail = useCallback((bank) => {
+
+  const handleSetBankDetail = useCallback((bank: CardInfo) => {
     setBankDetail(bank);
   }, []);
-  
+
   return (
     <Grid grow>
       <Grid.Col span={4}>

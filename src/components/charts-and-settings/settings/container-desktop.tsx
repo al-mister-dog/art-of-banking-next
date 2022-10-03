@@ -1,4 +1,4 @@
-import { Card, Center, Title, useMantineTheme } from "@mantine/core";
+import { Card, Center, Paper, Title, useMantineTheme } from "@mantine/core";
 import { useAppSelector } from "../../../app/hooks";
 import { selectActions } from "../../../features/actions/actionsSlice";
 import { sliderSettings } from "../../../features/settings/initialState";
@@ -17,11 +17,11 @@ export default function Desktop() {
     sliderSettings[currentLectureId].sliderFixtures?.overdraft || 0;
 
   return (
-    <Card style={{ backgroundColor: theme.colors.violet[1] }}>
+    <Card style={{ backgroundColor: theme.colors.violet[1], overflow: "visible" }}>
       <Center>
         <Title order={4}>Settings</Title>
       </Center>
-      <RefreshBalanceSheets />
+      
       <OverdraftSlider
         disabled={slidersDisabled.overdraft}
         overdraftValue={overdraftValue}
@@ -29,7 +29,6 @@ export default function Desktop() {
       <ReserveRequirementSlider disabled={slidersDisabled.reserveRequirement} />
       <InterestRateSlider disabled={slidersDisabled.interestRate} />
       <DisplayRadioGroup />
-      <ColorsRadioGroup />
     </Card>
   );
 }
