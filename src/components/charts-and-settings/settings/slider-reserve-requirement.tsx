@@ -18,7 +18,9 @@ export default function ReserveRequirementSlider({
   }
   return (
     <Box>
-      <Text>Reserve Requirement</Text>
+      <Text size="xs" >
+        Reserve Requirement
+      </Text>
       <Slider
         color="violet"
         label={`${reserveRequirement}%`}

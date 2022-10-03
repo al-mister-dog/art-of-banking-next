@@ -29,15 +29,12 @@ export default function OverdraftSlider({
   }, []);
   return (
     <Box>
-      <Text>Overdraft Limit</Text>
+      <Text size="xs" >Overdraft Limit</Text>
       <Slider
         color="violet"
         label={`$${overdraft}`}
         min={0}
-        max={
-          // Totals.getTotalReserves()
-          100
-        }
+        max={100}
         value={overdraft}
         onChange={(num) => handleChange({ num })}
         disabled={disabled}

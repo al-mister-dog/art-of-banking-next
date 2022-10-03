@@ -38,7 +38,7 @@ export default function BalanceByInstrument({ side, id, textColor }) {
               <BalanceFlash key={account.id} account={account} id={id} textColor={textColor} />
             )}
             {colorSettings.off && (
-              <BalanceOff key={account.id} account={account} />
+              <BalanceOff key={account.id} account={account} textColor={textColor}/>
             )}
           </div>
         );

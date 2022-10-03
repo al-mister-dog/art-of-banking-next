@@ -1,18 +1,15 @@
-import { createStyles, Text } from "@mantine/core";
+import { createStyles, Text, useMantineTheme } from "@mantine/core";
 import React from "react";
 
 const useStyles = createStyles(() => ({
-  text: {
-    color: "black",
-    padding: "0px 3px",
-  },
+ 
 }));
 
-const Balance = ({ account }) => {
-  const { classes } = useStyles();
+const Balance = ({ account, textColor }) => {
+  const theme = useMantineTheme()
 
   return (
-    <Text size="xs" weight="bold" align="left" className={classes.text}>
+    <Text size="xs" weight="bold" align="left" color={`${theme.colors[textColor][8]}`}>
       {account.thirdPartyDetail?.name
         ? `${account.thirdPartyDetail.name}: `
         : ""}

@@ -19,7 +19,7 @@ export default function InterestRateSlider({
 
   return (
     <Box>
-      <Text>Interest Rate</Text>
+      <Text size="xs" >Interest Rate</Text>
       <Slider
         color="violet"
         label={`${interestRate}%`}

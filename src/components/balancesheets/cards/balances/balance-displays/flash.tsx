@@ -8,18 +8,18 @@ import { setAsSpreadSheet, setAsTAccount } from "./utils/balance-display";
 const useStyles = createStyles((theme) => ({
   text: {
     transition: "all 0.5s ease-in",
-    color: "black",
-    padding: "0px 3px",
+    
+    padding: "0px",
   },
   decrease: {
     background: theme.colors.red[5],
     color: "white",
-    padding: "0px 3px",
+    padding: "0px",
   },
   increase: {
     background: theme.colors.green[5],
     color: "white",
-    padding: "0px 3px",
+    padding: "0px",
   },
 }));
 
@@ -49,7 +49,7 @@ function Balance({ account, id, textColor }) {
   const color = useColors(account.balance);
   let tAccountDisplay = setAsTAccount(account, id);
   let spreadSheetDisplay = setAsSpreadSheet(account);
-
+  console.log(color)
   return (
     <Text
       size="xs"

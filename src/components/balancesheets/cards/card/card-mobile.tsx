@@ -26,7 +26,7 @@ export const useStyles = createStyles((theme) => ({
   card: {
     backgroundColor: theme.colors.violet[1],
     paddingBottom: "0px",
-    width: "20rem",
+    width: "100%",
     height: "13.75rem",
     margin: "auto",
   },

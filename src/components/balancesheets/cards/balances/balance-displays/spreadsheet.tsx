@@ -7,19 +7,19 @@ const useStyles = createStyles((theme) => ({
     transition: "all 0.5s ease-in",
     background: theme.colors.yellow[7],
     color: "white",
-    padding: "0px 3px",
+    padding: "0px",
   },
   issuance: {
     transition: "all 0.5s ease-in",
     background: theme.colors.green[7],
     color: "white",
-    padding: "0px 3px",
+    padding: "0px",
   },
   setOff: {
     transition: "all 0.5s ease-in",
     background: theme.colors.red[7],
     color: "white",
-    padding: "0px 3px",
+    padding: "0px",
   },
   novation: {
     transition: "all 0.5s ease-in",

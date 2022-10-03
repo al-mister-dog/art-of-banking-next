@@ -26,35 +26,41 @@ const useStyles = createStyles((theme) => ({
   text: {
     transition: "all 0.5s ease-in",
     // color: "black",
-    padding: "0px 3px",
-    borderRadius: "3px",
+    padding: "0px ",
+    borderRadius: "",
   },
   decrease: {
     transition: "all 0.5s ease-in",
     background: theme.colors.red[5],
     color: "white",
-    padding: "0px 3px",
-    borderRadius: "3px",
+    padding: "0px ",
+    borderRadius: "",
   },
   increase: {
     transition: "all 0.5s ease-in",
     background: theme.colors.green[5],
     color: "white",
-    padding: "0px 3px",
-    borderRadius: "3px",
+    padding: "0px ",
+    borderRadius: "",
   },
 }));
 
 const Balance = ({ account, id, textColor }) => {
   const { displaySettings } = useAppSelector(selectSettings);
   const { classes } = useStyles();
-  const theme = useMantineTheme()
+  const theme = useMantineTheme();
   const color = useColors(account.balance);
   let tAccountDisplay = setAsTAccount(account, id);
   let spreadSheetDisplay = setAsSpreadSheet(account);
- 
+
   return (
-    <Text size="xs" weight="bold" align="left" className={classes[color]} color={color !== "text" ? "" : theme.colors[textColor][8]}>
+    <Text
+      size="xs"
+      weight="bold"
+      align="left"
+      className={classes[color]}
+      color={color !== "text" ? "" : theme.colors[textColor][8]}
+    >
       {displaySettings.taccounts
         ? `${tAccountDisplay}`
         : `${spreadSheetDisplay}`}
