@@ -3,7 +3,7 @@ import useSymbolSettings from "../../../../../../hooks/useSymbolSettings";
 export function setAsTAccount(account: any, id: number) {
   let info = "";
   const symbol = useSymbolSettings(account.balance);
-  if (account.category === "reserves") {
+  if (account.category === "Reserves") {
     info = `${symbol}${account.balance} ${account.category}`;
   }
   if (account.subordinateId === id) {

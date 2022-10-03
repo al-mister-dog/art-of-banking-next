@@ -19,7 +19,7 @@ export const Totals = {
     const depositAccounts = mapReduceBalance(
       Accounts.getAllAccounts(bank).filter(
         (account) =>
-          account.type === "customer deposits" &&
+          account.type === "Customer Deposits" &&
           account.superiorId === bank.id &&
           account.balance > 0
       )
@@ -46,7 +46,7 @@ export const Totals = {
     const depositAccounts = mapReduceBalance(
       Accounts.getAllAccounts(bank).filter(
         (account) =>
-          account.type === "customer deposits" &&
+          account.type === "Customer Deposits" &&
           account.subordinateId === bank.id &&
           account.balance > 0
       )
@@ -58,7 +58,7 @@ export const Totals = {
     const depositAccounts = mapReduceBalance(
       Accounts.getAllAccounts(bank).filter(
         (account) =>
-          account.type === "customer deposits" &&
+          account.type === "Customer Deposits" &&
           account.superiorId === bank.id &&
           account.balance > 0
       )

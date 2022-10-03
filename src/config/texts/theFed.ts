@@ -56,7 +56,7 @@ export const theFedText = {
     an overdraft with the fed. After this get Bank 1 to take out a fed funds loan from bank 2 in order to 
     settle with the Fed. Pay attention to the credit graph as well as the color coded payments. What happens
     if you reverse the order of payments, taking out a loan with bank 2 and then transfering to bank 2? Please note that at this
-    stage in the lectures, bank deposits and reserves are the same thing to commercial banks.`,
+    stage in the lectures, Bank Deposits and reserves are the same thing to commercial banks.`,
   },
   step3: {
     lectureTitle: `Fed Funds`,

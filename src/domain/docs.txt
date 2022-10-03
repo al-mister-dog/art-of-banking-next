@@ -77,11 +77,11 @@ if party is subordinate and balance > 0
 
 does this hold true for everything?
 
-c1-b1: customer deposits +50
-c1 is subordinate and balance > 0 (asset) //customer deposits
-b1 is superior and balance > 0 (liability) //customer deposits
+c1-b1: Customer Deposits +50
+c1 is subordinate and balance > 0 (asset) //Customer Deposits
+b1 is superior and balance > 0 (liability) //Customer Deposits
 
-c1-b1: customer deposits -50
+c1-b1: Customer Deposits -50
 c1 is subordinate and balance < 0 (liability) //customer overdrafts
 b1 is superior and balance < 0 (asset)  //customer overdrafts
 
@@ -123,7 +123,7 @@ if (customerDeposit or bankDeposit) {
 [ { id: 1,
     customerId: 3,
     bankId: 0,
-    type: 'customer deposits',
+    type: 'Customer Deposits',
     balance: 150 } ]
   ​​​​​at ​​​​​​​​getLiabilities(barclays)​​​ ​quokka.ts:364:1​
 
@@ -132,7 +132,7 @@ if (customerDeposit or bankDeposit) {
 [ { id: 1,
     customerId: 3,
     bankId: 0,
-    type: 'customer deposits',
+    type: 'Customer Deposits',
     balance: 150 } ]
   ​​​​​at ​​​​​​​​getAssets(herbie)​​​ ​quokka.ts:366:1​
 
@@ -162,7 +162,7 @@ if (customerDeposit or bankDeposit) {
 [ { id: 1,
     customerId: 3,
     bankId: 0,
-    type: 'customer deposits',
+    type: 'Customer Deposits',
     balance: 150 } ]
   ​​​​​at ​​​​​​​​getLiabilities(barclays)​​​ ​quokka.ts:369:1​
 
@@ -171,7 +171,7 @@ if (customerDeposit or bankDeposit) {
 [ { id: 1,
     customerId: 3,
     bankId: 0,
-    type: 'customer deposits',
+    type: 'Customer Deposits',
     balance: 150 } ]
   ​​​​​at ​​​​​​​​getAssets(herbie)​​​ ​quokka.ts:371:1​
 

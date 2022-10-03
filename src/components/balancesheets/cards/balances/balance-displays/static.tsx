@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../../../../app/hooks";
 import { selectSettings } from "../../../../../features/settings/settingsSlice";
-import { createStyles, Text } from "@mantine/core";
+import { createStyles, Text, useMantineTheme } from "@mantine/core";
 import React, { useEffect, useRef } from "react";
 import { setAsSpreadSheet, setAsTAccount } from "./utils/balance-display";
 
@@ -25,7 +25,7 @@ function useColors(balance: number) {
 const useStyles = createStyles((theme) => ({
   text: {
     transition: "all 0.5s ease-in",
-    color: "black",
+    // color: "black",
     padding: "0px 3px",
     borderRadius: "3px",
   },
@@ -45,15 +45,16 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const Balance = ({ account, id }) => {
+const Balance = ({ account, id, textColor }) => {
   const { displaySettings } = useAppSelector(selectSettings);
   const { classes } = useStyles();
+  const theme = useMantineTheme()
   const color = useColors(account.balance);
   let tAccountDisplay = setAsTAccount(account, id);
   let spreadSheetDisplay = setAsSpreadSheet(account);
  
   return (
-    <Text size="xs" weight="bold" align="left" className={classes[color]}>
+    <Text size="xs" weight="bold" align="left" className={classes[color]} color={color !== "text" ? "" : theme.colors[textColor][8]}>
       {displaySettings.taccounts
         ? `${tAccountDisplay}`
         : `${spreadSheetDisplay}`}

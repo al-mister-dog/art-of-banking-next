@@ -109,7 +109,7 @@ export const banksSlice = createSlice({
     },
     payDues: (state, { payload }) => {
       const { amount, b1, b2 } = payload;
-      Dues.decrease(b1, b2, "customer deposits", amount);
+      Dues.decrease(b1, b2, "Customer Deposits", amount);
       GraphData.setCreditData();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);

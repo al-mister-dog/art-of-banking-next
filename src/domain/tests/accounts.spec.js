@@ -26,8 +26,8 @@ describe('Account Get Methods', () => {
   test("receive an array of customer's accounts after creating accounts", () => {
     const { barclays, hsbc, alex } = setupParties()
 
-    Banks.createAccount(alex, barclays, 'customer deposits', 50)
-    Banks.createAccount(alex, hsbc, 'customer deposits', 50)
+    Banks.createAccount(alex, barclays, 'Customer Deposits', 50)
+    Banks.createAccount(alex, hsbc, 'Customer Deposits', 50)
 
     const accounts = Accounts.getAllAccounts(alex)
 

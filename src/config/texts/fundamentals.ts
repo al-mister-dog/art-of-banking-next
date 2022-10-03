@@ -93,9 +93,9 @@ export const fundamentalsText = {
       It is up to the bank issuing the overdraft for how long credit can expand before the money
       needs calling in.`,
       `We now introduce a line chart below that represents the amount of credit is in a bank at 
-      any given moment. Lets say the bank starts with zero money. If a customer deposits $100 in 
+      any given moment. Lets say the bank starts with zero money. If a Customer Deposits $100 in 
       the bank, the bank owes $100 in deposits and therefore the amount of credit in the system is
-      $100. If the customer withdraws $50, there is $50 of credit in the system. If a customer deposits
+      $100. If the customer withdraws $50, there is $50 of credit in the system. If a Customer Deposits
       $100 in the bank and transfers it to another customer of the same bank, the credit stays at $100.
       However if a customer transfers more money than is in their account, the credit expands further.
       The only way to contract the amount of credit is for the customer to pay back their overdraft. 
@@ -145,7 +145,7 @@ export const fundamentalsText = {
       these funds for investments elsewhere. But bank runs (the scenario illustrated in the previous
       sentence) can and do happen.`,
       `This then is one of many constraints a bank faces. Traditionally banks are required to keep
-      a fraction of total customer deposits as reserves. For example if total customer deposits were
+      a fraction of total Customer Deposits as reserves. For example if total Customer Deposits were
       $10000, a bank may be required by law to keep $2500 in reserve to meet its daily demands. This 
       is called fractional reserve banking.`,
       `We have seen by playing with overdrafts how credit can expand and contract. Credit expansion 
@@ -167,7 +167,7 @@ export const fundamentalsText = {
       these funds for investments elsewhere. But bank runs (the scenario illustrated in the previous
       sentence) can and do happen.`,
       `This then is one of many constraints a bank faces. Traditionally banks are required to keep
-      a fraction of total customer deposits as reserves. For example if total customer deposits were
+      a fraction of total Customer Deposits as reserves. For example if total Customer Deposits were
       $10000, a bank may be required by law to keep $2500 in reserve to meet its daily demands. This 
       is called fractional reserve banking.`,
       `We have seen by playing with overdrafts how credit can expand and contract. Credit expansion 

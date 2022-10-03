@@ -42,10 +42,10 @@ export const System = {
   handleDues(bank1: Bank, bank2: Bank, amount: number) {
     const systemType: SystemObjectFunctions = {
       national: function (): void {
-        Dues.increase(bank1, bank2, "customer deposits", amount);
+        Dues.increase(bank1, bank2, "Customer Deposits", amount);
       },
       correspondent: function (): void {
-        Dues.increase(bank1, bank2, "customer deposits", amount);
+        Dues.increase(bank1, bank2, "Customer Deposits", amount);
       },
       clearinghouse: function (): void {
         const clearinghouse = Clearinghouse.get();
@@ -68,13 +68,13 @@ export const System = {
     const systemType: SystemObjectFunctions = {
       national: function (): void {
         if (Dues.owed(bank1, bank2)) {
-          Dues.decrease(bank1, bank2, "bank deposits", amount);
+          Dues.decrease(bank1, bank2, "Bank Deposits", amount);
         }
       },
       correspondent: function (): void {
         Dues.owed(bank1, bank2);
         if (Dues.owed(bank1, bank2)) {
-          Dues.decrease(bank1, bank2, "bank deposits", amount);
+          Dues.decrease(bank1, bank2, "Bank Deposits", amount);
         }
       },
       clearinghouse: function (): void {
@@ -102,7 +102,7 @@ export const System = {
       centralbank: function (): void {
         if (bank.type === "bank") {
           const centralbank = bankData.banks[0];
-          Accounts.createAccount(bank, centralbank, "bank deposits", initialDeposit);
+          Accounts.createAccount(bank, centralbank, "Bank Deposits", initialDeposit);
         }
       },
       chips: function (): void {},

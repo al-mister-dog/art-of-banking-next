@@ -8,6 +8,7 @@ import {
   Text,
   Title,
   createStyles,
+  useMantineTheme,
 } from "@mantine/core";
 import { CardInfo } from "../../types";
 import BalanceByInstrument from "../balances/balance-by-instrument";
@@ -15,8 +16,8 @@ import { Record } from "../../../../domain/Records";
 import SpreadsheetList from "../balances/balance-displays/spreadsheet-list";
 
 const useStyles = createStyles((theme) => ({
-  card: { paddingBottom: "0px", backgroundColor: theme.colors.violet[1] },
-  header: { padding: "5px", cursor: "pointer" },
+  card: { paddingBottom: "0px", height: "13.75rem", backgroundColor: theme.colors.violet[1] },
+  header: { padding: "3px", cursor: "pointer" },
   grape: {
     backgroundColor: theme.colors.grape,
     "&:hover": {
@@ -46,19 +47,21 @@ const useStyles = createStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.colors.teal[3],
     },
-  }
+  },
 }));
 interface Props {
   bank: CardInfo;
   handleSetBankDetail: (v: CardInfo) => void;
 }
 export default function CardUI({ bank, handleSetBankDetail }: Props) {
-  const { displaySettings, spreadsheetSettings } = useAppSelector(selectSettings);
+  const { displaySettings, spreadsheetSettings } =
+    useAppSelector(selectSettings);
   const { classes } = useStyles();
+  const theme = useMantineTheme();
   const onSelectBank = useCallback((bank: CardInfo) => {
     handleSetBankDetail(bank);
   }, []);
-  
+
   let spreadsheetBalances = { assets: undefined, liabilities: undefined };
   if (spreadsheetSettings.latest) {
     spreadsheetBalances = Record.get(bank.cardInfo.id);
@@ -70,7 +73,7 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
   return (
     <Card
       key={bank.cardInfo.id}
-      // shadow="sm"
+      shadow="sm"
       p="sm"
       radius="xs"
       className={classes.card}
@@ -85,48 +88,68 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
           </Title>
         </Center>
       </Card.Section>
-      <SimpleGrid
-        cols={2}
-        sx={{ borderBottom: "1px solid black", padding: "5px" }}
-      >
-        <Text size="sm" weight="bold" align="center">
-          Assets
-        </Text>
-        <Text size="sm" weight="bold" align="center">
-          Liabilities
-        </Text>
-      </SimpleGrid>
-      {displaySettings.spreadsheet && spreadsheetBalances.assets !== undefined ? (
-        <SpreadsheetList
-          assets={spreadsheetBalances.assets}
-          liabilities={spreadsheetBalances.liabilities}
-        />
-      ) : (
-        <SimpleGrid cols={2} style={{ height: "110px", overflowX: "hidden" }}>
-          <div>
-            {bank.balanceSheet.assets.map((asset: any) => {
-              return (
-                <BalanceByInstrument
-                  key={asset.instrument}
-                  side={asset}
-                  id={bank.cardInfo.id}
-                />
-              );
-            })}
-          </div>
-          <div>
-            {bank.balanceSheet.liabilities.map((lbys: any) => {
-              return (
-                <BalanceByInstrument
-                  key={lbys.instrument}
-                  side={lbys}
-                  id={bank.cardInfo.id}
-                />
-              );
-            })}
-          </div>
+      <Card.Section>
+        <SimpleGrid
+          cols={2}
+          sx={{
+            borderBottom: `1px solid ${theme.colors[bank.color][2]}`,
+            height: "1.25rem",
+          }}
+        >
+          <Text
+            size="xs"
+            weight="bold"
+            align="center"
+            color={`${theme.colors[bank.color][9]}`}
+          >
+            Assets
+          </Text>
+          <Text
+            size="xs"
+            weight="bold"
+            align="center"
+            color={`${theme.colors[bank.color][9]}`}
+          >
+            Liabilities
+          </Text>
         </SimpleGrid>
-      )}
+      </Card.Section>
+      <Card.Section style={{padding: "5px"}}>
+        {displaySettings.spreadsheet &&
+        spreadsheetBalances.assets !== undefined ? (
+          <SpreadsheetList
+            assets={spreadsheetBalances.assets}
+            liabilities={spreadsheetBalances.liabilities}
+          />
+        ) : (
+          <SimpleGrid cols={2} style={{ overflowX: "hidden" }}>
+            <div>
+              {bank.balanceSheet.assets.map((asset: any) => {
+                return (
+                  <BalanceByInstrument
+                    key={asset.instrument}
+                    side={asset}
+                    id={bank.cardInfo.id}
+                    textColor={bank.color}
+                  />
+                );
+              })}
+            </div>
+            <div>
+              {bank.balanceSheet.liabilities.map((liability: any) => {
+                return (
+                  <BalanceByInstrument
+                    key={liability.instrument}
+                    side={liability}
+                    id={bank.cardInfo.id}
+                    textColor={bank.color}
+                  />
+                );
+              })}
+            </div>
+          </SimpleGrid>
+        )}
+      </Card.Section>
     </Card>
   );
 }

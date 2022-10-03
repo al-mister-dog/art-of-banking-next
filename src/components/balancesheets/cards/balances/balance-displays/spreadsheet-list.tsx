@@ -7,11 +7,11 @@ import { ClassNames } from "@emotion/react";
 
 export default function ClaveroList({ assets, liabilities }) {
   return (
-    <Card.Section>
+    
       <SimpleGrid
         cols={2}
         spacing={0}
-        style={{ height: "110px", overflowX: "hidden" }}
+        style={{ overflowX: "hidden" }}
       >
         <div>
           {assets.map((record: any, index) => {
@@ -24,6 +24,6 @@ export default function ClaveroList({ assets, liabilities }) {
           })}
         </div>
       </SimpleGrid>
-    </Card.Section>
+    
   );
 }

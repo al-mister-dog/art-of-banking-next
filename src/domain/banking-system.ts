@@ -12,7 +12,7 @@ export const BankingSystem = {
     const newReserves = {
       id: reservesData.id,
       cashReserves: reserves,
-      category: "reserves",
+      category: "Reserves",
     };
     let newBankData = JSON.parse(JSON.stringify(bankData));
 

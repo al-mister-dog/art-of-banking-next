@@ -10,14 +10,14 @@ export const balanceSheetDisplay1 = {
         category: 'customer overdrafts',
       },
     ],
-    dueTos: [
+    Due Tos: [
       {
         id: 1,
         subordinateId: 1,
         superiorId: 0,
-        type: 'customer deposits',
+        type: 'Customer Deposits',
         balance: 10,
-        category: 'dueTos',
+        category: 'Due Tos',
       },
     ],
   },
@@ -27,19 +27,19 @@ export const balanceSheetDisplay1 = {
         id: 0,
         subordinateId: 2,
         superiorId: 0,
-        type: 'customer deposits',
+        type: 'Customer Deposits',
         balance: 35,
-        category: 'customer deposits',
+        category: 'Customer Deposits',
       },
     ],
-    dueTos: [
+    Due Tos: [
       {
         id: 0,
         subordinateId: 0,
         superiorId: 1,
-        type: 'customer deposits',
+        type: 'Customer Deposits',
         balance: 100,
-        category: 'dueTos',
+        category: 'Due Tos',
       },
     ],
   },
@@ -64,12 +64,12 @@ export const balanceSheetDisplay2 = {
         category: 'customer overdrafts',
       },
     ],
-    dueTos: [
+    Due Tos: [
       {
         id: 1,
         subordinateId: 1,
         superiorId: 0,
-        type: 'customer deposits',
+        type: 'Customer Deposits',
         balance: 10,
         thirdPartyDetail: {
           id: 1,
@@ -78,7 +78,7 @@ export const balanceSheetDisplay2 = {
           accountIds: [1, 3],
           duesIds: [0, 1],
         },
-        category: 'dueTos',
+        category: 'Due Tos',
       },
     ],
   },
@@ -88,7 +88,7 @@ export const balanceSheetDisplay2 = {
         id: 0,
         subordinateId: 2,
         superiorId: 0,
-        type: 'customer deposits',
+        type: 'Customer Deposits',
         balance: 35,
         thirdPartyDetail: {
           id: 2,
@@ -97,15 +97,15 @@ export const balanceSheetDisplay2 = {
           accountIds: [0],
           duesIds: [],
         },
-        category: 'customer deposits',
+        category: 'Customer Deposits',
       },
     ],
-    dueTos: [
+    Due Tos: [
       {
         id: 0,
         subordinateId: 0,
         superiorId: 1,
-        type: 'customer deposits',
+        type: 'Customer Deposits',
         balance: 100,
         thirdPartyDetail: {
           id: 1,
@@ -114,7 +114,7 @@ export const balanceSheetDisplay2 = {
           accountIds: [1, 3],
           duesIds: [0, 1],
         },
-        category: 'dueTos',
+        category: 'Due Tos',
       },
     ],
   },
@@ -139,12 +139,12 @@ export const balanceSheetDisplay3 = {
         category: 'customer overdrafts',
       },
     ],
-    dueTos: [
+    Due Tos: [
       {
         id: 1,
         subordinateId: 1,
         superiorId: 0,
-        type: 'customer deposits',
+        type: 'Customer Deposits',
         balance: 10,
         thirdPartyDetail: {
           id: 1,
@@ -153,7 +153,7 @@ export const balanceSheetDisplay3 = {
           accountIds: [1, 3],
           duesIds: [0, 1],
         },
-        category: 'dueTos',
+        category: 'Due Tos',
       },
     ],
     cashReserves: [
@@ -166,7 +166,7 @@ export const balanceSheetDisplay3 = {
         id: 0,
         subordinateId: 2,
         superiorId: 0,
-        type: 'customer deposits',
+        type: 'Customer Deposits',
         balance: 35,
         thirdPartyDetail: {
           id: 2,
@@ -175,15 +175,15 @@ export const balanceSheetDisplay3 = {
           accountIds: [0],
           duesIds: [],
         },
-        category: 'customer deposits',
+        category: 'Customer Deposits',
       },
     ],
-    dueTos: [
+    Due Tos: [
       {
         id: 0,
         subordinateId: 0,
         superiorId: 1,
-        type: 'customer deposits',
+        type: 'Customer Deposits',
         balance: 100,
         thirdPartyDetail: {
           id: 1,
@@ -192,7 +192,7 @@ export const balanceSheetDisplay3 = {
           accountIds: [1, 3],
           duesIds: [0, 1],
         },
-        category: 'dueTos',
+        category: 'Due Tos',
       },
     ],
   },
@@ -207,7 +207,7 @@ export const balanceSheetDisplay4 = {
           id: 2,
           subordinateId: 4,
           superiorId: 0,
-          type: 'customer deposits',
+          type: 'Customer Deposits',
           balance: 25,
           category: 'customer overdrafts',
           thirdPartyDetail: {
@@ -222,15 +222,15 @@ export const balanceSheetDisplay4 = {
       ],
     },
     {
-      instrument: 'dueFroms',
+      instrument: 'Due Froms',
       accounts: [
         {
           id: 1,
           subordinateId: 1,
           superiorId: 0,
-          type: 'customer deposits',
+          type: 'Customer Deposits',
           balance: 10,
-          category: 'dueFroms',
+          category: 'Due Froms',
           thirdPartyDetail: {
             id: 1,
             name: 'hsbc',
@@ -251,15 +251,15 @@ export const balanceSheetDisplay4 = {
   ],
   liabilities: [
     {
-      instrument: 'customer deposits',
+      instrument: 'Customer Deposits',
       accounts: [
         {
           id: 0,
           subordinateId: 2,
           superiorId: 0,
-          type: 'customer deposits',
+          type: 'Customer Deposits',
           balance: 35,
-          category: 'customer deposits',
+          category: 'Customer Deposits',
           thirdPartyDetail: {
             id: 2,
             name: 'alex',
@@ -272,15 +272,15 @@ export const balanceSheetDisplay4 = {
       ],
     },
     {
-      instrument: 'dueTos',
+      instrument: 'Due Tos',
       accounts: [
         {
           id: 0,
           subordinateId: 0,
           superiorId: 1,
-          type: 'customer deposits',
+          type: 'Customer Deposits',
           balance: 100,
-          category: 'dueTos',
+          category: 'Due Tos',
           thirdPartyDetail: {
             id: 1,
             name: 'hsbc',
@@ -304,7 +304,7 @@ export const balanceSheetDisplay5 = {
           id: 2,
           subordinateId: 4,
           superiorId: 0,
-          type: 'customer deposits',
+          type: 'Customer Deposits',
           balance: 25,
           category: 'customer overdrafts',
           thirdPartyDetail: {
@@ -318,15 +318,15 @@ export const balanceSheetDisplay5 = {
       ],
     },
     {
-      instrument: 'dueFroms',
+      instrument: 'Due Froms',
       accounts: [
         {
           id: 1,
           subordinateId: 1,
           superiorId: 0,
-          type: 'customer deposits',
+          type: 'Customer Deposits',
           balance: 10,
-          category: 'dueFroms',
+          category: 'Due Froms',
           thirdPartyDetail: {
             id: 1,
             name: 'hsbc',
@@ -346,15 +346,15 @@ export const balanceSheetDisplay5 = {
   ],
   liabilities: [
     {
-      instrument: 'customer deposits',
+      instrument: 'Customer Deposits',
       accounts: [
         {
           id: 0,
           subordinateId: 2,
           superiorId: 0,
-          type: 'customer deposits',
+          type: 'Customer Deposits',
           balance: 35,
-          category: 'customer deposits',
+          category: 'Customer Deposits',
           thirdPartyDetail: {
             id: 2,
             name: 'alex',
@@ -366,15 +366,15 @@ export const balanceSheetDisplay5 = {
       ],
     },
     {
-      instrument: 'dueTos',
+      instrument: 'Due Tos',
       accounts: [
         {
           id: 0,
           subordinateId: 0,
           superiorId: 1,
-          type: 'customer deposits',
+          type: 'Customer Deposits',
           balance: 100,
-          category: 'dueTos',
+          category: 'Due Tos',
           thirdPartyDetail: {
             id: 1,
             name: 'hsbc',

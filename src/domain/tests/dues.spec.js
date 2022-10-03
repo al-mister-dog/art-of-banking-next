@@ -32,7 +32,7 @@ describe('transfers based on system', () => {
       const dues = Dues.get(barclays, hsbc)
       expect(dues.subordinateId).toBe(barclays.id)
       expect(dues.superiorId).toBe(hsbc.id)
-      expect(dues.type).toBe('customer deposits')
+      expect(dues.type).toBe('Customer Deposits')
       expect(dues.balance).toBe(25)
     })
     test('due balance should increase on subsequent transfers', () => {

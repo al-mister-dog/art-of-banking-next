@@ -9,7 +9,7 @@ import { Record } from "./Records";
 
 export const Banks = {
   createAccount(bank1: Bank, bank2: Bank, amount: number = 0) {
-    Accounts.createAccount(bank1, bank2, "bank deposits", amount);
+    Accounts.createAccount(bank1, bank2, "Bank Deposits", amount);
     if (amount) {
       Reserves.decreaseReserves(bank1, amount);
       Reserves.increaseReserves(bank2, amount);

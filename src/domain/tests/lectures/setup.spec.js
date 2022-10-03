@@ -125,15 +125,15 @@ describe('setting up a test', () => {
 const balancesheet = {
   assets: [
     {
-      instrument: 'dueFroms',
+      instrument: 'Due Froms',
       accounts: [
         {
           id: 1,
           subordinateId: 1,
           superiorId: 0,
-          type: 'customer deposits',
+          type: 'Customer Deposits',
           balance: 40,
-          category: 'dueFroms',
+          category: 'Due Froms',
           thirdPartyDetail: {
             id: 1,
             name: 'hsbc',
@@ -151,15 +151,15 @@ const balancesheet = {
   ],
   liabilities: [
     {
-      instrument: 'customer deposits',
+      instrument: 'Customer Deposits',
       accounts: [
         {
           id: 0,
           subordinateId: 2,
           superiorId: 0,
-          type: 'customer deposits',
+          type: 'Customer Deposits',
           balance: 50,
-          category: 'customer deposits',
+          category: 'Customer Deposits',
           thirdPartyDetail: {
             id: 2,
             name: 'alex',
@@ -172,9 +172,9 @@ const balancesheet = {
           id: 1,
           subordinateId: 3,
           superiorId: 0,
-          type: 'customer deposits',
+          type: 'Customer Deposits',
           balance: 140,
-          category: 'customer deposits',
+          category: 'Customer Deposits',
           thirdPartyDetail: {
             id: 3,
             name: 'emma',
@@ -186,15 +186,15 @@ const balancesheet = {
       ],
     },
     {
-      instrument: 'dueTos',
+      instrument: 'Due Tos',
       accounts: [
         {
           id: 0,
           subordinateId: 0,
           superiorId: 1,
-          type: 'customer deposits',
+          type: 'Customer Deposits',
           balance: 50,
-          category: 'dueTos',
+          category: 'Due Tos',
           thirdPartyDetail: {
             id: 1,
             name: 'hsbc',
