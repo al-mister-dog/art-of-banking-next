@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 
 const IndexPage: NextPage = () => {
   return (
-    <div style={{padding: 16}}>
+    <div style={{padding: 16, marginTop: "200px"}}>
       <h1>Art of Banking</h1>
       <p>
         The world economy is made from the fabric of global finance. The fabric
