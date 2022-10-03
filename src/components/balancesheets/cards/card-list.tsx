@@ -19,8 +19,8 @@ function BalanceSheetsContainer() {
   const colors: Colors = {
     customer: "grape",
     bank: "violet",
-    centralbank: "teal",
-    clearinghouse: "pink",
+    centralbank: "blue",
+    clearinghouse: "blue",
   };
 
   function getCardInfo(bank: Bank): CardInfo {

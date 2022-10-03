@@ -42,6 +42,12 @@ const useStyles = createStyles((theme) => ({
       backgroundColor: theme.colors.pink[3],
     },
   },
+  blue: {
+    backgroundColor: theme.colors.blue,
+    "&:hover": {
+      backgroundColor: theme.colors.blue[3],
+    },
+  },
 }));
 
 export default function ClaveroCard({ bank }) {

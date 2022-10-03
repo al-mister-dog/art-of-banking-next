@@ -48,6 +48,12 @@ const useStyles = createStyles((theme) => ({
       backgroundColor: theme.colors.teal[3],
     },
   },
+  blue: {
+    backgroundColor: theme.colors.blue,
+    "&:hover": {
+      backgroundColor: theme.colors.blue[3],
+    },
+  },
 }));
 interface Props {
   bank: CardInfo;

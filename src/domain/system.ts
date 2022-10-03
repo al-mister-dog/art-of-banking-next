@@ -23,7 +23,7 @@ export const System = {
     system = systemType;
     const setup: SystemObjectFunctions = {
       clearinghouse: function (): void {
-        BankingSystem.createBank("clearinghouse", "clearinghouse", 200);
+        BankingSystem.createBank("Clearing House", "clearinghouse", 200);
       },
       national: function (): void {
         return;

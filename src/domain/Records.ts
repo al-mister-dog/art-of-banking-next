@@ -147,7 +147,7 @@ export const Record = {
   },
   increaseBalance(bank1: Bank, bank2: Bank, amount: number) {
     let type = "deposits";
-    if (bank1.name === "clearinghouse" || bank2.name === "clearinghouse") {
+    if (bank1.name === "Clearing House" || bank2.name === "Clearing House") {
       type = "ch certs";
     }
     const depositAssetRecord = {
@@ -156,7 +156,7 @@ export const Record = {
       amount: amount,
       id: bank2.id,
       symbol: "+",
-      name: bank2.name === "clearinghouse" ? "CH" : bank2.name,
+      name: bank2.name === "Clearing House" ? "CH" : bank2.name,
     };
     const depositLiabilityRecord = {
       instrumentType: type,

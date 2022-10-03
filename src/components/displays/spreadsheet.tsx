@@ -10,8 +10,8 @@ export default function SpreadSheet() {
   const colors = {
     customer: "grape",
     bank: "violet",
-    centralbank: "indigo",
-    clearinghouse: "pink",
+    centralbank: "blue",
+    clearinghouse: "blue",
   };
 
   function getCardInfo(bank: Bank): CardInfo {

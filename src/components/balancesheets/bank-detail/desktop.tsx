@@ -24,6 +24,9 @@ const useStyles = createStyles((theme) => ({
   indigo: {
     color: theme.colors.indigo,
   },
+  blue: {
+    color: theme.colors.blue,
+  },
 }));
 
 function SidePanel({ bank }: { bank: CardInfo }) {

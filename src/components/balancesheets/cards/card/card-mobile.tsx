@@ -61,6 +61,12 @@ export const useStyles = createStyles((theme) => ({
       backgroundColor: theme.colors.teal[3],
     },
   },
+  blue: {
+    backgroundColor: theme.colors.blue,
+    "&:hover": {
+      backgroundColor: theme.colors.blue[3],
+    },
+  },
 }));
 
 export default function CardUI({ bank }: { bank: CardInfo }) {
