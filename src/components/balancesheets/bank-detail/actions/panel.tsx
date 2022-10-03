@@ -12,54 +12,24 @@ import { useCurrentAction } from "../../../../hooks/useCurrentAction";
 
 export default function ActionsPanel({ bank }: { bank: CardInfo }) {
   const { actions } = useAppSelector(selectActions);
-
   const [action, setAction] = useState<string | null>(null);
-
-  const currentAction = useRef(action);
-  // useCurrentAction(actions, currentAction, setAction);
-  // const actionInActions = Object.keys(actions)
-  //   .flatMap((acn) => actions[acn])
-  //   .find((acn) => acn.value === currentAction.current);
-
-  // if (currentAction.current !== null && actionInActions === undefined) {
-  //   currentAction.current = null;
-  //   setAction(null);
-  // }
-
-  function handleSetAction(val) {
-    currentAction.current = val;
-    setAction(val);
-  }
-  // let actionData = [];
-  // if (bank.cardInfo.type === "bank") {
-  //   actionData = actions.bank;
-  // }
-  // if (bank.cardInfo.type === "customer") {
-  //   actionData = actions.customer;
-  // }
   let actionData = actions[bank.cardInfo.type];
 
-  if (actionData === undefined) {
+  if (actionData === undefined || actionData.length === 0) {
     return (
       <Center>
         <Text weight="bold">No Actions to Perform in This Lecture</Text>
       </Center>
     );
   }
-  if (actionData.length === 0) {
-    return (
-      <Center>
-        <Text weight="bold">No Actions to Perform in This Lecture</Text>
-      </Center>
-    );
-  }
+
   return (
     <Stack spacing="xl">
       <ActionSelections
         bank={bank}
         action={action}
         actionData={actionData}
-        setAction={handleSetAction}
+        setAction={setAction}
       />
 
       {action && <ActionForms action={action} bank={bank} />}

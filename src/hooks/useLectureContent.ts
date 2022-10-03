@@ -10,5 +10,5 @@ export function useLectureContent(id: unknown) {
     dispatch(setup({ id }));
     dispatch(setActions({ id }));
     dispatch(refreshSettings());
-  }, [id]);
+  }, []);
 }

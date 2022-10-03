@@ -1,13 +1,16 @@
+import { useAppDispatch } from "../../app/hooks";
+import { setActions } from "../../features/actions/actionsSlice";
+import { setup } from "../../features/banks/banksSlice";
+import { refreshSettings } from "../../features/settings/settingsSlice";
+import { useEffect } from "react";
 import { createStyles } from "@mantine/core";
-import { useLectureContent } from "../../hooks/useLectureContent";
-import { partsTexts } from "../../config/parts";
+import { introductoryTexts } from "../../config/parts";
 import { getRouteObjectData } from "../../helpers/routeMethods";
 import { lectureRoutes } from "../../config/sidebar-routes/lectureRoutes";
 import Article from "../../components/article/article";
 import BalanceSheets from "../../components/balancesheets/cards/card-list";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
 import KeyTerms from "../../components/article/lecture-index/key-terms";
-import Test from "../../components/test";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {
@@ -25,22 +28,20 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function LecturePath({
-  id,
-  path,
-  title,
-  keyTermsIds,
-  introductoryTexts,
-}) {
-  const { paragraphs, assignment } = introductoryTexts;
+export default function LecturePath({ slug, id, title, keyTermsIds }) {
+  const { paragraphs, assignment } = introductoryTexts[id];
   const { classes } = useStyles();
-  useLectureContent(id);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(setup({ id }));
+    dispatch(setActions({ id }));
+    dispatch(refreshSettings());
+  }, []);
 
   return (
     <>
-      {/* <Test /> */}
       <Article
-        slug={path}
+        slug={slug}
         title={title}
         text={paragraphs}
         assignment={assignment}
@@ -64,19 +65,19 @@ export default function LecturePath({
 }
 
 export async function getStaticProps(context) {
-  const { path } = context.params;
-  const data = getRouteObjectData(path);
+  const { slug } = context.params;
+  const data = getRouteObjectData(slug);
   const { id, title, keyTermsIds } = data;
-  const introductoryTexts = partsTexts[id];
+
   return {
-    props: { id, title, keyTermsIds, introductoryTexts, path, key: path },
+    props: { slug, id, title, keyTermsIds, key: slug },
   };
 }
 
 export async function getStaticPaths() {
   const paths = lectureRoutes.routes.flatMap((route) => {
     return route.routes.map((r) => ({
-      params: { path: r.path.split("/").slice(1, 3) },
+      params: { slug: r.path.split("/").slice(1, 3) },
     }));
   });
 

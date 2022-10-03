@@ -14,7 +14,7 @@ export default function RepayLoan({ bank }: { bank: CardInfo }) {
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
   const [amount, setAmount] = useState<number>(0);
   const [paymentType, setPaymentType] = useState("deposits");
-  const radioSelections = ["deposits", "cash"];
+
   function repayLoanPayload() {
     const payload = {
       amount,

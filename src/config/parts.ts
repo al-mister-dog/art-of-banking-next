@@ -1,6 +1,6 @@
 import { fundamentalsText, clearinghouseText, theFedText } from "./texts";
 
-export const partsTexts = {
+export const introductoryTexts = {
   0: fundamentalsText.step1,
   1: fundamentalsText.step2,
   2: fundamentalsText.step3,
