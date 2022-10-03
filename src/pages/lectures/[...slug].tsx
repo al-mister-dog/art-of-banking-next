@@ -29,8 +29,14 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function LecturePath({ slug, id, title, keyTermsIds }) {
-  const { paragraphs, assignment } = introductoryTexts[id];
+export default function LecturePath({
+  slug,
+  id,
+  title,
+  introductoryTexts,
+  keyTermsIds,
+}) {
+  const { paragraphs, assignment } = introductoryTexts;
   const { classes } = useStyles();
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -74,7 +80,14 @@ export async function getStaticProps(context) {
   const { id, title, keyTermsIds } = data;
 
   return {
-    props: { slug, id, title, keyTermsIds, key: slug },
+    props: {
+      slug,
+      id,
+      title,
+      introductoryTexts: introductoryTexts[id],
+      keyTermsIds,
+      key: slug,
+    },
   };
 }
 
