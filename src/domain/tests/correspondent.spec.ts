@@ -39,10 +39,10 @@ describe('Correspondent transactions', () => {
     Customer.createAccount(herbie, hsbc)
     Customer.transfer(25, alex, herbie, barclays, hsbc)
     expect(
-      Display.balanceSheetObject(barclays).liabilities.Due Tos[0].superiorId
+      Display.balanceSheetObject(barclays).liabilities.dueTos[0].superiorId
     ).toEqual(hsbc.id)
     expect(
-      Display.balanceSheetObject(barclays).liabilities.Due Tos[0].balance
+      Display.balanceSheetObject(barclays).liabilities.dueTos[0].balance
     ).toEqual(25)
     expect(
       Display.balanceSheetObject(hsbc).assets.Due Froms[0].subordinateId

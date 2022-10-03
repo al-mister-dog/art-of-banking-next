@@ -15,7 +15,7 @@ export default function Article({ slug, title, text, assignment }) {
   const isMobile = useMediaQuery();
   const paddingRight = `${isMobile ? "0px" : "200px"}`;
   const paddingLeft = `${isMobile ? "10px" : "50px"}`;
-  console.log("Article")
+  
   return (
     <>
       <div

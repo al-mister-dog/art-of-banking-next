@@ -186,7 +186,7 @@ const balancesheet = {
       ],
     },
     {
-      instrument: 'Due Tos',
+      instrument: 'dueTos',
       accounts: [
         {
           id: 0,
@@ -194,7 +194,7 @@ const balancesheet = {
           superiorId: 1,
           type: 'Customer Deposits',
           balance: 50,
-          category: 'Due Tos',
+          category: 'dueTos',
           thirdPartyDetail: {
             id: 1,
             name: 'hsbc',

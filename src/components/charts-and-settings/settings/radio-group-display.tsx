@@ -15,7 +15,7 @@ export default function DisplayRadioGroup() {
     dispatch(setDisplay({ key: value }));
     setDisplayButton(value);
   }
-  console.log("RADIOGROUP")
+  
   // this sets display back to "balances" on page change
   useEffect(() => {
     dispatch(setDisplay({ key: displayButton }));

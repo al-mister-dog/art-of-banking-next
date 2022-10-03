@@ -10,14 +10,14 @@ export const balanceSheetDisplay1 = {
         category: 'customer overdrafts',
       },
     ],
-    Due Tos: [
+    dueTos: [
       {
         id: 1,
         subordinateId: 1,
         superiorId: 0,
         type: 'Customer Deposits',
         balance: 10,
-        category: 'Due Tos',
+        category: 'dueTos',
       },
     ],
   },
@@ -32,14 +32,14 @@ export const balanceSheetDisplay1 = {
         category: 'Customer Deposits',
       },
     ],
-    Due Tos: [
+    dueTos: [
       {
         id: 0,
         subordinateId: 0,
         superiorId: 1,
         type: 'Customer Deposits',
         balance: 100,
-        category: 'Due Tos',
+        category: 'dueTos',
       },
     ],
   },
@@ -64,7 +64,7 @@ export const balanceSheetDisplay2 = {
         category: 'customer overdrafts',
       },
     ],
-    Due Tos: [
+    dueTos: [
       {
         id: 1,
         subordinateId: 1,
@@ -78,7 +78,7 @@ export const balanceSheetDisplay2 = {
           accountIds: [1, 3],
           duesIds: [0, 1],
         },
-        category: 'Due Tos',
+        category: 'dueTos',
       },
     ],
   },
@@ -100,7 +100,7 @@ export const balanceSheetDisplay2 = {
         category: 'Customer Deposits',
       },
     ],
-    Due Tos: [
+    dueTos: [
       {
         id: 0,
         subordinateId: 0,
@@ -114,7 +114,7 @@ export const balanceSheetDisplay2 = {
           accountIds: [1, 3],
           duesIds: [0, 1],
         },
-        category: 'Due Tos',
+        category: 'dueTos',
       },
     ],
   },
@@ -139,7 +139,7 @@ export const balanceSheetDisplay3 = {
         category: 'customer overdrafts',
       },
     ],
-    Due Tos: [
+    dueTos: [
       {
         id: 1,
         subordinateId: 1,
@@ -153,7 +153,7 @@ export const balanceSheetDisplay3 = {
           accountIds: [1, 3],
           duesIds: [0, 1],
         },
-        category: 'Due Tos',
+        category: 'dueTos',
       },
     ],
     cashReserves: [
@@ -178,7 +178,7 @@ export const balanceSheetDisplay3 = {
         category: 'Customer Deposits',
       },
     ],
-    Due Tos: [
+    dueTos: [
       {
         id: 0,
         subordinateId: 0,
@@ -192,7 +192,7 @@ export const balanceSheetDisplay3 = {
           accountIds: [1, 3],
           duesIds: [0, 1],
         },
-        category: 'Due Tos',
+        category: 'dueTos',
       },
     ],
   },
@@ -272,7 +272,7 @@ export const balanceSheetDisplay4 = {
       ],
     },
     {
-      instrument: 'Due Tos',
+      instrument: 'dueTos',
       accounts: [
         {
           id: 0,
@@ -280,7 +280,7 @@ export const balanceSheetDisplay4 = {
           superiorId: 1,
           type: 'Customer Deposits',
           balance: 100,
-          category: 'Due Tos',
+          category: 'dueTos',
           thirdPartyDetail: {
             id: 1,
             name: 'hsbc',
@@ -366,7 +366,7 @@ export const balanceSheetDisplay5 = {
       ],
     },
     {
-      instrument: 'Due Tos',
+      instrument: 'dueTos',
       accounts: [
         {
           id: 0,
@@ -374,7 +374,7 @@ export const balanceSheetDisplay5 = {
           superiorId: 1,
           type: 'Customer Deposits',
           balance: 100,
-          category: 'Due Tos',
+          category: 'dueTos',
           thirdPartyDetail: {
             id: 1,
             name: 'hsbc',

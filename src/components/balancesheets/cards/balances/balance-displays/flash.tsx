@@ -49,7 +49,7 @@ function Balance({ account, id, textColor }) {
   const color = useColors(account.balance);
   let tAccountDisplay = setAsTAccount(account, id);
   let spreadSheetDisplay = setAsSpreadSheet(account);
-  console.log(color)
+  
   return (
     <Text
       size="xs"
