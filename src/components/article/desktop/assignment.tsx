@@ -1,6 +1,5 @@
 import { createStyles } from "@mantine/core";
-import { Card, Text, Title } from "@mantine/core";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { Text, Title } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -24,28 +23,26 @@ const useStyles = createStyles((theme) => ({
 }));
 export default function Assignment({ assignment }) {
   const { classes } = useStyles();
-  const isMobile = useMediaQuery();
+
   return (
     <div>
       <Title
         className={classes.title}
         order={2}
         style={{
-          paddingLeft: isMobile ? "" : "50px",
-          paddingRight: isMobile ? "" : "50px",
+          paddingLeft: "50px",
+          paddingRight: "50px",
         }}
       >
         Assignment
       </Title>
       <div className={`${classes.card}`}>
         <div
-          className={`${!isMobile && classes.desktopWidth}`}
           style={{
-            paddingLeft: isMobile ? 16 : "50px",
-            paddingRight: isMobile ? 16 : "",
+            paddingLeft: "50px",
           }}
         >
-          <Text size={isMobile ? "md" : "lg"} weight="bold" italic>
+          <Text size="lg" weight="bold" italic>
             {assignment}
           </Text>
         </div>

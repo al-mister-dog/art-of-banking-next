@@ -1,26 +1,13 @@
-import { useMediaQuery } from "../../hooks/useMediaQuery";
-import { Title, Text, createStyles } from "@mantine/core";
-import Assignment from "./assignment";
-import Main from "./main";
+import { Title, Text } from "@mantine/core";
+
 import Link from "next/link";
 
-const useStyles = createStyles((theme) => ({
-  articleContainer: { padding: 16 },
-  assignmentContainer: {
-    marginTop: "200px",
-  },
-}));
 export default function Intro({ title, text, nextPath }) {
-  const { classes } = useStyles();
-  const isMobile = useMediaQuery();
-  const paddingRight = `${isMobile ? "0px" : "200px"}`;
-  const paddingLeft = `${isMobile ? "10px" : "50px"}`;
-
   return (
     <>
       <div
         style={{
-          padding: `0px ${paddingRight} 0px ${paddingLeft}`,
+          padding: `0px 0px 0px 10px`,
           marginTop: "200px",
         }}
       >

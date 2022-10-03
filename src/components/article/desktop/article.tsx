@@ -1,8 +1,7 @@
-import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { createStyles } from "@mantine/core";
 import Assignment from "./assignment";
 import Main from "./main";
-import Title from "./title";
+import Title from "../title";
 
 const useStyles = createStyles((theme) => ({
   articleContainer: { padding: 16 },
@@ -11,16 +10,11 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 export default function Article({ slug, title, text, assignment }) {
-  const { classes } = useStyles();
-  const isMobile = useMediaQuery();
-  const paddingRight = `${isMobile ? "0px" : "200px"}`;
-  const paddingLeft = `${isMobile ? "10px" : "50px"}`;
-  
   return (
     <>
       <div
         style={{
-          padding: `0px ${paddingRight} 0px ${paddingLeft}`,
+          padding: `0px 200px 0px 50px`,
           marginTop: "200px",
         }}
       >
@@ -30,7 +24,7 @@ export default function Article({ slug, title, text, assignment }) {
         </div>
       </div>
 
-      <div className={classes.assignmentContainer}>
+      <div style={{ marginTop: "200px" }}>
         <Assignment assignment={assignment} />
       </div>
     </>

@@ -12,14 +12,13 @@ import {
 import { introductoryTexts } from "../../config/parts";
 import { getRouteObjectData } from "../../helpers/routeMethods";
 import { lectureRoutes } from "../../config/sidebar-routes/lectureRoutes";
-import Article from "../../components/article/article";
+import ArticleMobile from "../../components/article/mobile/article";
+import ArticleDesktop from "../../components/article/desktop/article";
 import BalanceSheets from "../../components/balancesheets/cards/card-list";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
 import KeyTerms from "../../components/article/lecture-index/key-terms";
-import RefreshBalanceSheets from "../../components/charts-and-settings/settings/refresh";
-import Settings from "../../components/charts-and-settings/mobile";
-import { Dots, DotsVertical } from "tabler-icons-react";
 import Toolbar from "../../components/charts-and-settings/toolbar";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {
@@ -33,7 +32,6 @@ const useStyles = createStyles((theme) => ({
   },
   balanceSheets: {
     padding: 16,
-    // paddingTop: "50px",
   },
 }));
 
@@ -44,7 +42,6 @@ export default function LecturePath({
   introductoryTexts,
   keyTermsIds,
 }) {
-  const theme = useMantineTheme();
   const { paragraphs, assignment } = introductoryTexts;
   const { classes } = useStyles();
   const dispatch = useAppDispatch();
@@ -54,21 +51,32 @@ export default function LecturePath({
     dispatch(refreshSettings());
   }, []);
 
+  const isMobile = useMediaQuery();
+
   return (
     <>
-      <Article
-        slug={slug}
-        title={title}
-        text={paragraphs}
-        assignment={assignment}
-      />
+      {isMobile ? (
+        <ArticleMobile
+          slug={slug}
+          title={title}
+          text={paragraphs}
+          assignment={assignment}
+        />
+      ) : (
+        <ArticleDesktop
+          slug={slug}
+          title={title}
+          text={paragraphs}
+          assignment={assignment}
+        />
+      )}
+
       {title !== "Introduction" && (
         <>
           <div className={classes.assignmentContainer}>
             <div className={classes.balanceSheets}>
               <div
                 style={{
-                  
                   marginBottom: "25px",
                   padding: "5px",
                   display: "flex",
