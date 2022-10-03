@@ -5,7 +5,7 @@ export const accounts1 = {
     superiorId: 0,
     type: 'ch certificates',
     balance: 1000,
-    category: "ch certificates",
+    category: "CH Certificates",
   },
   1: {
     id: 1,
@@ -13,6 +13,6 @@ export const accounts1 = {
     superiorId: 0,
     type: 'ch certificates',
     balance: 1000,
-    category: "ch certificates",
+    category: "CH Certificates",
   },
 }

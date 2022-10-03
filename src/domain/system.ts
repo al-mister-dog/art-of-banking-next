@@ -49,8 +49,8 @@ export const System = {
       },
       clearinghouse: function (): void {
         const clearinghouse = Clearinghouse.get();
-        Dues.increase(bank1, clearinghouse, "ch certificates", amount);
-        Dues.increase(clearinghouse, bank2, "ch certificates", amount);
+        Dues.increase(bank1, clearinghouse, "CH Certificates", amount);
+        Dues.increase(clearinghouse, bank2, "CH Certificates", amount);
       },
       centralbank: function (): void {},
       chips: function (): void {
@@ -96,7 +96,7 @@ export const System = {
       clearinghouse: function (): void {
         if (bank.type === "bank") {
           const clearinghouse = bankData.banks[0];
-          Accounts.createAccount(bank, clearinghouse, "ch certificates", 100);
+          Accounts.createAccount(bank, clearinghouse, "CH Certificates", 100);
         }
       },
       centralbank: function (): void {

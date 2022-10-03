@@ -9,12 +9,14 @@ export default function LayoutMobile({
   banksArray: CardInfo[];
 }) {
   const [group1, group2] = splitArray(banksArray);
-  
+
   return (
-    <Group style={{ height: "30rem", width: "100%", overflow: "auto" }}>
-      {banksArray.map((bank) => (
-        <Card key={bank.cardInfo.id} bank={bank} />
-      ))}
-    </Group>
+    <div>
+      <Group style={{ height: "30rem", width: "100%", overflow: "auto" }}>
+        {banksArray.map((bank) => (
+          <Card key={bank.cardInfo.id} bank={bank} />
+        ))}
+      </Group>
+    </div>
   );
 }

@@ -12,7 +12,7 @@ export const clearinghouse = {
       credit: true,
       constraint: false,
       parties: ["customer1", "customer2", "customer3", "customer4", "bank1"],
-      balanceSheetDisplay: ["Customer Deposits", "customer overdrafts"],
+      balanceSheetDisplay: ["Customer Deposits", "Customer Overdrafts"],
       text: clearinghouseText.step2,
       state: clearinghouseState.oneBigBank,
     },
@@ -28,7 +28,7 @@ export const clearinghouse = {
         "bank1",
         "bank2",
       ],
-      balanceSheetDisplay: ["Customer Deposits", "customer overdrafts", "dues"],
+      balanceSheetDisplay: ["Customer Deposits", "Customer Overdrafts", "dues"],
       text: clearinghouseText.step3,
       state: clearinghouseState.multipleBanks,
     },
@@ -46,7 +46,7 @@ export const clearinghouse = {
       ],
       balanceSheetDisplay: [
         "Customer Deposits",
-        "customer overdrafts",
+        "Customer Overdrafts",
         "Bank Deposits",
         "bankOverdrafts",
         "dues",
@@ -69,7 +69,7 @@ export const clearinghouse = {
       ],
       balanceSheetDisplay: [
         "Customer Deposits",
-        "customer overdrafts",
+        "Customer Overdrafts",
         "dues",
         "chCertificates",
         "chOverdrafts",
@@ -99,7 +99,7 @@ export const clearinghouse = {
       ],
       balanceSheetDisplay: [
         "Customer Deposits",
-        "customer overdrafts",
+        "Customer Overdrafts",
         "dues",
         "chCertificates",
         // "chOverdrafts",
@@ -126,7 +126,7 @@ export const clearinghouse = {
       ],
       balanceSheetDisplay: [
         "Customer Deposits",
-        "customer overdrafts",
+        "Customer Overdrafts",
         "dues",
         "chCertificates",
         // "chOverdrafts",

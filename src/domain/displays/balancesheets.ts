@@ -24,7 +24,7 @@ interface CorrespondingCreditInstruments {
 const correspondingCreditInstruments: CorrespondingCreditInstruments = {
   dues: {
     assets: "Due Froms",
-    liabilities: "Due Tos",
+    liabilities: "dueTos",
   },
   loans: {
     assets: "loan to",
@@ -39,16 +39,16 @@ const correspondingCreditInstruments: CorrespondingCreditInstruments = {
 export const BalanceSheets = {
   getCorrespondingInstruments(type) {
     const correspondingInstruments: CorrespondingInstruments = {
-      "Customer Deposits": "customer overdrafts",
-      "customer overdrafts": "Customer Deposits",
+      "Customer Deposits": "Customer Overdrafts",
+      "Customer Overdrafts": "Customer Deposits",
       "Bank Deposits":
         System.getSystem() === "centralbank"
-          ? "daylight overdrafts"
-          : "bank overdrafts",
-      "daylight overdrafts": "Bank Deposits",
+          ? "Daylight Overdrafts"
+          : "Bank Overdrafts",
+      "Daylight Overdrafts": "Bank Deposits",
       bankOverdrafts: "Bank Deposits",
-      "ch certificates": "ch loans",
-      "ch loans": "ch certificates",
+      "CH Certificates": "CH Loans",
+      "CH Loans": "CH Certificates",
     };
     return correspondingInstruments[type];
   },
