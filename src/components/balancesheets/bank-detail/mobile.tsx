@@ -3,6 +3,7 @@ import {
   Center,
   Title,
   Tabs,
+  Text,
   createStyles,
   useMantineTheme,
 } from "@mantine/core";
@@ -26,7 +27,7 @@ const useStyles = createStyles((theme) => ({
 
 export default function SidePanel({ bank }: { bank: CardInfo }) {
   const { classes } = useStyles();
-
+  const theme = useMantineTheme();
   return (
     <Card
       p="sm"
@@ -44,9 +45,15 @@ export default function SidePanel({ bank }: { bank: CardInfo }) {
       </Card.Section>
       <Tabs color={`${bank.color}`} defaultValue="actions">
         <Tabs.List grow>
-          <Tabs.Tab value="actions">Actions</Tabs.Tab>
-          <Tabs.Tab value="charts">Charts</Tabs.Tab>
-          <Tabs.Tab value="records">Records</Tabs.Tab>
+          <Tabs.Tab value="actions">
+            <Text color={theme.colors[bank.color][9]}>Actions</Text>
+          </Tabs.Tab>
+          <Tabs.Tab value="charts">
+            <Text color={theme.colors[bank.color][9]}>Charts</Text>
+          </Tabs.Tab>
+          <Tabs.Tab value="records">
+            <Text color={theme.colors[bank.color][9]}>Records</Text>
+          </Tabs.Tab>
         </Tabs.List>
 
         <Tabs.Panel value="actions" pt="xs">

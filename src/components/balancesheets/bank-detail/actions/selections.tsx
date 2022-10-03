@@ -1,4 +1,4 @@
-import { Select, Text } from "@mantine/core";
+import { Select, Text, useMantineTheme } from "@mantine/core";
 import { CardInfo } from "../../types";
 
 interface Props {
@@ -9,14 +9,16 @@ interface Props {
 }
 
 export default function ActionSelections({
+  bank,
   action,
   actionData,
   setAction,
 }: Props) {
-  
+  const theme = useMantineTheme()
   return (
     <Select
       label="Actions"
+      color={theme.colors[bank.color][9]}
       placeholder="Choose an Action"
       value={action}
       onChange={setAction}

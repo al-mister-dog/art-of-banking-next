@@ -153,7 +153,6 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
         <Drawer
           opened={opened}
           onClose={() => setOpened(false)}
-          title={`${bank.cardInfo.name}: ${bank.cardInfo.type}`}
           padding="xl"
           size="lg"
         >
