@@ -33,7 +33,7 @@ const useStyles = createStyles((theme) => ({
   },
   balanceSheets: {
     padding: 16,
-    paddingTop: "50px",
+    // paddingTop: "50px",
   },
 }));
 
@@ -68,14 +68,13 @@ export default function LecturePath({
             <div className={classes.balanceSheets}>
               <div
                 style={{
-                  marginTop: "5px",
+                  
                   marginBottom: "25px",
                   padding: "5px",
                   display: "flex",
                   justifyContent: "space-between",
                 }}
               >
-                {" "}
                 <Toolbar />
               </div>
 

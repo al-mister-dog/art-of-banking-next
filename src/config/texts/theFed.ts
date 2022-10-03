@@ -32,7 +32,7 @@ export const theFedText = {
     lectureTitle: `The Fed`,
     title: `Daylight Overdrafts`,
     paragraphs: [
-      `It is worth being reminding once more that in the federal reserve system, that money transfers
+      `It is worth being reminded once more that in the federal reserve system, money transfers
       happen between the banks and the Fed, and not between the banks themselves. Lets say a customer
       from Bank A transfers money to a customer of Bank B. Bank B does not need to know whether this
       payment caused Bank A to go into their overdraft. Bank B is happy because their money came

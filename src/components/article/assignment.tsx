@@ -14,7 +14,7 @@ const useStyles = createStyles((theme) => ({
     borderTopRightRadius: 5,
   },
   card: {
-    paddingTop: 16,
+    paddingTop: 25,
     background: theme.colors.violet[0],
   },
   desktopWidth: {
@@ -40,9 +40,12 @@ export default function Assignment({ assignment }) {
       <div className={`${classes.card}`}>
         <div
           className={`${!isMobile && classes.desktopWidth}`}
-          style={{ paddingLeft: isMobile ? 16 : "50px" }}
+          style={{
+            paddingLeft: isMobile ? 16 : "50px",
+            paddingRight: isMobile ? 16 : "",
+          }}
         >
-          <Text size="xl" weight="bold" italic>
+          <Text size={isMobile ? "md" : "lg"} weight="bold" italic>
             {assignment}
           </Text>
         </div>
