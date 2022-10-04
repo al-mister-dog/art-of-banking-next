@@ -1,5 +1,5 @@
 import { forwardRef, useContext } from "react";
-import { useMediaQuery } from "../../../../../hooks/useMediaQuery";
+import { useMediaQuery } from "@mantine/hooks";
 import {
   Button,
   Group,
@@ -11,6 +11,7 @@ import {
 } from "@mantine/core";
 import { CardInfo } from "../../../types";
 import { DrawerContext } from "../../../cards/card/card-mobile";
+import { mediaQuery } from "../../../../../config/media-query";
 
 interface Props {
   bank: CardInfo;
@@ -41,9 +42,8 @@ export default function FixedAmount({
   btnText,
   validation,
 }: Props) {
-  const isMobile = useMediaQuery();
+  const isMobile = useMediaQuery(mediaQuery);
   const setOpened = useContext(DrawerContext);
-  const theme = useMantineTheme();
 
   return (
     <Stack spacing="md">

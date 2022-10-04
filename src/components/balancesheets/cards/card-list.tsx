@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../../app/hooks";
 import { selectBanks } from "../../../features/banks/banksSlice";
-import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import { useMediaQuery } from "@mantine/hooks";
 import { MantineProvider } from "@mantine/core";
 import { CardInfo } from "../types";
 import { Display } from "../../../domain/display";
@@ -8,6 +8,7 @@ import { Bank } from "../../../domain/structures";
 import LayoutMobile from "./card/layout-mobile";
 import LayoutDesktop from "./card/layout-desktop";
 import React from "react";
+import { mediaQuery } from "../../../config/media-query";
 
 interface Colors {
   [index: string]: any;
@@ -15,7 +16,7 @@ interface Colors {
 
 function BalanceSheetsContainer() {
   const { banks } = useAppSelector(selectBanks);
-  const isMobile = useMediaQuery();
+  const isMobile = useMediaQuery(mediaQuery);
   const colors: Colors = {
     customer: "grape",
     bank: "violet",

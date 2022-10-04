@@ -1,5 +1,6 @@
-import { forwardRef, useContext, useState } from "react";
-import { useMediaQuery } from "../../../../../hooks/useMediaQuery";
+import { forwardRef, useContext } from "react";
+
+import { mediaQuery } from "../../../../../config/media-query";
 import {
   Button,
   Group,
@@ -15,6 +16,8 @@ import {
 import { CurrencyDollar } from "tabler-icons-react";
 import { CardInfo } from "../../../types";
 import {DrawerContext} from "../../../cards/card/card-mobile"
+import { useMediaQuery } from "@mantine/hooks";
+
 
 interface Props {
   bank: CardInfo;
@@ -50,7 +53,7 @@ export default function FixedAmount({
   btnText,
   validation,
 }: Props) {
-  const isMobile = useMediaQuery();
+  const isMobile = useMediaQuery(mediaQuery);
   const setOpened = useContext(DrawerContext);
   const theme = useMantineTheme();
 

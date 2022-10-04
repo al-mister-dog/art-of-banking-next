@@ -11,8 +11,9 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { analytics, bankData } from "../../../domain/structures";
-import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import { bankData } from "../../../domain/structures";
+import { useMediaQuery } from "@mantine/hooks";
+import { mediaQuery } from "../../../config/media-query";
 
 ChartJS.register(
   CategoryScale,
@@ -25,7 +26,7 @@ ChartJS.register(
 
 export default function BarChart() {
   const { analytics } = useAppSelector(selectBanks);
-  const isMobile = useMediaQuery();
+  const isMobile = useMediaQuery(mediaQuery);
   const banks = Object.keys(analytics.graphs.nationalData).map((id) => {
     return bankData.banks[id];
   });

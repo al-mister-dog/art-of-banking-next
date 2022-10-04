@@ -6,28 +6,26 @@ import {
   debitBank,
 } from "../../../../../features/banks/banksSlice";
 import { forwardRef, useContext, useState } from "react";
-import { useMediaQuery } from "../../../../../hooks/useMediaQuery";
+import { useMediaQuery } from "@mantine/hooks";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
 import { creditData } from "../../../../../domain/structures";
 import { Banks } from "../../../../../domain/bank";
-import { Customer } from "../../../../../domain/customer";
+
 import {
   Button,
-  Center,
   Group,
-  Input,
-  NumberInput,
   Radio,
   Select,
   Stack,
   Text,
   useMantineTheme,
 } from "@mantine/core";
-import { CurrencyDollar } from "tabler-icons-react";
-import {DrawerContext} from "../../../cards/card/card-mobile"
+
+import { DrawerContext } from "../../../cards/card/card-mobile";
 import { CardInfo } from "../../../types";
 import { Dues } from "../../../../../domain/dues";
 import { System } from "../../../../../domain/system";
+import { mediaQuery } from "../../../../../config/media-query";
 
 export default function SettleDues({ bank }: { bank: CardInfo }) {
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
@@ -106,7 +104,7 @@ const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
 
 function NextStep({ bank, selectedBank }) {
   const dispatch = useAppDispatch();
-  const isMobile = useMediaQuery();
+  const isMobile = useMediaQuery(mediaQuery);
   const setOpened = useContext(DrawerContext);
   const theme = useMantineTheme();
   const [paymentType, setPaymentType] = useState("credit");
@@ -224,7 +222,7 @@ function NextStep({ bank, selectedBank }) {
 
 function NextStepCH({ bank, selectedBank }) {
   const dispatch = useAppDispatch();
-  const isMobile = useMediaQuery();
+  const isMobile = useMediaQuery(mediaQuery);
   const setOpened = useContext(DrawerContext);
   const theme = useMantineTheme();
 
@@ -245,7 +243,7 @@ function NextStepCH({ bank, selectedBank }) {
     const bankName = otherBank.name;
     settlementInfo = `${bankName} owes you $${accountInfo.balance}`;
   }
-  
+
   const validation = useValidator("settleDues", bank, amount, selectedBank);
   function payDuesPayload() {
     if (isDebtor) {

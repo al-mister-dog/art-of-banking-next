@@ -2,7 +2,7 @@ import { useAppDispatch } from "../../app/hooks";
 import { setActions } from "../../features/actions/actionsSlice";
 import { setup } from "../../features/banks/banksSlice";
 import { refreshSettings } from "../../features/settings/settingsSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   ActionIcon,
   createStyles,
@@ -18,7 +18,11 @@ import BalanceSheets from "../../components/balancesheets/cards/card-list";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
 import KeyTerms from "../../components/article/lecture-index/key-terms";
 import Toolbar from "../../components/charts-and-settings/toolbar";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
+import {
+  useMediaQuery,
+  // useIsMobile,
+} from "../../hooks/useMediaQuery";
+import Article from "../../components/article/Article";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {
@@ -51,25 +55,14 @@ export default function LecturePath({
     dispatch(refreshSettings());
   }, []);
 
-  const isMobile = useMediaQuery();
-
   return (
     <>
-      {isMobile ? (
-        <ArticleMobile
-          slug={slug}
-          title={title}
-          text={paragraphs}
-          assignment={assignment}
-        />
-      ) : (
-        <ArticleDesktop
-          slug={slug}
-          title={title}
-          text={paragraphs}
-          assignment={assignment}
-        />
-      )}
+      <Article
+        slug={slug}
+        title={title}
+        text={paragraphs}
+        assignment={assignment}
+      />
 
       {title !== "Introduction" && (
         <>

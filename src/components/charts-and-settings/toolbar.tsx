@@ -3,11 +3,12 @@ import { ActionIcon, Popover, useMantineTheme } from "@mantine/core";
 import RefreshBalanceSheets from "../../components/charts-and-settings/settings/refresh";
 import Settings from "../../components/charts-and-settings/mobile";
 import { DotsVertical } from "tabler-icons-react";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { useMediaQuery } from "@mantine/hooks";
+import { mediaQuery } from "../../config/media-query";
 
 export default function Toolbar() {
   const theme = useMantineTheme();
-  const isMobile = useMediaQuery();
+  const isMobile = useMediaQuery(mediaQuery);
   return isMobile ? (
     <>
       <RefreshBalanceSheets />

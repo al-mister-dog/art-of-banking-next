@@ -7,12 +7,13 @@ import ChartCredit from "./charts/linechart-credit";
 import SettingsDesktop from "./settings/container-desktop";
 import SettingsMobile from "./settings/container-mobile";
 import { charts } from "../../config/charts";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { useMediaQuery } from "@mantine/hooks";
+import { mediaQuery } from "../../config/media-query";
 
 export default function Desktop() {
   const { currentLectureId } = useAppSelector(selectActions);
   const theme = useMantineTheme();
-  const isMobile = useMediaQuery();
+  const isMobile = useMediaQuery(mediaQuery);
   return (
     <>
       {isMobile ? (

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useMediaQuery } from "../../../../../hooks/useMediaQuery";
+import { useMediaQuery } from "@mantine/hooks";
 import {
   Button,
   Input,
@@ -11,6 +11,7 @@ import {
 import { CurrencyDollar } from "tabler-icons-react";
 import { CardInfo } from "../../../types";
 import {DrawerContext} from "../../../cards/card/card-mobile"
+import { mediaQuery } from "../../../../../config/media-query";
 
 interface Props {
   bank: CardInfo;
@@ -42,7 +43,7 @@ export default function SelectAndPay({
   btnText,
   validation,
 }: Props) {
-  const isMobile = useMediaQuery();
+  const isMobile = useMediaQuery(mediaQuery);
   const setOpened = useContext(DrawerContext);
   
   return (
