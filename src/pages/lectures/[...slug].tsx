@@ -58,6 +58,7 @@ export default function LecturePath({
   return (
     <>
       <Article
+        // key={slug}
         slug={slug}
         title={title}
         text={paragraphs}
