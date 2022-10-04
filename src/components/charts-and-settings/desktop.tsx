@@ -1,11 +1,10 @@
 import { useAppSelector } from "../../app/hooks";
 import { selectActions } from "../../features/actions/actionsSlice";
 import { Card, Grid, useMantineTheme } from "@mantine/core";
-import ChartPrivateCredit from "./charts/linechart-private-credit";
-import ChartBalances from "./charts/barchart-balances";
-import ChartCredit from "./charts/linechart-credit";
-import SettingsDesktop from "./settings/container-desktop";
-import SettingsMobile from "./settings/container-mobile";
+import ChartPrivateCredit from "../balancesheets/charts/linechart-private-credit";
+import ChartBalances from "../balancesheets/charts/barchart-balances";
+import ChartCredit from "../balancesheets/charts/linechart-credit";
+import SettingsDesktop from "../balancesheets/settings/container-desktop";
 import { charts } from "../../config/charts";
 import { useMediaQuery } from "@mantine/hooks";
 import { mediaQuery } from "../../config/media-query";

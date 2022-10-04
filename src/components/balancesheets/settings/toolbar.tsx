@@ -22,7 +22,7 @@ export default function Toolbar() {
           </ActionIcon>
         </Popover.Target>
         <Popover.Dropdown>
-          <Settings />
+          {/* <Settings setOpened={setOpened}/> */}
         </Popover.Dropdown>
       </Popover>
     </>

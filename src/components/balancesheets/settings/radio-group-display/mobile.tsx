@@ -1,32 +1,37 @@
 import { useAppDispatch } from "../../../../app/hooks";
 import { useState, useEffect } from "react";
-import { Box, Radio, Text } from "@mantine/core";
+import { Box, createStyles, Radio, Text } from "@mantine/core";
 import { setDisplay } from "../../../../features/settings/settingsSlice";
-import ColorsMenu from "../menu-colors";
-import SpreadsheetMenu from "../menu-spreadsheet";
+import SpreadsheetMenu from "../menu-spreadsheet-mobile";
 
-export default function DisplayRadioGroup() {
+export default function DisplayRadioGroup({ setOpened, setHidden }) {
   const dispatch = useAppDispatch();
-
+  
   const [displayButton, setDisplayButton] = useState("balances");
+  
 
   function handleOnChange(value: string) {
     dispatch(setDisplay({ key: value }));
-    setDisplayButton(value);
+    if (value !== "spreadsheet") {
+      setOpened(false);
+    } 
+
+    // setDisplayButton(value);
   }
 
   // this sets display back to "balances" on page change
-  useEffect(() => {
-    dispatch(setDisplay({ key: displayButton }));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(setDisplay({ key: displayButton }));
+  // }, []);
 
   return (
     <Box>
       <Radio.Group
         value={displayButton}
-        orientation="vertical"
+        // orientation="vertical"
         onChange={(value) => handleOnChange(value)}
         name="Display"
+        label="Balancesheet Display"
       >
         <Radio
           color="violet"
@@ -40,7 +45,7 @@ export default function DisplayRadioGroup() {
           label={<Text size="xs">T-Accounts</Text>}
         />
 
-        <SpreadsheetMenu>
+        <SpreadsheetMenu setOpened={setOpened} setHidden={setHidden}>
           <Radio
             color="violet"
             value="spreadsheet"

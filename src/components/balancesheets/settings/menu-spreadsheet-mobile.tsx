@@ -5,14 +5,21 @@ import { Button, Menu, Modal, Text, useMantineTheme } from "@mantine/core";
 import Spreadsheet from "../../displays/spreadsheet";
 import SpreadsheetAbout from "./about-spreadsheet";
 
-export default function SpreadsheetMenu({ children }) {
+export default function SpreadsheetMenu({ setOpened, setHidden, children }) {
   const dispatch = useAppDispatch();
   const [spreadSheetOpened, setSpreadSheetOpened] = useState(false);
   const [aboutOpened, setAboutOpened] = useState(false);
 
   function handleClickMenuItem(value: string) {
     dispatch(setClaveroDisplay({ key: value }));
+    setOpened(false);
   }
+  function doFunc() {
+    setHidden(false);
+    setOpened(false);
+    console.log("do FUNC");
+  }
+
   return (
     <>
       <Menu shadow="md" width={200}>
@@ -28,10 +35,20 @@ export default function SpreadsheetMenu({ children }) {
           </Menu.Item>
 
           <Menu.Divider />
-          <Menu.Item onClick={() => setSpreadSheetOpened(true)}>
+          <Menu.Item
+            onClick={() => {
+              setHidden(true);
+              setSpreadSheetOpened(true);
+            }}
+          >
             Full Page
           </Menu.Item>
-          <Menu.Item onClick={() => setAboutOpened(true)}>
+          <Menu.Item
+            onClick={() => {
+              setHidden(true);
+              setAboutOpened(true);
+            }}
+          >
             <Text color="dimmed" weight="bold">
               About Color-Coding
             </Text>
@@ -41,14 +58,20 @@ export default function SpreadsheetMenu({ children }) {
 
       <Modal
         opened={aboutOpened}
-        onClose={() => setAboutOpened(false)}
+        onClose={() => {
+          doFunc();
+
+          setAboutOpened(false);
+        }}
         title="Color-Coded Payment Notation"
       >
         <SpreadsheetAbout />
       </Modal>
       <Modal
         opened={spreadSheetOpened}
-        onClose={() => setSpreadSheetOpened(false)}
+        onClose={() => {
+          setSpreadSheetOpened(false);
+        }}
         withCloseButton={false}
         fullScreen
       >
@@ -56,7 +79,12 @@ export default function SpreadsheetMenu({ children }) {
           <Button
             color="violet"
             style={{ position: "fixed", margin: "5px" }}
-            onClick={() => setSpreadSheetOpened(false)}
+            onClick={() => {
+              console.log("WEE");
+              setSpreadSheetOpened(false);
+              setHidden(false);
+              setOpened(false);
+            }}
           >
             Close
           </Button>
