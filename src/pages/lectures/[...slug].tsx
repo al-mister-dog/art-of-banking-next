@@ -14,7 +14,7 @@ import { getRouteObjectData } from "../../helpers/routeMethods";
 import { lectureRoutes } from "../../config/sidebar-routes/lectureRoutes";
 import BalanceSheets from "../../components/balancesheets/cards/card-list";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
-import Toolbar from "../../components/charts-and-settings/toolbar";
+import Toolbar from "../../components/balancesheets/settings/toolbar";
 import KeyTerms from "../../components/article/lecture-index/key-terms";
 
 import Article from "../../components/article/Article";

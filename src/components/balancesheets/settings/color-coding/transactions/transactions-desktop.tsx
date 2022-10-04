@@ -1,9 +1,9 @@
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch } from "../../../../../app/hooks";
 import { useState } from "react";
-import { setClaveroDisplay } from "../../../features/settings/settingsSlice";
+import { setClaveroDisplay } from "../../../../../features/settings/settingsSlice";
 import { Button, Menu, Modal, Text, useMantineTheme } from "@mantine/core";
-import Spreadsheet from "../../displays/spreadsheet";
-import SpreadsheetAbout from "./about-spreadsheet";
+import Spreadsheet from "../../../../displays/spreadsheet";
+import SpreadsheetAbout from "../../about/about-spreadsheet";
 
 export default function SpreadsheetMenu({ children }) {
   const dispatch = useAppDispatch();

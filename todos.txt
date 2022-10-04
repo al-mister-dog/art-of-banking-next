@@ -1,5 +1,8 @@
 SETTINGS
 each lecture page should be able to set its own overdraft rate, interest rate etc
+//mobile
+display type stays open on clicks
+drawer closes on click second option of radio buttons
 
 CHARTS
 the graph system needs to be more dynamic. it should add data from setup-function transactions

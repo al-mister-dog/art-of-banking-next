@@ -1,8 +1,8 @@
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch } from "../../../../../app/hooks";
 import { useState } from "react";
-import { setColors } from "../../../features/settings/settingsSlice";
+import { setColors } from "../../../../../features/settings/settingsSlice";
 import { Menu, Modal, Text } from "@mantine/core";
-import AboutColors from "./about-colors";
+import AboutColors from "../../about/about-colors";
 
 export default function ColorsMenu({ children }) {
   const dispatch = useAppDispatch();
@@ -17,7 +17,7 @@ export default function ColorsMenu({ children }) {
       <Menu.Target>{children}</Menu.Target>
 
       <Menu.Dropdown>
-        <Menu.Label>Transaction Color Coding</Menu.Label>
+        <Menu.Label>Balances Color Coding</Menu.Label>
         <Menu.Item onClick={() => handleClickMenuItem("static")}>
           Each Transaction
         </Menu.Item>

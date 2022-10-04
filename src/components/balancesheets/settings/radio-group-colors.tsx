@@ -22,7 +22,7 @@ export default function ColorsRadioGroup() {
           orientation="vertical"
           onChange={(value) => handleOnChange(value)}
           name="ColorCoding"
-          label="Transaction Color Coding"
+          label="Balances Color Coding"
         >
           <Radio color="violet" value="round" label="All" />
           <Radio color="violet" value="static" label="Each" />

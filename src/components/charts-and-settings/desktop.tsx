@@ -4,7 +4,7 @@ import { Card, Grid, useMantineTheme } from "@mantine/core";
 import ChartPrivateCredit from "../balancesheets/charts/linechart-private-credit";
 import ChartBalances from "../balancesheets/charts/barchart-balances";
 import ChartCredit from "../balancesheets/charts/linechart-credit";
-import SettingsDesktop from "../balancesheets/settings/container-desktop";
+import SettingsDesktop from "../balancesheets/settings/container/container-desktop";
 import { charts } from "../../config/charts";
 import { useMediaQuery } from "@mantine/hooks";
 import { mediaQuery } from "../../config/media-query";

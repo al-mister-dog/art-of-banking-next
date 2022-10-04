@@ -1,29 +1,14 @@
-import {
-  ActionIcon,
-  createStyles,
-  Drawer,
-  useMantineTheme,
-} from "@mantine/core";
-
-import RefreshBalanceSheets from "../balancesheets/settings/refresh";
-import Settings from "../balancesheets/settings/mobile";
-import { DotsVertical } from "tabler-icons-react";
-import { useMediaQuery } from "@mantine/hooks";
-import { mediaQuery } from "../../config/media-query";
 import { useState } from "react";
-const useStyles = createStyles(() => ({
-  hidden: {
-    display: "none",
-  },
-  visible: {
-    // display: "block",
-  },
-}));
+import { ActionIcon, Drawer, useMantineTheme } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
+import { mediaQuery } from "../../../config/media-query";
+import Settings from "./container/container-mobile";
+import RefreshBalanceSheets from "./refresh-button";
+import { DotsVertical } from "tabler-icons-react";
+
 export default function Toolbar() {
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
-  const { classes } = useStyles();
-  const [hidden, setHidden] = useState(false);
   const isMobile = useMediaQuery(mediaQuery);
 
   return isMobile ? (

@@ -1,22 +1,16 @@
 import { useAppSelector, useAppDispatch } from "../../../../app/hooks";
 import { selectSettings } from "../../../../features/settings/settingsSlice";
-import { useState, useEffect } from "react";
-import { Box, createStyles, Radio, Text } from "@mantine/core";
 import { setDisplay } from "../../../../features/settings/settingsSlice";
-import SpreadsheetMenu from "../menu-spreadsheet-mobile";
+import { Box, Radio, Text } from "@mantine/core";
+import { useRadioSettings } from "../../../../hooks/useRadioSettings";
 
-export default function DisplayRadioGroup({ setOpened }) {
+export default function MenuDisplays() {
   const dispatch = useAppDispatch();
   const { displaySettings } = useAppSelector(selectSettings);
-  const displayButton = Object.keys(displaySettings).filter(
-    (key) => displaySettings[key] === true
-  )[0];
-
+  const displayButton = useRadioSettings(displaySettings);
+  
   function handleOnChange(value: string) {
     dispatch(setDisplay({ key: value }));
-    if (value !== "spreadsheet") {
-      setOpened(false);
-    }
   }
 
   return (

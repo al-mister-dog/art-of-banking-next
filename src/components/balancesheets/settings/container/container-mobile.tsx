@@ -1,14 +1,13 @@
-import { useAppSelector } from "../../../app/hooks";
-import { selectActions } from "../../../features/actions/actionsSlice";
-import { useState } from "react";
-import { sliderSettings } from "../../../features/settings/initialState";
-import { Center, createStyles, Title } from "@mantine/core";
+import { useAppSelector } from "../../../../app/hooks";
+import { selectActions } from "../../../../features/actions/actionsSlice";
+import { sliderSettings } from "../../../../features/settings/initialState";
+import { Center, Title } from "@mantine/core";
 
-import OverdraftSlider from "../settings/slider-overdraft";
-import ReserveRequirementSlider from "../settings/slider-reserve-requirement";
-import InterestRateSlider from "../settings/slider-interest-rate";
-import DisplayRadioGroup from "../settings/radio-group-display/mobile";
-import ColorsRadioGroup from "../settings/radio-group-colors/mobile";
+import OverdraftSlider from "../sliders/slider-overdraft";
+import ReserveRequirementSlider from "../sliders/slider-reserve-requirement";
+import InterestRateSlider from "../sliders/slider-interest-rate";
+import DisplayRadioGroup from "../menu-displays/mobile";
+import ColorsRadioGroup from "../menu-colors/mobile";
 
 export default function SettingsMobile({ setOpened }) {
   const { currentLectureId } = useAppSelector(selectActions);
@@ -23,7 +22,11 @@ export default function SettingsMobile({ setOpened }) {
         <Title order={4}>Settings</Title>
       </Center>
       <div
-        style={{ marginTop: "1rem", marginLeft: "4rem", marginRight: "3rem" }}
+        style={{
+          width: "70%",
+          margin: "auto",
+          marginTop: "1rem",
+        }}
       >
         <OverdraftSlider
           disabled={slidersDisabled.overdraft}
@@ -33,7 +36,7 @@ export default function SettingsMobile({ setOpened }) {
           disabled={slidersDisabled.reserveRequirement}
         />
         <InterestRateSlider disabled={slidersDisabled.interestRate} />
-        <DisplayRadioGroup setOpened={setOpened} />
+        <DisplayRadioGroup />
         <ColorsRadioGroup setOpened={setOpened} />
       </div>
     </>

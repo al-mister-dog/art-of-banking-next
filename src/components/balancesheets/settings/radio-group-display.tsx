@@ -2,9 +2,9 @@ import { useAppDispatch } from "../../../app/hooks";
 import { useEffect, useState } from "react";
 import { setDisplay } from "../../../features/settings/settingsSlice";
 import { Box, Radio } from "@mantine/core";
-import SpreadsheetMenu from "./menu-spreadsheet";
+import SpreadsheetMenu from "./color-coding/transactions/transactions-desktop";
 
-import ColorsMenu from "./menu-colors";
+import ColorsMenu from "./color-coding/balances/balances-desktop";
 
 export default function DisplayRadioGroup() {
   const dispatch = useAppDispatch();
@@ -15,7 +15,7 @@ export default function DisplayRadioGroup() {
     dispatch(setDisplay({ key: value }));
     setDisplayButton(value);
   }
-  
+  console.log("HELLO")
   // this sets display back to "balances" on page change
   useEffect(() => {
     dispatch(setDisplay({ key: displayButton }));

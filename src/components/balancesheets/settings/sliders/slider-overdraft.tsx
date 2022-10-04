@@ -1,11 +1,9 @@
-import { useAppSelector, useAppDispatch } from "../../../app/hooks";
+import { useAppSelector, useAppDispatch } from "../../../../app/hooks";
 import {
   selectSettings,
   setOverdraft,
-} from "../../../features/settings/settingsSlice";
-import { selectActions } from "../../../features/actions/actionsSlice";
+} from "../../../../features/settings/settingsSlice";
 import { Box, Slider, Text } from "@mantine/core";
-import { Totals } from "../../../domain/displays/totals";
 import { useEffect } from "react";
 
 //NEEDS TO BE RANGE
@@ -29,7 +27,7 @@ export default function OverdraftSlider({
   }, []);
   return (
     <Box>
-      <Text size="xs" >Overdraft Limit</Text>
+      <Text size="xs">Overdraft Limit</Text>
       <Slider
         color="violet"
         label={`$${overdraft}`}
