@@ -20,8 +20,8 @@ export default function Layout(props: any) {
           padding: 0,
         },
       }}
-      navbarOffsetBreakpoint="sm"
-      asideOffsetBreakpoint="sm"
+      // navbarOffsetBreakpoint="sm"
+      // asideOffsetBreakpoint="sm"
       fixed={isMobile}
       navbar={
         isMobile ? (

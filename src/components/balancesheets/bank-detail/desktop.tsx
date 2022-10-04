@@ -9,7 +9,6 @@ import {
 } from "@mantine/core";
 import { CardInfo } from "../types";
 import ActionsPanel from "./actions/panel";
-import LineChart from "../../charts-and-settings/charts/linechartbank";
 import React from "react";
 
 const useStyles = createStyles((theme) => ({

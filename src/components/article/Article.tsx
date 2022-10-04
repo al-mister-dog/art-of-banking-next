@@ -1,5 +1,4 @@
 import { useMediaQuery } from "@mantine/hooks";
-import { mediaQuery } from "../../config/media-query";
 import ArticleMobile from "./mobile/article";
 import ArticleDesktop from "./desktop/article";
 

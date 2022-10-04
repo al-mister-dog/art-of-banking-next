@@ -12,16 +12,11 @@ import {
 import { introductoryTexts } from "../../config/parts";
 import { getRouteObjectData } from "../../helpers/routeMethods";
 import { lectureRoutes } from "../../config/sidebar-routes/lectureRoutes";
-import ArticleMobile from "../../components/article/mobile/article";
-import ArticleDesktop from "../../components/article/desktop/article";
 import BalanceSheets from "../../components/balancesheets/cards/card-list";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
-import KeyTerms from "../../components/article/lecture-index/key-terms";
 import Toolbar from "../../components/charts-and-settings/toolbar";
-import {
-  useMediaQuery,
-  // useIsMobile,
-} from "../../hooks/useMediaQuery";
+import KeyTerms from "../../components/article/lecture-index/key-terms";
+
 import Article from "../../components/article/Article";
 
 const useStyles = createStyles((theme) => ({
