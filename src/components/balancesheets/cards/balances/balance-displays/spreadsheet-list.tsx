@@ -1,11 +1,8 @@
-import { useEffect, useRef } from "react";
-
-import { Card, SimpleGrid } from "@mantine/core";
-
+import { SimpleGrid } from "@mantine/core";
 import Spreadsheet from "./spreadsheet";
-import { ClassNames } from "@emotion/react";
 
-export default function ClaveroList({ assets, liabilities }) {
+
+export default function SpreadsheetList({ assets, liabilities }) {
   return (
     <SimpleGrid
       cols={2}

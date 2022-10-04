@@ -126,7 +126,7 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
             liabilities={spreadsheetBalances.liabilities}
           />
         ) : (
-          <SimpleGrid cols={2} style={{ overflowX: "hidden" }}>
+          <SimpleGrid cols={2} style={{ height: "7.9rem", overflowX: "hidden" }}>
             <div>
               {bank.balanceSheet.assets.map((asset: any) => {
                 return (
