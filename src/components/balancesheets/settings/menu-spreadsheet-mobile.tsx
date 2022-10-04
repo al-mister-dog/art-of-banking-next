@@ -5,7 +5,7 @@ import { Button, Menu, Modal, Text, useMantineTheme } from "@mantine/core";
 import Spreadsheet from "../../displays/spreadsheet";
 import SpreadsheetAbout from "./about-spreadsheet";
 
-export default function SpreadsheetMenu({ setOpened, children }) {
+export default function SpreadsheetMenu({ setOpened }) {
   const dispatch = useAppDispatch();
   const [spreadSheetOpened, setSpreadSheetOpened] = useState(false);
   const [aboutOpened, setAboutOpened] = useState(false);
@@ -22,35 +22,31 @@ export default function SpreadsheetMenu({ setOpened, children }) {
   return (
     <>
       <Menu shadow="md" width={200}>
-        <Menu.Target>{children}</Menu.Target>
+        <Menu.Label>Display Transactions</Menu.Label>
+        <Menu.Item onClick={() => handleClickMenuItem("lastTwo")}>
+          Each Transaction
+        </Menu.Item>
+        <Menu.Item onClick={() => handleClickMenuItem("all")}>
+          All Transactions
+        </Menu.Item>
 
-        <Menu.Dropdown>
-          <Menu.Label>Display Transactions</Menu.Label>
-          <Menu.Item onClick={() => handleClickMenuItem("lastTwo")}>
-            Each Transaction
-          </Menu.Item>
-          <Menu.Item onClick={() => handleClickMenuItem("all")}>
-            All Transactions
-          </Menu.Item>
-
-          <Menu.Divider />
-          <Menu.Item
-            onClick={() => {
-              setSpreadSheetOpened(true);
-            }}
-          >
-            Full Page
-          </Menu.Item>
-          <Menu.Item
-            onClick={() => {
-              setAboutOpened(true);
-            }}
-          >
-            <Text color="dimmed" weight="bold">
-              About Color-Coding
-            </Text>
-          </Menu.Item>
-        </Menu.Dropdown>
+        <Menu.Divider />
+        <Menu.Item
+          onClick={() => {
+            setSpreadSheetOpened(true);
+          }}
+        >
+          Full Page
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => {
+            setAboutOpened(true);
+          }}
+        >
+          <Text color="dimmed" weight="bold">
+            About Color-Coding
+          </Text>
+        </Menu.Item>
       </Menu>
 
       <Modal

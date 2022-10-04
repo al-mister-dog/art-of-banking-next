@@ -40,13 +40,11 @@ export default function DisplayRadioGroup({ setOpened }) {
           label={<Text size="xs">T-Accounts</Text>}
         />
 
-        <SpreadsheetMenu setOpened={setOpened}>
-          <Radio
-            color="violet"
-            value="spreadsheet"
-            label={<Text size="xs">Spreadsheet</Text>}
-          />
-        </SpreadsheetMenu>
+        <Radio
+          color="violet"
+          value="spreadsheet"
+          label={<Text size="xs">Spreadsheet</Text>}
+        />
       </Radio.Group>
     </Box>
   );

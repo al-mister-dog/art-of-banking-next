@@ -8,7 +8,7 @@ import OverdraftSlider from "../settings/slider-overdraft";
 import ReserveRequirementSlider from "../settings/slider-reserve-requirement";
 import InterestRateSlider from "../settings/slider-interest-rate";
 import DisplayRadioGroup from "../settings/radio-group-display/mobile";
-import ColorsRadioGroup from "../settings/radio-group-colors";
+import ColorsRadioGroup from "../settings/radio-group-colors/mobile";
 
 export default function SettingsMobile({ setOpened }) {
   const { currentLectureId } = useAppSelector(selectActions);
@@ -22,7 +22,9 @@ export default function SettingsMobile({ setOpened }) {
       <Center>
         <Title order={4}>Settings</Title>
       </Center>
-      <div style={{ marginTop: "1rem", marginLeft: "4rem", marginRight: "3rem" }}>
+      <div
+        style={{ marginTop: "1rem", marginLeft: "4rem", marginRight: "3rem" }}
+      >
         <OverdraftSlider
           disabled={slidersDisabled.overdraft}
           overdraftValue={overdraftValue}
@@ -32,7 +34,7 @@ export default function SettingsMobile({ setOpened }) {
         />
         <InterestRateSlider disabled={slidersDisabled.interestRate} />
         <DisplayRadioGroup setOpened={setOpened} />
-        <ColorsRadioGroup />
+        <ColorsRadioGroup setOpened={setOpened} />
       </div>
     </>
   );

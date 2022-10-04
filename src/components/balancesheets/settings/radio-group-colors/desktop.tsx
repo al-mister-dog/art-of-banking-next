@@ -1,9 +1,8 @@
-import { useAppSelector, useAppDispatch } from "../../../app/hooks";
-import { selectSettings } from "../../../features/settings/settingsSlice";
+import { useAppSelector, useAppDispatch } from "../../../../app/hooks";
+import { selectSettings } from "../../../../features/settings/settingsSlice";
 import { useState } from "react";
 import { Box, Radio } from "@mantine/core";
-useAppSelector;
-import { setColors } from "../../../features/settings/settingsSlice";
+import { setColors } from "../../../../features/settings/settingsSlice";
 
 export default function ColorsRadioGroup() {
   const { displaySettings } = useAppSelector(selectSettings);
@@ -15,7 +14,7 @@ export default function ColorsRadioGroup() {
     setColorCoding(value);
   }
   return (
-    <Box mt="lg" >
+    <Box mt="lg">
       {!displaySettings.spreadsheet && (
         <Radio.Group
           value={colorCoding}

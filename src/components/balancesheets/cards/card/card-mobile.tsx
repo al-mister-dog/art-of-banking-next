@@ -127,7 +127,7 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
           />
         ) : (
           <SimpleGrid cols={2} style={{ height: "7.9rem", overflowX: "hidden" }}>
-            <div>
+            <div style={{borderRight: `1px solid ${theme.colors[bank.color][2]}`}}>
               {bank.balanceSheet.assets.map((asset: any) => {
                 return (
                   <BalanceByInstrument
