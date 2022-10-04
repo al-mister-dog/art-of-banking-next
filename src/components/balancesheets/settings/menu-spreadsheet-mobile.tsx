@@ -5,7 +5,7 @@ import { Button, Menu, Modal, Text, useMantineTheme } from "@mantine/core";
 import Spreadsheet from "../../displays/spreadsheet";
 import SpreadsheetAbout from "./about-spreadsheet";
 
-export default function SpreadsheetMenu({ setOpened, setHidden, children }) {
+export default function SpreadsheetMenu({ setOpened, children }) {
   const dispatch = useAppDispatch();
   const [spreadSheetOpened, setSpreadSheetOpened] = useState(false);
   const [aboutOpened, setAboutOpened] = useState(false);
@@ -15,7 +15,6 @@ export default function SpreadsheetMenu({ setOpened, setHidden, children }) {
     setOpened(false);
   }
   function doFunc() {
-    setHidden(false);
     setOpened(false);
     console.log("do FUNC");
   }
@@ -37,7 +36,6 @@ export default function SpreadsheetMenu({ setOpened, setHidden, children }) {
           <Menu.Divider />
           <Menu.Item
             onClick={() => {
-              setHidden(true);
               setSpreadSheetOpened(true);
             }}
           >
@@ -45,7 +43,6 @@ export default function SpreadsheetMenu({ setOpened, setHidden, children }) {
           </Menu.Item>
           <Menu.Item
             onClick={() => {
-              setHidden(true);
               setAboutOpened(true);
             }}
           >
@@ -80,9 +77,8 @@ export default function SpreadsheetMenu({ setOpened, setHidden, children }) {
             color="violet"
             style={{ position: "fixed", margin: "5px" }}
             onClick={() => {
-              console.log("WEE");
               setSpreadSheetOpened(false);
-              setHidden(false);
+
               setOpened(false);
             }}
           >

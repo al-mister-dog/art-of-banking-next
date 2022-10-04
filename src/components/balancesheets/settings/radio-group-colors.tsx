@@ -15,10 +15,11 @@ export default function ColorsRadioGroup() {
     setColorCoding(value);
   }
   return (
-    <Box mt="lg">
+    <Box mt="lg" style={{marginLeft: "auto", marginRight: 0}}>
       {!displaySettings.spreadsheet && (
         <Radio.Group
           value={colorCoding}
+          orientation="vertical"
           onChange={(value) => handleOnChange(value)}
           name="ColorCoding"
           label="Transaction Color Coding"

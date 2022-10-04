@@ -1,7 +1,7 @@
 import {
   ActionIcon,
   createStyles,
-  Popover,
+  Drawer,
   useMantineTheme,
 } from "@mantine/core";
 
@@ -25,29 +25,16 @@ export default function Toolbar() {
   const { classes } = useStyles();
   const [hidden, setHidden] = useState(false);
   const isMobile = useMediaQuery(mediaQuery);
-  console.log(hidden)
+
   return isMobile ? (
     <>
       <RefreshBalanceSheets />
-
-      <Popover
-        opened={opened}
-        onChange={setOpened}
-        position="bottom"
-        shadow="md"
-      >
-        <Popover.Target>
-          <ActionIcon size="lg" onClick={() => setOpened(true)}>
-            <DotsVertical size={40} color={`${theme.colors.violet[9]}`} />
-          </ActionIcon>
-        </Popover.Target>
-        <Popover.Dropdown
-          className={`${hidden ? `${classes.hidden}` : `${classes.visible}`}`}
-          sx={{width: "20rem"}}
-        >
-          <Settings setOpened={setOpened} setHidden={setHidden} />
-        </Popover.Dropdown>
-      </Popover>
+      <ActionIcon size="lg" onClick={() => setOpened(true)}>
+        <DotsVertical size={40} color={`${theme.colors.violet[9]}`} />
+      </ActionIcon>
+      <Drawer position="right" opened={opened} onClose={() => setOpened(false)}>
+        <Settings setOpened={setOpened} />
+      </Drawer>
     </>
   ) : (
     <RefreshBalanceSheets />
