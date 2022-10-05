@@ -23,37 +23,37 @@ const useStyles = createStyles((theme) => ({
   },
   header: { padding: "3px", cursor: "pointer" },
   grape: {
-    backgroundColor: theme.colors.grape[8],
+    // backgroundColor: theme.colors.grape[8],
     "&:hover": {
       backgroundColor: theme.colors.grape[3],
     },
   },
   violet: {
-    backgroundColor: theme.colors.violet[8],
+    // backgroundColor: theme.colors.violet[8],
     "&:hover": {
       backgroundColor: theme.colors.violet[3],
     },
   },
   indigo: {
-    backgroundColor: theme.colors.violet,
+    // backgroundColor: theme.colors.violet,
     "&:hover": {
       backgroundColor: theme.colors.violet[3],
     },
   },
   pink: {
-    backgroundColor: theme.colors.pink,
+    // backgroundColor: theme.colors.pink,
     "&:hover": {
       backgroundColor: theme.colors.pink[3],
     },
   },
   teal: {
-    backgroundColor: theme.colors.teal,
+    // backgroundColor: theme.colors.teal,
     "&:hover": {
       backgroundColor: theme.colors.teal[3],
     },
   },
   blue: {
-    backgroundColor: theme.colors.blue,
+    // backgroundColor: theme.colors.blue,
     "&:hover": {
       backgroundColor: theme.colors.blue[3],
     },
@@ -91,12 +91,13 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
     >
       <Card.Section
         className={`${classes.header} ${classes[bank.color]}`}
-        // className={`${classes.header}`}
+        
+        
         onClick={() => onSelectBank(bank)}
       >
         <Center>
-          <Title order={4} color="white">
-          {/* <Title order={4} color={theme.colors[bank.color][9]}> */}
+          {/* <Title order={4} color="white"> */}
+          <Title order={4} color={theme.colors[bank.color][9]}>
             {bank.cardInfo.name}
           </Title>
         </Center>
@@ -105,8 +106,8 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
         <SimpleGrid
           cols={2}
           sx={{
-            backgroundColor: theme.colors[bank.color][8],
-            // borderBottom: `1px solid ${theme.colors[bank.color][2]}`,
+            // backgroundColor: theme.colors[bank.color][8],
+            borderBottom: `1px solid ${theme.colors[bank.color][2]}`,
             height: "1.25rem",
           }}
         >
@@ -114,8 +115,8 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
             size="xs"
             weight="bold"
             align="center"
-            // color={`${theme.colors[bank.color][9]}`}
-            color="white"
+            color={`${theme.colors[bank.color][9]}`}
+            // color="white"
           >
             Assets
           </Text>
@@ -123,8 +124,8 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
             size="xs"
             weight="bold"
             align="center"
-            // color={`${theme.colors[bank.color][9]}`}
-            color="white"
+            color={`${theme.colors[bank.color][9]}`}
+            // color="white"
           >
             Liabilities
           </Text>
