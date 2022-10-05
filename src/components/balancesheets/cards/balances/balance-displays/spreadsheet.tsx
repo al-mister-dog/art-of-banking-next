@@ -1,6 +1,5 @@
 import React from "react";
-import { createStyles, Text } from "@mantine/core";
-import useColorSettings from "../../../../../hooks/useColorSettings";
+import { createStyles, Text, useMantineTheme } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   assignment: {
@@ -25,16 +24,18 @@ const useStyles = createStyles((theme) => ({
     transition: "all 0.5s ease-in",
     background: theme.colors.blue[7],
     color: "white",
-    padding: "0px 3px",
+    padding: "0px",
   },
 }));
 
-const Balance = ({ record }) => {
+const Balance = ({ record, bank }) => {
   const { classes } = useStyles();
+  const theme = useMantineTheme();
   if (record === null) {
     return (
-      <Text size="xs" 
-      style={{borderBottom: "1px solid #828282"}}
+      <Text
+        size="xs"
+        style={{ borderBottom: `1px solid ${theme.colors[bank.color][2]}` }}
       >
         <br></br>
       </Text>
@@ -46,10 +47,11 @@ const Balance = ({ record }) => {
       weight="bold"
       align="left"
       className={classes[record.notationType]}
-      style={{borderBottom: "1px solid #828282"}}
+      style={{ borderBottom: `1px solid ${theme.colors[bank.color][2]}` }}
     >
       {record.symbol}
-      {record.amount} {record.instrumentType} {record.name === "clearinghouse" ? "CH" : record.name}
+      {record.amount} {record.instrumentType}{" "}
+      {record.name === "clearinghouse" ? "CH" : record.name}
     </Text>
   );
 };

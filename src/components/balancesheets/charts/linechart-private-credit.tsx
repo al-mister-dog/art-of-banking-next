@@ -47,7 +47,7 @@ export default function LineChart() {
   }
 
   const options = {
-    responsive: true,
+    // responsive: true,
     scales: {
       y: {
         beginAtZero: true,

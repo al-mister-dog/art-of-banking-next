@@ -15,16 +15,16 @@ const useStyles = createStyles((theme) => ({
   header: { padding: "5px" },
 
   grape: {
-    color: theme.colors.grape,
+    backgroundColor: theme.colors.grape[8],
   },
   violet: {
-    color: theme.colors.violet,
+    backgroundColor: theme.colors.violet[8],
   },
   indigo: {
-    color: theme.colors.indigo,
+    backgroundColor: theme.colors.indigo[8],
   },
   blue: {
-    color: theme.colors.blue,
+    backgroundColor: theme.colors.blue[8],
   },
 }));
 
@@ -43,7 +43,7 @@ function SidePanel({ bank }: { bank: CardInfo }) {
     >
       <Card.Section className={`${classes.header} ${classes[bank.color]}`}>
         <Center>
-          <Title order={2} color={`${bank.color}`}>
+          <Title order={2} color="white">
             {bank.cardInfo.name}
           </Title>
         </Center>

@@ -3,7 +3,7 @@ import { selectActions } from "../../../../features/actions/actionsSlice";
 import { useState, useCallback, useEffect } from "react";
 import { Grid } from "@mantine/core";
 import { CardInfo } from "../../types";
-import CardGrid from "./card-grid-desktop";
+import CardGrid from "./card-grid";
 import BankDetail from "../../bank-detail/desktop";
 
 export default function LayoutDesktop({

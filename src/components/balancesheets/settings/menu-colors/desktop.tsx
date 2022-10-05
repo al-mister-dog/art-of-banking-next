@@ -1,34 +1,15 @@
-import { useAppSelector, useAppDispatch } from "../../../../app/hooks";
+import { useAppSelector } from "../../../../app/hooks";
 import { selectSettings } from "../../../../features/settings/settingsSlice";
-import { useState } from "react";
-import { Box, Radio } from "@mantine/core";
-import { setColors } from "../../../../features/settings/settingsSlice";
+import { Box } from "@mantine/core";
+import MenuSpreadSheet from "../color-coding/transactions/transactions-desktop";
+import MenuBalances from "../color-coding/balances/balances-desktop";
 
-export default function ColorsRadioGroup() {
+export default function ColorMenus() {
   const { displaySettings } = useAppSelector(selectSettings);
-  const dispatch = useAppDispatch();
-  const [colorCoding, setColorCoding] = useState("round");
 
-  function handleOnChange(value: string) {
-    dispatch(setColors({ key: value }));
-    setColorCoding(value);
-  }
   return (
     <Box mt="lg">
-      {!displaySettings.spreadsheet && (
-        <Radio.Group
-          value={colorCoding}
-          orientation="vertical"
-          onChange={(value) => handleOnChange(value)}
-          name="ColorCoding"
-          label="Balances Color Coding"
-        >
-          <Radio color="violet" value="static" label="Each" />
-          <Radio color="violet" value="round" label="All" />
-          <Radio color="violet" value="flash" label="Flash" />
-          <Radio color="violet" value="off" label="Off" />
-        </Radio.Group>
-      )}
+      {displaySettings.spreadsheet ? <MenuSpreadSheet /> : <MenuBalances />}
     </Box>
   );
 }

@@ -4,20 +4,29 @@ import {
   selectSettings,
   setClaveroDisplay,
 } from "../../../../../features/settings/settingsSlice";
-import { Box, Button, Modal, Radio, Text } from "@mantine/core";
-import Spreadsheet from "../../../../displays/spreadsheet";
-
 import { useRadioSettings } from "../../../../../hooks/useRadioSettings";
+import {
+  Box,
+  Button,
+  Modal,
+  Radio,
+  Stack,
+  Text,
+  useMantineTheme,
+} from "@mantine/core";
 import SpreadsheetAbout from "../../about/about-spreadsheet";
+import Spreadsheet from "../../../../displays/spreadsheet";
 
 export default function SpreadsheetMenu({ setOpened }) {
   const dispatch = useAppDispatch();
-
   const { spreadsheetSettings } = useAppSelector(selectSettings);
-  const transactionType = useRadioSettings(spreadsheetSettings);
-
+  
   const [spreadSheetOpened, setSpreadSheetOpened] = useState(false);
   const [aboutOpened, setAboutOpened] = useState(false);
+
+  const theme = useMantineTheme();
+
+  const transactionType = useRadioSettings(spreadsheetSettings);
 
   function handleOnChangeTransaction(value: string) {
     dispatch(setClaveroDisplay({ key: value }));
@@ -32,7 +41,7 @@ export default function SpreadsheetMenu({ setOpened }) {
           orientation="vertical"
           onChange={(value) => handleOnChangeTransaction(value)}
           name="ColorCoding"
-          label="Transactions Display"
+          label="Spreadsheet Colors"
         >
           <Radio
             color="violet"
@@ -45,27 +54,28 @@ export default function SpreadsheetMenu({ setOpened }) {
             label={<Text size="xs">All Transactions</Text>}
           />
         </Radio.Group>
-
-        <Button
-          color="violet"
-          mt="md"
-          variant="light"
-          onClick={() => {
-            setSpreadSheetOpened(true);
-          }}
-        >
-          Full Page
-        </Button>
-        <Button
-          color="violet"
-          mt="md"
-          variant="light"
-          onClick={() => {
-            setAboutOpened(true);
-          }}
-        >
-          About Color-Coding
-        </Button>
+        <Stack>
+          <Button
+            color="violet"
+            mt="md"
+            variant="light"
+            onClick={() => {
+              setSpreadSheetOpened(true);
+            }}
+          >
+            Full Page
+          </Button>
+          <Button
+            color="violet"
+            mt="md"
+            variant="light"
+            onClick={() => {
+              setAboutOpened(true);
+            }}
+          >
+            About Color-Coding
+          </Button>
+        </Stack>
       </Box>
 
       <Modal
@@ -74,6 +84,7 @@ export default function SpreadsheetMenu({ setOpened }) {
           setAboutOpened(false);
         }}
         title="Color-Coded Payment Notation"
+        styles={{ modal: { backgroundColor: theme.colors.red[0] } }}
       >
         <SpreadsheetAbout />
       </Modal>
@@ -84,6 +95,7 @@ export default function SpreadsheetMenu({ setOpened }) {
         }}
         withCloseButton={false}
         fullScreen
+        styles={{ modal: { backgroundColor: theme.colors.red[0] } }}
       >
         <div style={{ height: "60px" }}>
           <Button

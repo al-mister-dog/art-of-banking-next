@@ -30,27 +30,23 @@ export default function DisplayRadioGroup() {
         onChange={(value) => handleOnChange(value)}
         name="Display"
       >
-        <ColorsMenu>
-          <Radio
-            color="violet"
-            value="balances"
-            label={<Text size="xs">Balances</Text>}
-          />
-        </ColorsMenu>
-        <ColorsMenu>
-          <Radio
-            color="violet"
-            value="taccounts"
-            label={<Text size="xs">T-Accounts</Text>}
-          />
-        </ColorsMenu>
-        <SpreadsheetMenu>
-          <Radio
-            color="violet"
-            value="spreadsheet"
-            label={<Text size="xs">Spreadsheet</Text>}
-          />
-        </SpreadsheetMenu>
+        <Radio
+          color="violet"
+          value="balances"
+          label={<Text size="xs">Balances</Text>}
+        />
+
+        <Radio
+          color="violet"
+          value="taccounts"
+          label={<Text size="xs">T-Accounts</Text>}
+        />
+
+        <Radio
+          color="violet"
+          value="spreadsheet"
+          label={<Text size="xs">Spreadsheet</Text>}
+        />
       </Radio.Group>
     </Box>
   );

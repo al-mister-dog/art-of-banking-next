@@ -70,7 +70,7 @@ export const useStyles = createStyles((theme) => ({
 }));
 
 export default function CardUI({ bank }: { bank: CardInfo }) {
-  const theme = useMantineTheme()
+  const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const { classes } = useStyles();
   const { displaySettings, spreadsheetSettings } =
@@ -85,7 +85,7 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
     spreadsheetBalances = Record.getAllTransactions(bank.cardInfo.id);
   }
 
-  const textColor = bank.color
+  const textColor = bank.color;
   return (
     <Card
       key={bank.cardInfo.id}
@@ -107,27 +107,47 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
       <Card.Section>
         <SimpleGrid
           cols={2}
-          sx={{ borderBottom: `1px solid ${theme.colors[bank.color][2]}`, height: "1.25rem" }}
+          sx={{
+            borderBottom: `1px solid ${theme.colors[bank.color][2]}`,
+            height: "1.25rem",
+          }}
         >
-
-          <Text size="xs" weight="bold" align="center" color={`${theme.colors[bank.color][9]}`}>
+          <Text
+            size="xs"
+            weight="bold"
+            align="center"
+            color={`${theme.colors[bank.color][9]}`}
+          >
             Assets
           </Text>
-          <Text size="xs" weight="bold" align="center" color={`${theme.colors[bank.color][9]}`}>
+          <Text
+            size="xs"
+            weight="bold"
+            align="center"
+            color={`${theme.colors[bank.color][9]}`}
+          >
             Liabilities
           </Text>
         </SimpleGrid>
       </Card.Section>
-      <Card.Section style={{padding: "5px"}}>
+      <Card.Section style={{ padding: "5px" }}>
         {displaySettings.spreadsheet &&
         spreadsheetBalances.assets !== undefined ? (
           <SpreadsheetList
             assets={spreadsheetBalances.assets}
             liabilities={spreadsheetBalances.liabilities}
+            bank={bank}
           />
         ) : (
-          <SimpleGrid cols={2} style={{ height: "7.9rem", overflowX: "hidden" }}>
-            <div style={{borderRight: `1px solid ${theme.colors[bank.color][2]}`}}>
+          <SimpleGrid
+            cols={2}
+            style={{ height: "7.9rem", overflowX: "hidden" }}
+          >
+            <div
+              style={{
+                borderRight: `1px solid ${theme.colors[bank.color][2]}`,
+              }}
+            >
               {bank.balanceSheet.assets.map((asset: any) => {
                 return (
                   <BalanceByInstrument
@@ -168,4 +188,3 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
     </Card>
   );
 }
-

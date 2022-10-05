@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../../../app/hooks";
 import { selectSettings } from "../../../../features/settings/settingsSlice";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback } from "react";
 import {
   Card,
   Center,
@@ -16,16 +16,20 @@ import { Record } from "../../../../domain/Records";
 import SpreadsheetList from "../balances/balance-displays/spreadsheet-list";
 
 const useStyles = createStyles((theme) => ({
-  card: { paddingBottom: "0px", height: "13.75rem", backgroundColor: theme.colors.violet[1] },
+  card: {
+    paddingBottom: "0px",
+    height: "13.75rem",
+    backgroundColor: theme.colors.violet[1],
+  },
   header: { padding: "3px", cursor: "pointer" },
   grape: {
-    backgroundColor: theme.colors.grape,
+    backgroundColor: theme.colors.grape[8],
     "&:hover": {
       backgroundColor: theme.colors.grape[3],
     },
   },
   violet: {
-    backgroundColor: theme.colors.violet,
+    backgroundColor: theme.colors.violet[8],
     "&:hover": {
       backgroundColor: theme.colors.violet[3],
     },
@@ -76,6 +80,7 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
   } else if (spreadsheetSettings.all) {
     spreadsheetBalances = Record.getAllTransactions(bank.cardInfo.id);
   }
+
   return (
     <Card
       key={bank.cardInfo.id}
@@ -86,10 +91,12 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
     >
       <Card.Section
         className={`${classes.header} ${classes[bank.color]}`}
+        // className={`${classes.header}`}
         onClick={() => onSelectBank(bank)}
       >
         <Center>
           <Title order={4} color="white">
+          {/* <Title order={4} color={theme.colors[bank.color][9]}> */}
             {bank.cardInfo.name}
           </Title>
         </Center>
@@ -98,7 +105,8 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
         <SimpleGrid
           cols={2}
           sx={{
-            borderBottom: `1px solid ${theme.colors[bank.color][2]}`,
+            backgroundColor: theme.colors[bank.color][8],
+            // borderBottom: `1px solid ${theme.colors[bank.color][2]}`,
             height: "1.25rem",
           }}
         >
@@ -106,7 +114,8 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
             size="xs"
             weight="bold"
             align="center"
-            color={`${theme.colors[bank.color][9]}`}
+            // color={`${theme.colors[bank.color][9]}`}
+            color="white"
           >
             Assets
           </Text>
@@ -114,22 +123,28 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
             size="xs"
             weight="bold"
             align="center"
-            color={`${theme.colors[bank.color][9]}`}
+            // color={`${theme.colors[bank.color][9]}`}
+            color="white"
           >
             Liabilities
           </Text>
         </SimpleGrid>
       </Card.Section>
-      <Card.Section style={{padding: "5px"}}>
+      <Card.Section style={{ padding: "5px" }}>
         {displaySettings.spreadsheet &&
         spreadsheetBalances.assets !== undefined ? (
           <SpreadsheetList
             assets={spreadsheetBalances.assets}
             liabilities={spreadsheetBalances.liabilities}
+            bank={bank}
           />
         ) : (
-          <SimpleGrid cols={2} style={{ height: "10rem",overflowX: "hidden" }}>
-            <div style={{borderRight: `1px solid ${theme.colors[bank.color][2]}`}}>
+          <SimpleGrid cols={2} style={{ height: "10rem", overflowX: "hidden" }}>
+            <div
+              style={{
+                borderRight: `1px solid ${theme.colors[bank.color][2]}`,
+              }}
+            >
               {bank.balanceSheet.assets.map((asset: any) => {
                 return (
                   <BalanceByInstrument

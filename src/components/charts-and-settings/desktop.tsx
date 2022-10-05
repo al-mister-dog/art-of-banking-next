@@ -30,20 +30,22 @@ export default function Desktop() {
           )}
         </div>
       ) : (
-        <Grid grow>
-          <Grid.Col span={1}>
-            <SettingsDesktop />
-          </Grid.Col>
-          <Grid.Col span={4}>
-            <Card style={{ backgroundColor: theme.colors.violet[1] }}>
-              {charts[currentLectureId] === "balances" && <ChartBalances />}
-              {charts[currentLectureId] === "credit" && <ChartCredit />}
-              {charts[currentLectureId] === "private credit" && (
-                <ChartPrivateCredit />
-              )}
-            </Card>
-          </Grid.Col>
-        </Grid>
+        <div style={{height: "30rem"}}>
+          <Grid grow>
+            <Grid.Col span={1}>
+              <SettingsDesktop />
+            </Grid.Col>
+            <Grid.Col span={3}>
+              <Card style={{ backgroundColor: theme.colors.violet[1] }}>
+                {charts[currentLectureId] === "balances" && <ChartBalances />}
+                {charts[currentLectureId] === "credit" && <ChartCredit />}
+                {charts[currentLectureId] === "private credit" && (
+                  <ChartPrivateCredit />
+                )}
+              </Card>
+            </Grid.Col>
+          </Grid>
+        </div>
       )}
     </>
   );

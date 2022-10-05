@@ -5,19 +5,20 @@ import {
   Text,
   Title,
   createStyles,
+  useMantineTheme,
 } from "@mantine/core";
 import { Record } from "../../domain/Records";
 import Spreadsheet from "../balancesheets/cards/balances/balance-displays/spreadsheet";
-import SpreadsheetList from "../balancesheets/cards/balances/balance-displays/spreadsheet-list";
 
 const useStyles = createStyles((theme) => ({
   card: {
+    margin: "10px",
     paddingBottom: "0px",
+    minHeight: "13.75rem",
+    minWidth: "24rem",
     backgroundColor: theme.colors.violet[1],
-    minWidth: "350px",
-    margin: "5px",
   },
-  header: { padding: "5px", cursor: "pointer" },
+  header: { padding: "3px", cursor: "pointer" },
   grape: {
     backgroundColor: theme.colors.grape,
     "&:hover": {
@@ -50,17 +51,17 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function ClaveroCard({ bank }) {
+export default function SpreadsheetCard({ bank }) {
   const { classes } = useStyles();
-
+  const theme = useMantineTheme();
   const { assets, liabilities } = Record.getAllTransactions(bank.cardInfo.id);
 
   return (
     <Card
       key={bank.cardInfo.id}
+      shadow="sm"
       p="sm"
       radius="xs"
-      shadow="sm"
       className={classes.card}
     >
       <Card.Section className={`${classes.header} ${classes[bank.color]}`}>
@@ -70,28 +71,49 @@ export default function ClaveroCard({ bank }) {
           </Title>
         </Center>
       </Card.Section>
-      <SimpleGrid
-        cols={2}
-        sx={{ borderBottom: "1px solid black", padding: "5px" }}
-      >
-        <Text size="sm" weight="bold" align="center">
-          Assets
-        </Text>
-        <Text size="sm" weight="bold" align="center">
-          Liabilities
-        </Text>
-      </SimpleGrid>
-
       <Card.Section>
-        <SimpleGrid cols={2} spacing={0}>
-          <div>
-            {assets.map((record: any, index) => {
-              return <Spreadsheet key={index} record={record} />;
+        <SimpleGrid
+          cols={2}
+          sx={{
+            borderBottom: `1px solid ${theme.colors[bank.color][2]}`,
+            height: "1.25rem",
+          }}
+        >
+          <Text
+            size="xs"
+            weight="bold"
+            align="center"
+            color={`${theme.colors[bank.color][9]}`}
+          >
+            Assets
+          </Text>
+          <Text
+            size="xs"
+            weight="bold"
+            align="center"
+            color={`${theme.colors[bank.color][9]}`}
+          >
+            Liabilities
+          </Text>
+        </SimpleGrid>
+      </Card.Section>
+
+      <Card.Section style={{ padding: "5px" }}>
+        <SimpleGrid
+          cols={2}
+          spacing={0}
+          style={{ height: "10rem", overflowX: "hidden" }}
+        >
+          <div
+            style={{ borderRight: `1px solid ${theme.colors[bank.color][2]}` }}
+          >
+            {assets.map((record: any, index: number) => {
+              return <Spreadsheet key={index} record={record} bank={bank} />;
             })}
           </div>
           <div>
-            {liabilities.map((record: any, index) => {
-              return <Spreadsheet key={index} record={record} />;
+            {liabilities.map((record: any, index: number) => {
+              return <Spreadsheet key={index} record={record} bank={bank} />;
             })}
           </div>
         </SimpleGrid>

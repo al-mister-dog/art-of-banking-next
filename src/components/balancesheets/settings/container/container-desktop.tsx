@@ -1,3 +1,6 @@
+import { useAppSelector } from "../../../../app/hooks";
+import { selectActions } from "../../../../features/actions/actionsSlice";
+import { sliderSettings } from "../../../../features/settings/initialState";
 import {
   Card,
   Center,
@@ -6,14 +9,11 @@ import {
   Title,
   useMantineTheme,
 } from "@mantine/core";
-import { useAppSelector } from "../../../../app/hooks";
-import { selectActions } from "../../../../features/actions/actionsSlice";
-import { sliderSettings } from "../../../../features/settings/initialState";
 import DisplayRadioGroup from "../menu-displays/desktop";
 import InterestRateSlider from "../sliders/slider-interest-rate";
 import OverdraftSlider from "../sliders/slider-overdraft";
 import ReserveRequirementSlider from "../sliders/slider-reserve-requirement";
-
+import ColorsMenu from "../menu-colors/desktop";
 
 export default function Desktop() {
   const { currentLectureId } = useAppSelector(selectActions);
@@ -24,18 +24,30 @@ export default function Desktop() {
 
   return (
     <Card
-      style={{ backgroundColor: theme.colors.violet[1], overflow: "visible" }}
+      style={{
+        backgroundColor: theme.colors.violet[1],
+        overflow: "visible",
+        height: "27.5rem",
+      }}
     >
-      <Card.Section mb="xs" p="xs">
+      <Card.Section
+        mb="xs"
+        p="xs"
+        style={{ borderBottom: `1px solid ${theme.colors.violet[2]}` }}
+      >
         <Center>
-          <Title order={4}>Settings</Title>
+          <Title order={4} color="violet">
+            Settings
+          </Title>
         </Center>
       </Card.Section>
 
       <SimpleGrid cols={2}>
-        <div>
-          <Text size="sm" weight="bold" >Ranges</Text>
-          <div style={{ marginTop: "5px" }}>
+        <div style={{ borderRight: `1px solid ${theme.colors.violet[2]}` }}>
+          <Text size="sm" weight="bold" color="violet">
+            Ranges
+          </Text>
+          <div style={{ marginTop: "5px", paddingRight: "5px" }}>
             <OverdraftSlider
               disabled={slidersDisabled.overdraft}
               overdraftValue={overdraftValue}
@@ -47,8 +59,11 @@ export default function Desktop() {
           </div>
         </div>
         <div>
-        <Text size="sm" weight="bold" >Balancesheet Display</Text>
+          <Text size="sm" weight="bold" color="violet">
+            Balancesheet Display
+          </Text>
           <DisplayRadioGroup />
+          <ColorsMenu />
         </div>
       </SimpleGrid>
     </Card>
