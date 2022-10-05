@@ -59,46 +59,8 @@ export const Record = {
     insertLog(bank1.id, bank1Log);
     insertLog(bank2.id, bank2Log);
   },
-  customerDeposit(bank1: Bank, bank2: Bank, amount: number) {
-    const reservesAssetRecord1 = {
-      instrumentType: "cash",
-      notationType: "assignment",
-      amount: amount,
-      id: bank2.id,
-      symbol: "-",
-      name: bank2.name,
-    };
-    const depositAssetRecord = {
-      instrumentType: "deposits",
-      notationType: "issuance",
-      amount: amount,
-      id: bank2.id,
-      symbol: "+",
-      name: bank2.name,
-    };
-    const reservesAssetRecord2 = {
-      instrumentType: "cash",
-      notationType: "assignment",
-      amount: amount,
-      id: bank1.id,
-      symbol: "+",
-      name: bank1.name,
-    };
-    const depositLiabilityRecord = {
-      instrumentType: "deposits",
-      notationType: "issuance",
-      amount: amount,
-      id: bank1.id,
-      symbol: "+",
-      name: bank1.name,
-    };
 
-    insertAssetsEntry(bank1.id, reservesAssetRecord1);
-    insertAssetsEntry(bank1.id, depositAssetRecord);
-    insertAssetsEntry(bank2.id, reservesAssetRecord2);
-    insertLiabilitiesEntry(bank2.id, depositLiabilityRecord);
-  },
-  customerWithdraw(bank1: Bank, bank2: Bank, amount: number) {
+  withdraw(bank1: Bank, bank2: Bank, amount: number) {
     const reservesAssetRecord1 = {
       instrumentType: "cash",
       notationType: "assignment",
@@ -150,55 +112,7 @@ export const Record = {
     insertLog(bank1.id, bank1Log);
     insertLog(bank2.id, bank2Log);
   },
-  decreaseBalance(bank1: Bank, bank2: Bank, amount: number) {
-    const depositAssetRecord = {
-      instrumentType: "deposits",
-      notationType: "novation",
-      amount: amount,
-      id: bank2.id,
-      symbol: "-",
-      name: bank2.name,
-    };
-    const depositLiabilityRecord = {
-      instrumentType: "deposits",
-      notationType: "novation",
-      amount: amount,
-      id: bank1.id,
-      symbol: "-",
-      name: bank1.name,
-    };
-    insertAssetsEntry(bank1.id, depositAssetRecord);
-    insertLiabilitiesEntry(bank2.id, depositLiabilityRecord);
-    // insertLog(bank1.id, "to", "Credit", depositAssetRecord);
-    // insertLog(bank2.id, "from", "Credit", depositLiabilityRecord);
-  },
-  increaseBalance(bank1: Bank, bank2: Bank, amount: number) {
-    let type = "deposits";
-    if (bank1.name === "Clearing House" || bank2.name === "Clearing House") {
-      type = "ch certs";
-    }
-    const depositAssetRecord = {
-      instrumentType: type,
-      notationType: "novation",
-      amount: amount,
-      id: bank2.id,
-      symbol: "+",
-      name: bank2.name === "Clearing House" ? "CH" : bank2.name,
-    };
-    const depositLiabilityRecord = {
-      instrumentType: type,
-      notationType: "novation",
-      amount: amount,
-      id: bank1.id,
-      symbol: "+",
-      name: bank1.name === "clearinghouse" ? "CH" : bank1.name,
-    };
 
-    insertAssetsEntry(bank1.id, depositAssetRecord);
-    insertLiabilitiesEntry(bank2.id, depositLiabilityRecord);
-    // insertLog(bank1.id, "to", "Credit", depositAssetRecord);
-    // insertLog(bank2.id, "from", "Credit", depositLiabilityRecord);
-  },
   transferSingle(
     amount: number,
     customer1: Bank,
@@ -245,7 +159,7 @@ export const Record = {
 
     const customer1Log = {
       id: customer1.id,
-      action: `Transfered $${amount} to ${customer1.name}`,
+      action: `Transfered $${amount} to ${customer2.name}`,
       symbol: "-",
     };
     const customer2Log = {
@@ -332,8 +246,7 @@ export const Record = {
       action: `Credited $${amount} to ${customer2.name}`,
       symbol: "-",
     };
-    console.log(customer1.name)
-    console.log(customer2.name)
+
     insertLog(customer1.id, customer1Log);
     insertLog(customer2.id, customer2Log);
     insertLog(bank1.id, bank1Log);
@@ -410,6 +323,32 @@ export const Record = {
     }
 
     checkOverdraft(bank2, centralbank, b2CbAccount.balance, balance1, amount);
+
+    const bank1Log = {
+      id: bank1.id,
+      action: `Transfered $${amount} to ${bank2.name}`,
+      symbol: "-",
+    };
+    const bank2Log = {
+      id: bank2.id,
+      action: `Received $${amount} transfer from ${bank1.name}`,
+      symbol: "+",
+    };
+    const centralbankLogA = {
+      id: centralbank.id,
+      action: `Debited $${amount} from ${bank1.name}`,
+      symbol: "+",
+    };
+    const centralbankLogB = {
+      id: centralbank.id,
+      action: `Credited $${amount} to ${bank2.name}`,
+      symbol: "-",
+    };
+
+    insertLog(bank1.id, bank1Log);
+    insertLog(bank2.id, bank2Log);
+    insertLog(centralbank.id, centralbankLogA);
+    insertLog(centralbank.id, centralbankLogB);
   },
   getFedFundsLoan(amount: number, bank1: Bank, bank2: Bank, centralbank: Bank) {
     const b1CbAccount = Accounts.getAccountByIds(bank1.id, centralbank.id);
@@ -418,15 +357,26 @@ export const Record = {
     const balance2 = b2CbAccount.balance;
     const bank1Record = {
       instrumentType: balance1 > 0 ? "deposits" : "overdrafts",
-      notationType: "novation",
+      notationType: "issuance",
       amount,
       symbol: "+",
+      id: bank2.id,
+      name: bank2.name,
     };
     const bank2Record = {
       instrumentType: balance2 > 0 ? "deposits" : "overdrafts",
-      notationType: "novation",
+      notationType: "issuance",
       amount,
       symbol: "+",
+      id: bank2.id,
+      name: bank2.name,
+    };
+
+    insertLiabilitiesEntry(bank1.id, bank1Record);
+    insertAssetsEntry(bank2.id, bank2Record);
+    const bank1Log = {
+      id: bank1.id,
+      action: ``,
     };
   },
 
@@ -449,7 +399,12 @@ export const Record = {
       symbol: "+",
       name: bank1.name,
     };
-    insertAssetsEntry(bank2.id, bank2Record);
+
+    if (bank2.type === "clearinghouse" ) {
+      insertLiabilitiesEntry(bank2.id, bank2Record);
+    } else {
+      insertAssetsEntry(bank2.id, bank2Record);
+    }
     insertLiabilitiesEntry(bank1.id, bank1Record);
     const bank1Log = {
       id: bank1.id,
@@ -458,10 +413,11 @@ export const Record = {
     };
     const bank2Log = {
       id: bank2.id,
-      action: `Received $${amount} credit from ${bank2.name}`,
+      action: `Received $${amount} from ${bank2.name}`,
       symbol: "+",
     };
-    // insertLog(bank1.id, "to", "Credit", "", bank1Record
+    insertLog(bank1.id, bank1Log);
+    insertLog(bank2.id, bank2Log);
   },
   debitAccount(bank1, bank2, amount) {
     const system = System.getSystem();
@@ -483,6 +439,18 @@ export const Record = {
     };
     insertAssetsEntry(bank1.id, bank1Record);
     insertLiabilitiesEntry(bank2.id, bank2Record);
+    const bank1Log = {
+      id: bank1.id,
+      action: `Debited $${amount} from ${bank2.name}`,
+      symbol: "+",
+    };
+    const bank2Log = {
+      id: bank2.id,
+      action: `$${amount} Debited from ${bank2.name}`,
+      symbol: "-",
+    };
+    insertLog(bank1.id, bank1Log);
+    insertLog(bank2.id, bank2Log);
   },
   increaseDues(bank1, bank2, amount) {
     const system = System.getSystem();
@@ -505,6 +473,21 @@ export const Record = {
 
     insertLiabilitiesEntry(bank1.id, duesLiabilityRecord1);
     insertAssetsEntry(bank2.id, duesAssetRecord2);
+
+    const bank1Log = {
+      id: bank1.id,
+      action: `$${amount} owed to ${bank2.name}`,
+      symbol: "",
+      aside: true,
+    };
+    const bank2Log = {
+      id: bank2.id,
+      action: `$${amount} owed from ${bank2.name}`,
+      symbol: "",
+      aside: true,
+    };
+    insertLog(bank1.id, bank1Log);
+    insertLog(bank2.id, bank2Log);
   },
   decreaseDues(bank1, bank2, amount) {
     const system = System.getSystem();
@@ -526,9 +509,24 @@ export const Record = {
     };
     insertLiabilitiesEntry(bank1.id, duesLiabilityRecord1);
     insertAssetsEntry(bank2.id, duesAssetRecord2);
+
+    const bank1Log = {
+      id: bank1.id,
+      action: `Paid $${amount} owed to ${bank2.name}`,
+      symbol: "",
+      // aside: true,
+    };
+    const bank2Log = {
+      id: bank1.id,
+      action: `Received $${amount} owed from ${bank2.name}`,
+      symbol: "",
+      // aside: true,
+    };
+    insertLog(bank1.id, bank1Log);
+    insertLog(bank2.id, bank2Log);
   },
   fedFundsLoan(bank1, bank2, amount) {
-    const duesLiabilityRecord1 = {
+    const record1 = {
       instrumentType: "fed funds",
       notationType: "issuance",
       amount: amount,
@@ -536,7 +534,7 @@ export const Record = {
       symbol: "+",
       name: bank2.name,
     };
-    const duesAssetRecord2 = {
+    const record2 = {
       instrumentType: "fed funds",
       notationType: "issuance",
       amount: amount,
@@ -544,8 +542,22 @@ export const Record = {
       symbol: "+",
       name: bank1.name,
     };
-    insertLiabilitiesEntry(bank1.id, duesLiabilityRecord1);
-    insertAssetsEntry(bank2.id, duesAssetRecord2);
+
+    insertLiabilitiesEntry(bank1.id, record1);
+    insertAssetsEntry(bank2.id, record2);
+
+    const bank1Log = {
+      id: bank1.id,
+      action: `Received $${amount} Fed Funds from ${bank2.name}`,
+      symbol: "+",
+    };
+    const bank2Log = {
+      id: bank1.id,
+      action: `Issued $${amount} Fed Funds to ${bank2.name}`,
+      symbol: "-",
+    };
+    insertLog(bank1.id, bank1Log);
+    insertLog(bank2.id, bank2Log);
   },
   repayFedFundsLoan(bank1, bank2, amount) {
     const duesLiabilityRecord1 = {
@@ -566,6 +578,19 @@ export const Record = {
     };
     insertLiabilitiesEntry(bank1.id, duesLiabilityRecord1);
     insertAssetsEntry(bank2.id, duesAssetRecord2);
+
+    const bank1Log = {
+      id: bank1.id,
+      action: `Paid back $${amount} Fed Funds to ${bank2.name}`,
+      symbol: "-",
+    };
+    const bank2Log = {
+      id: bank1.id,
+      action: `Received $${amount} Fed Funds from ${bank2.name}`,
+      symbol: "+",
+    };
+    insertLog(bank1.id, bank1Log);
+    insertLog(bank2.id, bank2Log);
   },
   get(id) {
     if (records.id === 0) {
@@ -744,3 +769,53 @@ function checkOverdraft(bank, centralbank, balance1, balance2, amount) {
     insertLiabilitiesEntry(centralbank.id, centralBankRecord4);
   }
 }
+
+// decreaseBalance(bank1: Bank, bank2: Bank, amount: number) {
+//   const depositAssetRecord = {
+//     instrumentType: "deposits",
+//     notationType: "novation",
+//     amount: amount,
+//     id: bank2.id,
+//     symbol: "-",
+//     name: bank2.name,
+//   };
+//   const depositLiabilityRecord = {
+//     instrumentType: "deposits",
+//     notationType: "novation",
+//     amount: amount,
+//     id: bank1.id,
+//     symbol: "-",
+//     name: bank1.name,
+//   };
+//   insertAssetsEntry(bank1.id, depositAssetRecord);
+//   insertLiabilitiesEntry(bank2.id, depositLiabilityRecord);
+//   // insertLog(bank1.id, "to", "Credit", depositAssetRecord);
+//   // insertLog(bank2.id, "from", "Credit", depositLiabilityRecord);
+// },
+// increaseBalance(bank1: Bank, bank2: Bank, amount: number) {
+//   let type = "deposits";
+//   if (bank1.name === "Clearing House" || bank2.name === "Clearing House") {
+//     type = "ch certs";
+//   }
+//   const depositAssetRecord = {
+//     instrumentType: type,
+//     notationType: "novation",
+//     amount: amount,
+//     id: bank2.id,
+//     symbol: "+",
+//     name: bank2.name === "Clearing House" ? "CH" : bank2.name,
+//   };
+//   const depositLiabilityRecord = {
+//     instrumentType: type,
+//     notationType: "novation",
+//     amount: amount,
+//     id: bank1.id,
+//     symbol: "+",
+//     name: bank1.name === "clearinghouse" ? "CH" : bank1.name,
+//   };
+
+//   insertAssetsEntry(bank1.id, depositAssetRecord);
+//   insertLiabilitiesEntry(bank2.id, depositLiabilityRecord);
+//   // insertLog(bank1.id, "to", "Credit", depositAssetRecord);
+//   // insertLog(bank2.id, "from", "Credit", depositLiabilityRecord);
+// },

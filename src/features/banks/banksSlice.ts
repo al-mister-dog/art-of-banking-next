@@ -124,7 +124,6 @@ export const banksSlice = createSlice({
     },
     debitClearinghouse: (state, { payload }) => {
       const { amount, b1, b2 } = payload;
-
       Banks.debitAccount(b1, b2, amount);
       Dues.settle(b1, b2);
       GraphData.setCreditData();

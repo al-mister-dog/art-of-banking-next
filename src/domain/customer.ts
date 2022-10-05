@@ -23,7 +23,7 @@ export const Customer = {
     if (amount) {
       Reserves.decreaseReserves(customer, amount);
       Reserves.increaseReserves(bank, amount);
-      Record.deposit(customer, bank, amount)
+      Record.deposit(customer, bank, amount);
     }
   },
   deposit(customer: Bank, bank: Bank, amount: number) {
@@ -36,7 +36,7 @@ export const Customer = {
     Accounts.decreaseCorrespondingBalance(customer, bank, amount);
     Reserves.increaseReserves(customer, amount);
     Reserves.decreaseReserves(bank, amount);
-    Record.customerWithdraw(customer, bank, amount);
+    Record.withdraw(customer, bank, amount);
   },
 
   transfer(
@@ -49,14 +49,14 @@ export const Customer = {
     if (bank2) {
       Accounts.decreaseCorrespondingBalance(customer1, bank1, amount);
       Accounts.increaseCorrespondingBalance(customer2, bank2, amount);
-      System.handleDues(bank1, bank2, amount);
       Record.transferMultiple(amount, customer1, customer2, bank1, bank2);
+      System.handleDues(bank1, bank2, amount);
+      //possible error?
     } else {
       Accounts.decreaseCorrespondingBalance(customer1, bank1, amount);
       Accounts.increaseCorrespondingBalance(customer2, bank1, amount);
       Record.transferSingle(amount, customer1, customer2, bank1);
     }
-    
   },
 
   getLoan(customer: Bank, bank: Bank, amount: number) {

@@ -106,7 +106,7 @@ export const Dues = {
 
   settle(bank1: Bank, bank2: Bank) {
     const accounts = Dues.getCorresponding(bank1, bank2);
-
+    
     CreditAccounts.set(accounts[0], 0);
     CreditAccounts.set(accounts[1], 0);
   },

@@ -92,7 +92,7 @@ export const Record = {
       }
     }
   },
-  customerWithdraw(bank1: Bank, bank2: Bank, amount: number) {
+  withdraw(bank1: Bank, bank2: Bank, amount: number) {
     const reservesAssetRecord1 = {
       instrumentType: "cash",
       notationType: "assignment",
