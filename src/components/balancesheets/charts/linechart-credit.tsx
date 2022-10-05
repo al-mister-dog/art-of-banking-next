@@ -40,7 +40,8 @@ export default function LineChart() {
   }
 
   const options = {
-    responsive: true,
+    // responsive: true,
+    maintainAspectRatio: false,
     scales: {
       y: {
         beginAtZero: true,
@@ -54,6 +55,7 @@ export default function LineChart() {
       title: {
         display: true,
         text: "Credit vs Reserves",
+        color: theme.colors.violet[9]
       },
     },
   };
@@ -80,5 +82,12 @@ export default function LineChart() {
   if (analytics.graphs.credit.length === 0) {
     return <>Waiting For Graph Data</>;
   }
-  return <Line options={options} data={data} />;
+  // return <Line options={options} data={data} />;
+
+
+  return (
+    <div style={{height: "25.5rem", width: "100%"}}>
+      <Line options={options} data={data} />
+    </div>
+  )
 }

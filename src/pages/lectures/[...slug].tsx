@@ -2,13 +2,8 @@ import { useAppDispatch } from "../../app/hooks";
 import { setActions } from "../../features/actions/actionsSlice";
 import { setup } from "../../features/banks/banksSlice";
 import { refreshSettings } from "../../features/settings/settingsSlice";
-import { useEffect, useState } from "react";
-import {
-  ActionIcon,
-  createStyles,
-  Popover,
-  useMantineTheme,
-} from "@mantine/core";
+import { useEffect } from "react";
+import { createStyles } from "@mantine/core";
 import { introductoryTexts } from "../../config/parts";
 import { getRouteObjectData } from "../../helpers/routeMethods";
 import { lectureRoutes } from "../../config/sidebar-routes/lectureRoutes";
@@ -53,7 +48,6 @@ export default function LecturePath({
   return (
     <>
       <Article
-        // key={slug}
         slug={slug}
         title={title}
         text={paragraphs}

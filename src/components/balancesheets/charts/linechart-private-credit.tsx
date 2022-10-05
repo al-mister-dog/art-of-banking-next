@@ -60,7 +60,8 @@ export default function LineChart() {
       },
       title: {
         display: true,
-        text: "Credit vs Reserves",
+        text: "Private Credit vs Reserves",
+        color: theme.colors.violet[9]
       },
     },
   };
@@ -90,5 +91,9 @@ export default function LineChart() {
       },
     ],
   };
-  return <Line options={options} data={data} />;
+  return (
+    <div style={{ height: "25.5rem", width: "100%" }}>
+      <Line options={options} data={data} />
+    </div>
+  );
 }

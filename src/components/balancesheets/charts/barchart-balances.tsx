@@ -14,6 +14,7 @@ import { Bar } from "react-chartjs-2";
 import { bankData } from "../../../domain/structures";
 import { useMediaQuery } from "@mantine/hooks";
 import { mediaQuery } from "../../../config/media-query";
+import { useMantineTheme } from "@mantine/core";
 
 ChartJS.register(
   CategoryScale,
@@ -26,6 +27,7 @@ ChartJS.register(
 
 export default function BarChart() {
   const { analytics } = useAppSelector(selectBanks);
+  const theme = useMantineTheme()
   const isMobile = useMediaQuery(mediaQuery);
   const banks = Object.keys(analytics.graphs.nationalData).map((id) => {
     return bankData.banks[id];
@@ -62,6 +64,7 @@ export default function BarChart() {
       title: {
         display: true,
         text: "Balances",
+        color: theme.colors.violet[9]
       },
     },
     scales: {
@@ -85,5 +88,9 @@ export default function BarChart() {
       },
     ],
   };
-  return <Bar options={options} data={data} />;
+  return (
+    <div style={{ height: "25.5rem", width: "100%" }}>
+      <Bar options={options} data={data} />
+    </div>
+  );
 }

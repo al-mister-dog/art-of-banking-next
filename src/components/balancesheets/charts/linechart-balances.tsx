@@ -73,6 +73,7 @@ export default function LineChart() {
       title: {
         display: true,
         text: "Credit vs Reserves",
+        color: theme.colors.violet[9]
       },
     },
   };
@@ -119,5 +120,9 @@ export default function LineChart() {
   if (Object.keys(analytics.graphs.nationalData).length === 0) {
     return <>Loading...</>;
   }
-  return <Line options={options} data={data} />;
+  return (
+    <div style={{ height: "25.5rem", width: "100%" }}>
+      <Line options={options} data={data} />
+    </div>
+  );
 }
