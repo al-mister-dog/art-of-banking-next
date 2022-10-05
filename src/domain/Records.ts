@@ -482,7 +482,7 @@ export const Record = {
     };
     const bank2Log = {
       id: bank2.id,
-      action: `$${amount} owed from ${bank2.name}`,
+      action: `$${amount} owed from ${bank1.name}`,
       symbol: "",
       aside: true,
     };
@@ -512,7 +512,7 @@ export const Record = {
 
     const bank1Log = {
       id: bank1.id,
-      action: `Paid $${amount} owed to ${bank2.name}`,
+      action: `Paid $${amount} owed to ${bank1.name}`,
       symbol: "",
       // aside: true,
     };

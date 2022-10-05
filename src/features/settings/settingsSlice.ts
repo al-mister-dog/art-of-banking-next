@@ -76,7 +76,7 @@ export const settingsSlice = createSlice({
       const key: keyof ClaveroSettings = payload.key;
       let resetClaveroSettings = {
         latest: false,
-        lastTwo: false,
+        each: false,
         all: false,
       };
       const newClaveroSettings = { ...resetClaveroSettings, [key]: true };

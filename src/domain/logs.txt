@@ -1,0 +1,4 @@
+deposit: {
+    action: string,
+    symbol: +
+}

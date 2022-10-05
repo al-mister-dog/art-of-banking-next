@@ -29,15 +29,15 @@ export const displaySettings: DisplaySettings = {
 };
 
 export interface ClaveroSettings {
-  latest: boolean;
-  lastTwo: boolean;
+  
+  each: boolean;
   all: boolean;
 }
 
 export const spreadsheetSettings: ClaveroSettings = {
-  latest: true,
-  lastTwo: false,
-  all: false,
+  
+  each: false,
+  all: true,
 };
 
 export const sliderSettings = {

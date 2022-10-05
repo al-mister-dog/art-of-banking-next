@@ -7,6 +7,7 @@ import {
 import ColorsMenu from "../color-coding/balances/balances-desktop";
 import SpreadsheetMenu from "../color-coding/transactions/transactions-desktop";
 import { useRadioSettings } from "../../../../hooks/useRadioSettings";
+import { useEffect } from "react";
 
 export default function DisplayRadioGroup() {
   const dispatch = useAppDispatch();
@@ -18,9 +19,9 @@ export default function DisplayRadioGroup() {
   }
 
   // this sets display back to "balances" on page change
-  // useEffect(() => {
-  //   dispatch(setDisplay({ key: "balances" }));
-  // }, []);
+  useEffect(() => {
+    dispatch(setDisplay({ key: "balances" }));
+  }, []);
 
   return (
     <Box>

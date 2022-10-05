@@ -45,7 +45,7 @@ export default function SpreadsheetMenu({ setOpened }) {
         >
           <Radio
             color="violet"
-            value="lastTwo"
+            value="each"
             label={<Text size="xs">Each Transaction</Text>}
           />
           <Radio

@@ -27,7 +27,7 @@ export default function SpreadsheetMenu() {
   const theme = useMantineTheme();
 
   const transactionType = useRadioSettings(spreadsheetSettings);
-
+  console.log(transactionType);
   function handleOnChangeTransaction(value: string) {
     dispatch(setClaveroDisplay({ key: value }));
   }
@@ -46,7 +46,7 @@ export default function SpreadsheetMenu() {
         >
           <Radio
             color="violet"
-            value="lastTwo"
+            value="each"
             label={<Text size="xs">Each Transaction</Text>}
           />
           <Radio
