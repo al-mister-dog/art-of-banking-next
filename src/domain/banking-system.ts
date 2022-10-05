@@ -1,7 +1,12 @@
 import { Bank, BankData, bankData, records, reservesData } from "./structures";
 import { System } from "./system";
 export const BankingSystem = {
-  createBank(name: string, type: string, reserves: number = 0, initialDeposit?: number) {
+  createBank(
+    name: string,
+    type: string,
+    reserves: number = 0,
+    initialDeposit?: number
+  ) {
     const newBank = {
       id: bankData.id,
       name,
@@ -20,8 +25,11 @@ export const BankingSystem = {
       id: newBankData.id,
       records: { assets: [], liabilities: [] },
     };
-    
-    
+    records.partyLogs[newBankData.id] = {
+      id: newBankData.id,
+      log: [],
+    };
+
     let banks = newBankData.banks;
     banks = { ...banks, [newBank.id]: newBank };
     newBankData.banks = banks;

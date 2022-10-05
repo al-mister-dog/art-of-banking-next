@@ -145,7 +145,7 @@ export function clearBankData() {
     creditAccounts: {} as CreditAccounts,
     allIds: [] as number[],
   };
-  records = { id: 0, parties: {} as Records, rounds: {}, allIds: [] };
+  records = { id: 0, parties: {} as Records, partyLogs: {}, rounds: {}, allIds: [] };
   analytics = {
     records: {},
     balances: {},
@@ -254,6 +254,7 @@ interface Records {
 export let records = {
   id: 0,
   parties: {} as Records,
+  partyLogs: {},
   rounds: {},
   allIds: [],
 };

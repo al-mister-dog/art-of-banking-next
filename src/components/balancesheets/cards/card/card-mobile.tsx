@@ -85,7 +85,6 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
     spreadsheetBalances = Record.getAllTransactions(bank.cardInfo.id);
   }
 
-  const textColor = bank.color;
   return (
     <Card
       key={bank.cardInfo.id}
