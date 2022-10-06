@@ -45,8 +45,7 @@ const actionLists = {
   },
   6: {
     centralbank: [
-      { value: "settleDues", label: "Settle Dues with Banks" },
-      { value: "netDues", label: "Net Dues with Banks" },
+      
     ],
     bank: [
       { value: "bankTransfer", label: "Transfer Money to Bank" },
