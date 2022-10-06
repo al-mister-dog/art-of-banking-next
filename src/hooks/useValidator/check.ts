@@ -52,6 +52,21 @@ export const check = {
     }
     return this;
   },
+  sufficientReservesFed(bank, bankAccount, amount) {
+    const reserves = bankAccount.balance;
+    console.log(reserves);
+    console.log(amount);
+    console.log(reserves < amount)
+    if (reserves < amount) {
+      this.checks = {
+        ...this.checks,
+        error: true,
+        errorMessage: `${bank.name} Has Insufficient Reserves`,
+        disabled: true,
+      };
+    }
+    return this;
+  },
   sufficentDeposits(
     customerDeposits: number,
     amount: number,
@@ -145,5 +160,5 @@ export const check = {
       };
     }
     return this;
-  }
+  },
 };

@@ -78,7 +78,7 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
   } else if (spreadsheetSettings.all) {
     spreadsheetBalances = Record.getAllTransactions(bank.cardInfo.id);
   }
-
+  
   return (
     <Card
       key={bank.cardInfo.id}
@@ -89,8 +89,6 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
     >
       <Card.Section
         className={`${classes.header} ${classes[bank.color]}`}
-        
-        
         onClick={() => onSelectBank(bank)}
       >
         <Center>
@@ -151,6 +149,7 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
                     side={asset}
                     id={bank.cardInfo.id}
                     textColor={bank.color}
+                    bank={bank}
                   />
                 );
               })}
@@ -163,6 +162,7 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
                     side={liability}
                     id={bank.cardInfo.id}
                     textColor={bank.color}
+                    bank={bank}
                   />
                 );
               })}

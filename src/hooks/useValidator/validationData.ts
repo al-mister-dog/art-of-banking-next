@@ -1,8 +1,11 @@
 import { CardInfo } from "../../components/balancesheets/types";
-import { Loans } from "../../domain/loans";
 import { Reserves } from "../../domain/reserves";
 import { creditData } from "../../domain/structures";
-import { getTransferDetails, getWithdrawDetails } from "../../helpers/getters";
+import {
+  getTransferDetails,
+  getWithdrawDetails,
+  getWithdrawDetailsFed,
+} from "../../helpers/getters";
 import { check } from "./check";
 
 const validatorsByLecture = {
@@ -430,25 +433,31 @@ const validatorsByLecture = {
       },
       withdraw(customer: CardInfo, amount: number, selectedBank: string) {
         const { customerDeposits, bankReserves, bank } =
-          getWithdrawDetails(customer);
-        return check
-          .isAmount(amount)
-          .isSelectedBank(selectedBank)
-          .isPositiveAmount(amount)
-          .sufficientReserves(bankReserves, amount, bank.name)
-          .sufficentDeposits(customerDeposits, amount, customer.cardInfo.name)
-          .validate();
+          getWithdrawDetailsFed(customer);
+
+        return (
+          check
+            .isAmount(amount)
+            .isSelectedBank(selectedBank)
+            .isPositiveAmount(amount)
+            .sufficientReservesFed(bank, bankReserves, amount)
+            // .sufficientReserves(bankReserves, amount, bank.name)
+            // .sufficentDeposits(customerDeposits, amount, customer.cardInfo.name)
+            .validate()
+        );
       },
       transfer(customer: CardInfo, amount: number, selectedBank: string) {
         const { customerDeposits, bankReserves, bank } =
           getTransferDetails(customer);
-        return check
-          .isAmount(amount)
-          .isSelectedBank(selectedBank)
-          .isPositiveAmount(amount)
-          // .sufficientReserves(bankReserves, amount, bank.name)
-          .sufficentDeposits(customerDeposits, amount, customer.cardInfo.name)
-          .validate();
+        return (
+          check
+            .isAmount(amount)
+            .isSelectedBank(selectedBank)
+            .isPositiveAmount(amount)
+            // .sufficientReserves(bankReserves, amount, bank.name)
+            .sufficentDeposits(customerDeposits, amount, customer.cardInfo.name)
+            .validate()
+        );
       },
     },
   },

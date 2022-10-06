@@ -19,6 +19,17 @@ export function getWithdrawDetails(customer: CardInfo) {
   };
 }
 
+export function getWithdrawDetailsFed(customer: CardInfo) {
+  const customerDeposits = Accounts.getAccountById(customer.cardInfo.id);
+  const bank = Banks.getByCustomerId(customer.cardInfo.id);
+  const bankAccount = Accounts.getAccountById(bank.id);
+  return {
+    customerDeposits: customerDeposits.balance,
+    bankReserves: bankAccount,
+    bank,
+  };
+}
+
 export function getTransferDetails(customer: CardInfo) {
   const customerDeposits = Accounts.getAccountById(customer.cardInfo.id);
   const bank = Banks.getByCustomerId(customer.cardInfo.id);

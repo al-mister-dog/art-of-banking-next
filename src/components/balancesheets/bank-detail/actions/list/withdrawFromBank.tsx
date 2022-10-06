@@ -15,7 +15,7 @@ export default function WithdrawFromBank({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
   const [amount, setAmount] = useState<number>(0);
-  
+  console.log("WITHDRAW FROM BANK")
   function withdrawPayload() {
     const payload = {
       amount,

@@ -4,6 +4,7 @@ import { selectSettings } from "../../features/settings/settingsSlice";
 import { CardInfo } from "../../components/balancesheets/types";
 import { validatorsById } from "./validationData";
 
+
 interface ValidationObject {
   error: boolean;
   errorMessage: string;
@@ -18,7 +19,7 @@ export function useValidator(
 ): ValidationObject {
   const { currentLectureId } = useAppSelector(selectActions);
   const { overdraft, reserveRequirement } = useAppSelector(selectSettings);
-
+ 
   return validatorsById[currentLectureId][bank.cardInfo.type][action](
     bank,
     amount,

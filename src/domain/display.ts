@@ -36,7 +36,6 @@ export const Display = {
     const liabilitiesDetailed = this.addDetails(bank, liabilities);
     const mappedAssets = mapBalanceToCategory(assetsDetailed);
     const mappedLiabilities = mapBalanceToCategory(liabilitiesDetailed);
-
     return {
       assets: getNestedArray(mappedAssets),
       liabilities: getNestedArray(mappedLiabilities),

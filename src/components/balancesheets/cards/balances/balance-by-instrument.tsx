@@ -8,13 +8,13 @@ import { Text, useMantineTheme } from "@mantine/core";
 import { System } from "../../../../domain/system";
 import { bankData } from "../../../../domain/structures";
 
-export default function BalanceByInstrument({ side, id, textColor }) {
+export default function BalanceByInstrument({ side, id, textColor, bank }) {
   const { colorSettings, displaySettings } = useAppSelector(selectSettings);
   const theme = useMantineTheme();
-  if (System.getSystem() === "centralbank" && side.instrument === "Reserves") {
+  if (System.getSystem() === "centralbank" && side.instrument === "Reserves" && bank.cardInfo.type !== "customer") {
     return;
   }
-  
+
   return (
     <div style={{ marginBottom: "1.5px" }}>
       <Text
@@ -29,16 +29,35 @@ export default function BalanceByInstrument({ side, id, textColor }) {
         return (
           <div key={i}>
             {colorSettings.round && (
-              <BalanceEachRound key={account.id} account={account} id={id} textColor={textColor} />
+              <BalanceEachRound
+                key={account.id}
+                account={account}
+                id={id}
+                textColor={textColor}
+              />
             )}
             {colorSettings.static && (
-              <BalanceEachTurn key={account.id} account={account} id={id} textColor={textColor} />
+              <BalanceEachTurn
+                key={account.id}
+                account={account}
+                id={id}
+                textColor={textColor}
+              />
             )}
             {colorSettings.flash && (
-              <BalanceFlash key={account.id} account={account} id={id} textColor={textColor} />
+              <BalanceFlash
+                key={account.id}
+                account={account}
+                id={id}
+                textColor={textColor}
+              />
             )}
             {colorSettings.off && (
-              <BalanceOff key={account.id} account={account} textColor={textColor}/>
+              <BalanceOff
+                key={account.id}
+                account={account}
+                textColor={textColor}
+              />
             )}
           </div>
         );

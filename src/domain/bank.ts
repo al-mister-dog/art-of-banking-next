@@ -16,12 +16,15 @@ export const Banks = {
       Record.deposit(bank1, bank2, amount);
     }
   },
+  
   get() {
     return mapObject(bankData.banks).filter((bank) => bank.type === "bank");
   },
+
   getAll() {
     return mapObject(bankData.banks);
   },
+
   getById(id: number) {
     const bank = bankData.allIds
       .map((id) => bankData.banks[id])
@@ -32,6 +35,7 @@ export const Banks = {
       );
     return { ...bank[0] };
   },
+
   getByCustomerId(id: number) {
     const sharedAccounts = mapObject(accountData.accounts).filter(
       (account) => account.subordinateId === id
@@ -41,6 +45,7 @@ export const Banks = {
     );
     return { ...banksById[0] };
   },
+
   getAllByCustomerId(id: number) {
     const sharedAccounts = mapObject(accountData.accounts).filter(
       (account) => account.subordinateId === id
@@ -50,12 +55,14 @@ export const Banks = {
     );
     return banksById;
   },
+
   deposit(bank1: Bank, bank2: Bank, amount: number) {
     Accounts.increaseCorrespondingBalance(bank1, bank2, amount);
     Reserves.decreaseReserves(bank1, amount);
     Reserves.increaseReserves(bank2, amount);
     Record.deposit(bank1, bank2, amount);
   },
+
   withdraw(bank1: Bank, bank2: Bank, amount: number) {
     Accounts.decreaseCorrespondingBalance(bank1, bank2, amount);
     Reserves.increaseReserves(bank1, amount);
@@ -69,11 +76,7 @@ export const Banks = {
       Record.transferMultipleCB(amount, bank1, bank2, centralbank);
       Accounts.increaseCorrespondingBalance(bank2, centralbank, amount);
       Accounts.decreaseCorrespondingBalance(bank1, centralbank, amount);
-      // System.handleAfterTransfer(bank1, bank2, amount, true);
-      
     }
-    // Accounts.increaseCorrespondingBalance(bank1, bank2, amount);
-    // System.handleAfterTransfer(bank1, bank2, amount, true);
   },
 
   creditAccount(bank1: Bank, bank2: Bank, amount: number) {

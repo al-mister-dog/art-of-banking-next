@@ -102,7 +102,7 @@ export default function SpreadsheetCard({ bank }) {
         <SimpleGrid
           cols={2}
           spacing={0}
-          style={{ height: "10rem", overflowX: "hidden" }}
+          style={{  overflowX: "hidden" }}
         >
           <div
             style={{ borderRight: `1px solid ${theme.colors[bank.color][2]}` }}
