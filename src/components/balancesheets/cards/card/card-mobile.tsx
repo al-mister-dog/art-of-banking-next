@@ -152,6 +152,7 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
                     side={asset}
                     id={bank.cardInfo.id}
                     textColor={bank.color}
+                    bank={bank}
                   />
                 );
               })}
@@ -164,6 +165,7 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
                     side={liability}
                     id={bank.cardInfo.id}
                     textColor={bank.color}
+                    bank={bank}
                   />
                 );
               })}
