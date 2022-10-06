@@ -136,6 +136,17 @@ export const check = {
     }
     return this;
   },
+  currentLoan(array) {
+    if (array.length > 0) {
+      this.checks = {
+        ...this.checks,
+        error: true,
+        errorMessage: `Current loan with this bank needs to be paid`,
+        disabled: true,
+      };
+    }
+    return this;
+  },
   isDuesAmount(amount: number, loanAmount: number) {
     if (amount > loanAmount) {
       this.checks = {

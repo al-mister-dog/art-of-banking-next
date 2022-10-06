@@ -206,6 +206,7 @@ export interface CreditAccount {
   balance: number;
   category: string;
   netted?: boolean;
+  interest: number;
 }
 
 export type PossibleCreditAccount = CreditAccount | undefined;

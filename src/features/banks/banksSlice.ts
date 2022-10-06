@@ -86,8 +86,8 @@ export const banksSlice = createSlice({
     },
 
     getLoan: (state, { payload }) => {
-      const { amount, c1, b1 } = payload;
-      Customer.getLoan(c1, b1, amount);
+      const { amount, interest, c1, b1, } = payload;
+      Customer.getLoan(c1, b1, amount, interest);
       GraphData.setCreditData();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);
@@ -95,7 +95,6 @@ export const banksSlice = createSlice({
     repayLoan: (state, { payload }) => {
       const { amount, c1, b1, paymentType } = payload;
       if (paymentType === "deposits") {
-        console.log(amount)
         Customer.repayLoanFromAccount(c1, b1, amount);
       }
       if (paymentType === "cash") {

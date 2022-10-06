@@ -1,24 +1,20 @@
 import { useAppSelector } from "../../../../../app/hooks";
 import { selectSettings } from "../../../../../features/settings/settingsSlice";
-import { forwardRef, useContext } from "react";
-import { InterestRates } from "../../../../../domain/calculator";
-import { mediaQuery } from "../../../../../config/media-query";
+import { useContext } from "react";
+import { useMediaQuery } from "@mantine/hooks";
 import {
   Button,
-  Group,
   Input,
   NumberInput,
-  Radio,
   Select,
   SelectItem,
   Stack,
   Text,
-  useMantineTheme,
 } from "@mantine/core";
 import { CurrencyDollar } from "tabler-icons-react";
 import { CardInfo } from "../../../types";
 import { DrawerContext } from "../../../cards/card/card-mobile";
-import { useMediaQuery } from "@mantine/hooks";
+import { mediaQuery } from "../../../../../config/media-query";
 
 interface Props {
   bank: CardInfo;
@@ -29,8 +25,6 @@ interface Props {
   setSubject: (v: any) => void;
   amount: number;
   setAmount: (v: any) => void;
-  paymentType: string;
-  setPaymentType: (v: string) => void;
   dispatchFunction: () => void;
   btnText: string;
   validation: {
@@ -38,9 +32,8 @@ interface Props {
     errorMessage: string;
     disabled: boolean;
   };
-  isLoan?: boolean;
 }
-export default function FixedAmount({
+export default function SelectAndPay({
   bank,
   label,
   placeholder,
@@ -49,16 +42,13 @@ export default function FixedAmount({
   setSubject,
   amount,
   setAmount,
-  paymentType,
-  setPaymentType,
   dispatchFunction,
   btnText,
   validation,
-  isLoan,
 }: Props) {
+  const { interestRate } = useAppSelector(selectSettings);
   const isMobile = useMediaQuery(mediaQuery);
   const setOpened = useContext(DrawerContext);
-  const theme = useMantineTheme();
 
   return (
     <Stack spacing="md">
@@ -66,27 +56,9 @@ export default function FixedAmount({
         label={label}
         placeholder={placeholder}
         value={value}
-        itemComponent={SelectItem}
         data={data}
         onChange={setSubject}
       />
-      <Radio.Group
-        value={paymentType}
-        onChange={setPaymentType}
-        name="PaymentType"
-        label="Payment Type"
-      >
-        <Radio
-          color={`${theme.colors[bank.color]}`}
-          value="deposits"
-          label="Deposits"
-        />
-        <Radio
-          color={`${theme.colors[bank.color]}`}
-          value="cash"
-          label="Cash"
-        />
-      </Radio.Group>
       <Input.Wrapper error={validation.errorMessage}>
         <NumberInput
           icon={<CurrencyDollar />}
@@ -94,10 +66,12 @@ export default function FixedAmount({
           placeholder="0"
           radius="xs"
           error={validation.error}
-          onChange={setAmount}
+          onChange={(amount) => setAmount(amount)}
         />
       </Input.Wrapper>
-
+      <Text size="xs" color="dimmed">
+        + {interestRate}% interest
+      </Text>
       {isMobile ? (
         <Button
           color={`${bank.color}`}
@@ -121,24 +95,3 @@ export default function FixedAmount({
     </Stack>
   );
 }
-
-interface ItemProps extends React.ComponentPropsWithoutRef<"div"> {
-  label: string;
-  owed: any;
-}
-
-const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
-  ({ label, owed, ...others }: ItemProps, ref) => {
-    return (
-      <div ref={ref} {...others}>
-        <Group noWrap>
-          <div>
-            <Text>
-              {label}: ${owed}{" "}
-            </Text>
-          </div>
-        </Group>
-      </div>
-    );
-  }
-);

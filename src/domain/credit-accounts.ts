@@ -18,7 +18,8 @@ export const CreditAccounts = {
     superior: Bank,
     balance = 0,
     type: string,
-    category: string
+    category: string,
+    interest?: number
   ) {
     let newAccount: CreditAccount = {
       id: creditData.id,
@@ -27,9 +28,10 @@ export const CreditAccounts = {
       type,
       balance,
       category,
+      interest,
     };
     if (category === "dues") {
-      newAccount = {...newAccount, netted: false}
+      newAccount = { ...newAccount, netted: false };
     }
     const newCreditData = JSON.parse(JSON.stringify(creditData));
     newCreditData.creditAccounts[newCreditData.id] = newAccount;
@@ -67,12 +69,12 @@ export const CreditAccounts = {
 
   increaseCorrespondingCredit(account: CreditAccount, amount: number) {
     let newCreditAccount = { ...account };
-    
+
     if (newCreditAccount.balance === 0) {
-      newCreditAccount = {...newCreditAccount, netted: false}
+      newCreditAccount = { ...newCreditAccount, netted: false };
     }
     newCreditAccount.balance += amount;
-    
+
     let creditAccounts = { ...creditData.creditAccounts };
     creditAccounts = { ...creditAccounts, [account.id]: newCreditAccount };
     CreditData.assignAccounts(creditAccounts);
@@ -82,13 +84,23 @@ export const CreditAccounts = {
     const newCreditAccount = { ...account };
     newCreditAccount.balance -= amount;
 
-    let creditAccounts = { ...creditData.creditAccounts };
-    creditAccounts = { ...creditAccounts, [account.id]: newCreditAccount };
-    CreditData.assignAccounts(creditAccounts);
+    if (newCreditAccount.balance <= 0 && newCreditAccount.type === "loans") {
+      console.log(newCreditAccount);
+      let creditAccounts = { ...creditData.creditAccounts };
+      let invalidatedAccount = {
+        ...creditAccounts,
+        [account.id]: {},
+      };
+      creditAccounts = { ...creditAccounts, [account.id]: invalidatedAccount };
+      CreditData.assignAccounts(creditAccounts);
+    } else {
+      let creditAccounts = { ...creditData.creditAccounts };
+      creditAccounts = { ...creditAccounts, [account.id]: newCreditAccount };
+      CreditData.assignAccounts(creditAccounts);
+    }
   },
 
   set(account: CreditAccount, amount: number) {
-    
     let newCreditAccount = { ...account };
     newCreditAccount.balance = amount;
     // if (newCreditAccount.balance === 0) {

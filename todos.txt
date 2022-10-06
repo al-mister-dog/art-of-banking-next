@@ -55,3 +55,8 @@ moving slider will not affect this rate
 user repays loan
 added interest amount shown
 when user selects loan to repay the value is placed in the select item below
+
+user cannot get another loan from same bank until paid off previous loan
+
+validator
+validator checks if there is already a loan sub.id sup.id balance > 0

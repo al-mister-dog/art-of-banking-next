@@ -26,7 +26,7 @@ interface Props {
   placeholder: string;
   value: string;
   data: (string | SelectItem)[];
-  setSubject: (v: any) => void;
+  setSubject: (v: any, x: any) => void;
   amount: number;
   setAmount: (v: any) => void;
   paymentType: string;
@@ -59,7 +59,8 @@ export default function FixedAmount({
   const isMobile = useMediaQuery(mediaQuery);
   const setOpened = useContext(DrawerContext);
   const theme = useMantineTheme();
-
+  
+  const formatted = parseFloat(`${amount}`);
   return (
     <Stack spacing="md">
       <Select
@@ -68,7 +69,7 @@ export default function FixedAmount({
         value={value}
         itemComponent={SelectItem}
         data={data}
-        onChange={setSubject}
+        onChange={(value) => setSubject(value, data)}
       />
       <Radio.Group
         value={paymentType}
@@ -91,10 +92,16 @@ export default function FixedAmount({
         <NumberInput
           icon={<CurrencyDollar />}
           value={amount}
+          formatter={() => (!Number.isNaN(amount) ? `${formatted}` : `${amount}`)}
+          // formatter={() => {
+          //     !Number.isNaN(parseFloat(value))
+          //     ? `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+          //     : '$ '
+          // }}
           placeholder="0"
           radius="xs"
           error={validation.error}
-          onChange={setAmount}
+          onChange={(amount) => setAmount(amount)}
         />
       </Input.Wrapper>
 
@@ -125,16 +132,21 @@ export default function FixedAmount({
 interface ItemProps extends React.ComponentPropsWithoutRef<"div"> {
   label: string;
   owed: any;
+  interest: number;
 }
 
 const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
-  ({ label, owed, ...others }: ItemProps, ref) => {
+  ({ label, owed, interest, ...others }: ItemProps, ref) => {
+    const plusInterest = owed + interest;
     return (
       <div ref={ref} {...others}>
         <Group noWrap>
           <div>
             <Text>
               {label}: ${owed}{" "}
+              <Text size="xs">
+                + {interest * 10}% interest: {plusInterest}
+              </Text>
             </Text>
           </div>
         </Group>

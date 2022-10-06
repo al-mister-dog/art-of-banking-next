@@ -1,4 +1,4 @@
-import { useAppDispatch } from "../../../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../../app/hooks";
 import { getLoan } from "../../../../../features/banks/banksSlice";
 
 import { useState } from "react";
@@ -8,17 +8,22 @@ import { Customer } from "../../../../../domain/customer";
 
 import { CardInfo } from "../../../types";
 
-import SelectAndPay from "../compositions/select-and-pay";
+import SelectLoan from "../compositions/select-loan";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
+import { selectSettings } from "../../../../../features/settings/settingsSlice";
+import { InterestRates } from "../../../../../domain/calculator";
 
 export default function TakeOutLoan({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();
+  const { interestRate } = useAppSelector(selectSettings);
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
   const [amount, setAmount] = useState<number>(0);
   
   function getLoanPayload() {
+    const interest = parseFloat(InterestRates.percentage(interestRate, amount));
     const payload = {
       amount,
+      interest,
       c1: Customer.getById(bank.cardInfo.id),
       b1: Banks.getByCustomerId(bank.cardInfo.id),
     };
@@ -32,7 +37,7 @@ export default function TakeOutLoan({ bank }: { bank: CardInfo }) {
   const validation = useValidator("getLoan", bank, amount, selectedBank);
 
   return (
-    <SelectAndPay
+    <SelectLoan
       bank={bank}
       label="Get Loan From"
       placeholder="Pick a Bank"

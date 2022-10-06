@@ -3,8 +3,21 @@ import { Record } from "./Records";
 import { Bank, creditData, CreditData, CreditAccount } from "./structures";
 
 export const Loans = {
-  create(subordinate: Bank, superior: Bank, amount: number, type: string) {
-    CreditAccounts.create(subordinate, superior, amount, type, "loans");
+  create(
+    subordinate: Bank,
+    superior: Bank,
+    amount: number,
+    type: string,
+    interest?: number
+  ) {
+    CreditAccounts.create(
+      subordinate,
+      superior,
+      amount,
+      type,
+      "loans",
+      interest
+    );
   },
   createMortgage(
     subordinate: Bank,
@@ -53,7 +66,9 @@ export const Loans = {
       (account) =>
         account.subordinateId === bank1.id &&
         account.superiorId === bank2.id &&
-        account.category === "loans"
+        account.category === "loans" &&
+        account.balance > 0
+
     )[0];
   },
 
@@ -81,6 +96,7 @@ export const Loans = {
     if (account) {
       CreditAccounts.decreaseCorrespondingCredit(account, amount);
     } else {
+      console.log("HELLO")
       Loans.create(bank1, bank2, amount, type);
     }
   },

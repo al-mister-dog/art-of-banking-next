@@ -59,8 +59,8 @@ export const Customer = {
     }
   },
 
-  getLoan(customer: Bank, bank: Bank, amount: number) {
-    Loans.create(customer, bank, amount, "Customer Deposits");
+  getLoan(customer: Bank, bank: Bank, amount: number, interest?: number) {
+    Loans.create(customer, bank, amount, "Customer Deposits", interest);
     Accounts.increaseCorrespondingBalance(customer, bank, amount);
   },
   repayLoanFromAccount(customer: Bank, bank: Bank, amount: number) {

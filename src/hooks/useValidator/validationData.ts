@@ -1,4 +1,5 @@
 import { CardInfo } from "../../components/balancesheets/types";
+import { Banks } from "../../domain/bank";
 import { Reserves } from "../../domain/reserves";
 import { creditData } from "../../domain/structures";
 import {
@@ -147,13 +148,20 @@ const validatorsByLecture = {
         selectedBank: string,
         overdraft: number
       ) {
-        const { customerDeposits, bankReserves, bank } =
-          getTransferDetails(customer);
+        const owingBanks = creditData.allIds
+          .map((id) => creditData.creditAccounts[id])
+          .filter(
+            (account) =>
+              account.subordinateId === customer.cardInfo.id &&
+              account.balance > 0
+          );
+
         return check
           .isAmount(amount)
           .isSelectedBank(selectedBank)
           .isPositiveAmount(amount)
-          .isReasonableAmount(amount)
+          .currentLoan(owingBanks)
+          .isReasonableAmount(amount) //work on this obviously
           .validate();
       },
       repayLoan(
@@ -162,15 +170,15 @@ const validatorsByLecture = {
         selectedBank: string,
         overdraft: number
       ) {
-        const loan = creditData.allIds
+        const loans = creditData.allIds
           .map((id) => creditData.creditAccounts[id])
           .filter(
             (account) =>
               account.subordinateId === customer.cardInfo.id &&
-              account.superiorId === parseInt(selectedBank)
+              account.superiorId === parseInt(selectedBank) && account.balance > 0
           );
-        if (loan.length > 0) {
-          const loanAmount = loan[0].balance;
+        if (loans.length > 0) {
+          const loanAmount = loans[0].balance + loans[0].interest;
 
           return check
             .isAmount(amount)
