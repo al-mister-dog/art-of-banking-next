@@ -73,9 +73,7 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
   }, []);
 
   let spreadsheetBalances = { assets: undefined, liabilities: undefined };
-  if (spreadsheetSettings.latest) {
-    spreadsheetBalances = Record.get(bank.cardInfo.id);
-  } else if (spreadsheetSettings.each) {
+  if (spreadsheetSettings.each) {
     spreadsheetBalances = Record.getLastTwo(bank.cardInfo.id);
   } else if (spreadsheetSettings.all) {
     spreadsheetBalances = Record.getAllTransactions(bank.cardInfo.id);

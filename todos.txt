@@ -26,3 +26,9 @@ show 0 balances
 
 LAYOUT
 breakpoints between interactive components needs sorting out
+
+FULL PAGE SPREADSHEET
+center cards
+
+MORTGAGE
+change validation for withdraw
