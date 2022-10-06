@@ -1,22 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Analytics } from "../../domain/displays/analytics";
 import type { AppState } from "../../app/store";
 import { setupFunctions } from "../../config/setup-functions/setupFunctions";
 import { Customer } from "../../domain/customer";
-import { BalanceSheets } from "../../domain/displays/balancesheets";
+
 import {
   accountData,
   analytics,
   bankData,
   creditData,
-  records,
   reservesData,
 } from "../../domain/structures";
 import initialBankData from "./inititalState";
-import { Totals } from "../../domain/displays/totals";
+
 import { Dues } from "../../domain/dues";
 import { Banks } from "../../domain/bank";
-import { Display } from "../../domain/display";
 import { Record } from "../../domain/Records";
 import { CentralBank } from "../../domain/centralbank";
 import { System } from "../../domain/system";
@@ -39,7 +36,7 @@ const initialState: BanksState = {
   analytics: analytics,
   loading: true,
 };
-let count = 0;
+
 export const banksSlice = createSlice({
   name: "banks",
   initialState,

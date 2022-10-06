@@ -82,7 +82,6 @@ export const Accounts = {
         (account) => account.subordinateId === id1 && account.superiorId === id2
       )[0];
   },
-
   increaseCorrespondingBalance(customer: Bank, bank: Bank, amount: number) {
     let account = Accounts.getAccount(customer, bank);
 

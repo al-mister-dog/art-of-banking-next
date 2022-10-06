@@ -24,15 +24,19 @@ interface CorrespondingCreditInstruments {
 const correspondingCreditInstruments: CorrespondingCreditInstruments = {
   dues: {
     assets: "Due Froms",
-    liabilities: "dueTos",
+    liabilities: "Due Tos",
   },
   loans: {
-    assets: "loan to",
-    liabilities: "loan from",
+    assets: "Loan To",
+    liabilities: "Loan From",
   },
   "fed funds": {
     assets: "fed funds to",
     liabilities: "fed funds from",
+  },
+  Mortgage: {
+    assets: "Mortgage To",
+    liabilities: "Mortgage From",
   },
 };
 
@@ -106,7 +110,7 @@ export const BalanceSheets = {
 
     const dueToAccounts = creditAccounts
       .filter(
-        (account) => account.superiorId === bank.id && account.balance > 0
+        (account) => account.superiorId === bank.id && account.balance > 0 //CHANGED
       )
       .map((account) => {
         return {

@@ -15,7 +15,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 
-import BankDetail from "../../bank-detail/mobile";
+import BankDetail from "../../bank-detail/panel/mobile";
 import BalanceByInstrument from "../balances/balance-by-instrument";
 
 import { CardInfo } from "../../types";

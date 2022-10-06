@@ -11,7 +11,6 @@ import BalanceSheets from "../../components/balancesheets/cards/card-list";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
 import Toolbar from "../../components/balancesheets/settings/toolbar";
 import KeyTerms from "../../components/article/lecture-index/key-terms";
-
 import Article from "../../components/article/Article";
 
 const useStyles = createStyles((theme) => ({
@@ -53,7 +52,6 @@ export default function LecturePath({
         text={paragraphs}
         assignment={assignment}
       />
-
       {title !== "Introduction" && (
         <>
           <div className={classes.assignmentContainer}>

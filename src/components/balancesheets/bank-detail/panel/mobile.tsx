@@ -7,51 +7,50 @@ import {
   createStyles,
   useMantineTheme,
 } from "@mantine/core";
-import { CardInfo } from "../types";
-import ActionsPanel from "./actions/panel";
-import React from "react";
-import RecordsPanel from "./records/panel";
+
+import { CardInfo } from "../../types";
+import ActionsPanel from "../actions/panel";
+import RecordsPanel from "../records/panel/mobile";
+import LineChart from "../../charts/linechartbank";
 
 const useStyles = createStyles((theme) => ({
   header: { padding: "5px" },
 
   grape: {
-    backgroundColor: theme.colors.grape[8],
+    color: theme.colors.grape,
   },
   violet: {
-    backgroundColor: theme.colors.violet[8],
+    color: theme.colors.violet,
   },
   indigo: {
-    backgroundColor: theme.colors.indigo[8],
+    color: theme.colors.indigo,
   },
   blue: {
-    backgroundColor: theme.colors.blue[8],
+    color: theme.colors.blue,
   },
 }));
 
-function SidePanel({ bank }: { bank: CardInfo }) {
+export default function SidePanel({ bank }: { bank: CardInfo }) {
   const { classes } = useStyles();
   const theme = useMantineTheme();
   return (
     <Card
       p="sm"
-      radius="xs"
       style={{
         paddingBottom: "0px",
-        height: "28rem",
-        backgroundColor: theme.colors.violet[1],
+        minHeight: "450px",
       }}
     >
       <Card.Section className={`${classes.header} ${classes[bank.color]}`}>
         <Center>
-          <Title order={2} color="white">
+          <Title order={2} color={`${bank.color}`}>
             {bank.cardInfo.name}
           </Title>
         </Center>
       </Card.Section>
       <Tabs color={`${bank.color}`} defaultValue="records">
         <Tabs.List grow>
-        <Tabs.Tab value="records">
+          <Tabs.Tab value="records">
             <Text color={theme.colors[bank.color][9]}>Records</Text>
           </Tabs.Tab>
           <Tabs.Tab value="actions">
@@ -60,24 +59,20 @@ function SidePanel({ bank }: { bank: CardInfo }) {
           <Tabs.Tab value="charts">
             <Text color={theme.colors[bank.color][9]}>Charts</Text>
           </Tabs.Tab>
-          
         </Tabs.List>
         <Tabs.Panel value="records" pt="xs">
           <RecordsPanel bank={bank} />
         </Tabs.Panel>
+
         <Tabs.Panel value="actions" pt="xs">
           <ActionsPanel bank={bank} />
         </Tabs.Panel>
 
         <Tabs.Panel value="charts" pt="xs">
           Charts tab content
-          {/* <LineChart bank={bank} /> */}
+          <LineChart bank={bank} />
         </Tabs.Panel>
-
-        
       </Tabs>
     </Card>
   );
 }
-
-export default React.memo(SidePanel);

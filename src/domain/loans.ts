@@ -6,6 +6,14 @@ export const Loans = {
   create(subordinate: Bank, superior: Bank, amount: number, type: string) {
     CreditAccounts.create(subordinate, superior, amount, type, "loans");
   },
+  createMortgage(
+    subordinate: Bank,
+    superior: Bank,
+    amount: number,
+    type: string
+  ) {
+    CreditAccounts.create(subordinate, superior, amount, type, "Mortgage");
+  },
 
   createFedFunds(
     subordinate: Bank,

@@ -416,6 +416,41 @@ const validatorsByLecture = {
         );
       },
     },
+    customer: {
+      deposit(customer: CardInfo, amount: number, selectedBank: string) {
+        const customerReserves = Reserves.getReservesById(customer.cardInfo.id);
+        return check
+          .requiredFields(selectedBank, amount)
+          .sufficientReserves(
+            customerReserves.cashReserves,
+            amount,
+            customer.cardInfo.name
+          )
+          .validate();
+      },
+      withdraw(customer: CardInfo, amount: number, selectedBank: string) {
+        const { customerDeposits, bankReserves, bank } =
+          getWithdrawDetails(customer);
+        return check
+          .isAmount(amount)
+          .isSelectedBank(selectedBank)
+          .isPositiveAmount(amount)
+          .sufficientReserves(bankReserves, amount, bank.name)
+          .sufficentDeposits(customerDeposits, amount, customer.cardInfo.name)
+          .validate();
+      },
+      transfer(customer: CardInfo, amount: number, selectedBank: string) {
+        const { customerDeposits, bankReserves, bank } =
+          getTransferDetails(customer);
+        return check
+          .isAmount(amount)
+          .isSelectedBank(selectedBank)
+          .isPositiveAmount(amount)
+          // .sufficientReserves(bankReserves, amount, bank.name)
+          .sufficentDeposits(customerDeposits, amount, customer.cardInfo.name)
+          .validate();
+      },
+    },
   },
 };
 
@@ -436,5 +471,6 @@ export const validatorsById = {
   13: validatorsByLecture.dues2,
   14: validatorsByLecture.simple,
   15: validatorsByLecture.fed,
-  16: validatorsByLecture.simple,
+  16: validatorsByLecture.fed,
+  17: validatorsByLecture.fed,
 };

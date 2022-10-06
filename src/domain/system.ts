@@ -3,6 +3,8 @@ import { Dues } from "./dues";
 import { Bank, bankData, SystemType } from "./structures";
 import { Accounts } from "./accounts";
 import { Clearinghouse } from "./clearinghouse";
+import { CentralBank } from "./centralbank";
+import { Banks } from "./bank";
 export let system: SystemType = "national";
 
 type SystemObjectFunctions = {
@@ -52,7 +54,9 @@ export const System = {
         Dues.increase(bank1, clearinghouse, "CH Certificates", amount);
         Dues.increase(clearinghouse, bank2, "CH Certificates", amount);
       },
-      centralbank: function (): void {},
+      centralbank: function (): void {
+        CentralBank.transfer(bank1, bank2, amount)
+      },
       chips: function (): void {
         throw new Error("Function not implemented.");
       },
@@ -102,7 +106,12 @@ export const System = {
       centralbank: function (): void {
         if (bank.type === "bank") {
           const centralbank = bankData.banks[0];
-          Accounts.createAccount(bank, centralbank, "Bank Deposits", initialDeposit);
+          Accounts.createAccount(
+            bank,
+            centralbank,
+            "Bank Deposits",
+            initialDeposit
+          );
         }
       },
       chips: function (): void {},

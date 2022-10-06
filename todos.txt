@@ -21,28 +21,8 @@ all done... a few edge cases
 maxrange:
 work on an algorithm that makes the best looking min max range
 
-Records:
-When clicking on a bank card, the bank card detail pops up.
-The first thing that the user sees should be a list of transactions they have made:
-Deposited $10 into Bank 1 account
-Transfered $5 to Customer 2
-Received $20 from Customer 3
-Withdrew $5 from Bank 1 account
-Received $40 loan from Bank 1
-Payed back $30 loan to Bank 1
-Owes Bank 2 $30
-Received $10 from Clearing House
-
-
-Could be present tense?
-
-
+Card
+show 0 balances
 
 LAYOUT
 breakpoints between interactive components needs sorting out
-
-MOBILE VERSION
-sort out ui for mobile VERSION
-1hr
-chart comes out of the screen
-

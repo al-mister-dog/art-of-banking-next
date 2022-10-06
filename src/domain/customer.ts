@@ -72,4 +72,12 @@ export const Customer = {
     Reserves.decreaseReserves(customer, amount);
     Reserves.increaseReserves(bank, amount);
   },
+  getMortgage(customer: Bank, bank: Bank, amount: number) {
+    Loans.createMortgage(customer, bank, amount, "Mortgage");
+    Accounts.increaseCorrespondingBalance(customer, bank, amount);
+  },
+  repayMortgage(customer: Bank, bank: Bank, amount: number) {
+    Loans.decrease(customer, bank, amount, "Mortgage");
+    Accounts.decreaseCorrespondingBalance(customer, bank, amount);
+  },
 };

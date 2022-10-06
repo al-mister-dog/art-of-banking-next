@@ -1,3 +1,4 @@
+import { CardInfo } from "../components/balancesheets/types";
 import { Accounts } from "./accounts";
 import { Bank, RecordDetail, records } from "./structures";
 import { System } from "./system";
@@ -9,6 +10,11 @@ const creditInstrumentsBySystem = {
 };
 
 export const Record = {
+  getLogs(id: number) {
+    return records.partyLogs[id].log.map((logInfo) => {
+      return logInfo;
+    });
+  },
   deposit(bank1: Bank, bank2: Bank, amount: number) {
     const reservesAssetRecord1 = {
       instrumentType: "cash",
@@ -48,11 +54,15 @@ export const Record = {
     insertLiabilitiesEntry(bank2.id, depositLiabilityRecord);
     const bank1Log = {
       id: bank1.id,
+      thirdPartyId: bank2.id,
+      thirdPartyName: bank2.name,
       action: `Deposited $${amount} to ${bank2.name} account`,
       symbol: "+",
     };
     const bank2Log = {
       id: bank2.id,
+      thirdPartyId: bank1.id,
+      thirdPartyName: bank1.name,
       action: `Received $${amount} from ${bank1.name}`,
       symbol: "+",
     };
@@ -101,11 +111,15 @@ export const Record = {
 
     const bank1Log = {
       id: bank1.id,
+      thirdPartyId: bank2.id,
+      thirdPartyName: bank2.name,
       action: `Withdrew $${amount} from ${bank2.name} account`,
       symbol: "-",
     };
     const bank2Log = {
       id: bank2.id,
+      thirdPartyId: bank1.id,
+      thirdPartyName: bank1.name,
       action: `Paid out $${amount} to ${bank1.name}`,
       symbol: "-",
     };
@@ -159,21 +173,29 @@ export const Record = {
 
     const customer1Log = {
       id: customer1.id,
+      thirdPartyId: customer2.id,
+      thirdPartyName: customer2.name,
       action: `Transfered $${amount} to ${customer2.name}`,
       symbol: "-",
     };
     const customer2Log = {
       id: customer2.id,
+      thirdPartyId: bank1.id,
+      thirdPartyName: bank1.name,
       action: `Received $${amount} transfer from ${customer1.name}`,
       symbol: "+",
     };
     const bank1LogA = {
       id: bank1.id,
+      thirdPartyId: customer1.id,
+      thirdPartyName: customer1.name,
       action: `Debited $${amount} from ${customer1.name}`,
       symbol: "+",
     };
     const bank1LogB = {
       id: bank1.id,
+      thirdPartyId: customer2.id,
+      thirdPartyName: customer2.name,
       action: `Credited $${amount} to ${customer2.name}`,
       symbol: "-",
     };
@@ -228,21 +250,29 @@ export const Record = {
     insertLiabilitiesEntry(bank2.id, bank2Record);
     const customer1Log = {
       id: customer1.id,
+      thirdPartyId: customer2.id,
+      thirdPartyName: customer2.name,
       action: `Transfered $${amount} to ${customer2.name}`,
       symbol: "-",
     };
     const customer2Log = {
       id: customer2.id,
+      thirdPartyId: customer1.id,
+      thirdPartyName: customer1.name,
       action: `Received $${amount} transfer from ${customer1.name}`,
       symbol: "+",
     };
     const bank1Log = {
       id: bank1.id,
+      thirdPartyId: customer1.id,
+      thirdPartyName: customer1.name,
       action: `Debited $${amount} from ${customer1.name}`,
       symbol: "+",
     };
     const bank2Log = {
       id: bank1.id,
+      thirdPartyId: customer2.id,
+      thirdPartyName: customer2.name,
       action: `Credited $${amount} to ${customer2.name}`,
       symbol: "-",
     };
@@ -326,21 +356,29 @@ export const Record = {
 
     const bank1Log = {
       id: bank1.id,
+      thirdPartyId: bank2.id,
+      thirdPartyName: bank2.name,
       action: `Transfered $${amount} to ${bank2.name}`,
       symbol: "-",
     };
     const bank2Log = {
       id: bank2.id,
+      thirdPartyId: bank1.id,
+      thirdPartyName: bank1.name,
       action: `Received $${amount} transfer from ${bank1.name}`,
       symbol: "+",
     };
     const centralbankLogA = {
       id: centralbank.id,
+      thirdPartyId: bank1.id,
+      thirdPartyName: bank1.name,
       action: `Debited $${amount} from ${bank1.name}`,
       symbol: "+",
     };
     const centralbankLogB = {
       id: centralbank.id,
+      thirdPartyId: bank2.id,
+      thirdPartyName: bank2.name,
       action: `Credited $${amount} to ${bank2.name}`,
       symbol: "-",
     };
@@ -400,7 +438,7 @@ export const Record = {
       name: bank1.name,
     };
 
-    if (bank2.type === "clearinghouse" ) {
+    if (bank2.type === "clearinghouse") {
       insertLiabilitiesEntry(bank2.id, bank2Record);
     } else {
       insertAssetsEntry(bank2.id, bank2Record);
