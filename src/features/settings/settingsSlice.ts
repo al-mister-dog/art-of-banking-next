@@ -49,7 +49,7 @@ export const settingsSlice = createSlice({
     refreshSettings: (state) => {
       state.overdraft = 0;
       state.reserveRequirement = 0;
-      state.interestRate = 0;
+      // state.interestRate = 0;
     },
     setColors: (state, { payload }) => {
       const key: keyof ColorSettings = payload.key;

@@ -73,7 +73,7 @@ export const sliderSettings = {
     sliderSettings: {
       overdraft: false,
       reserveRequirement: false,
-      interestRate: true,
+      interestRate: false,
     },
   },
   5: {

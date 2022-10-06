@@ -20,7 +20,7 @@ export default function Desktop() {
   // const slidersDisabled = sliderSettings[currentLectureId].sliderSettings;
   // const overdraftValue =
   //   sliderSettings[currentLectureId].sliderFixtures?.overdraft || 0;
-console.log("HASHAHS")
+
   return (
     <>
       a

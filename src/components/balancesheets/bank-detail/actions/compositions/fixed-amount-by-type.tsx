@@ -1,5 +1,7 @@
+import { useAppSelector } from "../../../../../app/hooks";
+import { selectSettings } from "../../../../../features/settings/settingsSlice";
 import { forwardRef, useContext } from "react";
-
+import { InterestRates } from "../../../../../domain/calculator";
 import { mediaQuery } from "../../../../../config/media-query";
 import {
   Button,
@@ -15,9 +17,8 @@ import {
 } from "@mantine/core";
 import { CurrencyDollar } from "tabler-icons-react";
 import { CardInfo } from "../../../types";
-import {DrawerContext} from "../../../cards/card/card-mobile"
+import { DrawerContext } from "../../../cards/card/card-mobile";
 import { useMediaQuery } from "@mantine/hooks";
-
 
 interface Props {
   bank: CardInfo;
@@ -37,6 +38,7 @@ interface Props {
     errorMessage: string;
     disabled: boolean;
   };
+  isLoan?: boolean;
 }
 export default function FixedAmount({
   bank,
@@ -52,6 +54,7 @@ export default function FixedAmount({
   dispatchFunction,
   btnText,
   validation,
+  isLoan,
 }: Props) {
   const isMobile = useMediaQuery(mediaQuery);
   const setOpened = useContext(DrawerContext);
@@ -125,15 +128,24 @@ interface ItemProps extends React.ComponentPropsWithoutRef<"div"> {
 }
 
 const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
-  ({ label, owed, ...others }: ItemProps, ref) => (
-    <div ref={ref} {...others}>
-      <Group noWrap>
-        <div>
-          <Text>
-            {label}: ${owed}
-          </Text>
-        </div>
-      </Group>
-    </div>
-  )
+  ({ label, owed, ...others }: ItemProps, ref) => {
+    const { interestRate } = useAppSelector(selectSettings);
+
+    const interest = parseFloat(InterestRates.percentage(interestRate, owed));
+    const plusInterest = owed + interest;
+    return (
+      <div ref={ref} {...others}>
+        <Group noWrap>
+          <div>
+            <Text>
+              {label}: ${owed}{" "}
+              <Text size="xs">
+                + {interestRate}% interest: {plusInterest}
+              </Text>
+            </Text>
+          </div>
+        </Group>
+      </div>
+    );
+  }
 );

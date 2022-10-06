@@ -95,6 +95,7 @@ export const banksSlice = createSlice({
     repayLoan: (state, { payload }) => {
       const { amount, c1, b1, paymentType } = payload;
       if (paymentType === "deposits") {
+        console.log(amount)
         Customer.repayLoanFromAccount(c1, b1, amount);
       }
       if (paymentType === "cash") {

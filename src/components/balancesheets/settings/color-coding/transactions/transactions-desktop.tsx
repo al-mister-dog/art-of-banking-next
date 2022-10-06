@@ -27,7 +27,7 @@ export default function SpreadsheetMenu() {
   const theme = useMantineTheme();
 
   const transactionType = useRadioSettings(spreadsheetSettings);
-  console.log(transactionType);
+
   function handleOnChangeTransaction(value: string) {
     dispatch(setClaveroDisplay({ key: value }));
   }

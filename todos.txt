@@ -30,5 +30,28 @@ breakpoints between interactive components needs sorting out
 FULL PAGE SPREADSHEET
 center cards
 
-MORTGAGE
-change validation for withdraw in fed system
+Interest Rates
+
+step one
+interest rate set in reducer
+when a loan is taken out a percentage of interest is charged on top of that loan
+the interest added should only show up when paying back the loan
+
+step two
+introduce a time element
+a tick that adds a day since balancesheet component has been opened.
+could be done in slug
+dispatch timer
+
+try first out
+
+
+
+User
+sets interest rate in SETTINGS
+takes out a loan, current interest rate is shown
+interest rate is added to the credit account
+moving slider will not affect this rate
+user repays loan
+added interest amount shown
+when user selects loan to repay the value is placed in the select item below

@@ -54,9 +54,6 @@ export const check = {
   },
   sufficientReservesFed(bank, bankAccount, amount) {
     const reserves = bankAccount.balance;
-    console.log(reserves);
-    console.log(amount);
-    console.log(reserves < amount)
     if (reserves < amount) {
       this.checks = {
         ...this.checks,
