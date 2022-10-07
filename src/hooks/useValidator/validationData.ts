@@ -142,12 +142,7 @@ const validatorsByLecture = {
           .isOverdraftLimit(customerDeposits, overdraft, amount)
           .validate();
       },
-      getLoan(
-        customer: CardInfo,
-        amount: number,
-        selectedBank: string,
-        overdraft: number
-      ) {
+      getLoan(customer: CardInfo, amount: number, selectedBank: string) {
         const owingBanks = creditData.allIds
           .map((id) => creditData.creditAccounts[id])
           .filter(
@@ -164,18 +159,14 @@ const validatorsByLecture = {
           .isReasonableAmount(amount) //work on this obviously
           .validate();
       },
-      repayLoan(
-        customer: CardInfo,
-        amount: number,
-        selectedBank: string,
-        overdraft: number
-      ) {
+      repayLoan(customer: CardInfo, amount: number, selectedBank: string) {
         const loans = creditData.allIds
           .map((id) => creditData.creditAccounts[id])
           .filter(
             (account) =>
               account.subordinateId === customer.cardInfo.id &&
-              account.superiorId === parseInt(selectedBank) && account.balance > 0
+              account.superiorId === parseInt(selectedBank) &&
+              account.balance > 0
           );
         if (loans.length > 0) {
           const loanAmount = loans[0].balance + loans[0].interest;
@@ -372,32 +363,30 @@ const validatorsByLecture = {
       ) {
         const { customerDeposits, bankReserves, bank } =
           getTransferDetails(customer);
-        return (
-          check
-            .isAmount(amount)
-            .isSelectedBank(selectedBank)
-            .isPositiveAmount(amount)
-            // .isOverdraftLimit(customerDeposits, overdraft, amount)
-            // .isRequiredReserves(bankReserves, reserveRequirement, amount, bank)
-            // .sufficientReserves(bankReserves, amount, bank.name)
-            // .sufficentDeposits(customerDeposits, amount, customer.cardInfo.name)
-            .validate()
-        );
+        return check
+          .isAmount(amount)
+          .isSelectedBank(selectedBank)
+          .isPositiveAmount(amount)
+          .validate();
       },
       getFedFundsLoan(
         customer: CardInfo,
         amount: number,
-        selectedBank: string,
-        overdraft: number,
-        reserveRequirement: number
+        selectedBank: string
       ) {
-        const { customerDeposits, bankReserves, bank } =
-          getTransferDetails(customer);
+        const owingBanks = creditData.allIds
+          .map((id) => creditData.creditAccounts[id])
+          .filter(
+            (account) =>
+              account.subordinateId === customer.cardInfo.id &&
+              account.balance > 0
+          );
         return (
           check
             .isAmount(amount)
             .isSelectedBank(selectedBank)
             .isPositiveAmount(amount)
+            .currentLoan(owingBanks)
             // .isOverdraftLimit(customerDeposits, overdraft, amount)
             // .isRequiredReserves(bankReserves, reserveRequirement, amount, bank)
             // .sufficientReserves(bankReserves, amount, bank.name)

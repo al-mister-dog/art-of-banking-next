@@ -29,6 +29,8 @@ interface Props {
   setSubject: (v: any, x: any) => void;
   amount: number;
   setAmount: (v: any) => void;
+  paymentType: string;
+  setPaymentType: (v: string) => void;
   dispatchFunction: () => void;
   btnText: string;
   validation: {
@@ -38,7 +40,7 @@ interface Props {
   };
   isLoan?: boolean;
 }
-export default function FixedAmountLoan({
+export default function FixedAmount({
   bank,
   label,
   placeholder,
@@ -47,13 +49,17 @@ export default function FixedAmountLoan({
   setSubject,
   amount,
   setAmount,
+  paymentType,
+  setPaymentType,
   dispatchFunction,
   btnText,
   validation,
+  isLoan,
 }: Props) {
   const isMobile = useMediaQuery(mediaQuery);
   const setOpened = useContext(DrawerContext);
-
+  const theme = useMantineTheme();
+  
   const formatted = parseFloat(`${amount}`);
   return (
     <Stack spacing="md">
@@ -65,13 +71,33 @@ export default function FixedAmountLoan({
         data={data}
         onChange={(value) => setSubject(value, data)}
       />
+      <Radio.Group
+        value={paymentType}
+        onChange={setPaymentType}
+        name="PaymentType"
+        label="Payment Type"
+      >
+        <Radio
+          color={`${theme.colors[bank.color]}`}
+          value="deposits"
+          label="Deposits"
+        />
+        <Radio
+          color={`${theme.colors[bank.color]}`}
+          value="cash"
+          label="Cash"
+        />
+      </Radio.Group>
       <Input.Wrapper error={validation.errorMessage}>
         <NumberInput
           icon={<CurrencyDollar />}
           value={amount}
-          formatter={() =>
-            !Number.isNaN(amount) ? `${formatted}` : `${amount}`
-          }
+          formatter={() => (!Number.isNaN(amount) ? `${formatted}` : `${amount}`)}
+          // formatter={() => {
+          //     !Number.isNaN(parseFloat(value))
+          //     ? `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+          //     : '$ '
+          // }}
           placeholder="0"
           radius="xs"
           error={validation.error}
@@ -107,11 +133,10 @@ interface ItemProps extends React.ComponentPropsWithoutRef<"div"> {
   label: string;
   owed: any;
   interest: number;
-  interestRate: number;
 }
 
 const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
-  ({ label, owed, interest, interestRate, ...others }: ItemProps, ref) => {
+  ({ label, owed, interest, ...others }: ItemProps, ref) => {
     const plusInterest = owed + interest;
     return (
       <div ref={ref} {...others}>
@@ -120,7 +145,7 @@ const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
             <Text>
               {label}: ${owed}{" "}
               <Text size="xs">
-                + {interestRate}% interest: ${plusInterest}
+                + {interest * 10}% interest: {plusInterest}
               </Text>
             </Text>
           </div>

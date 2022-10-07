@@ -1,17 +1,15 @@
 import TransferToCustomer from "./list/transferToCustomer";
 import WithdrawFromBank from "./list/withdrawFromBank";
 import DepositIntoBank from "./list/depositIntoBank";
-import TakeOutLoan from "./list/takeOutLoan";
+import TakeOutLoan from "./list/getLoan";
 import RepayLoan from "./list/repayLoan";
 import NetDues from "./list/netDues";
 import PayDues from "./list/payDues";
 import SettleDues from "./list/settleDues";
-import { CardInfo } from "../../types";
-
-import { useValidator } from "../../../../hooks/useValidator/useValidator";
 import TransferToBank from "./list/transferToBank";
 import GetFedFundsLoan from "./list/getFedFundsLoan";
 import PayFedFundsLoan from "./list/payFedFundsLoan";
+import { CardInfo } from "../../types";
 
 export default function ActionForms({
   action,

@@ -1,24 +1,25 @@
-import { useAppDispatch } from "../../../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../../app/hooks";
+import { selectSettings } from "../../../../../features/settings/settingsSlice";
 import { getFedFundsLoan } from "../../../../../features/banks/banksSlice";
-
 import { useState } from "react";
-
 import { Banks } from "../../../../../domain/bank";
-import { Customer } from "../../../../../domain/customer";
-
 import { CardInfo } from "../../../types";
-
-import SelectAndPay from "../compositions/select-and-pay";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
+import SelectLoan from "../compositions/select-loan";
+import { InterestRates } from "../../../../../domain/calculator";
 
 export default function GetFedFundsLoan({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();
+  const { interestRate } = useAppSelector(selectSettings);
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
   const [amount, setAmount] = useState<number>(0);
 
   function getLoanPayload() {
+    const interest = parseFloat(InterestRates.percentage(interestRate, amount));
     const payload = {
       amount,
+      interest,
+      interestRate, 
       b1: Banks.getById(bank.cardInfo.id),
       b2: Banks.getById(parseInt(selectedBank)),
     };
@@ -40,7 +41,7 @@ export default function GetFedFundsLoan({ bank }: { bank: CardInfo }) {
   );
 
   return (
-    <SelectAndPay
+    <SelectLoan
       bank={bank}
       label="Get Loan From"
       placeholder="Pick a Bank With Excess Reserves"

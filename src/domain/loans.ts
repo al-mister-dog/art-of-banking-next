@@ -8,7 +8,8 @@ export const Loans = {
     superior: Bank,
     amount: number,
     type: string,
-    interest?: number
+    interest?: number,
+    interestRate?: number
   ) {
     CreditAccounts.create(
       subordinate,
@@ -16,7 +17,8 @@ export const Loans = {
       amount,
       type,
       "loans",
-      interest
+      interest,
+      interestRate
     );
   },
   createMortgage(
@@ -32,9 +34,19 @@ export const Loans = {
     subordinate: Bank,
     superior: Bank,
     amount: number,
-    type: string
+    type: string,
+    interest: number,
+    interestRate: number
   ) {
-    CreditAccounts.create(subordinate, superior, amount, type, "fed funds");
+    CreditAccounts.create(
+      subordinate,
+      superior,
+      amount,
+      type,
+      "fed funds",
+      interest,
+      interestRate
+    );
   },
 
   getAll(bank: Bank) {
@@ -68,7 +80,6 @@ export const Loans = {
         account.superiorId === bank2.id &&
         account.category === "loans" &&
         account.balance > 0
-
     )[0];
   },
 
@@ -96,7 +107,7 @@ export const Loans = {
     if (account) {
       CreditAccounts.decreaseCorrespondingCredit(account, amount);
     } else {
-      console.log("HELLO")
+      console.log("HELLO");
       Loans.create(bank1, bank2, amount, type);
     }
   },

@@ -86,8 +86,8 @@ export const banksSlice = createSlice({
     },
 
     getLoan: (state, { payload }) => {
-      const { amount, interest, c1, b1, } = payload;
-      Customer.getLoan(c1, b1, amount, interest);
+      const { amount, interest, interestRate, c1, b1 } = payload;
+      Customer.getLoan(c1, b1, amount, interest, interestRate);
       GraphData.setCreditData();
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.updateRecords(state);
@@ -144,7 +144,6 @@ export const banksSlice = createSlice({
     },
     debitBank: (state, { payload }) => {
       const { amount, b1, b2 } = payload;
-
       Banks.debitAccount(b1, b2, amount);
       Dues.settle(b1, b2);
       GraphData.setCreditData();
@@ -152,8 +151,8 @@ export const banksSlice = createSlice({
       banksSlice.caseReducers.updateRecords(state);
     },
     getFedFundsLoan: (state, { payload }) => {
-      const { amount, b1, b2 } = payload;
-      CentralBank.getLoan(b1, b2, amount);
+      const { amount, interest, interestRate, b1, b2 } = payload;
+      CentralBank.getLoan(b1, b2, amount, interest, interestRate);
       CentralBank.transfer(b2, b1, amount);
       GraphData.setCentralBankGraphData();
       banksSlice.caseReducers.setState(state);

@@ -86,8 +86,8 @@ export const CentralBank = {
     Record.debitAccount(bank1, bank2, amount);
   },
 
-  getLoan(bank1: Bank, bank2: Bank, amount: number) {
-    Loans.createFedFunds(bank1, bank2, amount, "fed funds");
+  getLoan(bank1: Bank, bank2: Bank, amount: number, interest: number, interestRate: number) {
+    Loans.createFedFunds(bank1, bank2, amount, "fed funds", interest, interestRate);
     Record.fedFundsLoan(bank1, bank2, amount);
   },
   repayLoan(bank1: Bank, bank2: Bank, amount: number) {

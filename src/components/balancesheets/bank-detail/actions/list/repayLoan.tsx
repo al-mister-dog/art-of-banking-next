@@ -6,22 +6,16 @@ import { Customer } from "../../../../../domain/customer";
 import { CardInfo } from "../../../types";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
 import { creditData } from "../../../../../domain/structures";
-import FixedAmountLoan from "../compositions/fixed-amount-loan";
+import FixedAmountLoan from "../compositions/fixed-amount-loan-by-type";
 import { Text } from "@mantine/core";
-import { InterestRates } from "../../../../../domain/calculator";
-import { selectSettings } from "../../../../../features/settings/settingsSlice";
 
 export default function RepayLoan({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();
-  const { interestRate } = useAppSelector(selectSettings);
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
   const [amount, setAmount] = useState<number>(0);
   const [paymentType, setPaymentType] = useState("deposits");
 
   function repayLoanPayload() {
-    const interest = parseFloat(InterestRates.percentage(interestRate, amount));
-    const plusInterest = amount + interest;
-
     const payload = {
       amount,
       c1: Customer.getById(bank.cardInfo.id),
@@ -34,7 +28,7 @@ export default function RepayLoan({ bank }: { bank: CardInfo }) {
     setSelectedBank(val);
     setAmount(data[0].owed + data[0].interest);
   }
-  console.log(creditData.allIds.map((id) => creditData.creditAccounts[id]));
+
   const owingBanks = creditData.allIds
     .map((id) => creditData.creditAccounts[id])
     .filter(

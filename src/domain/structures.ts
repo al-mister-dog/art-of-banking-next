@@ -145,7 +145,13 @@ export function clearBankData() {
     creditAccounts: {} as CreditAccounts,
     allIds: [] as number[],
   };
-  records = { id: 0, parties: {} as Records, partyLogs: {}, rounds: {}, allIds: [] };
+  records = {
+    id: 0,
+    parties: {} as Records,
+    partyLogs: {},
+    rounds: {},
+    allIds: [],
+  };
   analytics = {
     records: {},
     balances: {},
@@ -206,7 +212,8 @@ export interface CreditAccount {
   balance: number;
   category: string;
   netted?: boolean;
-  interest: number;
+  interest?: number;
+  interestRate?: number;
 }
 
 export type PossibleCreditAccount = CreditAccount | undefined;

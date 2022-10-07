@@ -19,7 +19,8 @@ export const CreditAccounts = {
     balance = 0,
     type: string,
     category: string,
-    interest?: number
+    interest?: number,
+    interestRate?: number
   ) {
     let newAccount: CreditAccount = {
       id: creditData.id,
@@ -29,6 +30,7 @@ export const CreditAccounts = {
       balance,
       category,
       interest,
+      interestRate,
     };
     if (category === "dues") {
       newAccount = { ...newAccount, netted: false };
