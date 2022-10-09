@@ -1,0 +1,19 @@
+ For example, assume that on a given day, 
+ $10 billion of federal funds transactions occurred at each of 5, 10, 15 and 20 basis points, 
+ and $60 billion occurred at 25 basis points. 
+ This represents $100 billion of total volume. 
+ The median would be the rate at the ‘middle dollar’, 
+ or $50 billion, which is 25 basis points in this example. 
+ 
+ Alternatively, if $20 billion of transactions occurred at 10, 15, 20 and 25 basis points, 
+ the volume-weighted median would be 15 basis points.
+
+ totalVolume,
+ 
+ PROBLEM SET
+ 5  10 15 20 25 25 25 25 25 25
+ 10 20 30 40 50 60 70 80 90 100
+
+ 10 15 20 25
+ 20 40 60 80
+ 

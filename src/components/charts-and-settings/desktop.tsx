@@ -5,6 +5,7 @@ import ChartPrivateCredit from "../balancesheets/charts/linechart-private-credit
 import ChartBalances from "../balancesheets/charts/barchart-balances";
 import ChartCredit from "../balancesheets/charts/linechart-credit";
 import SettingsDesktop from "../balancesheets/settings/container/container-desktop";
+import EffectiveRate from "../balancesheets/charts/effective-rate-beta";
 import { charts } from "../../config/charts";
 import { useMediaQuery } from "@mantine/hooks";
 import { mediaQuery } from "../../config/media-query";
@@ -30,18 +31,19 @@ export default function Desktop() {
           )}
         </div>
       ) : (
-        <div style={{height: "30rem"}}>
+        <div style={{ height: "30rem" }}>
           <Grid grow>
             <Grid.Col span={1}>
               <SettingsDesktop />
             </Grid.Col>
             <Grid.Col span={3}>
               <Card style={{ backgroundColor: theme.colors.violet[1] }}>
-                {charts[currentLectureId] === "balances" && <ChartBalances />}
+                {/* {charts[currentLectureId] === "balances" && <ChartBalances />}
                 {charts[currentLectureId] === "credit" && <ChartCredit />}
                 {charts[currentLectureId] === "private credit" && (
                   <ChartPrivateCredit />
-                )}
+                )} */}
+                <EffectiveRate />
               </Card>
             </Grid.Col>
           </Grid>

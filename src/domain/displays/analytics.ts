@@ -1,6 +1,7 @@
 import { Banks } from "../bank";
+import { getWeightedMedian } from "../calculators/weightedMedian";
 import { Display } from "../display";
-import { accountData } from "../structures";
+import { accountData, creditData, loanRecords } from "../structures";
 import { BalanceSheets } from "./balancesheets";
 import { Totals } from "./totals";
 
@@ -29,10 +30,29 @@ export const Analytics = {
       .map((account) => {
         return account.balance;
       })
-      .reduce((acc, cur) => {return acc + cur}, 0);
+      .reduce((acc, cur) => {
+        return acc + cur;
+      }, 0);
     return {
       data: assetData,
       total: assetTotals,
     };
+  },
+  getVolumeWeightedMedian() {
+    const allLoans = loanRecords;
+    const data = getWeightedMedian(allLoans);
+    const fallbackData = {
+      volumeWeightedMedian: 0,
+      associatedData: [
+        {
+          transactionPercentage: "0",
+          rate: 0,
+          occurences: 0,
+          volume: 0,
+          cumulativeFrequency: 0,
+        },
+      ],
+    };
+    return data || fallbackData;
   },
 };

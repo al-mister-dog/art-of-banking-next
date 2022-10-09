@@ -1,6 +1,13 @@
+import CentralBank from "../components/widgets/compound-interest-calculator";
 import { CreditAccounts } from "./credit-accounts";
 import { Record } from "./Records";
-import { Bank, creditData, CreditData, CreditAccount } from "./structures";
+import {
+  Bank,
+  creditData,
+  CreditData,
+  CreditAccount,
+  bankData,
+} from "./structures";
 
 export const Loans = {
   create(
@@ -18,7 +25,8 @@ export const Loans = {
       type,
       "loans",
       interest,
-      interestRate
+      interestRate,
+      amount
     );
   },
   createMortgage(
@@ -45,7 +53,8 @@ export const Loans = {
       type,
       "fed funds",
       interest,
-      interestRate
+      interestRate,
+      amount,
     );
   },
 

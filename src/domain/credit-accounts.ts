@@ -4,6 +4,7 @@ import {
   CreditData,
   CreditAccount,
   BankData,
+  loanRecords,
 } from "./structures";
 
 const nettedAccounts = [];
@@ -20,7 +21,8 @@ export const CreditAccounts = {
     type: string,
     category: string,
     interest?: number,
-    interestRate?: number
+    interestRate?: number,
+    principal?: number
   ) {
     let newAccount: CreditAccount = {
       id: creditData.id,
@@ -31,7 +33,9 @@ export const CreditAccounts = {
       category,
       interest,
       interestRate,
+      principal,
     };
+    
     if (category === "dues") {
       newAccount = { ...newAccount, netted: false };
     }
@@ -42,6 +46,9 @@ export const CreditAccounts = {
     newCreditData.allIds.push(newAccount.id);
     CreditData.assign(newCreditData);
     BankData.assignCreditIds(subordinate, superior, newAccount.id);
+    if (category === "loans" || category === "fed funds") {
+      loanRecords.push(newAccount);
+    }
   },
   get() {
     return creditData.creditAccounts;

@@ -79,6 +79,7 @@ export const actions = {
   15: actionLists[6],
   16: actionLists[6],
   17: actionLists[6],
+  18: actionLists[6],
 };
 
 const initialActionData = actions[0];

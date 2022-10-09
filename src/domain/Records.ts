@@ -388,7 +388,13 @@ export const Record = {
     insertLog(centralbank.id, centralbankLogA);
     insertLog(centralbank.id, centralbankLogB);
   },
-  getFedFundsLoan(amount: number, bank1: Bank, bank2: Bank, centralbank: Bank) {
+  getFedFundsLoan(
+    amount: number,
+    bank1: Bank,
+    bank2: Bank,
+    centralbank: Bank,
+    interestRate: number
+  ) {
     const b1CbAccount = Accounts.getAccountByIds(bank1.id, centralbank.id);
     const b2CbAccount = Accounts.getAccountByIds(bank2.id, centralbank.id);
     const balance1 = b1CbAccount.balance;
@@ -412,10 +418,6 @@ export const Record = {
 
     insertLiabilitiesEntry(bank1.id, bank1Record);
     insertAssetsEntry(bank2.id, bank2Record);
-    const bank1Log = {
-      id: bank1.id,
-      action: ``,
-    };
   },
 
   creditAccount(bank1, bank2, amount) {
@@ -563,7 +565,7 @@ export const Record = {
     insertLog(bank1.id, bank1Log);
     insertLog(bank2.id, bank2Log);
   },
-  fedFundsLoan(bank1, bank2, amount) {
+  fedFundsLoan(bank1, bank2, amount, interestRate) {
     const record1 = {
       instrumentType: "fed funds",
       notationType: "issuance",
@@ -581,18 +583,19 @@ export const Record = {
       name: bank1.name,
     };
 
-    insertLiabilitiesEntry(bank1.id, record1);
-    insertAssetsEntry(bank2.id, record2);
-
     const bank1Log = {
       id: bank1.id,
-      action: `Received $${amount} Fed Funds from ${bank2.name}`,
-      symbol: "+",
+      thirdPartyId: bank2.id,
+      thirdPartyName: bank2.name,
+      action: `Received $${amount} Fed Funds from ${bank2.name} at ${interestRate}% interest`,
+      symbol: "-",
     };
     const bank2Log = {
-      id: bank1.id,
-      action: `Issued $${amount} Fed Funds to ${bank2.name}`,
-      symbol: "-",
+      id: bank2.id,
+      thirdPartyId: bank1.id,
+      thirdPartyName: bank1.name,
+      action: `Issued $${amount} Fed Funds from ${bank2.name} at ${interestRate}% interest`,
+      symbol: "+",
     };
     insertLog(bank1.id, bank1Log);
     insertLog(bank2.id, bank2Log);

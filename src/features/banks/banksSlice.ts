@@ -18,6 +18,7 @@ import { Record } from "../../domain/Records";
 import { CentralBank } from "../../domain/centralbank";
 import { System } from "../../domain/system";
 import { GraphData } from "../../domain/graph-data";
+import { Analytics } from "../../domain/displays/analytics";
 
 export interface BanksState {
   banks: any;
@@ -190,6 +191,7 @@ export const banksSlice = createSlice({
         ];
       }
       state.analytics.graphs.nationalData = analytics.graphs.nationalData;
+      state.analytics.graphs.loanData = Analytics.getVolumeWeightedMedian();
     },
     setLoading: (state) => {
       state.loading = true;

@@ -1,5 +1,4 @@
 import { CardInfo } from "../../components/balancesheets/types";
-import { Banks } from "../../domain/bank";
 import { Reserves } from "../../domain/reserves";
 import { creditData } from "../../domain/structures";
 import {
@@ -479,4 +478,5 @@ export const validatorsById = {
   15: validatorsByLecture.fed,
   16: validatorsByLecture.fed,
   17: validatorsByLecture.fed,
+  18: validatorsByLecture.fed,
 };

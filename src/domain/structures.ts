@@ -160,6 +160,18 @@ export function clearBankData() {
       reserves: [],
       privateCredit: [],
       nationalData: {},
+      loanData: {
+        volumeWeightedMedian: 0,
+        associatedData: [
+          {
+            transactionPercentage: "0",
+            rate: 0,
+            occurences: 0,
+            volume: 0,
+            cumulativeFrequency: 0,
+          },
+        ],
+      },
     },
   };
 }
@@ -214,6 +226,7 @@ export interface CreditAccount {
   netted?: boolean;
   interest?: number;
   interestRate?: number;
+  principal?: number;
 }
 
 export type PossibleCreditAccount = CreditAccount | undefined;
@@ -276,6 +289,18 @@ export let analytics = {
     reserves: [],
     privateCredit: [],
     nationalData: {},
+    loanData: {
+      volumeWeightedMedian: 0,
+      associatedData: [
+        {
+          transactionPercentage: "0",
+          rate: 0,
+          occurences: 0,
+          volume: 0,
+          cumulativeFrequency: 0,
+        },
+      ],
+    },
   },
 };
 
@@ -302,3 +327,5 @@ export const AnalyticsData = {
     analytics = { ...analytics, graphs };
   },
 };
+
+export const loanRecords = [];

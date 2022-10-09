@@ -8,13 +8,14 @@ import { Customer } from "../../../../../domain/customer";
 import { CardInfo } from "../../../types";
 import SelectLoan from "../compositions/select-loan";
 import { InterestRates } from "../../../../../domain/calculator";
+import { Analytics } from "../../../../../domain/displays/analytics";
 
 export default function GetLoan({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();
   const { interestRate } = useAppSelector(selectSettings);
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
   const [amount, setAmount] = useState<number>(0);
-
+  console.log(Analytics.getVolumeWeightedMedian());
   function getLoanPayload() {
     const interest = parseFloat(InterestRates.percentage(interestRate, amount));
     const payload = {

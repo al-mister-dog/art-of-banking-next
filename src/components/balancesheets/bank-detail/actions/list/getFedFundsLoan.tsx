@@ -7,6 +7,9 @@ import { CardInfo } from "../../../types";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
 import SelectLoan from "../compositions/select-loan";
 import { InterestRates } from "../../../../../domain/calculator";
+import { getWeightedMedian } from "../../../../../domain/calculators/volumeWeightedMedian";
+import { creditData } from "../../../../../domain/structures";
+import { Analytics } from "../../../../../domain/displays/analytics";
 
 export default function GetFedFundsLoan({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();
@@ -19,13 +22,13 @@ export default function GetFedFundsLoan({ bank }: { bank: CardInfo }) {
     const payload = {
       amount,
       interest,
-      interestRate, 
+      interestRate,
       b1: Banks.getById(bank.cardInfo.id),
       b2: Banks.getById(parseInt(selectedBank)),
     };
     dispatch(getFedFundsLoan(payload));
   }
-
+  console.log(Analytics.getVolumeWeightedMedian());
   const thisBankId = bank.cardInfo.id;
   const banks = Banks.getAll()
     .filter((bank) => bank.type === "bank" && bank.id !== thisBankId)

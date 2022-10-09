@@ -147,13 +147,13 @@ export const lectureRoutes = {
           lectureId: 2,
           keyTermsIds: [0, 1, 2],
         },
-        // {
-        //   id: 18,
-        //   title: "Dealers and Market Makers",
-        //   path: "/the-federal-reserve/dealers-and-market-makers",
-        //   lectureId: 2,
-        //   keyTermsIds: [0, 1, 2],
-        // },
+        {
+          id: 18,
+          title: "Fed Funds Rate 1",
+          path: "/the-federal-reserve/fed-funds-rate-1",
+          lectureId: 2,
+          keyTermsIds: [0, 1, 2],
+        },
         // {
         //   id: 19,
         //   title: "Sandbox",

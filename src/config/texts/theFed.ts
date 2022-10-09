@@ -128,14 +128,11 @@ export const theFedText = {
     of contracting the credit after the transfer has been completed? Hint: its down to you...`,
   },
   step5: {
-    lectureTitle: `Clearing House`,
-    title: `The Clearing House`,
+    lectureTitle: `The Fed`,
+    title: `Fed Funds Rate`,
     paragraphs: [
-      `The correspondent system of banking is a step forward from the older system of interbank
-      payments, but it could be improved. Obviously it would advantageous 
-      to devise a system where the bank only had to pay the net across all its correspondents, rather
-      than pay bilaterally with every bank in the network. It would be easier if all the banks held 
-      correspondent accounts with only one bank, and use those balances to clear all its payments.`,
+      `We often hear about central banks raising or lowering the interest rate in response to what
+      is going on in the economy.`,
       `In the mid nineteenth century, a group of banks of roughly the same stature set up the New York
       Clearing House Association, a bank who's reserves where made up of a subscription by every 
       member bank. Any payment due to or from one bank became a payment due to or from the Clearing

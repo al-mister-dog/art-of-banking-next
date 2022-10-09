@@ -29,13 +29,11 @@ export const displaySettings: DisplaySettings = {
 };
 
 export interface ClaveroSettings {
-  
   each: boolean;
   all: boolean;
 }
 
 export const spreadsheetSettings: ClaveroSettings = {
-  
   each: false,
   all: true,
 };
@@ -150,7 +148,7 @@ export const sliderSettings = {
     sliderSettings: {
       overdraft: false,
       reserveRequirement: true,
-      interestRate: true,
+      interestRate: false,
     },
     sliderFixtures: {
       overdraft: 10,
@@ -160,13 +158,23 @@ export const sliderSettings = {
     sliderSettings: {
       overdraft: false,
       reserveRequirement: true,
-      interestRate: true,
+      interestRate: false,
     },
     sliderFixtures: {
       overdraft: 100,
     },
   },
   17: {
+    sliderSettings: {
+      overdraft: false,
+      reserveRequirement: true,
+      interestRate: false,
+    },
+    sliderFixtures: {
+      overdraft: 100,
+    },
+  },
+  18: {
     sliderSettings: {
       overdraft: false,
       reserveRequirement: true,
