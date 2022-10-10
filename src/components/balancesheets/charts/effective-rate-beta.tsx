@@ -77,7 +77,7 @@ export default function EffectiveRate() {
       },
       {
         type: "line" as const,
-        label: "Cumulative Frequency",
+        label: "Cumulative Dollar Weight",
         backgroundColor: theme.colors.violet[7],
         data: loanData.associatedData.map((data) => data.cumulativeFrequency),
         borderColor: theme.colors.violet[7],

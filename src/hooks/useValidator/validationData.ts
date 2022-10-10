@@ -147,9 +147,9 @@ const validatorsByLecture = {
           .filter(
             (account) =>
               account.subordinateId === customer.cardInfo.id &&
+              // account.superiorId === parseInt(selectedBank) &&
               account.balance > 0
           );
-
         return check
           .isAmount(amount)
           .isSelectedBank(selectedBank)
@@ -378,6 +378,7 @@ const validatorsByLecture = {
           .filter(
             (account) =>
               account.subordinateId === customer.cardInfo.id &&
+              account.superiorId === parseInt(selectedBank) &&
               account.balance > 0
           );
         return (
