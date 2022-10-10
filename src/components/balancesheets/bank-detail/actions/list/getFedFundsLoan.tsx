@@ -1,21 +1,17 @@
-import { useAppDispatch, useAppSelector } from "../../../../../app/hooks";
-import { selectSettings } from "../../../../../features/settings/settingsSlice";
+import { useAppDispatch } from "../../../../../app/hooks";
 import { getFedFundsLoan } from "../../../../../features/banks/banksSlice";
 import { useState } from "react";
 import { Banks } from "../../../../../domain/bank";
 import { CardInfo } from "../../../types";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
-import SelectLoan from "../compositions/select-loan";
 import { InterestRates } from "../../../../../domain/calculator";
-import { getWeightedMedian } from "../../../../../domain/calculators/volumeWeightedMedian";
-import { creditData } from "../../../../../domain/structures";
-import { Analytics } from "../../../../../domain/displays/analytics";
+import SelectLoan from "../compositions/select-loan";
 
 export default function GetFedFundsLoan({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();
-  const { interestRate } = useAppSelector(selectSettings);
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
   const [amount, setAmount] = useState<number>(0);
+  const [interestRate, setInterestRate] = useState<number>(0);
 
   function getLoanPayload() {
     const interest = parseFloat(InterestRates.percentage(interestRate, amount));
@@ -28,7 +24,7 @@ export default function GetFedFundsLoan({ bank }: { bank: CardInfo }) {
     };
     dispatch(getFedFundsLoan(payload));
   }
-  console.log(Analytics.getVolumeWeightedMedian());
+
   const thisBankId = bank.cardInfo.id;
   const banks = Banks.getAll()
     .filter((bank) => bank.type === "bank" && bank.id !== thisBankId)
@@ -43,6 +39,14 @@ export default function GetFedFundsLoan({ bank }: { bank: CardInfo }) {
     selectedBank
   );
 
+  function onSetInterestRate(value) {
+    if (value === undefined) {
+      setInterestRate(0);
+    } else {
+      setInterestRate(value);
+    }
+  }
+
   return (
     <SelectLoan
       bank={bank}
@@ -53,6 +57,8 @@ export default function GetFedFundsLoan({ bank }: { bank: CardInfo }) {
       setSubject={setSelectedBank}
       amount={amount}
       setAmount={setAmount}
+      interestRate={interestRate}
+      setInterestRate={onSetInterestRate}
       dispatchFunction={getLoanPayload}
       btnText="Get Loan"
       validation={validation}

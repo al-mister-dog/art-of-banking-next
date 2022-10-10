@@ -1,5 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../../../../../app/hooks";
-import { selectSettings } from "../../../../../features/settings/settingsSlice";
+import { useAppDispatch } from "../../../../../app/hooks";
 import { getLoan } from "../../../../../features/banks/banksSlice";
 import { useState } from "react";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
@@ -8,14 +7,14 @@ import { Customer } from "../../../../../domain/customer";
 import { CardInfo } from "../../../types";
 import SelectLoan from "../compositions/select-loan";
 import { InterestRates } from "../../../../../domain/calculator";
-import { Analytics } from "../../../../../domain/displays/analytics";
 
 export default function GetLoan({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();
-  const { interestRate } = useAppSelector(selectSettings);
+
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
   const [amount, setAmount] = useState<number>(0);
-  console.log(Analytics.getVolumeWeightedMedian());
+  const [interestRate, setInterestRate] = useState<number>(0);
+
   function getLoanPayload() {
     const interest = parseFloat(InterestRates.percentage(interestRate, amount));
     const payload = {
@@ -34,6 +33,14 @@ export default function GetLoan({ bank }: { bank: CardInfo }) {
 
   const validation = useValidator("getLoan", bank, amount, selectedBank);
 
+  function onSetInterestRate(value) {
+    if (value === undefined) {
+      setInterestRate(0);
+    } else {
+      setInterestRate(value);
+    }
+  }
+
   return (
     <SelectLoan
       bank={bank}
@@ -44,6 +51,8 @@ export default function GetLoan({ bank }: { bank: CardInfo }) {
       setSubject={setSelectedBank}
       amount={amount}
       setAmount={setAmount}
+      interestRate={interestRate}
+      setInterestRate={onSetInterestRate}
       dispatchFunction={getLoanPayload}
       btnText="Get Loan"
       validation={validation}

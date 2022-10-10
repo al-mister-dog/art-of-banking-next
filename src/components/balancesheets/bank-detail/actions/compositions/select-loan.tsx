@@ -11,7 +11,7 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
-import { CurrencyDollar } from "tabler-icons-react";
+import { CurrencyDollar, Percentage } from "tabler-icons-react";
 import { CardInfo } from "../../../types";
 import { DrawerContext } from "../../../cards/card/card-mobile";
 import { mediaQuery } from "../../../../../config/media-query";
@@ -25,6 +25,8 @@ interface Props {
   setSubject: (v: any) => void;
   amount: number;
   setAmount: (v: any) => void;
+  interestRate: number;
+  setInterestRate: (v: any) => void;
   dispatchFunction: () => void;
   btnText: string;
   validation: {
@@ -42,11 +44,12 @@ export default function SelectAndPay({
   setSubject,
   amount,
   setAmount,
+  interestRate,
+  setInterestRate,
   dispatchFunction,
   btnText,
   validation,
 }: Props) {
-  const { interestRate } = useAppSelector(selectSettings);
   const isMobile = useMediaQuery(mediaQuery);
   const setOpened = useContext(DrawerContext);
 
@@ -69,6 +72,13 @@ export default function SelectAndPay({
           onChange={(amount) => setAmount(amount)}
         />
       </Input.Wrapper>
+      <NumberInput
+        icon={<Percentage />}
+        value={interestRate}
+        placeholder="0"
+        radius="xs"
+        onChange={(interestRate) => setInterestRate(interestRate)}
+      />
       <Text size="xs" color="dimmed">
         + {interestRate}% interest
       </Text>

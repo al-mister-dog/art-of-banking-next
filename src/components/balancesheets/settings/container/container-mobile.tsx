@@ -35,7 +35,7 @@ export default function SettingsMobile({ setOpened }) {
         <ReserveRequirementSlider
           disabled={slidersDisabled.reserveRequirement}
         />
-        <InterestRateSlider disabled={slidersDisabled.interestRate} />
+        {/* <InterestRateSlider disabled={slidersDisabled.interestRate} /> */}
         <DisplayRadioGroup />
         <ColorsMenu setOpened={setOpened} />
       </div>

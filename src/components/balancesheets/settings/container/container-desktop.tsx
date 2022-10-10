@@ -55,7 +55,7 @@ export default function Desktop() {
             <ReserveRequirementSlider
               disabled={slidersDisabled.reserveRequirement}
             />
-            <InterestRateSlider disabled={slidersDisabled.interestRate} />
+            {/* <InterestRateSlider disabled={slidersDisabled.interestRate} /> */}
           </div>
         </div>
         <div>
