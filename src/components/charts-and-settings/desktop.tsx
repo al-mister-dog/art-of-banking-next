@@ -29,6 +29,7 @@ export default function Desktop() {
           {charts[currentLectureId] === "private credit" && (
             <ChartPrivateCredit />
           )}
+          {charts[currentLectureId] === "weighted median" && <EffectiveRate />}
         </div>
       ) : (
         <div style={{ height: "30rem" }}>
