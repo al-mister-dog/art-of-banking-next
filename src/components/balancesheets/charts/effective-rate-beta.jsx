@@ -43,7 +43,7 @@ export default function EffectiveRate() {
         annotations: [
           {
             id: "a-line-1",
-            type: "line" as const, // important, otherwise typescript complains
+            type: "line", // important, otherwise typescript complains
             backgroundColor: theme.colors.violet[3],
             borderColor: theme.colors.violet[3],
             borderWidth: 2,
@@ -55,7 +55,7 @@ export default function EffectiveRate() {
             label: {
               display: true,
               content: `EFFR: ${loanData.volumeWeightedMedian}%`,
-              position: "start" as const,
+              position: "start",
               backgroundColor: theme.colors.violet[3],
             },
           },
@@ -68,7 +68,7 @@ export default function EffectiveRate() {
     labels,
     datasets: [
       {
-        type: "bar" as const,
+        type: "bar",
         label: "Fed Funds",
         backgroundColor: theme.colors.blue[7],
         data: loanData.associatedData.map((data) => data.volume),
@@ -76,7 +76,7 @@ export default function EffectiveRate() {
         borderWidth: 2,
       },
       {
-        type: "line" as const,
+        type: "line",
         label: "Cumulative Dollar Weight",
         backgroundColor: theme.colors.violet[7],
         data: loanData.associatedData.map((data) => data.cumulativeFrequency),
