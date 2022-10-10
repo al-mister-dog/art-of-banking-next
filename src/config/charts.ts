@@ -17,4 +17,5 @@ export const charts = {
   15: "private credit",
   16: "private credit",
   17: "private credit",
+  18: "weighted median"
 };

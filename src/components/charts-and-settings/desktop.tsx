@@ -38,12 +38,14 @@ export default function Desktop() {
             </Grid.Col>
             <Grid.Col span={3}>
               <Card style={{ backgroundColor: theme.colors.violet[1] }}>
-                {/* {charts[currentLectureId] === "balances" && <ChartBalances />}
+                {charts[currentLectureId] === "balances" && <ChartBalances />}
                 {charts[currentLectureId] === "credit" && <ChartCredit />}
                 {charts[currentLectureId] === "private credit" && (
                   <ChartPrivateCredit />
-                )} */}
-                <EffectiveRate />
+                )}
+                {charts[currentLectureId] === "weighted median" && (
+                  <EffectiveRate />
+                )}
               </Card>
             </Grid.Col>
           </Grid>

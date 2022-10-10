@@ -4,14 +4,17 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart } from "chart.js";
 import annotationPlugin from "chartjs-plugin-annotation";
+import { useMantineTheme } from "@mantine/core";
 
 Chart.register(annotationPlugin);
 
 export default function EffectiveRate() {
   const { analytics } = useAppSelector(selectBanks);
+  const theme = useMantineTheme();
   const loanData = analytics.graphs.loanData;
   const labels = loanData.associatedData.map((data) => `${data.rate}%`);
   const options = {
+    maintainAspectRatio: true,
     scales: {
       y: {
         // beginAtZero: true,
@@ -36,21 +39,24 @@ export default function EffectiveRate() {
           content: "Effective Rate",
         },
       },
-
       annotation: {
         annotations: [
           {
             id: "a-line-1",
             type: "line" as const, // important, otherwise typescript complains
-            borderColor: "black",
-            borderWidth: 1,
+            backgroundColor: theme.colors.violet[3],
+            borderColor: theme.colors.violet[3],
+            borderWidth: 2,
             scaleID: "x",
+            borderDash: [2, 2],
             value: loanData.associatedData.findIndex(
               (d) => d.rate === loanData.volumeWeightedMedian
             ),
             label: {
-              enabled: true,
-              content: "Effective Rate: (Volume Weighted Median)",
+              display: true,
+              content: `EFFR: ${loanData.volumeWeightedMedian}%`,
+              position: "start" as const,
+              backgroundColor: theme.colors.violet[3],
             },
           },
         ],
@@ -63,14 +69,26 @@ export default function EffectiveRate() {
     datasets: [
       {
         type: "bar" as const,
-        label: "Volume Traded at Interest Rate",
-        backgroundColor: "rgb(75, 192, 192)",
+        label: "Fed Funds",
+        backgroundColor: theme.colors.blue[7],
         data: loanData.associatedData.map((data) => data.volume),
-        borderColor: "white",
+        borderColor: theme.colors.blue[0],
+        borderWidth: 2,
+      },
+      {
+        type: "line" as const,
+        label: "Cumulative Frequency",
+        backgroundColor: theme.colors.violet[7],
+        data: loanData.associatedData.map((data) => data.cumulativeFrequency),
+        borderColor: theme.colors.violet[7],
         borderWidth: 2,
       },
     ],
   };
 
-  return <Bar options={options} data={data} height={150} />;
+  return (
+    <div style={{ height: "25.5rem", width: "100%" }}>
+      <Bar options={options} data={data} height={180} />
+    </div>
+  );
 }

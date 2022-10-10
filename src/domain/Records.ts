@@ -582,7 +582,8 @@ export const Record = {
       symbol: "+",
       name: bank1.name,
     };
-
+    insertLiabilitiesEntry(bank1.id, record1);
+    insertAssetsEntry(bank1.id, record2);
     const bank1Log = {
       id: bank1.id,
       thirdPartyId: bank2.id,

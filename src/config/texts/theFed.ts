@@ -153,7 +153,8 @@ export const theFedText = {
       `It is important to understand the Effective Federal Funds Rate for two reasons. Firstly it lets us 
       know the state of the banking system. A low EFFR may mean the economy is growing too fast and 
       is at risk of inflation. Conversely, a high EFFR may mean the economy is slowing down and is at
-      risk of recession. In the next chapter we will see how the Fed can manipulate the EFFR by using the
+      risk of recession. Secondly it gives the Fed a birds-eye view of the payments system, allowing it to 
+      enter the market itself in order to restore balance. In the next chapter we will see how the Fed can manipulate the EFFR by using the
       'Target Rate'.`,
     ],
     assignment: `Below we see that federal funds transactions have occured as given in the example from
