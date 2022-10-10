@@ -131,27 +131,34 @@ export const theFedText = {
     lectureTitle: `The Fed`,
     title: `Fed Funds Rate`,
     paragraphs: [
-      `We often hear about central banks raising or lowering the interest rate in response to what
-      is going on in the economy.`,
-      `In the mid nineteenth century, a group of banks of roughly the same stature set up the New York
-      Clearing House Association, a bank who's reserves where made up of a subscription by every 
-      member bank. Any payment due to or from one bank became a payment due to or from the Clearing
-      House. These payments were made with "Clearing House Certificates" which were bank notes representing
-      the dollar, in cash or gold. Each bank had a deposit account of Clearinghouse Certificates. 
-      At the end of each day, all the banks would meet up at the Clearing House, net their due tos and due froms, 
-      and if they were a debtor party, pay the Clearing House in certificates, or if they were the 
-      creditor party, receive certificates from the Clearing House.`,
-      `Because the money supply in this system is made up entirely of the deposit accounts of the 
-      member banks, total due tos and due froms will always net to zero, and reserves will never 
-      have to move. However this system can break if one member bank ends up systematically becoming a debtor
-      and runs out of certificates in their account. Other members would be reluctant to extend an 
-      overdraft to this debtor and the result would be the debtor bank defaulting and closing down. 
-      To avoid this, the Clearing House set up a loan system which worked as an overdraft and will be 
-      looked at in the next chapter.`,
+      `So far we have been trading fed funds between banks, and perhaps even setting the interest rate 
+    of the fed funds. We will now look at the wider picture of these interest rates. Understanding the 
+    wider picture will also help us understand another role the Fed plays outside of just facilitating payments between banks.`,
+      `The interest rate of a fed funds loan is decided between the borrower and lender banks. They are decided 
+      for different reasons. Because this is open market trading, every bank can see how every other bank is doing. 
+      If a lender bank sees that a borrower bank has a high exposure (a large amount of liabilities), the borrower
+      bank may wish to increase the interest rate on its fed funds loan to that bank. Likewise if the lender
+      bank has confidence in another bank's business, they may lend at a lower price, or perhaps the lender bank
+      is keen to get rid of excess reserves.`,
+      `If we averaged all the different fed funds loans traded between banks we would get the Effective Federal Funds Rate (EFFR). 
+    The precise rate is determined by finding the volume-weighted median rate of all fed funds loans.
+    In its simplest terms, the volume-weighted median is derived by halving the amount of money traded in that day
+    and taking note of the interest rate of fed funds that have been traded at that price. This gives us 
+    an idea of the general trend of lending rates. The St Louis Fed gives the following example...
+    `,
+      `"For example, assume that on a given day, $10 billion of federal funds transactions occurred at
+     each of 5, 10, 15 and 20 basis points, and $60 billion occurred at 25 basis points. This represents 
+     $100 billion of total volume. The median would be the rate at the ‘middle dollar’, or $50 billion, 
+     which is 25 basis points in this example."`,
+      `It is important to understand the Effective Federal Funds Rate for two reasons. Firstly it lets us 
+      know the state of the banking system. A low EFFR may mean the economy is growing too fast and 
+      is at risk of inflation. Conversely, a high EFFR may mean the economy is slowing down and is at
+      risk of recession. In the next chapter we will see how the Fed can manipulate the EFFR by using the
+      'Target Rate'.`,
     ],
-    assignment: `Below are banks and customers who have done a day of trading and are now ready to net
-    and settle dues with the clearinghouse. Net dues at the Clearing House and follow who owes who. 
-    Then settle dues and see what happens to the banks' certificate accounts.`,
+    assignment: `Below we see that federal funds transactions have occured as given in the example from
+    the St Louis Fed. Get the banks to trade fed funds at different interest rates in order to move the EFFR.
+    `,
   },
   step6: {
     lectureTitle: `Clearing House`,
