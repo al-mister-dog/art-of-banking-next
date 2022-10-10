@@ -50,7 +50,7 @@ export default function EffectiveRate() {
             ),
             label: {
               enabled: true,
-              content: "Effective Rate",
+              content: "Effective Rate: (Volume Weighted Median)",
             },
           },
         ],
@@ -63,7 +63,7 @@ export default function EffectiveRate() {
     datasets: [
       {
         type: "bar" as const,
-        label: "Volume Traded",
+        label: "Volume Traded at Interest Rate",
         backgroundColor: "rgb(75, 192, 192)",
         data: loanData.associatedData.map((data) => data.volume),
         borderColor: "white",

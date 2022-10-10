@@ -174,6 +174,11 @@ export function clearBankData() {
       },
     },
   };
+  loanData = {
+    id: 0,
+    loanAccounts: {} as LoanAccounts,
+    allIds: [] as number[],
+  };
 }
 
 export const AccountData = {

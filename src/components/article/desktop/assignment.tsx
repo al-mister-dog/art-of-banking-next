@@ -40,6 +40,7 @@ export default function Assignment({ assignment }) {
         <div
           style={{
             paddingLeft: "50px",
+            paddingRight: "25rem",
           }}
         >
           <Text size="lg" weight="bold" italic>
