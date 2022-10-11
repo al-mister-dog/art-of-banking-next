@@ -2,7 +2,7 @@ import { useAppSelector } from "../../app/hooks";
 import { Display } from "../../domain/display";
 import { Bank } from "../../domain/structures";
 import { selectBanks } from "../../features/banks/banksSlice";
-import { CardInfo } from "../balancesheets/types";
+import { CardInfo } from "../interactive-ui/types";
 import SpreadsheetCard from "./spreadsheet-card";
 
 export default function SpreadSheet() {

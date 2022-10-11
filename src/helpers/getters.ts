@@ -1,4 +1,4 @@
-import { CardInfo } from "../components/balancesheets/types";
+import { CardInfo } from "../components/interactive-ui/types";
 import { Accounts } from "../domain/accounts";
 import { Banks } from "../domain/bank";
 import { Reserves } from "../domain/reserves";

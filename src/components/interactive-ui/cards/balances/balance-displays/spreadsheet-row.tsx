@@ -28,7 +28,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const Balance = ({ record, bank }) => {
+const SpreadsheetRow = ({ record, bank }) => {
   const { classes } = useStyles();
   const theme = useMantineTheme();
   if (record === null) {
@@ -56,5 +56,5 @@ const Balance = ({ record, bank }) => {
   );
 };
 
-const MemoizedBalance = React.memo(Balance);
-export default MemoizedBalance;
+const MemoizedSpreadsheetRow = React.memo(SpreadsheetRow);
+export default MemoizedSpreadsheetRow;

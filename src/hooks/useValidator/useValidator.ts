@@ -1,7 +1,7 @@
 import { useAppSelector } from "../../app/hooks";
 import { selectActions } from "../../features/actions/actionsSlice";
 import { selectSettings } from "../../features/settings/settingsSlice";
-import { CardInfo } from "../../components/balancesheets/types";
+import { CardInfo } from "../../components/interactive-ui/types";
 import { validatorsById } from "./validationData";
 
 

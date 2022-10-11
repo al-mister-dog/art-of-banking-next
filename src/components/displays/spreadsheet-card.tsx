@@ -8,7 +8,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { Record } from "../../domain/Records";
-import Spreadsheet from "../balancesheets/cards/balances/balance-displays/spreadsheet";
+import SpreadsheetRow from "../interactive-ui/cards/balances/balance-displays/spreadsheet-row";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -51,7 +51,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function SpreadsheetCard({ bank }) {
+export default function RowCard({ bank }) {
   const { classes } = useStyles();
   const theme = useMantineTheme();
   const { assets, liabilities } = Record.getAllTransactions(bank.cardInfo.id);
@@ -108,12 +108,12 @@ export default function SpreadsheetCard({ bank }) {
             style={{ borderRight: `1px solid ${theme.colors[bank.color][2]}` }}
           >
             {assets.map((record: any, index: number) => {
-              return <Spreadsheet key={index} record={record} bank={bank} />;
+              return <SpreadsheetRow key={index} record={record} bank={bank} />;
             })}
           </div>
           <div>
             {liabilities.map((record: any, index: number) => {
-              return <Spreadsheet key={index} record={record} bank={bank} />;
+              return <SpreadsheetRow key={index} record={record} bank={bank} />;
             })}
           </div>
         </SimpleGrid>

@@ -1,17 +1,20 @@
 import { useAppSelector } from "../../../../app/hooks";
 import { selectSettings } from "../../../../features/settings/settingsSlice";
-import BalanceEachRound from "./balance-displays/round";
-import BalanceEachTurn from "./balance-displays/static";
-import BalanceFlash from "./balance-displays/flash";
-import BalanceOff from "./balance-displays/off";
+import BalanceEachRound from "./balance-displays/balance-sheet-rows/round";
+import BalanceEachTurn from "./balance-displays/balance-sheet-rows/static";
+import BalanceFlash from "./balance-displays/balance-sheet-rows/flash";
+import BalanceOff from "./balance-displays/balance-sheet-rows/off";
 import { Text, useMantineTheme } from "@mantine/core";
 import { System } from "../../../../domain/system";
-import { bankData } from "../../../../domain/structures";
 
-export default function BalanceByInstrument({ side, id, textColor, bank }) {
+export default function BalanceSheetRowHeading({ side, id, textColor, bank }) {
   const { colorSettings, displaySettings } = useAppSelector(selectSettings);
   const theme = useMantineTheme();
-  if (System.getSystem() === "centralbank" && side.instrument === "Reserves" && bank.cardInfo.type !== "customer") {
+  if (
+    System.getSystem() === "centralbank" &&
+    side.instrument === "Reserves" &&
+    bank.cardInfo.type !== "customer"
+  ) {
     return;
   }
 

@@ -1,6 +1,6 @@
 import { Group } from "@mantine/core";
 import { CardInfo } from "../../types";
-import Card from "../card/card-mobile";
+import Card from "./card-mobile";
 
 export default function LayoutMobile({
   banksArray,

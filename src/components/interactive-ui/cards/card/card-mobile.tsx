@@ -1,6 +1,9 @@
 import { useAppSelector } from "../../../../app/hooks";
 import { selectSettings } from "../../../../features/settings/settingsSlice";
-import { useCallback } from "react";
+import { createContext, useContext, useState } from "react";
+
+export const DrawerContext = createContext((v: boolean) => {});
+
 import {
   Card,
   Center,
@@ -8,69 +11,70 @@ import {
   Text,
   Title,
   createStyles,
+  Drawer,
   useMantineTheme,
 } from "@mantine/core";
+
+import BankDetail from "../../bank-detail/panel/mobile";
+import BalanceSheetRowHeading from "../balances/balance-sheet-heading";
+
 import { CardInfo } from "../../types";
-import BalanceByInstrument from "../balances/balance-by-instrument";
 import { Record } from "../../../../domain/Records";
 import SpreadsheetList from "../balances/balance-displays/spreadsheet-list";
 
-const useStyles = createStyles((theme) => ({
+export const useStyles = createStyles((theme) => ({
   card: {
-    paddingBottom: "0px",
-    height: "13.75rem",
     backgroundColor: theme.colors.violet[1],
+    paddingBottom: "0px",
+    width: "100%",
+    height: "11.75rem",
+    margin: "auto",
   },
   header: { padding: "3px", cursor: "pointer" },
   grape: {
-    // backgroundColor: theme.colors.grape[8],
+    backgroundColor: theme.colors.grape,
     "&:hover": {
       backgroundColor: theme.colors.grape[3],
     },
   },
   violet: {
-    // backgroundColor: theme.colors.violet[8],
+    backgroundColor: theme.colors.violet,
     "&:hover": {
       backgroundColor: theme.colors.violet[3],
     },
   },
   indigo: {
-    // backgroundColor: theme.colors.violet,
+    backgroundColor: theme.colors.violet,
     "&:hover": {
       backgroundColor: theme.colors.violet[3],
     },
   },
   pink: {
-    // backgroundColor: theme.colors.pink,
+    backgroundColor: theme.colors.pink,
     "&:hover": {
       backgroundColor: theme.colors.pink[3],
     },
   },
   teal: {
-    // backgroundColor: theme.colors.teal,
+    backgroundColor: theme.colors.teal,
     "&:hover": {
       backgroundColor: theme.colors.teal[3],
     },
   },
   blue: {
-    // backgroundColor: theme.colors.blue,
+    backgroundColor: theme.colors.blue,
     "&:hover": {
       backgroundColor: theme.colors.blue[3],
     },
   },
 }));
-interface Props {
-  bank: CardInfo;
-  handleSetBankDetail: (v: CardInfo) => void;
-}
-export default function CardUI({ bank, handleSetBankDetail }: Props) {
+
+export default function CardUI({ bank }: { bank: CardInfo }) {
+  const theme = useMantineTheme();
+  const [opened, setOpened] = useState(false);
+  const { classes } = useStyles();
   const { displaySettings, spreadsheetSettings } =
     useAppSelector(selectSettings);
-  const { classes } = useStyles();
-  const theme = useMantineTheme();
-  const onSelectBank = useCallback((bank: CardInfo) => {
-    handleSetBankDetail(bank);
-  }, []);
 
   let spreadsheetBalances = { assets: undefined, liabilities: undefined };
   if (spreadsheetSettings.each) {
@@ -78,7 +82,7 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
   } else if (spreadsheetSettings.all) {
     spreadsheetBalances = Record.getAllTransactions(bank.cardInfo.id);
   }
-  
+
   return (
     <Card
       key={bank.cardInfo.id}
@@ -89,11 +93,10 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
     >
       <Card.Section
         className={`${classes.header} ${classes[bank.color]}`}
-        onClick={() => onSelectBank(bank)}
+        onClick={() => setOpened(true)}
       >
         <Center>
-          {/* <Title order={4} color="white"> */}
-          <Title order={4} color={theme.colors[bank.color][9]}>
+          <Title order={4} color="white">
             {bank.cardInfo.name}
           </Title>
         </Center>
@@ -102,7 +105,6 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
         <SimpleGrid
           cols={2}
           sx={{
-            // backgroundColor: theme.colors[bank.color][8],
             borderBottom: `1px solid ${theme.colors[bank.color][2]}`,
             height: "1.25rem",
           }}
@@ -112,7 +114,6 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
             weight="bold"
             align="center"
             color={`${theme.colors[bank.color][9]}`}
-            // color="white"
           >
             Assets
           </Text>
@@ -121,7 +122,6 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
             weight="bold"
             align="center"
             color={`${theme.colors[bank.color][9]}`}
-            // color="white"
           >
             Liabilities
           </Text>
@@ -136,7 +136,10 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
             bank={bank}
           />
         ) : (
-          <SimpleGrid cols={2} style={{ height: "10rem", overflowX: "hidden" }}>
+          <SimpleGrid
+            cols={2}
+            style={{ height: "7.9rem", overflowX: "hidden" }}
+          >
             <div
               style={{
                 borderRight: `1px solid ${theme.colors[bank.color][2]}`,
@@ -144,7 +147,7 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
             >
               {bank.balanceSheet.assets.map((asset: any) => {
                 return (
-                  <BalanceByInstrument
+                  <BalanceSheetRowHeading
                     key={asset.instrument}
                     side={asset}
                     id={bank.cardInfo.id}
@@ -157,7 +160,7 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
             <div>
               {bank.balanceSheet.liabilities.map((liability: any) => {
                 return (
-                  <BalanceByInstrument
+                  <BalanceSheetRowHeading
                     key={liability.instrument}
                     side={liability}
                     id={bank.cardInfo.id}
@@ -170,6 +173,17 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
           </SimpleGrid>
         )}
       </Card.Section>
+
+      <DrawerContext.Provider value={setOpened}>
+        <Drawer
+          opened={opened}
+          onClose={() => setOpened(false)}
+          padding="xl"
+          size="lg"
+        >
+          <BankDetail bank={bank} />
+        </Drawer>
+      </DrawerContext.Provider>
     </Card>
   );
 }

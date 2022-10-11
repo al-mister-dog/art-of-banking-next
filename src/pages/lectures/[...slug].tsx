@@ -7,9 +7,9 @@ import { createStyles } from "@mantine/core";
 import { introductoryTexts } from "../../config/parts";
 import { getRouteObjectData } from "../../helpers/routeMethods";
 import { lectureRoutes } from "../../config/sidebar-routes/lectureRoutes";
-import BalanceSheets from "../../components/balancesheets/cards/card-list";
+import BalanceSheets from "../../components/interactive-ui/cards/card-list";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
-import Toolbar from "../../components/balancesheets/settings/toolbar";
+import Toolbar from "../../components/interactive-ui/settings/toolbar";
 import KeyTerms from "../../components/article/lecture-index/key-terms";
 import Article from "../../components/article/Article";
 

@@ -1,5 +1,5 @@
 import { SimpleGrid, useMantineTheme } from "@mantine/core";
-import Spreadsheet from "./spreadsheet";
+import SpreadsheetRow from "./spreadsheet-row";
 
 export default function SpreadsheetList({ assets, liabilities, bank }) {
   const theme = useMantineTheme();
@@ -11,12 +11,12 @@ export default function SpreadsheetList({ assets, liabilities, bank }) {
     >
       <div style={{ borderRight: `1px solid ${theme.colors[bank.color][2]}` }}>
         {assets.map((record: any, index: number) => {
-          return <Spreadsheet key={index} record={record} bank={bank} />;
+          return <SpreadsheetRow key={index} record={record} bank={bank} />;
         })}
       </div>
       <div>
         {liabilities.map((record: any, index: number) => {
-          return <Spreadsheet key={index} record={record} bank={bank} />;
+          return <SpreadsheetRow key={index} record={record} bank={bank} />;
         })}
       </div>
     </SimpleGrid>

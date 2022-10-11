@@ -1,9 +1,6 @@
 import { useAppSelector } from "../../../../app/hooks";
 import { selectSettings } from "../../../../features/settings/settingsSlice";
-import { createContext, useContext, useState } from "react";
-
-export const DrawerContext = createContext((v: boolean) => {});
-
+import { useCallback } from "react";
 import {
   Card,
   Center,
@@ -11,70 +8,63 @@ import {
   Text,
   Title,
   createStyles,
-  Drawer,
   useMantineTheme,
 } from "@mantine/core";
-
-import BankDetail from "../../bank-detail/panel/mobile";
-import BalanceByInstrument from "../balances/balance-by-instrument";
-
 import { CardInfo } from "../../types";
+import BalanceSheetRowHeading from "../balances/balance-sheet-heading";
 import { Record } from "../../../../domain/Records";
 import SpreadsheetList from "../balances/balance-displays/spreadsheet-list";
 
-export const useStyles = createStyles((theme) => ({
+const useStyles = createStyles((theme) => ({
   card: {
-    backgroundColor: theme.colors.violet[1],
     paddingBottom: "0px",
-    width: "100%",
-    height: "11.75rem",
-    margin: "auto",
+    height: "13.75rem",
+    backgroundColor: theme.colors.violet[1],
   },
   header: { padding: "3px", cursor: "pointer" },
   grape: {
-    backgroundColor: theme.colors.grape,
     "&:hover": {
       backgroundColor: theme.colors.grape[3],
     },
   },
   violet: {
-    backgroundColor: theme.colors.violet,
     "&:hover": {
       backgroundColor: theme.colors.violet[3],
     },
   },
   indigo: {
-    backgroundColor: theme.colors.violet,
     "&:hover": {
       backgroundColor: theme.colors.violet[3],
     },
   },
   pink: {
-    backgroundColor: theme.colors.pink,
     "&:hover": {
       backgroundColor: theme.colors.pink[3],
     },
   },
   teal: {
-    backgroundColor: theme.colors.teal,
     "&:hover": {
       backgroundColor: theme.colors.teal[3],
     },
   },
   blue: {
-    backgroundColor: theme.colors.blue,
     "&:hover": {
       backgroundColor: theme.colors.blue[3],
     },
   },
 }));
-
-export default function CardUI({ bank }: { bank: CardInfo }) {
-  const theme = useMantineTheme();
-  const [opened, setOpened] = useState(false);
-  const { classes } = useStyles();
+interface Props {
+  bank: CardInfo;
+  handleSetBankDetail: (v: CardInfo) => void;
+}
+export default function CardUI({ bank, handleSetBankDetail }: Props) {
   const { displaySettings, spreadsheetSettings } =
     useAppSelector(selectSettings);
+  const { classes } = useStyles();
+  const theme = useMantineTheme();
+  const onSelectBank = useCallback((bank: CardInfo) => {
+    handleSetBankDetail(bank);
+  }, []);
 
   let spreadsheetBalances = { assets: undefined, liabilities: undefined };
   if (spreadsheetSettings.each) {
@@ -93,10 +83,11 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
     >
       <Card.Section
         className={`${classes.header} ${classes[bank.color]}`}
-        onClick={() => setOpened(true)}
+        onClick={() => onSelectBank(bank)}
       >
         <Center>
-          <Title order={4} color="white">
+          {/* <Title order={4} color="white"> */}
+          <Title order={4} color={theme.colors[bank.color][9]}>
             {bank.cardInfo.name}
           </Title>
         </Center>
@@ -138,7 +129,8 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
         ) : (
           <SimpleGrid
             cols={2}
-            style={{ height: "7.9rem", overflowX: "hidden" }}
+            spacing={5}
+            style={{ height: "10rem", overflowX: "hidden" }}
           >
             <div
               style={{
@@ -147,7 +139,7 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
             >
               {bank.balanceSheet.assets.map((asset: any) => {
                 return (
-                  <BalanceByInstrument
+                  <BalanceSheetRowHeading
                     key={asset.instrument}
                     side={asset}
                     id={bank.cardInfo.id}
@@ -160,7 +152,7 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
             <div>
               {bank.balanceSheet.liabilities.map((liability: any) => {
                 return (
-                  <BalanceByInstrument
+                  <BalanceSheetRowHeading
                     key={liability.instrument}
                     side={liability}
                     id={bank.cardInfo.id}
@@ -173,17 +165,6 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
           </SimpleGrid>
         )}
       </Card.Section>
-
-      <DrawerContext.Provider value={setOpened}>
-        <Drawer
-          opened={opened}
-          onClose={() => setOpened(false)}
-          padding="xl"
-          size="lg"
-        >
-          <BankDetail bank={bank} />
-        </Drawer>
-      </DrawerContext.Provider>
     </Card>
   );
 }

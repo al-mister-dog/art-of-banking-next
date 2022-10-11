@@ -5,7 +5,6 @@ import { Center, Title } from "@mantine/core";
 
 import OverdraftSlider from "../sliders/slider-overdraft";
 import ReserveRequirementSlider from "../sliders/slider-reserve-requirement";
-import InterestRateSlider from "../sliders/slider-interest-rate";
 import DisplayRadioGroup from "../menu-displays/mobile";
 import ColorsMenu from "../menu-colors/mobile";
 

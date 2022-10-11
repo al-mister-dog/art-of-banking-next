@@ -5,6 +5,5 @@ write some tests for these.
 add interest rate to fed funds
 
 
-Fed Funds Loans
-at the minute you cant take out any loans until you pay one loan back.
-this should only apply to the bank you have taken a loan out with
+Settings
+move overdraft to bank settings
