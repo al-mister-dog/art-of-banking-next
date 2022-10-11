@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-import { Box, Text, TextInput, createStyles } from "@mantine/core";
+import { Box, Text, TextInput, createStyles, SimpleGrid } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   titleCalculator: {
@@ -52,7 +52,6 @@ const useStyles = createStyles((theme) => ({
       padding: "5px",
     },
   },
-  containerCalculator: {},
 
   sliderLabels: {
     display: "grid",
@@ -191,39 +190,36 @@ export default function CpiIndex() {
               <span style={{ fontWeight: "bold" }}>%{inflationRate}</span>
             </Text>
           </Box>
-          <Box className={classes.containerCalculator}>
-            <Text align="center" className={classes.titleCalculator}></Text>
+          <Box>
+            <SimpleGrid cols={3}>
+              <Text>Category</Text>
+              <Text>Price Change</Text>
+              <Text align="left">Weight (% of 100)</Text>
+            </SimpleGrid>
 
-            <Box className={classes.sliderLabels}>
-              <Text className={classes.sliderLabelCategory}>Category</Text>
-              <Text className={classes.sliderLabelChange}>Price Change</Text>
-              <Text className={classes.sliderLabelWeight} align="left">
-                Weight (% of 100)
-              </Text>
-            </Box>
             {cpi.map((object, index) => {
               const { category, weight, change } = object;
               return (
-                <div key={index} className={classes.slider} >
-                  <Text className={classes.labelCategory}>{category}:</Text>
-                  <TextInput
-                  style={{width: "80%"}}
-                    className={classes.labelChange}
-                    type="number"
-                    placeholder={`%${parseFloat(change.toFixed(2))}`}
-                    defaultValue={change}
-                    onChange={(value) => {
-                      let parsedValue = parseFloat(value.target.value);
-                      setIndexPrice(index);
-                      isNaN(parsedValue)
-                        ? setValuePrice(0)
-                        : setValuePrice(parsedValue);
-                    }}
-                  />
+                <div key={index}>
+                  <SimpleGrid cols={3}>
+                    <Text className={classes.labelCategory}>{category}:</Text>
+                    <TextInput
+                      type="number"
+                      placeholder={`%${parseFloat(change.toFixed(2))}`}
+                      defaultValue={change}
+                      onChange={(value) => {
+                        let parsedValue = parseFloat(value.target.value);
+                        setIndexPrice(index);
+                        isNaN(parsedValue)
+                          ? setValuePrice(0)
+                          : setValuePrice(parsedValue);
+                      }}
+                    />
 
-                  <Text className={classes.labelWeight}>
-                    %{parseFloat(weight.toFixed(2))}
-                  </Text>
+                    <Text className={classes.labelWeight}>
+                      %{parseFloat(weight.toFixed(2))}
+                    </Text>
+                  </SimpleGrid>
                 </div>
               );
             })}
