@@ -17,8 +17,8 @@ import { Banks } from "../../domain/services/bank";
 import { Record } from "../../domain/services/records";
 import { CentralBank } from "../../domain/services/centralbank";
 import { System } from "../../domain/system";
-import { GraphData } from "../../domain/graph-data";
-import { Analytics } from "../../domain/displays/analytics";
+import { GraphData } from "../../domain/analytics/graph-data";
+import { Analytics } from "../../domain/analytics/analytics";
 
 export interface BanksState {
   banks: any;

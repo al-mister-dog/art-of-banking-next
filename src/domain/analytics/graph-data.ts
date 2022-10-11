@@ -1,8 +1,8 @@
-import { Accounts } from "./services/accounts";
-import { Analytics } from "./displays/analytics";
-import { Totals } from "./displays/totals";
-import { Reserves } from "./services/reserves";
-import { analytics, AnalyticsData, bankData, reservesData } from "./structures";
+import { Accounts } from "../services/accounts";
+import { Analytics } from "./analytics";
+import { Totals } from "./totals";
+import { Reserves } from "../services/reserves";
+import { analytics, AnalyticsData, bankData, reservesData } from "../structures";
 
 export const GraphData = {
   setBalanceData() {

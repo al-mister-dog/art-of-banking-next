@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../app/hooks";
-import { Display } from "../../domain/display";
+import { Display } from "../../domain/analytics/display";
 import { Bank } from "../../domain/structures";
 import { selectBanks } from "../../features/banks/banksSlice";
 import { CardInfo } from "../interactive-ui/types";

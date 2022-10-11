@@ -1,6 +1,6 @@
-import { BalanceSheets } from "./displays/balancesheets";
-import { BankingSystem } from "./banking-system";
-import { Bank, creditData } from "./structures";
+import { BalanceSheets } from "./balancesheets";
+import { BankingSystem } from "../banking-system";
+import { Bank } from "../structures";
 export const Display = {
   addRelation(bank: Bank, account: any) {
     return account.superiorId === bank.id

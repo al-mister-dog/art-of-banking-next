@@ -3,7 +3,7 @@ import { selectBanks } from "../../../features/banks/banksSlice";
 import { useMediaQuery } from "@mantine/hooks";
 import { MantineProvider } from "@mantine/core";
 import { CardInfo } from "../types";
-import { Display } from "../../../domain/display";
+import { Display } from "../../../domain/analytics/display";
 import { Bank } from "../../../domain/structures";
 import LayoutMobile from "./card/layout-mobile";
 import LayoutDesktop from "./card/layout-desktop";

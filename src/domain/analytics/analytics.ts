@@ -1,5 +1,5 @@
 import { Banks } from "../services/bank";
-import { Display } from "../display";
+import { Display } from "./display";
 import { loanRecords } from "../structures";
 import { BalanceSheets } from "./balancesheets";
 import { Calculator } from "../calculators/Calculator";
