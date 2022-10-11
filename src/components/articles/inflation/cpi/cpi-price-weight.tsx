@@ -114,7 +114,7 @@ export default function CpiPriceWeight() {
   return (
     <CpiDisplay
       title="CPI Weight Calculator"
-      description="Weight Allocation of Items to Consumer Prices Index"
+      description="Price Change and Weight Allocation of Items to Consumer Prices Index"
       inflationIndex={inflationIndex}
       inflationRate={inflationRate}
       setIndexPrice={setIndexPrice}
