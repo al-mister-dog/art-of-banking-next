@@ -7,7 +7,7 @@ import {
   BankData,
 } from "./structures";
 import { mapObject } from "./helpers";
-import { Record } from "./Records";
+import { Record } from "./records";
 export const Accounts = {
   createAccount(
     subordinate: Bank,

@@ -1,4 +1,3 @@
-import { CardInfo } from "../components/interactive-ui/types";
 import { Accounts } from "./accounts";
 import { Bank, RecordDetail, records } from "./structures";
 import { System } from "./system";
@@ -811,53 +810,3 @@ function checkOverdraft(bank, centralbank, balance1, balance2, amount) {
     insertLiabilitiesEntry(centralbank.id, centralBankRecord4);
   }
 }
-
-// decreaseBalance(bank1: Bank, bank2: Bank, amount: number) {
-//   const depositAssetRecord = {
-//     instrumentType: "deposits",
-//     notationType: "novation",
-//     amount: amount,
-//     id: bank2.id,
-//     symbol: "-",
-//     name: bank2.name,
-//   };
-//   const depositLiabilityRecord = {
-//     instrumentType: "deposits",
-//     notationType: "novation",
-//     amount: amount,
-//     id: bank1.id,
-//     symbol: "-",
-//     name: bank1.name,
-//   };
-//   insertAssetsEntry(bank1.id, depositAssetRecord);
-//   insertLiabilitiesEntry(bank2.id, depositLiabilityRecord);
-//   // insertLog(bank1.id, "to", "Credit", depositAssetRecord);
-//   // insertLog(bank2.id, "from", "Credit", depositLiabilityRecord);
-// },
-// increaseBalance(bank1: Bank, bank2: Bank, amount: number) {
-//   let type = "deposits";
-//   if (bank1.name === "Clearing House" || bank2.name === "Clearing House") {
-//     type = "ch certs";
-//   }
-//   const depositAssetRecord = {
-//     instrumentType: type,
-//     notationType: "novation",
-//     amount: amount,
-//     id: bank2.id,
-//     symbol: "+",
-//     name: bank2.name === "Clearing House" ? "CH" : bank2.name,
-//   };
-//   const depositLiabilityRecord = {
-//     instrumentType: type,
-//     notationType: "novation",
-//     amount: amount,
-//     id: bank1.id,
-//     symbol: "+",
-//     name: bank1.name === "clearinghouse" ? "CH" : bank1.name,
-//   };
-
-//   insertAssetsEntry(bank1.id, depositAssetRecord);
-//   insertLiabilitiesEntry(bank2.id, depositLiabilityRecord);
-//   // insertLog(bank1.id, "to", "Credit", depositAssetRecord);
-//   // insertLog(bank2.id, "from", "Credit", depositLiabilityRecord);
-// },

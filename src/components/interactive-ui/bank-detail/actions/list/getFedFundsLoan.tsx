@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Banks } from "../../../../../domain/bank";
 import { CardInfo } from "../../../types";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
-import { InterestRates } from "../../../../../domain/calculator";
+import { InterestRates } from "../../../../../domain/calculators/interest-rates";
 import SelectLoan from "../compositions/select-loan";
 
 export default function GetFedFundsLoan({ bank }: { bank: CardInfo }) {

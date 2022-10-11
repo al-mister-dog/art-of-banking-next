@@ -1,11 +1,10 @@
 import { Accounts } from "./accounts";
 import { Reserves } from "./reserves";
-import { Dues } from "./dues";
-import { Bank, bankData, accountData, BankData } from "./structures";
-import { system, System } from "./system";
+import { Bank, bankData, accountData } from "./structures";
+import { System } from "./system";
 import { Loans } from "./loans";
 import { mapObject } from "./helpers";
-import { Record } from "./Records";
+import { Record } from "./records";
 
 export const Banks = {
   createAccount(bank1: Bank, bank2: Bank, amount: number = 0) {
@@ -16,7 +15,7 @@ export const Banks = {
       Record.deposit(bank1, bank2, amount);
     }
   },
-  
+
   get() {
     return mapObject(bankData.banks).filter((bank) => bank.type === "bank");
   },

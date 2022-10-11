@@ -4,7 +4,7 @@ import { BankingSystem } from "../../domain/banking-system";
 import { Customer } from "../../domain/customer";
 import { Display } from "../../domain/display";
 import { GraphData } from "../../domain/graph-data";
-import { Record } from "../../domain/Records";
+import { Record } from "../../domain/records";
 import { analytics, bankData, clearBankData } from "../../domain/structures";
 import { System } from "../../domain/system";
 

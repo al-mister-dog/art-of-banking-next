@@ -14,7 +14,7 @@ import initialBankData from "./inititalState";
 
 import { Dues } from "../../domain/dues";
 import { Banks } from "../../domain/bank";
-import { Record } from "../../domain/Records";
+import { Record } from "../../domain/records";
 import { CentralBank } from "../../domain/centralbank";
 import { System } from "../../domain/system";
 import { GraphData } from "../../domain/graph-data";

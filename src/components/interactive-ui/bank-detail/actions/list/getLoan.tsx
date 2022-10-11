@@ -6,7 +6,7 @@ import { Banks } from "../../../../../domain/bank";
 import { Customer } from "../../../../../domain/customer";
 import { CardInfo } from "../../../types";
 import SelectLoan from "../compositions/select-loan";
-import { InterestRates } from "../../../../../domain/calculator";
+import { InterestRates } from "../../../../../domain/calculators/interest-rates";
 
 export default function GetLoan({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();

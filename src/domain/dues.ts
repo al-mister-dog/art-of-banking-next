@@ -1,6 +1,6 @@
 import { Clearinghouse } from "./clearinghouse";
 import { CreditAccounts } from "./credit-accounts";
-import { Record } from "./Records";
+import { Record } from "./records";
 import { Reserves } from "./reserves";
 import {
   Bank,

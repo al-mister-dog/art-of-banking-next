@@ -1,7 +1,7 @@
 import { useAppSelector } from "../../../../../app/hooks";
 import { selectSettings } from "../../../../../features/settings/settingsSlice";
 import { forwardRef, useContext } from "react";
-import { InterestRates } from "../../../../../domain/calculator";
+import { InterestRates } from "../../../../../domain/calculators/interest-rates";
 import { mediaQuery } from "../../../../../config/media-query";
 import {
   Button,

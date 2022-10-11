@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import { CardInfo } from "../../types";
 import BalanceSheetRowHeading from "../balances/balance-sheet-heading";
-import { Record } from "../../../../domain/Records";
+import { Record } from "../../../../domain/records";
 import SpreadsheetList from "../balances/balance-displays/spreadsheet-list";
 
 const useStyles = createStyles((theme) => ({

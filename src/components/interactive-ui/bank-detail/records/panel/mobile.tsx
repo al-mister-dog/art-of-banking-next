@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Record } from "../../../../../domain/Records";
+import { Record } from "../../../../../domain/records";
 import { Box, createStyles } from "@mantine/core";
 import RecordList from "../list/mobile";
 import ToggleOrder from "../settings/orderby/mobile";

@@ -1,6 +1,6 @@
 import CentralBank from "../components/widgets/compound-interest-calculator";
 import { CreditAccounts } from "./credit-accounts";
-import { Record } from "./Records";
+import { Record } from "./records";
 import {
   Bank,
   creditData,

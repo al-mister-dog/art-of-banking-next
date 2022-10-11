@@ -11,7 +11,7 @@ import {
 import { system, System } from "./system";
 import { Loans } from "./loans";
 import { mapObject } from "./helpers";
-import { Record } from "./Records";
+import { Record } from "./records";
 import { CreditAccounts } from "./credit-accounts";
 
 export const CentralBank = {
