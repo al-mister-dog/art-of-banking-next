@@ -1,118 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
-import {
-  Box,
-  Text,
-  Slider,
-  createStyles,
-  SimpleGrid,
-  Grid,
-  useMantineTheme,
-  Card,
-} from "@mantine/core";
-const useStyles = createStyles((theme) => ({
-  title: {
-    marginBottom: "5px",
-    // fontWeight: "bold",
-    padding: "20px 0 10px 0",
-    "@media (max-width: 620px)": {
-      fontSize: "0.7rem",
-      margin: "15px 0 15px 0",
-      padding: "0",
-    },
-  },
-  boxCpi: {
-    padding: "20px",
-    border: "1px solid #d7d7d7",
-    borderRadius: "5px",
-    width: "60%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    margin: "auto",
-    "@media (max-width: 620px)": {
-      width: "90%",
-    },
-  },
-  inflationLabels: {
-    display: "flex",
-    justifyContent: "space-around",
-  },
-  inflationLabelIndex: {
-    "@media (max-width: 620px)": {
-      fontSize: "0.8rem",
-      padding: "5px",
-    },
-  },
-  inflationLabelRate: {
-    "@media (max-width: 620px)": {
-      fontSize: "0.8rem",
-      padding: "5px",
-    },
-  },
-  containerCalculator: {},
-
-  sliderLabels: {
-    display: "grid",
-    gridTemplateColumns: "3.5fr 1.5fr 5fr",
-
-    padding: "5px",
-    borderRadius: "5px",
-    marginBottom: "15px",
-  },
-  sliderLabelCategory: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    textAlign: "left",
-    "@media (max-width: 620px)": {
-      fontSize: "0.6rem",
-    },
-  },
-  sliderLabelChange: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    "@media (max-width: 620px)": {
-      fontSize: "0.6rem",
-    },
-    // width: "40%",
-  },
-  sliderLabelWeight: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    paddingLeft: "15px",
-    "@media (max-width: 620px)": {
-      fontSize: "0.6rem",
-    },
-  },
-
-  slider: {
-    display: "grid",
-    gridTemplateColumns: "3.5fr 1.5fr 1.5fr 3.5fr",
-    paddingBottom: "5px",
-  },
-  category: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    color: "#808080",
-    textAlign: "left",
-    // margin: "auto",
-    "@media (max-width: 620px)": {
-      fontSize: "0.4rem",
-    },
-  },
-  change: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    color: "#808080",
-    paddingLeft: "25px",
-  },
-  weight: {
-    paddingLeft: "50px",
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    color: "#808080",
-  },
-}));
+import CpiDisplay from "./cpi-display";
 
 const cpiData = [
   { category: "Food & non-alcoholic beverages", weight: 8.9, change: 1.4 },
@@ -130,8 +17,6 @@ const cpiData = [
 ];
 
 export default function CpiWeight() {
-  const { classes } = useStyles();
-  const theme = useMantineTheme();
   const [cpi, setCpi] = useState(cpiData);
   const [inflationIndex, setInflationIndex] = useState(0);
   const [inflationRate, setInflationRate] = useState(0);
@@ -180,7 +65,7 @@ export default function CpiWeight() {
       );
       const foundIndex = newCpi.indexOf(found);
       newCpi[foundIndex] = slidersToChange[index];
-      // Recalculate the reamining allocation
+      // Recalculate the remaining allocation
       unallocated -= targetAllocation;
       sliderCount -= 1;
     });
@@ -221,106 +106,14 @@ export default function CpiWeight() {
   }, [cpi]);
 
   return (
-    <>
-      <Text style={{ marginBottom: "25px" }}>CPI Weight Calculator</Text>
-      <Card
-        style={{
-          width: "55%",
-          margin: "auto",
-          backgroundColor: theme.colors.violet[1],
-        }}
-      >
-        <Box className={classes.inflationLabels}>
-          <Text className={classes.inflationLabelIndex}>
-            Inflation index:{" "}
-            <span style={{ fontWeight: "bold" }}>%{inflationIndex}</span>
-          </Text>
-          <Text className={classes.inflationLabelRate}>
-            Inflation rate:{" "}
-            <span style={{ fontWeight: "bold" }}>%{inflationRate}</span>
-          </Text>
-        </Box>
-        <Card.Section p={10}>
-          <Text align="center" p={15} color="violet" weight="bold">
-            Weight Allocation of Items to Consumer Prices Index
-          </Text>
-
-          <Grid
-            
-            style={{ borderTop: `1px solid ${theme.colors.violet[2]}`, borderBottom: `1px solid ${theme.colors.violet[2]}` }}
-            grow
-          >
-            <Grid.Col span={3}>
-              <Text size="xs" weight="bold" color="violet">
-                Category
-              </Text>
-            </Grid.Col>
-            <Grid.Col
-              span={1}
-              style={{
-                borderLeft: `1px solid ${theme.colors.violet[2]}`,
-                borderRight: `1px solid ${theme.colors.violet[2]}`,
-              }}
-            >
-              <Text size="xs" weight="bold" color="violet">
-                Price Change
-              </Text>
-            </Grid.Col>
-            <Grid.Col span={4}>
-              <Text size="xs" weight="bold" color="violet" align="left">
-                Weight (% of 100)
-              </Text>
-            </Grid.Col>
-          </Grid>
-          {cpi.map((object, index) => {
-            const { category, weight, change } = object;
-            return (
-              <div key={index}>
-                <Grid grow>
-                  <Grid.Col span={3}>
-                    <Text size="xs" color="dimmed" weight="bold">
-                      {category}:
-                    </Text>
-                  </Grid.Col>
-                  <Grid.Col
-                    span={1}
-                    style={{
-                      borderLeft: `1px solid ${theme.colors.violet[2]}`,
-                      borderRight: `1px solid ${theme.colors.violet[2]}`,
-                    }}
-                  >
-                    <Text size="xs" color="dimmed" weight="bold">
-                      %{change}
-                    </Text>
-                  </Grid.Col>
-                  <Grid.Col span={4}>
-                    <Grid grow>
-                      <Grid.Col span={1}>
-                        <Text size="xs" color="dimmed" weight="bold">
-                          %{parseFloat(weight.toFixed(2))}
-                        </Text>
-                      </Grid.Col>
-                      <Grid.Col span={9}>
-                        <Slider
-                          color="violet"
-                          value={parseFloat(weight.toFixed(2))}
-                          onChange={(value) => {
-                            setIndexPrice(index);
-                            setValuePrice(value);
-                          }}
-                          aria-labelledby="discrete-slider-custom"
-                          min={0}
-                          max={100}
-                        />
-                      </Grid.Col>
-                    </Grid>
-                  </Grid.Col>
-                </Grid>
-              </div>
-            );
-          })}
-        </Card.Section>
-      </Card>
-    </>
+    <CpiDisplay
+      title="CPI Weight Calculator"
+      description="Weight Allocation of Items to Consumer Prices Index"
+      inflationIndex={inflationIndex}
+      inflationRate={inflationRate}
+      setIndexPrice={setIndexPrice}
+      setValuePrice={setValuePrice}
+      cpi={cpi}
+    />
   );
 }
