@@ -1,114 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
-import { Box, Text, TextInput, createStyles, SimpleGrid } from "@mantine/core";
-
-const useStyles = createStyles((theme) => ({
-  titleCalculator: {
-    marginBottom: "5px",
-    padding: "20px 0 10px 0",
-    "@media (max-width: 620px)": {
-      fontSize: "0.7rem",
-      margin: "15px 0 15px 0",
-      padding: "0",
-    },
-  },
-  boxCpi: {
-    // padding: "20px",
-    border: "1px solid #d7d7d7",
-    borderRadius: "5px",
-    width: "60%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    margin: "auto",
-    "@media (max-width: 620px)": {
-      width: "90%",
-    },
-  },
-  container: {
-    padding: "20px",
-    // width: "60%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    margin: "auto",
-    "@media (max-width: 620px)": {
-      width: "90%",
-    },
-  },
-  labelsInflation: {
-    display: "flex",
-    justifyContent: "space-around",
-  },
-  labelInflationIndex: {
-    "@media (max-width: 620px)": {
-      fontSize: "0.8rem",
-      padding: "5px",
-    },
-  },
-  labelInflationRate: {
-    "@media (max-width: 620px)": {
-      fontSize: "0.8rem",
-      padding: "5px",
-    },
-  },
-
-  sliderLabels: {
-    display: "grid",
-    gridTemplateColumns: "3.3fr 3.3fr 3.3fr",
-    padding: "5px",
-    borderRadius: "5px",
-    marginBottom: "15px",
-  },
-  sliderLabelCategory: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    textAlign: "left",
-    "@media (max-width: 620px)": {
-      fontSize: "0.6rem",
-    },
-  },
-  sliderLabelChange: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    "@media (max-width: 620px)": {
-      fontSize: "0.6rem",
-    },
-  },
-  sliderLabelWeight: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    paddingLeft: "15px",
-    "@media (max-width: 620px)": {
-      fontSize: "0.6rem",
-    },
-  },
-
-  slider: {
-    display: "grid",
-    gridTemplateColumns: "3.3fr 3.3fr 3.3fr",
-  },
-  labelCategory: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    color: "#808080",
-    textAlign: "left",
-    "@media (max-width: 620px)": {
-      fontSize: "0.4rem",
-    },
-  },
-  labelChange: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    color: "#808080",
-  },
-  labelWeight: {
-    paddingLeft: "50px",
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    color: "#808080",
-  },
-}));
+import CpiDisplay from "./cpi-display";
 
 const cpiData = [
   { category: "Food & non-alcoholic beverages", weight: 8.9, change: 1.4 },
@@ -126,7 +17,6 @@ const cpiData = [
 ];
 
 export default function CpiIndex() {
-  const { classes } = useStyles();
   const [cpi, setCpi] = useState(cpiData);
   const [inflationIndex, setInflationIndex] = useState(0);
   const [inflationRate, setInflationRate] = useState(0);
@@ -176,56 +66,16 @@ export default function CpiIndex() {
   }, [cpi]);
 
   return (
-    <>
-      <Text style={{ marginBottom: "25px" }}>CPI Price Calculator</Text>
-      <Box className={classes.boxCpi}>
-        <Box className={classes.container}>
-          <Box className={classes.labelsInflation}>
-            <Text className={classes.labelInflationIndex}>
-              Inflation index:{" "}
-              <span style={{ fontWeight: "bold" }}>%{inflationIndex}</span>
-            </Text>
-            <Text className={classes.labelInflationRate}>
-              Inflation rate:{" "}
-              <span style={{ fontWeight: "bold" }}>%{inflationRate}</span>
-            </Text>
-          </Box>
-          <Box>
-            <SimpleGrid cols={3}>
-              <Text>Category</Text>
-              <Text>Price Change</Text>
-              <Text align="left">Weight (% of 100)</Text>
-            </SimpleGrid>
-
-            {cpi.map((object, index) => {
-              const { category, weight, change } = object;
-              return (
-                <div key={index}>
-                  <SimpleGrid cols={3}>
-                    <Text className={classes.labelCategory}>{category}:</Text>
-                    <TextInput
-                      type="number"
-                      placeholder={`%${parseFloat(change.toFixed(2))}`}
-                      defaultValue={change}
-                      onChange={(value) => {
-                        let parsedValue = parseFloat(value.target.value);
-                        setIndexPrice(index);
-                        isNaN(parsedValue)
-                          ? setValuePrice(0)
-                          : setValuePrice(parsedValue);
-                      }}
-                    />
-
-                    <Text className={classes.labelWeight}>
-                      %{parseFloat(weight.toFixed(2))}
-                    </Text>
-                  </SimpleGrid>
-                </div>
-              );
-            })}
-          </Box>
-        </Box>
-      </Box>
-    </>
+    <CpiDisplay
+      title="CPI Weight Calculator"
+      description="Price Change of Items to Consumer Prices Index"
+      inflationIndex={inflationIndex}
+      inflationRate={inflationRate}
+      setIndexPrice={setIndexPrice}
+      setValuePrice={setValuePrice}
+      cpi={cpi}
+      priceSelected={true}
+      weightSelected={false}
+    />
   );
 }

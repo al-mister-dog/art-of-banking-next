@@ -1,18 +1,44 @@
-import { Box, Text, Slider, Grid, useMantineTheme, Card } from "@mantine/core";
+import {
+  Box,
+  Text,
+  Slider,
+  Grid,
+  useMantineTheme,
+  Card,
+  TextInput,
+} from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
+import { Percentage } from "tabler-icons-react";
 import { mediaQuery } from "../../../../config/media-query";
+interface Props {
+  title: string;
+  description: string;
+  inflationIndex: number;
+  inflationRate: number;
+  cpi: any[];
+  priceSelected: boolean;
+  weightSelected: boolean;
+  setIndexPrice?: (v: any) => void;
+  setValuePrice?: (v: any) => void;
+  setIndexWeight?: (v: any) => void;
+  setValueWeight?: (v: any) => void;
+}
 export default function CpiDisplay({
   title,
   description,
   inflationIndex,
   inflationRate,
+  cpi,
+  priceSelected,
+  weightSelected,
   setIndexPrice,
   setValuePrice,
-  cpi,
-}) {
+  setIndexWeight,
+  setValueWeight,
+}: Props) {
   const theme = useMantineTheme();
   const isMobile = useMediaQuery(mediaQuery);
-
+  const monotone = "#312A45";
   return (
     <>
       <Card
@@ -22,23 +48,31 @@ export default function CpiDisplay({
           backgroundColor: theme.colors.violet[1],
         }}
       >
-        <Card.Section p={5}>
+        <Card.Section>
           <Text
+            pl={isMobile ? 0 : 10}
+            pt={10}
             size={isMobile ? "xs" : "md"}
-            align="center"
-            color="violet"
             weight="bold"
+            align={isMobile ? "center" : "left"}
+            style={{ color: monotone }}
           >
             {description}
           </Text>
         </Card.Section>
         <Card.Section pb={10}>
-          <Box style={{ display: "flex", justifyContent: "space-around" }}>
-            <Text size={isMobile ? "xs" : "md"} color="dimmed">
+          <Box
+            p={10}
+            style={{
+              display: isMobile ? "flex" : "",
+              justifyContent: isMobile ? "space-around" : "",
+            }}
+          >
+            <Text size={isMobile ? "xs" : "md"} style={{ color: monotone }}>
               Inflation index:{" "}
               <span style={{ fontWeight: "bold" }}>%{inflationIndex}</span>
             </Text>
-            <Text size={isMobile ? "xs" : "md"} color="dimmed">
+            <Text size={isMobile ? "xs" : "md"} style={{ color: monotone }}>
               Inflation rate:{" "}
               <span style={{ fontWeight: "bold" }}>%{inflationRate}</span>
             </Text>
@@ -50,13 +84,14 @@ export default function CpiDisplay({
             borderTop: `1px solid ${theme.colors.violet[2]}`,
             borderBottom: `1px solid ${theme.colors.violet[2]}`,
           }}
+          mb={5}
           grow
         >
           <Grid.Col span={3}>
             <Text
               size={isMobile ? 8 : "xs"}
               weight="bold"
-              color="violet"
+              style={{ color: monotone }}
               align="center"
             >
               Category
@@ -72,7 +107,7 @@ export default function CpiDisplay({
             <Text
               size={isMobile ? 8 : "xs"}
               weight="bold"
-              color="violet"
+              style={{ color: monotone }}
               align="center"
             >
               Price Change
@@ -82,7 +117,7 @@ export default function CpiDisplay({
             <Text
               size={isMobile ? 8 : "xs"}
               weight="bold"
-              color="violet"
+              style={{ color: monotone }}
               align="center"
             >
               Weight (% of 100)
@@ -97,7 +132,7 @@ export default function CpiDisplay({
                 <Grid.Col span={3}>
                   <Text
                     size={isMobile ? 10 : "xs"}
-                    color="dimmed"
+                    style={{ color: "#927ECE" }}
                     weight="bold"
                   >
                     {category}
@@ -110,14 +145,31 @@ export default function CpiDisplay({
                     borderRight: `1px solid ${theme.colors.violet[2]}`,
                   }}
                 >
-                  <Text
-                    size={isMobile ? 10 : "xs"}
-                    color="dimmed"
-                    weight="bold"
-                    align="center"
-                  >
-                    %{change}
-                  </Text>
+                  {priceSelected ? (
+                    <TextInput
+                      size="xs"
+                      type="number"
+                      icon={<Percentage size={18} />}
+                      placeholder={`%${parseFloat(change.toFixed(2))}`}
+                      defaultValue={change}
+                      onChange={(value) => {
+                        let parsedValue = parseFloat(value.target.value);
+                        setIndexPrice(index);
+                        isNaN(parsedValue)
+                          ? setValuePrice(0)
+                          : setValuePrice(parsedValue);
+                      }}
+                    />
+                  ) : (
+                    <Text
+                      size={isMobile ? 10 : "xs"}
+                      style={{ color: "#927ECE" }}
+                      weight="bold"
+                      align="center"
+                    >
+                      %{change}
+                    </Text>
+                  )}
                 </Grid.Col>
                 <Grid.Col span={4}>
                   <Grid grow>
@@ -125,7 +177,7 @@ export default function CpiDisplay({
                       <Text
                         p={0}
                         size={isMobile ? 10 : "xs"}
-                        color="dimmed"
+                        style={{ color: "#927ECE" }}
                         weight="bold"
                       >
                         {parseFloat(weight.toFixed(2))}
@@ -139,12 +191,13 @@ export default function CpiDisplay({
                         size={isMobile ? "xs" : "sm"}
                         value={parseFloat(weight.toFixed(2))}
                         onChange={(value) => {
-                          setIndexPrice(index);
-                          setValuePrice(value);
+                          setIndexWeight(index);
+                          setValueWeight(value);
                         }}
                         aria-labelledby="discrete-slider-custom"
                         min={0}
                         max={100}
+                        disabled={!weightSelected}
                       />
                     </Grid.Col>
                   </Grid>

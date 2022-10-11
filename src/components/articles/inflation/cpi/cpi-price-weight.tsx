@@ -1,110 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
-import {
-  Box,
-  Text,
-  Slider,
-  Button,
-  createStyles,
-  TextInput,
-  useMantineTheme,
-} from "@mantine/core";
-
-const useStyles = createStyles((theme) => ({
-  titleCalculator: {
-    marginBottom: "5px",
-    padding: "20px 0 10px 0",
-    "@media (max-width: 620px)": {
-      fontSize: "0.7rem",
-      margin: "15px 0 15px 0",
-      padding: "0",
-    },
-  },
-  container: {
-    padding: "20px",
-    width: "60%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    margin: "auto",
-    "@media (max-width: 620px)": {
-      width: "90%",
-    },
-  },
-  labelsInflation: {
-    display: "flex",
-    justifyContent: "space-around",
-  },
-  labelInflationIndex: {
-    "@media (max-width: 620px)": {
-      fontSize: "0.8rem",
-      padding: "5px",
-    },
-  },
-  labelInflationRate: {
-    "@media (max-width: 620px)": {
-      fontSize: "0.8rem",
-      padding: "5px",
-    },
-  },
-  containerCalculator: {},
-
-  sliderLabels: {
-    display: "grid",
-    gridTemplateColumns: "3.5fr 1.5fr 5fr",
-    padding: "5px",
-    borderRadius: "5px",
-    marginBottom: "15px",
-  },
-  sliderLabelCategory: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    textAlign: "left",
-    "@media (max-width: 620px)": {
-      fontSize: "0.6rem",
-    },
-  },
-  sliderLabelChange: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    "@media (max-width: 620px)": {
-      fontSize: "0.6rem",
-    },
-  },
-  sliderLabelWeight: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    paddingLeft: "15px",
-    "@media (max-width: 620px)": {
-      fontSize: "0.6rem",
-    },
-  },
-
-  slider: {
-    display: "grid",
-    gridTemplateColumns: "3.5fr 1.5fr 1.5fr 3.5fr",
-  },
-  labelCategory: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    color: "#808080",
-    textAlign: "left",
-    "@media (max-width: 620px)": {
-      fontSize: "0.4rem",
-    },
-  },
-  labelChange: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    color: "#808080",
-  },
-  labelWeight: {
-    paddingLeft: "50px",
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    color: "#808080",
-  },
-}));
+import CpiDisplay from "./cpi-display";
 
 const cpiData = [
   { category: "Food & non-alcoholic beverages", weight: 8.9, change: 1.4 },
@@ -122,8 +17,6 @@ const cpiData = [
 ];
 
 export default function CpiPriceWeight() {
-  const { classes } = useStyles();
-  const theme = useMantineTheme();
   const [cpi, setCpi] = useState(cpiData);
   const [inflationIndex, setInflationIndex] = useState(0);
   const [inflationRate, setInflationRate] = useState(0);
@@ -219,77 +112,18 @@ export default function CpiPriceWeight() {
   }, [cpi]);
 
   return (
-    <>
-      <Box className={classes.container}>
-        <Box className={classes.labelsInflation}>
-          <Text className={classes.labelInflationIndex}>
-            Inflation index:{" "}
-            <span style={{ fontWeight: "bold" }}>%{inflationIndex}</span>
-          </Text>
-          <Text className={classes.labelInflationRate}>
-            Inflation rate:{" "}
-            <span style={{ fontWeight: "bold" }}>%{inflationRate}</span>
-          </Text>
-        </Box>
-        <Box className={classes.containerCalculator}>
-          <Text align="center" className={classes.titleCalculator}></Text>
-          <Box>
-            <Box className={classes.sliderLabels}>
-              <Text className={classes.sliderLabelCategory}>Category</Text>
-              <Text className={classes.sliderLabelChange}>Price Change</Text>
-              <Text className={classes.sliderLabelWeight} align="left">
-                Weight (% of 100)
-              </Text>
-            </Box>
-            {cpi.map((object, index) => {
-              const { category, weight, change } = object;
-
-              return (
-                <div key={index} className={classes.slider}>
-                  <Text className={classes.labelCategory}>{category}:</Text>
-                  <TextInput
-                    className={classes.labelChange}
-                    type="number"
-                    defaultValue={change}
-                    placeholder={`%${parseFloat(change.toFixed(2))}`}
-                    onChange={(value) => {
-                      let parsedValue = parseFloat(value.target.value);
-
-                      setIndexPrice(index);
-                      isNaN(parsedValue)
-                        ? setValuePrice(0)
-                        : setValuePrice(parsedValue);
-                    }}
-                  ></TextInput>
-                  <Text className={classes.labelWeight}>
-                    %{parseFloat(weight.toFixed(2))}
-                  </Text>
-                  <Slider
-                    color="violet"
-                    value={parseFloat(weight.toFixed(2))}
-                    onChange={(value) => {
-                      setIndexWeight(index);
-                      setValueWeight(value);
-                    }}
-                    // aria-labelledby="discrete-slider-custom"
-
-                    min={0}
-                    max={100}
-                  />
-                </div>
-              );
-            })}
-          </Box>
-        </Box>
-
-        <Button
-          color="violet"
-          //   onClick={() => dispatch(submitCpi(cpi))}
-          style={{ marginTop: "10px" }}
-        >
-          Submit New Weights
-        </Button>
-      </Box>
-    </>
+    <CpiDisplay
+      title="CPI Weight Calculator"
+      description="Weight Allocation of Items to Consumer Prices Index"
+      inflationIndex={inflationIndex}
+      inflationRate={inflationRate}
+      setIndexPrice={setIndexPrice}
+      setValuePrice={setValuePrice}
+      setIndexWeight={setIndexWeight}
+      setValueWeight={setValueWeight}
+      cpi={cpi}
+      priceSelected={true}
+      weightSelected={true}
+    />
   );
 }

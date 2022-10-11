@@ -20,8 +20,8 @@ export default function CpiWeight() {
   const [cpi, setCpi] = useState(cpiData);
   const [inflationIndex, setInflationIndex] = useState(0);
   const [inflationRate, setInflationRate] = useState(0);
-  const [indexPrice, setIndexPrice] = useState(0);
-  const [valuePrice, setValuePrice] = useState(0);
+  const [indexWeight, setIndexWeight] = useState(0);
+  const [valueWeight, setValueWeight] = useState(0);
   const max = 100;
 
   function total(arr) {
@@ -98,9 +98,9 @@ export default function CpiWeight() {
     if (firstUpdate.current) {
       firstUpdate.current = false;
     } else {
-      handleChange(indexPrice, valuePrice);
+      handleChange(indexWeight, valueWeight);
     }
-  }, [valuePrice]);
+  }, [valueWeight]);
   useEffect(() => {
     getInflationRate();
   }, [cpi]);
@@ -111,9 +111,11 @@ export default function CpiWeight() {
       description="Weight Allocation of Items to Consumer Prices Index"
       inflationIndex={inflationIndex}
       inflationRate={inflationRate}
-      setIndexPrice={setIndexPrice}
-      setValuePrice={setValuePrice}
+      setIndexWeight={setIndexWeight}
+      setValueWeight={setValueWeight}
       cpi={cpi}
+      priceSelected={false}
+      weightSelected={true}
     />
   );
 }
