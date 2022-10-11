@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/config/routes/articleRoutes.js", "src/config/routes/lectureRoutes.js"  ],
   "exclude": [
     "node_modules"
   ]

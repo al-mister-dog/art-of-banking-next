@@ -6,12 +6,12 @@ import { useEffect } from "react";
 import { createStyles } from "@mantine/core";
 import { introductoryTexts } from "../../config/parts";
 import { getRouteObjectData } from "../../helpers/routeMethods";
-import { lectureRoutes } from "../../config/sidebar-routes/lectureRoutes";
+import { lectureRoutes } from "../../config/routes/lectureRoutes";
 import BalanceSheets from "../../components/interactive-ui/cards/card-list";
 import ChartsAndSettings from "../../components/charts-and-settings/desktop";
 import Toolbar from "../../components/interactive-ui/settings/toolbar";
-import KeyTerms from "../../components/article/lecture-index/key-terms";
-import Article from "../../components/article/Article";
+import KeyTerms from "../../components/lectures/article/lecture-index/key-terms";
+import Article from "../../components/lectures/article/Article";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {

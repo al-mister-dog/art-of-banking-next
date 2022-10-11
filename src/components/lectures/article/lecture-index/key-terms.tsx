@@ -1,4 +1,4 @@
-import { keyTerms } from "../../../config/normalized-data/key-terms";
+import { keyTerms } from "../../../../config/normalized-data/key-terms";
 import {
   Button,
   Text,

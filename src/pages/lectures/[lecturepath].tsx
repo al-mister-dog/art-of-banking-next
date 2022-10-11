@@ -1,6 +1,6 @@
-import { lectureRoutes } from "../../config/sidebar-routes/lectureRoutes";
+import { lectureRoutes } from "../../config/routes/lectureRoutes";
 import { homeTexts } from "../../config/homeTexts";
-import Intro from "../../components/article/intro";
+import Intro from "../../components/lectures/article/intro";
 
 export default function LecturePath({ id, title, nextPath }) {
   const { text } = homeTexts[id];

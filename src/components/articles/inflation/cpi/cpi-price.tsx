@@ -1,14 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-import {
-  Box,
-  Text,
-  Slider,
-  Button,
-  createStyles,
-  TextInput,
-  useMantineTheme,
-} from "@mantine/core";
+import { Box, Text, TextInput, createStyles } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   titleCalculator: {
@@ -20,9 +12,22 @@ const useStyles = createStyles((theme) => ({
       padding: "0",
     },
   },
+  boxCpi: {
+    // padding: "20px",
+    border: "1px solid #d7d7d7",
+    borderRadius: "5px",
+    width: "60%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    margin: "auto",
+    "@media (max-width: 620px)": {
+      width: "90%",
+    },
+  },
   container: {
     padding: "20px",
-    width: "60%",
+    // width: "60%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -51,7 +56,7 @@ const useStyles = createStyles((theme) => ({
 
   sliderLabels: {
     display: "grid",
-    gridTemplateColumns: "3.5fr 1.5fr 5fr",
+    gridTemplateColumns: "3.3fr 3.3fr 3.3fr",
     padding: "5px",
     borderRadius: "5px",
     marginBottom: "15px",
@@ -82,7 +87,7 @@ const useStyles = createStyles((theme) => ({
 
   slider: {
     display: "grid",
-    gridTemplateColumns: "3.5fr 1.5fr 1.5fr 3.5fr",
+    gridTemplateColumns: "3.3fr 3.3fr 3.3fr",
   },
   labelCategory: {
     fontSize: "0.8rem",
@@ -121,58 +126,18 @@ const cpiData = [
   { category: "Miscellaneous goods & services", weight: 8.3, change: 1.4 },
 ];
 
-export default function CpiWeightCalculator() {
+export default function CpiIndex() {
   const { classes } = useStyles();
-  const theme = useMantineTheme();
   const [cpi, setCpi] = useState(cpiData);
   const [inflationIndex, setInflationIndex] = useState(0);
   const [inflationRate, setInflationRate] = useState(0);
-  const [indexWeight, setIndexWeight] = useState(0);
-  const [valueWeight, setValueWeight] = useState(0);
   const [indexPrice, setIndexPrice] = useState(0);
   const [valuePrice, setValuePrice] = useState(0);
-
-  const max = 100;
-
-  function total(arr) {
-    return arr.reduce((acc, cur) => ({ weight: acc.weight + cur.weight }));
-  }
 
   function handleChangePrice(index, value) {
     value = parseFloat(value);
     const newCpi = cpi.map((item) => ({ ...item }));
     newCpi[index].change = value;
-    setCpi(newCpi);
-  }
-
-  function handleChangeWeight(index, value) {
-    const newCpi = cpi.map((item) => ({ ...item }));
-    newCpi[index].weight = value;
-    let unallocated = max - total(newCpi).weight;
-    let slidersToChangeArr = newCpi.filter((el, i) => i !== index);
-    let slidersToChange = slidersToChangeArr.map((item) => ({ ...item }));
-    if (unallocated > 0) {
-      slidersToChange.sort((a, b) => b.weight - a.weight);
-    } else {
-      slidersToChange.sort((a, b) => a.weight - b.weight);
-    }
-    let lengthMinusOne = cpi.length - 1;
-    let sliderCount = lengthMinusOne;
-    slidersToChange.forEach((item, index) => {
-      let targetAllocation = unallocated / sliderCount;
-      let result = slidersToChange[index].weight + targetAllocation;
-      if (result < 0) {
-        targetAllocation -= result;
-      }
-      slidersToChange[index].weight += targetAllocation;
-      const found = newCpi.find(
-        (el) => el.category === slidersToChange[index].category
-      );
-      const foundIndex = newCpi.indexOf(found);
-      newCpi[foundIndex] = slidersToChange[index];
-      unallocated -= targetAllocation;
-      sliderCount -= 1;
-    });
     setCpi(newCpi);
   }
 
@@ -198,13 +163,6 @@ export default function CpiWeightCalculator() {
   }
 
   const firstUpdate = useRef(true);
-  useEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-    } else {
-      handleChangeWeight(indexWeight, valueWeight);
-    }
-  }, [valueWeight]);
 
   useEffect(() => {
     if (firstUpdate.current) {
@@ -220,20 +178,22 @@ export default function CpiWeightCalculator() {
 
   return (
     <>
-      <Box className={classes.container}>
-        <Box className={classes.labelsInflation}>
-          <Text className={classes.labelInflationIndex}>
-            Inflation index:{" "}
-            <span style={{ fontWeight: "bold" }}>%{inflationIndex}</span>
-          </Text>
-          <Text className={classes.labelInflationRate}>
-            Inflation rate:{" "}
-            <span style={{ fontWeight: "bold" }}>%{inflationRate}</span>
-          </Text>
-        </Box>
-        <Box className={classes.containerCalculator}>
-          <Text align="center" className={classes.titleCalculator}></Text>
-          <Box>
+      <Text style={{ marginBottom: "25px" }}>CPI Price Calculator</Text>
+      <Box className={classes.boxCpi}>
+        <Box className={classes.container}>
+          <Box className={classes.labelsInflation}>
+            <Text className={classes.labelInflationIndex}>
+              Inflation index:{" "}
+              <span style={{ fontWeight: "bold" }}>%{inflationIndex}</span>
+            </Text>
+            <Text className={classes.labelInflationRate}>
+              Inflation rate:{" "}
+              <span style={{ fontWeight: "bold" }}>%{inflationRate}</span>
+            </Text>
+          </Box>
+          <Box className={classes.containerCalculator}>
+            <Text align="center" className={classes.titleCalculator}></Text>
+
             <Box className={classes.sliderLabels}>
               <Text className={classes.sliderLabelCategory}>Category</Text>
               <Text className={classes.sliderLabelChange}>Price Change</Text>
@@ -243,52 +203,32 @@ export default function CpiWeightCalculator() {
             </Box>
             {cpi.map((object, index) => {
               const { category, weight, change } = object;
-
               return (
-                <div key={index} className={classes.slider}>
+                <div key={index} className={classes.slider} >
                   <Text className={classes.labelCategory}>{category}:</Text>
                   <TextInput
+                  style={{width: "80%"}}
                     className={classes.labelChange}
                     type="number"
-                    defaultValue={change}
                     placeholder={`%${parseFloat(change.toFixed(2))}`}
+                    defaultValue={change}
                     onChange={(value) => {
                       let parsedValue = parseFloat(value.target.value);
-
                       setIndexPrice(index);
                       isNaN(parsedValue)
                         ? setValuePrice(0)
                         : setValuePrice(parsedValue);
                     }}
-                  ></TextInput>
+                  />
+
                   <Text className={classes.labelWeight}>
                     %{parseFloat(weight.toFixed(2))}
                   </Text>
-                  <Slider
-                    color="violet"
-                    value={parseFloat(weight.toFixed(2))}
-                    onChange={(value) => {
-                      setIndexWeight(index);
-                      setValueWeight(value);
-                    }}
-                    // aria-labelledby="discrete-slider-custom"
-
-                    min={0}
-                    max={100}
-                  />
                 </div>
               );
             })}
           </Box>
         </Box>
-
-        <Button
-          color="violet"
-          //   onClick={() => dispatch(submitCpi(cpi))}
-          style={{ marginTop: "10px" }}
-        >
-          Submit New Weights
-        </Button>
       </Box>
     </>
   );

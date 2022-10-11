@@ -1,7 +1,7 @@
 import { createStyles } from "@mantine/core";
-import { lectureRoutes } from "../../../config/routes/lectureRoutes";
+import { articleRoutes } from "../../../config/routes/articleRoutes";
 import { Accordion, List, Text } from "@mantine/core";
-import { useRouter } from "next/router";
+
 import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
@@ -24,21 +24,15 @@ export default function LecturesContent({
 
   return (
     <Accordion variant="filled">
-      {lectureRoutes.routes.map((route) => {
+      {articleRoutes.map((route) => {
         const { id, title, path, routes } = route;
         return (
           <Accordion.Item value={title} key={id}>
             <Accordion.Control>
-              <Link
-                href={{
-                  pathname: path,
-                  query: { id },
-                }}
-              >
+              <Link href={path}>
                 <Text size={14.2} weight={500}>
-                {title}
+                  {title}
                 </Text>
-                
               </Link>
             </Accordion.Control>
             <Accordion.Panel>
@@ -63,10 +57,10 @@ export default function LecturesContent({
                       >
                         <Link
                           href={{
-                            pathname: `/lectures${path}`,
+                            pathname: `/articles${path}`,
                             query: { path, id },
                           }}
-                          as={`/lectures${path}`}
+                          as={`/articles${path}`}
                           passHref
                         >
                           <Text size={13.9}>{title}</Text>
