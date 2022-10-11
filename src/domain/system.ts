@@ -1,10 +1,10 @@
 import { BankingSystem } from "./banking-system";
-import { Dues } from "./dues";
+import { Dues } from "./services/dues";
 import { Bank, bankData, SystemType } from "./structures";
-import { Accounts } from "./accounts";
-import { Clearinghouse } from "./clearinghouse";
-import { CentralBank } from "./centralbank";
-import { Banks } from "./bank";
+import { Accounts } from "./services/accounts";
+import { Clearinghouse } from "./services/clearinghouse";
+import { CentralBank } from "./services/centralbank";
+import { Banks } from "./services/bank";
 export let system: SystemType = "national";
 
 type SystemObjectFunctions = {

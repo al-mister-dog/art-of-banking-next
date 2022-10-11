@@ -1,4 +1,4 @@
-import { Bank, reservesData, ReservesData } from "./structures";
+import { Bank, reservesData, ReservesData } from "../structures";
 
 export const Reserves = {
   getReserves(bank: Bank) {

@@ -5,7 +5,7 @@ import {
   CreditAccount,
   BankData,
   loanRecords,
-} from "./structures";
+} from "../structures";
 
 export const CreditAccounts = {
   getData() {

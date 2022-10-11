@@ -8,8 +8,8 @@ import {
   CreditData,
   CreditAccount,
   bankData,
-} from "./structures";
-import { System } from "./system";
+} from "../structures";
+import { System } from "../system";
 
 export const Dues = {
   create(subordinate: Bank, superior: Bank, amount: number, type: string) {

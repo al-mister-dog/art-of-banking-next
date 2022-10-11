@@ -1,10 +1,10 @@
 import { Accounts } from "./accounts";
 import { Reserves } from "./reserves";
 import { Dues } from "./dues";
-import { Bank, bankData, records } from "./structures";
-import { System } from "./system";
+import { Bank, bankData, records } from "../structures";
+import { System } from "../system";
 import { Loans } from "./loans";
-import { mapObject } from "./helpers";
+import { mapObject } from "../helpers";
 import { Record } from "./records";
 
 export const Customer = {

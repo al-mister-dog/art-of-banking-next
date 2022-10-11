@@ -3,7 +3,7 @@ import { bankTransfer } from "../../../../../features/banks/banksSlice";
 
 import { useState } from "react";
 
-import { Banks } from "../../../../../domain/bank";
+import { Banks } from "../../../../../domain/services/bank";
 
 import SelectAndPay from "../compositions/select-and-pay";
 import { CardInfo } from "../../../types";

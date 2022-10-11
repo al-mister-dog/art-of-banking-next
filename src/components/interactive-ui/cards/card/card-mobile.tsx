@@ -19,7 +19,7 @@ import BankDetail from "../../bank-detail/panel/mobile";
 import BalanceSheetRowHeading from "../balances/balance-sheet-heading";
 
 import { CardInfo } from "../../types";
-import { Record } from "../../../../domain/records";
+import { Record } from "../../../../domain/services/records";
 import SpreadsheetList from "../balances/balance-displays/spreadsheet-list";
 
 export const useStyles = createStyles((theme) => ({

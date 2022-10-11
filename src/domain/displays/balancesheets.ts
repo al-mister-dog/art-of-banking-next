@@ -7,8 +7,8 @@ import {
   creditData,
   reservesData,
 } from "../structures";
-import { CreditAccounts } from "../credit-accounts";
-import { Banks } from "../bank";
+import { CreditAccounts } from "../services/credit-accounts";
+import { Banks } from "../services/bank";
 import { System } from "../system";
 
 interface CorrespondingInstruments {

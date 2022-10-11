@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { AppState } from "../../app/store";
 import { setupFunctions } from "../../config/setup-functions/setupFunctions";
-import { Customer } from "../../domain/customer";
+import { Customer } from "../../domain/services/customer";
 
 import {
   accountData,
@@ -12,10 +12,10 @@ import {
 } from "../../domain/structures";
 import initialBankData from "./inititalState";
 
-import { Dues } from "../../domain/dues";
-import { Banks } from "../../domain/bank";
-import { Record } from "../../domain/records";
-import { CentralBank } from "../../domain/centralbank";
+import { Dues } from "../../domain/services/dues";
+import { Banks } from "../../domain/services/bank";
+import { Record } from "../../domain/services/records";
+import { CentralBank } from "../../domain/services/centralbank";
 import { System } from "../../domain/system";
 import { GraphData } from "../../domain/graph-data";
 import { Analytics } from "../../domain/displays/analytics";

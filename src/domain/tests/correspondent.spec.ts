@@ -1,11 +1,11 @@
 import { clearBankData } from '../structures'
-import { Accounts } from '../accounts'
+import { Accounts } from '../services/accounts'
 import { BankingSystem } from '../banking-system'
-import { Banks } from '../bank'
+import { Banks } from '../services/bank'
 import { Display } from '../display'
-import { Customer } from '../customer'
+import { Customer } from '../services/customer'
 import { accounts1 } from './accounts-fixtures'
-import { Dues } from '../dues'
+import { Dues } from '../services/dues'
 
 function setupParties() {
   clearBankData()

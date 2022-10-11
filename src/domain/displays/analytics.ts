@@ -1,4 +1,4 @@
-import { Banks } from "../bank";
+import { Banks } from "../services/bank";
 import { Display } from "../display";
 import { loanRecords } from "../structures";
 import { BalanceSheets } from "./balancesheets";

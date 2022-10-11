@@ -7,10 +7,10 @@ import {
   accountData,
   BankData,
   creditData,
-} from "./structures";
-import { system, System } from "./system";
+} from "../structures";
+import { system, System } from "../system";
 import { Loans } from "./loans";
-import { mapObject } from "./helpers";
+import { mapObject } from "../helpers";
 import { Record } from "./records";
 import { CreditAccounts } from "./credit-accounts";
 

@@ -13,7 +13,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { useMantineTheme } from "@mantine/core";
-import { Banks } from "../../../domain/bank";
+import { Banks } from "../../../domain/services/bank";
 import { bankData } from "../../../domain/structures";
 
 ChartJS.register(

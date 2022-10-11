@@ -5,8 +5,8 @@ import {
   AccountData,
   bankData,
   BankData,
-} from "./structures";
-import { mapObject } from "./helpers";
+} from "../structures";
+import { mapObject } from "../helpers";
 import { Record } from "./records";
 export const Accounts = {
   createAccount(

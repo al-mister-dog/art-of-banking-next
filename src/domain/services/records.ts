@@ -1,6 +1,6 @@
 import { Accounts } from "./accounts";
-import { Bank, RecordDetail, records } from "./structures";
-import { System } from "./system";
+import { Bank, RecordDetail, records } from "../structures";
+import { System } from "../system";
 
 const creditInstrumentsBySystem = {
   national: "deposits",

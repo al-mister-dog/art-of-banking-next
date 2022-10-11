@@ -1,4 +1,4 @@
-import CentralBank from "../components/widgets/compound-interest-calculator";
+import CentralBank from "../../components/widgets/compound-interest-calculator";
 import { CreditAccounts } from "./credit-accounts";
 import { Record } from "./records";
 import {
@@ -7,7 +7,7 @@ import {
   CreditData,
   CreditAccount,
   bankData,
-} from "./structures";
+} from "../structures";
 
 export const Loans = {
   create(

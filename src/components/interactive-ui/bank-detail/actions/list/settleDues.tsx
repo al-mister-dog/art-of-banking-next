@@ -9,7 +9,7 @@ import { forwardRef, useContext, useState } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
 import { creditData } from "../../../../../domain/structures";
-import { Banks } from "../../../../../domain/bank";
+import { Banks } from "../../../../../domain/services/bank";
 
 import {
   Button,
@@ -23,7 +23,7 @@ import {
 
 import { DrawerContext } from "../../../cards/card/card-mobile";
 import { CardInfo } from "../../../types";
-import { Dues } from "../../../../../domain/dues";
+import { Dues } from "../../../../../domain/services/dues";
 import { System } from "../../../../../domain/system";
 import { mediaQuery } from "../../../../../config/media-query";
 

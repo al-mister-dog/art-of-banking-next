@@ -1,8 +1,8 @@
 import { useAppDispatch } from "../../../../../app/hooks";
 import { payDues } from "../../../../../features/banks/banksSlice";
 import { useState } from "react";
-import { Banks } from "../../../../../domain/bank";
-import { Customer } from "../../../../../domain/customer";
+import { Banks } from "../../../../../domain/services/bank";
+import { Customer } from "../../../../../domain/services/customer";
 import { CardInfo } from "../../../types";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
 import { creditData } from "../../../../../domain/structures";

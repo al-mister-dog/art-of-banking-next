@@ -3,8 +3,8 @@ import { withdraw } from "../../../../../features/banks/banksSlice";
 
 import { useState } from "react";
 
-import { Banks } from "../../../../../domain/bank";
-import { Customer } from "../../../../../domain/customer";
+import { Banks } from "../../../../../domain/services/bank";
+import { Customer } from "../../../../../domain/services/customer";
 
 import { CardInfo } from "../../../types";
 

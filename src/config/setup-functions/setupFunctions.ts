@@ -1,10 +1,10 @@
-import { CentralBank } from "../../domain/centralbank";
-import { Banks } from "../../domain/bank";
+import { CentralBank } from "../../domain/services/centralbank";
+import { Banks } from "../../domain/services/bank";
 import { BankingSystem } from "../../domain/banking-system";
-import { Customer } from "../../domain/customer";
+import { Customer } from "../../domain/services/customer";
 import { Display } from "../../domain/display";
 import { GraphData } from "../../domain/graph-data";
-import { Record } from "../../domain/records";
+import { Record } from "../../domain/services/records";
 import { analytics, bankData, clearBankData } from "../../domain/structures";
 import { System } from "../../domain/system";
 

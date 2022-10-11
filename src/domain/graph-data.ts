@@ -1,7 +1,7 @@
-import { Accounts } from "./accounts";
+import { Accounts } from "./services/accounts";
 import { Analytics } from "./displays/analytics";
 import { Totals } from "./displays/totals";
-import { Reserves } from "./reserves";
+import { Reserves } from "./services/reserves";
 import { analytics, AnalyticsData, bankData, reservesData } from "./structures";
 
 export const GraphData = {
