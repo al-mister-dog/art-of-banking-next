@@ -1,5 +1,6 @@
 import { Bank, BankData, bankData, records, reservesData } from "./structures";
 import { System } from "./system";
+
 export const BankingSystem = {
   createBank(
     name: string,

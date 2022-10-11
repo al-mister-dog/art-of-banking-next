@@ -4,7 +4,6 @@ import { Bank, bankData, SystemType } from "./structures";
 import { Accounts } from "./services/accounts";
 import { Clearinghouse } from "./services/clearinghouse";
 import { CentralBank } from "./services/centralbank";
-import { Banks } from "./services/bank";
 export let system: SystemType = "national";
 
 type SystemObjectFunctions = {
@@ -55,7 +54,7 @@ export const System = {
         Dues.increase(clearinghouse, bank2, "CH Certificates", amount);
       },
       centralbank: function (): void {
-        CentralBank.transfer(bank1, bank2, amount)
+        CentralBank.transfer(bank1, bank2, amount);
       },
       chips: function (): void {
         throw new Error("Function not implemented.");
