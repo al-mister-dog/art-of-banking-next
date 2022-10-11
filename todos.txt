@@ -1,9 +1,43 @@
-USER STORY
-go through all user patterns to find mistakes.
-write some tests for these.
+BANK FUNCTIONS
+Overdraft limit should be set by bank
 
-add interest rate to fed funds
+bankSettings: {
+    0: {
+        overdraft: true,
+        interestRate: true,
+        rates: {
+            overdraftFee: 0,
+            overdraftLimit: 0,
+            interestRate: 0,
+        }
+    }
+},
+this determines whether settings are available in a given lecture
 
 
-Settings
-move overdraft to bank settings
+
+reserveRequirement: true, (set by central bank?)
+
+action: {
+    bank: {
+        "Set Overdraft Fee",
+        "Set Overdraft Limit",
+    },
+    centralBank: {
+        "Set Overdraft Fee",
+        "set fed funds target",
+    }
+}
+
+
+
+
+Sequence:
+Bank sets an overdraft limit.
+Any customer of that bank will have this overdraft limit applied to them.
+
+by default rates are set to zero
+
+TODO:
+Tidy up structures
+Set up a bankSettings object in structures

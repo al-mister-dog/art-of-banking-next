@@ -1,9 +1,8 @@
 import { Banks } from "../bank";
-import { getWeightedMedian } from "../calculators/weightedMedian";
 import { Display } from "../display";
-import { accountData, creditData, loanRecords } from "../structures";
+import { loanRecords } from "../structures";
 import { BalanceSheets } from "./balancesheets";
-import { Totals } from "./totals";
+import { Calculator } from "../calculators/Calculator";
 
 export const Analytics = {
   getAllBalanceSheets() {
@@ -40,7 +39,7 @@ export const Analytics = {
   },
   getVolumeWeightedMedian() {
     const allLoans = loanRecords;
-    const data = getWeightedMedian(allLoans);
+    const data = Calculator.weightedMedian(allLoans);
     const fallbackData = {
       volumeWeightedMedian: 0,
       associatedData: [

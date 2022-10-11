@@ -1,4 +1,4 @@
-export function getWeightedMedian(transactions) {
+export function weightedMedian(transactions) {
   const aggregatedTransactions = aggregate(transactions);
   const middleDollar = getTotalVolume(transactions) / 2;
 

@@ -4,9 +4,10 @@ import {
   Box,
   Text,
   Slider,
-  TextInput,
   Button,
   createStyles,
+  TextInput,
+  useMantineTheme,
 } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
@@ -51,8 +52,6 @@ const useStyles = createStyles((theme) => ({
   sliderLabels: {
     display: "grid",
     gridTemplateColumns: "3.5fr 1.5fr 5fr",
-    backgroundColor: "gray",
-    color: "white",
     padding: "5px",
     borderRadius: "5px",
     marginBottom: "15px",
@@ -100,6 +99,7 @@ const useStyles = createStyles((theme) => ({
     color: "#808080",
   },
   labelWeight: {
+    paddingLeft: "50px",
     fontSize: "0.8rem",
     fontWeight: "bold",
     color: "#808080",
@@ -123,6 +123,7 @@ const cpiData = [
 
 export default function CpiWeightCalculator() {
   const { classes } = useStyles();
+  const theme = useMantineTheme();
   const [cpi, setCpi] = useState(cpiData);
   const [inflationIndex, setInflationIndex] = useState(0);
   const [inflationRate, setInflationRate] = useState(0);
@@ -136,11 +137,6 @@ export default function CpiWeightCalculator() {
   function total(arr) {
     return arr.reduce((acc, cur) => ({ weight: acc.weight + cur.weight }));
   }
-
-  const handleChangeTextInput = (index) => (e, value) => {
-    setIndexPrice(index);
-    setValuePrice(e.target.value);
-  };
 
   function handleChangePrice(index, value) {
     value = parseFloat(value);
@@ -179,11 +175,6 @@ export default function CpiWeightCalculator() {
     });
     setCpi(newCpi);
   }
-
-  const handleChangeSlider = (index) => (value) => {
-    setIndexWeight(index);
-    setValueWeight(value);
-  };
 
   function getInflationRate() {
     let weightedIndex = [];
@@ -242,7 +233,7 @@ export default function CpiWeightCalculator() {
         </Box>
         <Box className={classes.containerCalculator}>
           <Text align="center" className={classes.titleCalculator}></Text>
-          <Box >
+          <Box>
             <Box className={classes.sliderLabels}>
               <Text className={classes.sliderLabelCategory}>Category</Text>
               <Text className={classes.sliderLabelChange}>Price Change</Text>
@@ -252,27 +243,36 @@ export default function CpiWeightCalculator() {
             </Box>
             {cpi.map((object, index) => {
               const { category, weight, change } = object;
+
               return (
                 <div key={index} className={classes.slider}>
                   <Text className={classes.labelCategory}>{category}:</Text>
                   <TextInput
                     className={classes.labelChange}
                     type="number"
-                    placeholder={`%${parseFloat(change.toFixed(2))}`}
                     defaultValue={change}
-                    onChange={handleChangeTextInput}
-                  >
-                    
-                  </TextInput>
+                    placeholder={`%${parseFloat(change.toFixed(2))}`}
+                    onChange={(value) => {
+                      let parsedValue = parseFloat(value.target.value);
+
+                      setIndexPrice(index);
+                      isNaN(parsedValue)
+                        ? setValuePrice(0)
+                        : setValuePrice(parsedValue);
+                    }}
+                  ></TextInput>
                   <Text className={classes.labelWeight}>
                     %{parseFloat(weight.toFixed(2))}
                   </Text>
                   <Slider
-                    
+                    color="violet"
                     value={parseFloat(weight.toFixed(2))}
-                    onChange={handleChangeSlider}
+                    onChange={(value) => {
+                      setIndexWeight(index);
+                      setValueWeight(value);
+                    }}
                     // aria-labelledby="discrete-slider-custom"
-                    
+
                     min={0}
                     max={100}
                   />
@@ -283,7 +283,7 @@ export default function CpiWeightCalculator() {
         </Box>
 
         <Button
-          color="secondary"
+          color="violet"
           //   onClick={() => dispatch(submitCpi(cpi))}
           style={{ marginTop: "10px" }}
         >

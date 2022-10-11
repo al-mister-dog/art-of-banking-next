@@ -13,32 +13,12 @@ export interface Bank {
   creditIds: number[];
 }
 
-export interface Banks {
-  [key: string]: Bank;
-}
-
-export interface BankData {
-  id: number;
-  banks: Banks;
-  allIds: number[];
-}
-
 export interface Account {
   id: number;
   subordinateId: number;
   superiorId: number;
   type: string;
   balance: number;
-}
-
-export interface Accounts {
-  [key: string]: Account;
-}
-
-export interface AccountData {
-  id: number;
-  accounts: Accounts;
-  allIds: number[];
 }
 
 export interface LoanAccount {
@@ -49,47 +29,77 @@ export interface LoanAccount {
   balance: number;
 }
 
-export interface LoanAccounts {
-  [key: string]: LoanAccount;
-}
-
-export let loanData = {
-  id: 0,
-  loanAccounts: {} as LoanAccounts,
-  allIds: [] as number[],
-};
-
 export interface ReservesAccount {
   id: number;
   cashReserves: number;
+}
+
+export interface DuesAccount {
+  id: number;
+  subordinateId: number;
+  superiorId: number;
+  type: string;
+  balance: number;
+  category: string;
+  netted?: boolean;
+}
+
+export interface CreditAccount {
+  id: number;
+  subordinateId: number;
+  superiorId: number;
+  type: string;
+  balance: number;
+  category: string;
+  netted?: boolean;
+  interest?: number;
+  interestRate?: number;
+  principal?: number;
+}
+
+export type PossibleCreditAccount = CreditAccount | undefined;
+
+export interface Banks {
+  [key: string]: Bank;
+}
+
+export interface Accounts {
+  [key: string]: Account;
+}
+
+export interface LoanAccounts {
+  [key: string]: LoanAccount;
 }
 
 export interface ReservesAccounts {
   [key: string]: ReservesAccount;
 }
 
-export interface DuesAccount extends Account {
-  category: string;
-  netted?: boolean;
-}
-
-export type PossibleDuesAccount = DuesAccount | undefined;
-
 export interface DuesAccounts {
   [key: string]: DuesAccount;
 }
 
-export interface CreditAccount extends Account {
-  category: string;
-  netted?: boolean;
-}
-
-export type PossibleCreditAccount = CreditAccount | undefined;
-
 export interface CreditAccounts {
   [key: string]: CreditAccount;
 }
-export interface CreditData {
+
+export interface Records {
+  [key: string]: Record;
+}
+
+export interface BankDataObject {
+  id: number;
+  banks: Banks;
+  allIds: number[];
+}
+
+export interface AccountDataObject {
+  id: number;
+  accounts: Accounts;
+  allIds: number[];
+}
+
+export interface CreditDataObject {
   id: number;
   creditAccounts: CreditAccounts;
   allIds: number[];
@@ -104,11 +114,9 @@ export type RecordDetail = {
   name: string;
 } | null;
 
-interface Record {
+export interface Record {
   id: number;
   records: { assets: RecordDetail[]; liabilities: RecordDetail[] };
 }
 
-interface Records {
-  [key: string]: Record;
-}
+export type PossibleDuesAccount = DuesAccount | undefined;

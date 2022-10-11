@@ -7,8 +7,6 @@ import {
   loanRecords,
 } from "./structures";
 
-const nettedAccounts = [];
-
 export const CreditAccounts = {
   getData() {
     return creditData;
@@ -35,7 +33,7 @@ export const CreditAccounts = {
       interestRate,
       principal,
     };
-    
+
     if (category === "dues") {
       newAccount = { ...newAccount, netted: false };
     }
@@ -112,11 +110,6 @@ export const CreditAccounts = {
   set(account: CreditAccount, amount: number) {
     let newCreditAccount = { ...account };
     newCreditAccount.balance = amount;
-    // if (newCreditAccount.balance === 0) {
-    //   newCreditAccount = {...newCreditAccount, netted: true}
-    // } else {
-    //   newCreditAccount = {...newCreditAccount, netted: false}
-    // }
     let creditAccounts = creditData.creditAccounts;
     creditAccounts = { ...creditAccounts, [account.id]: newCreditAccount };
     CreditData.assignAccounts(creditAccounts);
