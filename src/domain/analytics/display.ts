@@ -1,6 +1,7 @@
 import { BalanceSheets } from "./balancesheets";
 import { BankingSystem } from "../banking-system";
-import { Bank } from "../structures";
+import { Bank } from "../structures/types";
+
 export const Display = {
   addRelation(bank: Bank, account: any) {
     return account.superiorId === bank.id
@@ -45,7 +46,7 @@ export const Display = {
   tAccount(bank: Bank) {
     const { assets, liabilities } =
       BalanceSheets.getAssetsAndLiabilitiesPlusReserves(bank);
-    return {assets, liabilities}
+    return { assets, liabilities };
   },
   balanceSheetObject(bank: Bank) {
     const { assets, liabilities } =

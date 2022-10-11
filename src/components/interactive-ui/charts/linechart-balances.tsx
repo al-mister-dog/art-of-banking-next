@@ -13,8 +13,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { useMantineTheme } from "@mantine/core";
-import { Banks } from "../../../domain/services/bank";
-import { bankData } from "../../../domain/structures";
+import { bankData } from "../../../domain/structures/objects";
 
 ChartJS.register(
   CategoryScale,
@@ -73,7 +72,7 @@ export default function LineChart() {
       title: {
         display: true,
         text: "Credit vs Reserves",
-        color: theme.colors.violet[9]
+        color: theme.colors.violet[9],
       },
     },
   };

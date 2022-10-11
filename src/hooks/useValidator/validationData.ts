@@ -1,6 +1,6 @@
 import { CardInfo } from "../../components/interactive-ui/types";
 import { Reserves } from "../../domain/services/reserves";
-import { creditData } from "../../domain/structures";
+import { creditData } from "../../domain/structures/objects";
 import {
   getTransferDetails,
   getWithdrawDetails,

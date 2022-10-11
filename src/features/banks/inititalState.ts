@@ -1,6 +1,6 @@
 import { BankingSystem } from "../../domain/banking-system";
 import { Customer } from "../../domain/services/customer";
-import { bankData } from "../../domain/structures";
+import { bankData } from "../../domain/structures/objects";
 
 BankingSystem.createBank("Bank 1", "bank");
 BankingSystem.createBank("Customer 1", "customer", 150);

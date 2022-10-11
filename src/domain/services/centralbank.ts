@@ -1,18 +1,11 @@
 import { Accounts } from "./accounts";
 import { Reserves } from "./reserves";
-import { Dues } from "./dues";
-import {
-  Bank,
-  bankData,
-  accountData,
-  BankData,
-  creditData,
-} from "../structures";
-import { system, System } from "../system";
 import { Loans } from "./loans";
 import { mapObject } from "../helpers";
 import { Record } from "./records";
 import { CreditAccounts } from "./credit-accounts";
+import { bankData, accountData, creditData } from "../structures/objects";
+import { Bank } from "../structures/types";
 
 export const CentralBank = {
   createAccount(bank1: Bank, bank2: Bank, amount: number = 0) {
@@ -86,8 +79,21 @@ export const CentralBank = {
     Record.debitAccount(bank1, bank2, amount);
   },
 
-  getLoan(bank1: Bank, bank2: Bank, amount: number, interest: number, interestRate: number) {
-    Loans.createFedFunds(bank1, bank2, amount, "fed funds", interest, interestRate);
+  getLoan(
+    bank1: Bank,
+    bank2: Bank,
+    amount: number,
+    interest: number,
+    interestRate: number
+  ) {
+    Loans.createFedFunds(
+      bank1,
+      bank2,
+      amount,
+      "fed funds",
+      interest,
+      interestRate
+    );
     Record.fedFundsLoan(bank1, bank2, amount, interestRate);
   },
   repayLoan(bank1: Bank, bank2: Bank, amount: number) {

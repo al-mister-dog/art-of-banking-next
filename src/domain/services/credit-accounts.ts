@@ -1,11 +1,10 @@
 import {
-  Bank,
   creditData,
   CreditData,
-  CreditAccount,
   BankData,
   loanRecords,
-} from "../structures";
+} from "../structures/objects";
+import { Bank, CreditAccount } from "../structures/types";
 
 export const CreditAccounts = {
   getData() {

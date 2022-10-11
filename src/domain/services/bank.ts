@@ -1,10 +1,11 @@
 import { Accounts } from "./accounts";
 import { Reserves } from "./reserves";
-import { Bank, bankData, accountData } from "../structures";
 import { System } from "../system";
 import { Loans } from "./loans";
 import { mapObject } from "../helpers";
 import { Record } from "./records";
+import { bankData, accountData } from "../structures/objects";
+import { Bank } from "../structures/types";
 
 export const Banks = {
   createAccount(bank1: Bank, bank2: Bank, amount: number = 0) {

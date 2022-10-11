@@ -5,7 +5,7 @@ import { Customer } from "../../domain/services/customer";
 import { Display } from "../../domain/analytics/display";
 import { GraphData } from "../../domain/analytics/graph-data";
 import { Record } from "../../domain/services/records";
-import { analytics, bankData, clearBankData } from "../../domain/structures";
+import { analytics, bankData, clearBankData } from "../../domain/structures/objects";
 import { System } from "../../domain/system";
 
 export type SetupFunctions = { [key: string]: any };

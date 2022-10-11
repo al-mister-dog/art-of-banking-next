@@ -2,7 +2,12 @@ import { Accounts } from "../services/accounts";
 import { Analytics } from "./analytics";
 import { Totals } from "./totals";
 import { Reserves } from "../services/reserves";
-import { analytics, AnalyticsData, bankData, reservesData } from "../structures";
+import {
+  bankData,
+  analytics,
+  AnalyticsData,
+  reservesData,
+} from "../structures/objects";
 
 export const GraphData = {
   setBalanceData() {

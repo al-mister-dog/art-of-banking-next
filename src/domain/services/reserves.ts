@@ -1,4 +1,5 @@
-import { Bank, reservesData, ReservesData } from "../structures";
+import { reservesData, ReservesData } from "../structures/objects";
+import { Bank } from "../structures/types";
 
 export const Reserves = {
   getReserves(bank: Bank) {

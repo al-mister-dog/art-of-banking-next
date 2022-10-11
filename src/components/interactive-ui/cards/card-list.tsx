@@ -4,7 +4,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { MantineProvider } from "@mantine/core";
 import { CardInfo } from "../types";
 import { Display } from "../../../domain/analytics/display";
-import { Bank } from "../../../domain/structures";
+import { Bank } from "../../../domain/structures/types";
 import LayoutMobile from "./card/layout-mobile";
 import LayoutDesktop from "./card/layout-desktop";
 import React from "react";

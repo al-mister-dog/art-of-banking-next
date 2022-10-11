@@ -1,11 +1,10 @@
 import { useAppDispatch } from "../../../../../app/hooks";
-import { payDues } from "../../../../../features/banks/banksSlice";
 import { useState } from "react";
+import { payDues } from "../../../../../features/banks/banksSlice";
 import { Banks } from "../../../../../domain/services/bank";
-import { Customer } from "../../../../../domain/services/customer";
 import { CardInfo } from "../../../types";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
-import { creditData } from "../../../../../domain/structures";
+import { creditData } from "../../../../../domain/structures/objects";
 import FixedAmount from "../compositions/fixed-amount";
 import { Text } from "@mantine/core";
 
@@ -40,7 +39,7 @@ export default function PayDues({ bank }: { bank: CardInfo }) {
     });
 
   const validation = useValidator("payDues", bank, amount, selectedBank);
-  
+
   if (
     owingBanks.length === 0 ||
     owingBanks[0].value === bank.cardInfo.id.toString()

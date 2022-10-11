@@ -4,9 +4,10 @@ import { useState } from "react";
 import { Banks } from "../../../../../domain/services/bank";
 import { CardInfo } from "../../../types";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
-import { creditData } from "../../../../../domain/structures";
+
 import FixedAction from "../compositions/fixed-action";
 import { Text } from "@mantine/core";
+import { creditData } from "../../../../../domain/structures/objects";
 
 export default function NetDues({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();
@@ -21,7 +22,7 @@ export default function NetDues({ bank }: { bank: CardInfo }) {
     };
     dispatch(netDues(payload));
   }
-  
+
   const owingBanks = creditData.allIds
     .map((id) => creditData.creditAccounts[id])
     .filter(
@@ -40,7 +41,7 @@ export default function NetDues({ bank }: { bank: CardInfo }) {
     });
 
   const validation = useValidator("netDues", bank, amount, selectedBank);
-  
+
   if (
     owingBanks.length === 0 ||
     owingBanks[0].value === bank.cardInfo.id.toString()

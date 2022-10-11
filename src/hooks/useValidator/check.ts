@@ -1,6 +1,5 @@
-import { BalanceSheets } from "../../domain/analytics/balancesheets";
 import { Totals } from "../../domain/analytics/totals";
-import { Bank } from "../../domain/structures";
+import { Bank } from "../../domain/structures/types";
 
 export const check = {
   checks: {

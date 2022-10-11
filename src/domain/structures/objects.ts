@@ -1,5 +1,5 @@
-import { SystemType } from "../structures";
 import {
+  SystemType,
   Bank,
   Banks,
   BankDataObject,

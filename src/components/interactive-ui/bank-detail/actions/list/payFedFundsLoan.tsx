@@ -1,14 +1,12 @@
-import { useAppDispatch, useAppSelector } from "../../../../../app/hooks";
+import { useAppDispatch } from "../../../../../app/hooks";
 import { repayFedFundsLoan } from "../../../../../features/banks/banksSlice";
 import { useState } from "react";
 import { Banks } from "../../../../../domain/services/bank";
-import { Customer } from "../../../../../domain/services/customer";
 import { CardInfo } from "../../../types";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
-import { creditData } from "../../../../../domain/structures";
+import { creditData } from "../../../../../domain/structures/objects";
 import FixedAmountLoan from "../compositions/fixed-amount-loan";
 import { Text } from "@mantine/core";
-import { selectSettings } from "../../../../../features/settings/settingsSlice";
 
 export default function PayFedFundsLoan({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();
@@ -40,7 +38,7 @@ export default function PayFedFundsLoan({ bank }: { bank: CardInfo }) {
         label: bank.name,
         owed: account.balance,
         interest: account.interest,
-        interestRate: account.interestRate
+        interestRate: account.interestRate,
       };
     });
 

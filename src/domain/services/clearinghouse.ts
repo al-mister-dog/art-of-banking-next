@@ -1,4 +1,4 @@
-import { bankData } from "../structures";
+import { bankData } from "../structures/objects";
 
 export const Clearinghouse = {
   get() {

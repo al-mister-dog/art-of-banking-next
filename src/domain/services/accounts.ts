@@ -1,13 +1,7 @@
-import {
-  Bank,
-  Account,
-  accountData,
-  AccountData,
-  bankData,
-  BankData,
-} from "../structures";
 import { mapObject } from "../helpers";
-import { Record } from "./records";
+import { accountData, AccountData, BankData } from "../structures/objects";
+import { Bank, Account } from "../structures/types";
+
 export const Accounts = {
   createAccount(
     subordinate: Bank,
@@ -84,7 +78,7 @@ export const Accounts = {
   },
   increaseCorrespondingBalance(customer: Bank, bank: Bank, amount: number) {
     let account = Accounts.getAccount(customer, bank);
-    
+
     if (account) {
       let newAccount = { ...account };
       newAccount.balance += amount;

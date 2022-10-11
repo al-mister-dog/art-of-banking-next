@@ -1,8 +1,8 @@
 import { Accounts } from "../services/accounts";
 import { BalanceSheets } from "./balancesheets";
-import { Account, Bank, DuesAccount, reservesData } from "../structures";
-import { accountData } from "../structures";
 import { Banks } from "../services/bank";
+import { accountData, reservesData } from "../structures/objects";
+import { Bank, Account, DuesAccount } from "../structures/types";
 //GETTING TOTALS
 export const Totals = {
   getTotalAccounts() {

@@ -1,11 +1,11 @@
-import { useAppDispatch, useAppSelector } from "../../../../../app/hooks";
+import { useAppDispatch } from "../../../../../app/hooks";
 import { repayLoan } from "../../../../../features/banks/banksSlice";
 import { useState } from "react";
 import { Banks } from "../../../../../domain/services/bank";
 import { Customer } from "../../../../../domain/services/customer";
 import { CardInfo } from "../../../types";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
-import { creditData } from "../../../../../domain/structures";
+import { creditData } from "../../../../../domain/structures/objects";
 import FixedAmountLoan from "../compositions/fixed-amount-loan-by-type";
 import { Text } from "@mantine/core";
 

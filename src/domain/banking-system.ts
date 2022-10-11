@@ -1,4 +1,10 @@
-import { Bank, BankData, bankData, records, reservesData } from "./structures";
+import {
+  BankData,
+  bankData,
+  records,
+  reservesData,
+} from "./structures/objects";
+import { Bank } from "./structures/types";
 import { System } from "./system";
 
 export const BankingSystem = {

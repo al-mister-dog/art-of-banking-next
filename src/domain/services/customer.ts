@@ -1,11 +1,13 @@
 import { Accounts } from "./accounts";
 import { Reserves } from "./reserves";
 import { Dues } from "./dues";
-import { Bank, bankData, records } from "../structures";
+
 import { System } from "../system";
 import { Loans } from "./loans";
 import { mapObject } from "../helpers";
 import { Record } from "./records";
+import { bankData } from "../structures/objects";
+import { Bank } from "../structures/types";
 
 export const Customer = {
   get() {
@@ -59,8 +61,21 @@ export const Customer = {
     }
   },
 
-  getLoan(customer: Bank, bank: Bank, amount: number, interest?: number, interestRate?: number) {
-    Loans.create(customer, bank, amount, "Customer Deposits", interest, interestRate);
+  getLoan(
+    customer: Bank,
+    bank: Bank,
+    amount: number,
+    interest?: number,
+    interestRate?: number
+  ) {
+    Loans.create(
+      customer,
+      bank,
+      amount,
+      "Customer Deposits",
+      interest,
+      interestRate
+    );
     Accounts.increaseCorrespondingBalance(customer, bank, amount);
   },
   repayLoanFromAccount(customer: Bank, bank: Bank, amount: number) {

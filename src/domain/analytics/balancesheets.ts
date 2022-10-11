@@ -1,15 +1,8 @@
-import {
-  Account,
-  accountData,
-  Bank,
-  bankData,
-  CreditAccount,
-  creditData,
-  reservesData,
-} from "../structures";
 import { CreditAccounts } from "../services/credit-accounts";
 import { Banks } from "../services/bank";
 import { System } from "../system";
+import { accountData, reservesData } from "../structures/objects";
+import { Account, Bank, CreditAccount } from "../structures/types";
 
 interface CorrespondingInstruments {
   [key: string]: string;

@@ -8,7 +8,7 @@ import {
 import { forwardRef, useContext, useState } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 import { useValidator } from "../../../../../hooks/useValidator/useValidator";
-import { creditData } from "../../../../../domain/structures";
+import { creditData } from "../../../../../domain/structures/objects";
 import { Banks } from "../../../../../domain/services/bank";
 
 import {

@@ -11,7 +11,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { bankData } from "../../../domain/structures";
+import { bankData } from "../../../domain/structures/objects";
 import { useMediaQuery } from "@mantine/hooks";
 import { mediaQuery } from "../../../config/media-query";
 import { useMantineTheme } from "@mantine/core";

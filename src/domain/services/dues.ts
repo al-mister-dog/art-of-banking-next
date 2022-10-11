@@ -2,14 +2,10 @@ import { Clearinghouse } from "./clearinghouse";
 import { CreditAccounts } from "./credit-accounts";
 import { Record } from "./records";
 import { Reserves } from "./reserves";
-import {
-  Bank,
-  creditData,
-  CreditData,
-  CreditAccount,
-  bankData,
-} from "../structures";
+
 import { System } from "../system";
+import { creditData } from "../structures/objects";
+import { Bank, CreditAccount } from "../structures/types";
 
 export const Dues = {
   create(subordinate: Bank, superior: Bank, amount: number, type: string) {
@@ -106,7 +102,7 @@ export const Dues = {
 
   settle(bank1: Bank, bank2: Bank) {
     const accounts = Dues.getCorresponding(bank1, bank2);
-    
+
     CreditAccounts.set(accounts[0], 0);
     CreditAccounts.set(accounts[1], 0);
   },

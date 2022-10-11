@@ -9,7 +9,7 @@ import {
   bankData,
   creditData,
   reservesData,
-} from "../../domain/structures";
+} from "../../domain/structures/objects";
 import initialBankData from "./inititalState";
 
 import { Dues } from "../../domain/services/dues";
