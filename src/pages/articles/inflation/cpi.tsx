@@ -74,6 +74,7 @@ export default function CPI() {
         Ukraine. Below is a chart showing the rate of change and the inflation
         rate from 2000 to 2020.
       </Text>
+    
       <Text>
         If the bulk of inflation was due solely to price increases (and its
         weighting by economists), how much change must occur to reach the Bank
