@@ -80,6 +80,7 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
       p="sm"
       radius="xs"
       className={classes.card}
+      // style={{ border: `1px solid ${theme.colors[bank.color][2]}` }}
     >
       <Card.Section
         className={`${classes.header} ${classes[bank.color]}`}

@@ -1,7 +1,8 @@
-import { createStyles } from "@mantine/core";
+import { useAppSelector } from "../../../app/hooks";
+import { selectActions } from "../../../features/actions/actionsSlice";
+import { createStyles, useMantineTheme } from "@mantine/core";
 import { lectureRoutes } from "../../../config/routes/lectureRoutes";
 import { Accordion, List, Text } from "@mantine/core";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
@@ -9,7 +10,7 @@ const useStyles = createStyles((theme) => ({
     borderLeft: "1px solid gray",
     padding: "5px 0px 5px 20px",
     "&:hover": {
-      backgroundColor: theme.colors.blue[1],
+      backgroundColor: theme.colors.violet[0],
       borderLeft: "1px solid blue",
     },
   },
@@ -20,7 +21,9 @@ export default function LecturesContent({
 }: {
   setMobileOpen?: (v: boolean) => void;
 }) {
+  const { currentLectureId } = useAppSelector(selectActions);
   const { classes } = useStyles();
+  const theme = useMantineTheme();
 
   return (
     <Accordion variant="filled">
@@ -36,15 +39,14 @@ export default function LecturesContent({
                 }}
               >
                 <Text size={14.2} weight={500}>
-                {title}
+                  {title}
                 </Text>
-                
               </Link>
             </Accordion.Control>
             <Accordion.Panel>
               <List listStyleType="none">
                 {routes.map((route: any) => {
-                  const { id, title, path, lectureId, keyTermsIds } = route;
+                  const { id, title, path } = route;
 
                   return (
                     <div
@@ -59,7 +61,11 @@ export default function LecturesContent({
                     >
                       <List.Item
                         className={classes.listItem}
-                        style={{ cursor: "pointer" }}
+                        style={{
+                          cursor: "pointer",
+                          background:
+                            currentLectureId === id ? theme.colors.violet[1] : "",
+                        }}
                       >
                         <Link
                           href={{

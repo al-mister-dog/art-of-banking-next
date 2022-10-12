@@ -1,16 +1,42 @@
-import { Center, Title } from "@mantine/core";
+import { Box, Center, Group } from "@mantine/core";
 import Text from "../../../components/articles/texts/Text";
+import Title from "../../../components/articles/texts/Title";
+import SubTitle from "../../../components/articles/texts/Subtitle";
 import CpiPrice from "../../../components/articles/inflation/cpi/cpi-price";
 import CpiWeight from "../../../components/articles/inflation/cpi/cpi-weight";
 import CpiPriceWeight from "../../../components/articles/inflation/cpi/cpi-price-weight";
-import { IndentDecrease } from "tabler-icons-react";
+import Change from "../../../components/articles/inflation/cpi/charts/change";
+import Rate from "../../../components/articles/inflation/cpi/charts/rate";
+import Caption from "../../../components/articles/texts/Caption";
+import { useMantineTheme } from "@mantine/core";
+import { getCpi, cpiData } from "../../../components/articles/inflation/cpi/calculator";
 
 export default function CPI() {
+  const theme = useMantineTheme();
+
   return (
     <>
-      <Center>
-        <Title order={1}>Consumer Price Index</Title>
-      </Center>
+      <Box ml={25} mt={200}>
+        <Title>Consumer Price Index</Title>
+      </Box>
+      <Box
+        mt={100}
+        mb={50}
+        style={{ display: "flex", justifyContent: "space-between" }}
+      >
+        <Change />
+        <Rate />
+      </Box>
+      <Caption>
+        Rate of change and inflation in the UK from 1999 to 2020. Source:{" "}
+        <a
+          href="https://www.rateinflation.com/consumer-price-index/uk-historical-cpi/"
+          target="_blank"
+          style={{ color: theme.colors.violet[9] }}
+        >
+          rateinflation.com
+        </a>
+      </Caption>
       <Text>
         Inflation can be described the decline of purchasing power of a given
         currency over time. A quantitative estimate of the rate at which the
@@ -30,7 +56,7 @@ export default function CPI() {
       </Text>
       <br></br>
       <Center>
-        <Title order={2}>Price Change</Title>
+        <SubTitle>Price Change</SubTitle>
       </Center>
 
       <Text>
@@ -46,7 +72,7 @@ export default function CPI() {
       <CpiPrice />
       <br></br>
       <Center>
-        <Title order={2}>Cpi Weight</Title>
+        <SubTitle>Cpi Weight</SubTitle>
       </Center>
       <Text>
         The weights are based on the relative importance of the product to
@@ -74,25 +100,23 @@ export default function CPI() {
         Ukraine. Below is a chart showing the rate of change and the inflation
         rate from 2000 to 2020.
       </Text>
-    
+
       <Text>
         If the bulk of inflation was due solely to price increases (and its
         weighting by economists), how much change must occur to reach the Bank
         of England's estimated peak rate of 11%? And do these prices reflect the
         prices we see today as consumers?
       </Text>
-      <CpiPriceWeight />
+      <CpiPriceWeight setNewCpi={getCpi} cpiData={cpiData} />
+
+      <Box
+        mt={50}
+        mb={50}
+        style={{ display: "flex", justifyContent: "space-between" }}
+      >
+        <Change />
+        <Rate />
+      </Box>
     </>
   );
 }
-
-const formula = `4. Divide the current product price total by the past price total
-Write down the total you found after adding up the current and past product prices. Take your current product price sum and divide it by the past price total you came up with. For instance, if your current price total is $216 and your past price total is $176, your equation would be 216 / 176 = 1.23
-
-5. Multiply the total by 100
-Once you've gotten a total, multiply it by 100 to create a baseline for the consumer price index. This is the number that makes your total comparable. Using the previous example, your equation is 216 / 176 = 1.23 x 100 = 122.72.
-
-6. Convert this number into a percentage
-To find the change in the consumer price index, you'll subtract 100 from this final result. Subtracting 100 allows you to subtract the baseline and see the change in product pricing in the previous years. Place a percentage sign onto your final total. This result is your change in the consumer price index.
-
-Continuing on with the previous example, the equation would be 216 / 176 = 1.23 x 100 = 122.72 -100 = 22.7%. Your final total will represent a 22.7% change in prices from the previous year you've chosen to the current year. Positive numbers represent an inflation rate, while negative numbers would be deflation.`;

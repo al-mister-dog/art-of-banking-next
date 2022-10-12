@@ -6,6 +6,8 @@ import {
   useMantineTheme,
   Card,
   TextInput,
+  Button,
+  Stack,
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { Percentage } from "tabler-icons-react";
@@ -22,6 +24,7 @@ interface Props {
   setValuePrice?: (v: any) => void;
   setIndexWeight?: (v: any) => void;
   setValueWeight?: (v: any) => void;
+  setNewCpi?: (v: any) => void;
 }
 export default function CpiDisplay({
   title,
@@ -35,6 +38,7 @@ export default function CpiDisplay({
   setValuePrice,
   setIndexWeight,
   setValueWeight,
+  setNewCpi,
 }: Props) {
   const theme = useMantineTheme();
   const isMobile = useMediaQuery(mediaQuery);
@@ -206,6 +210,13 @@ export default function CpiDisplay({
             </Box>
           );
         })}
+        {setNewCpi && (
+          <Stack mt={10}>
+            <Button color="violet" onClick={() => setNewCpi(cpi)}>
+              Submit New CPI
+            </Button>
+          </Stack>
+        )}
       </Card>
     </>
   );
