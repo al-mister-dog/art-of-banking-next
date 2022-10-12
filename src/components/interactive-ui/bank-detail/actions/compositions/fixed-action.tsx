@@ -42,13 +42,19 @@ export default function FixedAmount({
   btnText,
   validation,
 }: Props) {
+  const theme = useMantineTheme();
   const isMobile = useMediaQuery(mediaQuery);
   const setOpened = useContext(DrawerContext);
 
   return (
     <Stack spacing="md">
       <Select
-        label={label}
+        size="xs"
+        label={
+          <Text size="xs" weight="bold" color={theme.colors[bank.color][9]}>
+            {label}
+          </Text>
+        }
         placeholder={placeholder}
         value={value}
         itemComponent={SelectItem}

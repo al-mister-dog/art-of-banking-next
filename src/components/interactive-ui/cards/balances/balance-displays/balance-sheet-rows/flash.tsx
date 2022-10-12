@@ -4,11 +4,11 @@ import { createStyles, Text, useMantineTheme } from "@mantine/core";
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { setAsSpreadSheet, setAsTAccount } from "../utils/balance-display";
+import BalanceSheetRow from "./balance-sheet-row";
 
 const useStyles = createStyles((theme) => ({
   text: {
     transition: "all 0.5s ease-in",
-    
     padding: "0px",
   },
   decrease: {
@@ -49,19 +49,16 @@ function Balance({ account, id, textColor }) {
   const color = useColors(account.balance);
   let tAccountDisplay = setAsTAccount(account, id);
   let spreadSheetDisplay = setAsSpreadSheet(account);
-  
+
   return (
-    <Text
-      size="xs"
-      weight="bold"
-      align="left"
+    <BalanceSheetRow
       className={classes[color]}
       color={color !== "text" ? "" : theme.colors[textColor][8]}
     >
       {displaySettings.taccounts
         ? `${tAccountDisplay}`
         : `${spreadSheetDisplay}`}
-    </Text>
+    </BalanceSheetRow>
   );
 }
 

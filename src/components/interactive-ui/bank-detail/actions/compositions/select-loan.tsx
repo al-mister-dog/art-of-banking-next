@@ -10,6 +10,7 @@ import {
   SelectItem,
   Stack,
   Text,
+  useMantineTheme,
 } from "@mantine/core";
 import { CurrencyDollar, Percentage } from "tabler-icons-react";
 import { CardInfo } from "../../../types";
@@ -50,13 +51,19 @@ export default function SelectAndPay({
   btnText,
   validation,
 }: Props) {
+  const theme = useMantineTheme();
   const isMobile = useMediaQuery(mediaQuery);
   const setOpened = useContext(DrawerContext);
 
   return (
     <Stack spacing="md">
       <Select
-        label={label}
+        size="xs"
+        label={
+          <Text size="xs" weight="bold" color={theme.colors[bank.color][9]}>
+            {label}
+          </Text>
+        }
         placeholder={placeholder}
         value={value}
         data={data}
@@ -64,7 +71,7 @@ export default function SelectAndPay({
       />
       <Input.Wrapper error={validation.errorMessage}>
         <NumberInput
-          icon={<CurrencyDollar />}
+          size="xs" icon={<CurrencyDollar />}
           value={amount}
           placeholder="0"
           radius="xs"

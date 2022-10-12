@@ -4,6 +4,7 @@ import { selectSettings } from "../../../../../../features/settings/settingsSlic
 import { createStyles, Text, useMantineTheme } from "@mantine/core";
 import useColorSettings from "../../../../../../hooks/useColorSettings";
 import { setAsSpreadSheet, setAsTAccount } from "../utils/balance-display";
+import BalanceSheetRow from "./balance-sheet-row";
 
 const useStyles = createStyles((theme) => ({
   text: {
@@ -33,17 +34,14 @@ const Balance = ({ account, id, textColor }) => {
   let spreadSheetDisplay = setAsSpreadSheet(account);
 
   return (
-    <Text
-      size="xs"
-      weight="bold"
-      align="left"
+    <BalanceSheetRow
       className={classes[color]}
       color={color !== "text" ? "" : theme.colors[textColor][8]}
     >
       {displaySettings.taccounts
         ? `${tAccountDisplay}`
         : `${spreadSheetDisplay}`}
-    </Text>
+    </BalanceSheetRow>
   );
 };
 

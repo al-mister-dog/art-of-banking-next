@@ -6,7 +6,7 @@ import ToggleOrder from "../settings/orderby/desktop";
 
 const useStyles = createStyles(() => ({
   box: {
-    maxHeight: "17rem",
+    maxHeight: "16rem",
     overflowX: "auto",
   },
 }));

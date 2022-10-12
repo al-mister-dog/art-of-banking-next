@@ -14,11 +14,15 @@ export default function ActionSelections({
   actionData,
   setAction,
 }: Props) {
-  const theme = useMantineTheme()
+  const theme = useMantineTheme();
   return (
     <Select
-      label="Actions"
-      color={theme.colors[bank.color][9]}
+      size="xs"
+      label={
+        <Text size="xs" weight="bold" color={theme.colors[bank.color][9]}>
+          Actions
+        </Text>
+      }
       placeholder="Choose an Action"
       value={action}
       onChange={setAction}

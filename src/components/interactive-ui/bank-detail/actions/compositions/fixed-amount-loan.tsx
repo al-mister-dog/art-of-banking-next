@@ -51,14 +51,19 @@ export default function FixedAmountLoan({
   btnText,
   validation,
 }: Props) {
+  const theme = useMantineTheme();
   const isMobile = useMediaQuery(mediaQuery);
   const setOpened = useContext(DrawerContext);
-
   const formatted = parseFloat(`${amount}`);
   return (
     <Stack spacing="md">
       <Select
-        label={label}
+        size="xs"
+        label={
+          <Text size="xs" weight="bold" color={theme.colors[bank.color][9]}>
+            {label}
+          </Text>
+        }
         placeholder={placeholder}
         value={value}
         itemComponent={SelectItem}
@@ -67,7 +72,7 @@ export default function FixedAmountLoan({
       />
       <Input.Wrapper error={validation.errorMessage}>
         <NumberInput
-          icon={<CurrencyDollar />}
+          size="xs" icon={<CurrencyDollar />}
           value={amount}
           formatter={() =>
             !Number.isNaN(amount) ? `${formatted}` : `${amount}`

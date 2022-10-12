@@ -18,7 +18,7 @@ import SpreadsheetList from "../balances/balance-displays/spreadsheet-list";
 const useStyles = createStyles((theme) => ({
   card: {
     paddingBottom: "0px",
-    height: "13.75rem",
+    height: "12.75rem",
     backgroundColor: theme.colors.violet[1],
   },
   header: { padding: "3px", cursor: "pointer" },

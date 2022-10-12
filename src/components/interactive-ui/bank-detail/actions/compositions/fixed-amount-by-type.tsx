@@ -63,7 +63,12 @@ export default function FixedAmount({
   return (
     <Stack spacing="md">
       <Select
-        label={label}
+        size="xs"
+        label={
+          <Text size="xs" weight="bold" color={theme.colors[bank.color][9]}>
+            {label}
+          </Text>
+        }
         placeholder={placeholder}
         value={value}
         itemComponent={SelectItem}
@@ -89,6 +94,7 @@ export default function FixedAmount({
       </Radio.Group>
       <Input.Wrapper error={validation.errorMessage}>
         <NumberInput
+          size="xs"
           icon={<CurrencyDollar />}
           value={amount}
           placeholder="0"

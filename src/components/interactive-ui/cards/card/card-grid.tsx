@@ -9,7 +9,7 @@ function CardGrid({ group, handleSetBankDetail }) {
   return (
     <Grid gutter="xl" grow>
       <Grid.Col span={1}>
-        <div style={{ height: "450px", overflow: "auto" }}>
+        <div style={{ height: "27rem", overflow: "auto" }}>
           {group1.map((bank) => (
             <div key={bank.cardInfo.id} style={{ marginBottom: "10px" }}>
               <Card bank={bank} handleSetBankDetail={handleSetBankDetail} />
@@ -18,7 +18,7 @@ function CardGrid({ group, handleSetBankDetail }) {
         </div>
       </Grid.Col>
       <Grid.Col span={1}>
-        <div style={{ height: "450px", overflow: "auto" }}>
+        <div style={{ height: "27rem", overflow: "auto" }}>
           {group2.map((bank) => (
             <div key={bank.cardInfo.id} style={{ marginBottom: "10px" }}>
               <Card bank={bank} handleSetBankDetail={handleSetBankDetail} />

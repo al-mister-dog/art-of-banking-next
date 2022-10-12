@@ -34,13 +34,13 @@ export default function RecordList({ bank, logs, order }) {
               }}
             >
               <Text
-                size="sm"
+                size="xs"
                 color={log.aside ? "gray" : theme.colors[bank.color][9]}
               >
                 <span>{index + 1}: </span> {log.action}
               </Text>
               <Text
-                size="md"
+                size="sm"
                 weight="bold"
                 color={
                   log.aside

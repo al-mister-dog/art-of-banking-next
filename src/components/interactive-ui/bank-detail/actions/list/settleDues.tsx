@@ -31,6 +31,8 @@ export default function SettleDues({ bank }: { bank: CardInfo }) {
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
   const [selectedAccount, setSelectedAccount] = useState<string | null>(null);
 
+  const theme = useMantineTheme();
+
   const dues = Dues.getByIdAndNetted(bank.cardInfo.id).map((account) => {
     if (account.superiorId === bank.cardInfo.id) {
       const debtorBank = Banks.getById(account.subordinateId);
@@ -61,7 +63,12 @@ export default function SettleDues({ bank }: { bank: CardInfo }) {
   return (
     <Stack spacing="md">
       <Select
-        label="Settle Dues With"
+        size="xs"
+        label={
+          <Text size="xs" weight="bold" color={theme.colors[bank.color][9]}>
+            Settle Dues With
+          </Text>
+        }
         placeholder="Choose a Bank"
         value={selectedBank}
         itemComponent={SelectItem}
@@ -167,32 +174,35 @@ function NextStep({ bank, selectedBank }) {
       dispatch(debitBank(payload));
     }
   }
+
   return (
     <>
-      <Text size="sm" mb={0} color="dimmed">
+      <Text size="xs" mb={0} color="dimmed">
         {settlementInfo}
       </Text>
 
       <Radio.Group
-        mt={0}
+        mt={-10}
         value={paymentType}
         onChange={setPaymentType}
         name="PaymentMethod"
         label={
-          <Text size="md" weight="bold">
+          <Text size="sm" weight="bold" color={`${bank.color}`}>
             Payment Method
           </Text>
         }
       >
         <Radio
-          color={`${theme.colors[bank.color]}`}
+          size="xs"
+          color={`${bank.color}`}
           value="credit"
-          label={creditLabel}
+          label={<Text size="xs">{creditLabel}</Text>}
         />
         <Radio
-          color={`${theme.colors[bank.color]}`}
+          size="xs"
+          color={`${bank.color}`}
           value="debit"
-          label={debitLabel}
+          label={<Text size="xs">{creditLabel}</Text>}
         />
       </Radio.Group>
 
@@ -266,7 +276,7 @@ function NextStepCH({ bank, selectedBank }) {
   }
   return (
     <>
-      <Text size="sm" mb={0} color="dimmed">
+      <Text size="xs" mb={0} color="dimmed">
         {settlementInfo}
       </Text>
 

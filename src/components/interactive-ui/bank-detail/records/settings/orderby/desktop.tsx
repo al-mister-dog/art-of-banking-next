@@ -4,11 +4,12 @@ export default function ToggleOrder({ bank, order, setOrder }) {
   const theme = useMantineTheme();
   return (
     <Box mt={10}>
-      <Text size="sm" weight="bold" color={theme.colors[bank.color][9]}>
+      <Text size="xs" weight="bold" color={theme.colors[bank.color][9]}>
         Sort By
       </Text>
       <Radio.Group name="sortBy" value={order} onChange={setOrder}>
         <Radio
+          size="xs"
           color={`${bank.color}`}
           value="newest"
           label={
@@ -18,6 +19,7 @@ export default function ToggleOrder({ bank, order, setOrder }) {
           }
         />
         <Radio
+          size="xs"
           color={`${bank.color}`}
           value="oldest"
           label={

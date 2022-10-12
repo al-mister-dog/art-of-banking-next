@@ -31,7 +31,7 @@ export const System = {
         return;
       },
       centralbank: function (): void {
-        BankingSystem.createBank("centralbank", "centralbank");
+        BankingSystem.createBank("Central Bank", "centralbank");
       },
       correspondent: function (): void {},
       chips: function (): void {},
