@@ -29,6 +29,7 @@
     "chartjs-plugin-annotation": "^2.0.1",
     "dayjs": "^1.11.5",
     "embla-carousel-react": "^7.0.3",
+    "framer-motion": "^7.5.3",
     "next": "latest",
     "react": "^18.1.0",
     "react-chartjs-2": "^4.3.1",

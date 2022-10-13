@@ -16,3 +16,75 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.hero {
+  min-height: 70vh;
+  background-image: url(https://source.unsplash.com/NVJ3sze1ODE);
+  background-size: cover;
+  background-position: center;
+
+  /*  flexbox  */
+  /*   display: flex;
+  justify-content: center;
+  align-items: center; */
+
+  /*   grid */
+  display: grid;
+}
+
+.hero-inner {
+  max-width: 90%;
+  /*   text-align: center; */
+  place-self: end start;
+  color: #fff;
+  padding: 1rem;
+  /*   animation: fadeInUp 1s forwards; */
+}
+
+@media (min-width: 700px) {
+  .hero-inner {
+    max-width: 60%;
+    place-self: center;
+  }
+}
+
+.hero-headline {
+  margin: 0 0 1rem;
+  animation: fadeInUp 1s forwards;
+  opacity: 0;
+}
+
+.hero-text-1 {
+  animation: fadeInUp 1s forwards;
+  animation-delay: 300ms;
+  opacity: 0;
+}
+.hero-text-2 {
+  animation: fadeInUp 1s forwards;
+  animation-delay: 400ms;
+  opacity: 0;
+}
+.hero-text-3 {
+  animation: fadeInUp 1s forwards;
+  animation-delay: 500ms;
+  opacity: 0;
+}
+.hero-text-4 {
+  animation: fadeInUp 1s forwards;
+  animation-delay: 600ms;
+  opacity: 0;
+}
+
+/* animations */
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(-20px);
+  }
+}
