@@ -13,7 +13,6 @@ import { useMediaQuery } from "@mantine/hooks";
 import { Percentage } from "tabler-icons-react";
 import { mediaQuery } from "../../../../config/media-query";
 interface Props {
-  title: string;
   description: string;
   inflationIndex: number;
   inflationRate: number;
@@ -25,9 +24,9 @@ interface Props {
   setIndexWeight?: (v: any) => void;
   setValueWeight?: (v: any) => void;
   setNewCpi?: (v: any) => void;
+  width: string;
 }
 export default function CpiDisplay({
-  title,
   description,
   inflationIndex,
   inflationRate,
@@ -39,6 +38,7 @@ export default function CpiDisplay({
   setIndexWeight,
   setValueWeight,
   setNewCpi,
+  width,
 }: Props) {
   const theme = useMantineTheme();
   const isMobile = useMediaQuery(mediaQuery);
@@ -47,7 +47,7 @@ export default function CpiDisplay({
     <>
       <Card
         style={{
-          width: isMobile ? "100%" : "52%",
+          width: width,
           margin: "auto",
           backgroundColor: theme.colors.violet[1],
         }}

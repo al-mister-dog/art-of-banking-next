@@ -30,6 +30,7 @@ export default function OverdraftSlider({
       <Text size="xs">Overdraft Limit</Text>
       <Slider
         color="violet"
+        size="md"
         label={`$${overdraft}`}
         min={0}
         max={100}

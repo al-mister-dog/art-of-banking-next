@@ -5,6 +5,7 @@ import { Bar } from "react-chartjs-2";
 import { Chart } from "chart.js";
 import annotationPlugin from "chartjs-plugin-annotation";
 import { useMantineTheme } from "@mantine/core";
+import ChartContainer from "./chart-container";
 
 Chart.register(annotationPlugin);
 
@@ -87,8 +88,8 @@ export default function EffectiveRate() {
   };
 
   return (
-    <div style={{ height: "25.5rem", width: "100%" }}>
+    <ChartContainer>
       <Bar options={options} data={data} height={180} />
-    </div>
+    </ChartContainer>
   );
 }

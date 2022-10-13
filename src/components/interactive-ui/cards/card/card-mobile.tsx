@@ -138,7 +138,7 @@ export default function CardUI({ bank }: { bank: CardInfo }) {
         ) : (
           <SimpleGrid
             cols={2}
-            style={{ height: "7.9rem", overflowX: "hidden" }}
+            style={{ height: "7.5rem", overflowX: "hidden" }}
           >
             <div
               style={{

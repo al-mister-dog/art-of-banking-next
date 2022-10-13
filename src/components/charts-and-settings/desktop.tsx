@@ -32,7 +32,7 @@ export default function Desktop() {
           {charts[currentLectureId] === "weighted median" && <EffectiveRate />}
         </div>
       ) : (
-        <div style={{ height: "30rem" }}>
+        <div style={{ height: "25rem" }}>
           <Grid grow>
             <Grid.Col span={1}>
               <SettingsDesktop />

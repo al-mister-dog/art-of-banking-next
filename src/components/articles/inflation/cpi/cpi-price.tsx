@@ -1,4 +1,6 @@
+import { useMediaQuery } from "@mantine/hooks";
 import { useState, useEffect, useRef } from "react";
+import { mediaQuery } from "../../../../config/media-query";
 import CpiDisplay from "./cpi-display";
 
 const cpiData = [
@@ -22,6 +24,8 @@ export default function CpiIndex() {
   const [inflationRate, setInflationRate] = useState(0);
   const [indexPrice, setIndexPrice] = useState(0);
   const [valuePrice, setValuePrice] = useState(0);
+
+  const isMobile = useMediaQuery(mediaQuery);
 
   function handleChangePrice(index, value) {
     value = parseFloat(value);
@@ -67,7 +71,6 @@ export default function CpiIndex() {
 
   return (
     <CpiDisplay
-      title="CPI Weight Calculator"
       description="Price Change of Items to Consumer Prices Index"
       inflationIndex={inflationIndex}
       inflationRate={inflationRate}
@@ -76,6 +79,7 @@ export default function CpiIndex() {
       cpi={cpi}
       priceSelected={true}
       weightSelected={false}
+      width={isMobile ? "100%" : "52%"}
     />
   );
 }

@@ -13,6 +13,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { useMantineTheme } from "@mantine/core";
+import ChartContainer from "./chart-container";
 
 ChartJS.register(
   CategoryScale,
@@ -61,7 +62,7 @@ export default function LineChart() {
       title: {
         display: true,
         text: "Private Credit vs Reserves",
-        color: theme.colors.violet[9]
+        color: theme.colors.violet[9],
       },
     },
   };
@@ -92,8 +93,8 @@ export default function LineChart() {
     ],
   };
   return (
-    <div style={{ height: "25.5rem", width: "100%" }}>
+    <ChartContainer>
       <Line options={options} data={data} />
-    </div>
+    </ChartContainer>
   );
 }

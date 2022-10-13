@@ -2,6 +2,7 @@ import { useAppSelector } from "../../../../app/hooks";
 import { selectActions } from "../../../../features/actions/actionsSlice";
 import { sliderSettings } from "../../../../features/settings/initialState";
 import {
+  Box,
   Card,
   Center,
   Text,
@@ -27,7 +28,7 @@ export default function Desktop() {
       style={{
         backgroundColor: theme.colors.violet[1],
         overflow: "visible",
-        height: "27.5rem",
+        height: "24.5rem",
       }}
     >
       <Card.Section
@@ -41,31 +42,40 @@ export default function Desktop() {
           </Title>
         </Center>
       </Card.Section>
+      <Box>
+        <SimpleGrid style={{ height: "220px" }} cols={2}>
+          <Box>
+            <Text size="sm" weight="bold" color="violet">
+              Balancesheet Display
+            </Text>
+            <DisplayRadioGroup />
+          </Box>
 
-      <SimpleGrid cols={2}>
-        <div style={{ borderRight: `1px solid ${theme.colors.violet[2]}` }}>
-          <Text size="sm" weight="bold" color="violet">
-            Ranges
-          </Text>
-          <div style={{ marginTop: "5px", paddingRight: "5px" }}>
-            <OverdraftSlider
-              disabled={slidersDisabled.overdraft}
-              overdraftValue={overdraftValue}
-            />
-            <ReserveRequirementSlider
-              disabled={slidersDisabled.reserveRequirement}
-            />
-            {/* <InterestRateSlider disabled={slidersDisabled.interestRate} /> */}
-          </div>
-        </div>
-        <div>
-          <Text size="sm" weight="bold" color="violet">
-            Balancesheet Display
-          </Text>
-          <DisplayRadioGroup />
           <ColorsMenu />
-        </div>
-      </SimpleGrid>
+        </SimpleGrid>
+      </Box>
+
+      <Box>
+        <SimpleGrid cols={2}>
+          <Box>
+            <Text size="sm" weight="bold" color="violet">
+              Ranges
+            </Text>
+            <Box style={{ marginTop: "5px", paddingRight: "5px" }}>
+              <OverdraftSlider
+                disabled={slidersDisabled.overdraft}
+                overdraftValue={overdraftValue}
+              />
+              <ReserveRequirementSlider
+                disabled={slidersDisabled.reserveRequirement}
+              />
+            </Box>
+          </Box>
+          <Box>
+            <Text size="sm" weight="bold" color="violet"></Text>
+          </Box>
+        </SimpleGrid>
+      </Box>
     </Card>
   );
 }

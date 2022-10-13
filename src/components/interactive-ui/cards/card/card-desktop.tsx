@@ -131,7 +131,7 @@ export default function CardUI({ bank, handleSetBankDetail }: Props) {
           <SimpleGrid
             cols={2}
             spacing={5}
-            style={{ height: "10rem", overflowX: "hidden" }}
+            style={{ height: "8.8rem", overflowX: "hidden" }}
           >
             <div
               style={{

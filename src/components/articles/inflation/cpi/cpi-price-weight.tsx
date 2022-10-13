@@ -1,8 +1,7 @@
-import { Button } from "@mantine/core";
 import { useState, useEffect, useRef } from "react";
 import CpiDisplay from "./cpi-display";
 
-export default function CpiPriceWeight({ setNewCpi, cpiData }) {
+export default function CpiPriceWeight({ setNewCpi, cpiData, width, margin }) {
   const [cpi, setCpi] = useState(cpiData);
   const [inflationIndex, setInflationIndex] = useState(0);
   const [inflationRate, setInflationRate] = useState(0);
@@ -100,8 +99,7 @@ export default function CpiPriceWeight({ setNewCpi, cpiData }) {
   return (
     <>
       <CpiDisplay
-        title="CPI Weight Calculator"
-        description="Price Change and Weight Allocation of Items to Consumer Prices Index"
+        description="Price Change and Weight Allocation of Items to CPI"
         inflationIndex={inflationIndex}
         inflationRate={inflationRate}
         setIndexPrice={setIndexPrice}
@@ -112,6 +110,7 @@ export default function CpiPriceWeight({ setNewCpi, cpiData }) {
         priceSelected={true}
         weightSelected={true}
         setNewCpi={setNewCpi}
+        width={width}
       />
     </>
   );

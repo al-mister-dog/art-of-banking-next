@@ -37,6 +37,7 @@ const data = [
 ];
 
 export default function InflationChart() {
+  
   return (
     <Box sx={{ width: "100%", height: 300 }}>
       <Center>

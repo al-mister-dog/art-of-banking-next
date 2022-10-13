@@ -21,6 +21,7 @@ export default function ReserveRequirementSlider({
       <Text size="xs">Reserve Requirement</Text>
       <Slider
         color="violet"
+        size="md"
         label={`${reserveRequirement}%`}
         value={reserveRequirement}
         onChange={(num) => handleChange({ num })}

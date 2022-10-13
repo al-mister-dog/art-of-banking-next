@@ -136,7 +136,7 @@ function NextStep({ bank, selectedBank }) {
     const bankName = otherBank.name;
     settlementInfo = `${bankName} owes you $${accountInfo.balance}`;
     creditLabel = `Credit Your Account with ${bankName}`;
-    debitLabel = `Dedit ${bankName}'s Account with You`;
+    debitLabel = `Debit ${bankName}'s Account with You`;
   }
 
   const validation = useValidator("settleDues", bank, amount, selectedBank);
@@ -202,7 +202,7 @@ function NextStep({ bank, selectedBank }) {
           size="xs"
           color={`${bank.color}`}
           value="debit"
-          label={<Text size="xs">{creditLabel}</Text>}
+          label={<Text size="xs">{debitLabel}</Text>}
         />
       </Radio.Group>
 

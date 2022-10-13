@@ -73,8 +73,8 @@ export function getCpi(cpi) {
   inflationRate = parseFloat(newInflationRate);
   inflationByYear = [...inflationByYear, newElement];
   return {
-    cpiData,
-    inflationByYear,
-    inflationRate,
+    newCpiData: cpiData,
+    newInflationByYear: inflationByYear,
+    newInflationRate: inflationRate,
   };
 }

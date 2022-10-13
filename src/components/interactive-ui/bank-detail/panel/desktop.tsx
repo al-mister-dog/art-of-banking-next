@@ -37,7 +37,7 @@ function SidePanel({ bank }: { bank: CardInfo }) {
       radius="xs"
       style={{
         paddingBottom: "0px",
-        height: "27rem",
+        height: "26rem",
         backgroundColor: theme.colors.violet[1],
       }}
     >

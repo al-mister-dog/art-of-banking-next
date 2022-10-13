@@ -8,7 +8,7 @@ export default function ColorMenus() {
   const { displaySettings } = useAppSelector(selectSettings);
 
   return (
-    <Box mt="lg">
+    <Box>
       {displaySettings.spreadsheet ? <MenuSpreadSheet /> : <MenuBalances />}
     </Box>
   );

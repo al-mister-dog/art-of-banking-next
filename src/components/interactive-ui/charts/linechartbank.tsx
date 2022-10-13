@@ -11,7 +11,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { Totals } from "../../../domain/analytics/totals";
 import { BankingSystem } from "../../../domain/banking-system";
-
+import ChartContainer from "./chart-container";
 
 ChartJS.register(
   CategoryScale,
@@ -53,12 +53,16 @@ export default function LineChart({ bank }) {
       },
       {
         label: "Reserves",
-        data: deposits.map(d => d - 5),
+        data: deposits.map((d) => d - 5),
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
   };
 
-  return <Line options={options} data={data} />;
+  return (
+    <ChartContainer>
+      <Line options={options} data={data} />
+    </ChartContainer>
+  );
 }

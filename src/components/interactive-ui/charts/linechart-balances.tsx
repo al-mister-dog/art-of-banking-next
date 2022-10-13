@@ -14,6 +14,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { useMantineTheme } from "@mantine/core";
 import { bankData } from "../../../domain/structures/objects";
+import ChartContainer from "./chart-container";
 
 ChartJS.register(
   CategoryScale,
@@ -120,8 +121,8 @@ export default function LineChart() {
     return <>Loading...</>;
   }
   return (
-    <div style={{ height: "25.5rem", width: "100%" }}>
+    <ChartContainer>
       <Line options={options} data={data} />
-    </div>
+    </ChartContainer>
   );
 }

@@ -7,9 +7,9 @@ function CardGrid({ group, handleSetBankDetail }) {
   const [group1, group2] = splitArray(group);
 
   return (
-    <Grid gutter="xl" grow>
+    <Grid gutter="sm" grow>
       <Grid.Col span={1}>
-        <div style={{ height: "27rem", overflow: "auto" }}>
+        <div style={{ height: "26rem", overflow: "auto" }}>
           {group1.map((bank) => (
             <div key={bank.cardInfo.id} style={{ marginBottom: "10px" }}>
               <Card bank={bank} handleSetBankDetail={handleSetBankDetail} />
@@ -18,7 +18,7 @@ function CardGrid({ group, handleSetBankDetail }) {
         </div>
       </Grid.Col>
       <Grid.Col span={1}>
-        <div style={{ height: "27rem", overflow: "auto" }}>
+        <div style={{ height: "26rem", overflow: "auto" }}>
           {group2.map((bank) => (
             <div key={bank.cardInfo.id} style={{ marginBottom: "10px" }}>
               <Card bank={bank} handleSetBankDetail={handleSetBankDetail} />

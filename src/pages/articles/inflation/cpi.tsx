@@ -1,4 +1,4 @@
-import { Box, Center, Group } from "@mantine/core";
+import { Box, Center, Group, SimpleGrid } from "@mantine/core";
 import Text from "../../../components/articles/texts/Text";
 import Title from "../../../components/articles/texts/Title";
 import SubTitle from "../../../components/articles/texts/Subtitle";
@@ -9,24 +9,50 @@ import Change from "../../../components/articles/inflation/cpi/charts/change";
 import Rate from "../../../components/articles/inflation/cpi/charts/rate";
 import Caption from "../../../components/articles/texts/Caption";
 import { useMantineTheme } from "@mantine/core";
-import { getCpi, cpiData } from "../../../components/articles/inflation/cpi/calculator";
+import {
+  getCpi,
+  cpiData,
+  inflationByYear,
+} from "../../../components/articles/inflation/cpi/calculator";
+import ChangeDynamic from "../../../components/articles/inflation/cpi/charts/change-dynamic";
+import RateDynamic from "../../../components/articles/inflation/cpi/charts/rate-dynamic";
+import { useState } from "react";
+import { useMediaQuery } from "@mantine/hooks";
+import { mediaQuery } from "../../../config/media-query";
 
 export default function CPI() {
-  const theme = useMantineTheme();
+  const [inflationRate, setInflationRate] = useState(inflationByYear);
+  const [data, setData] = useState(cpiData);
 
+  const theme = useMantineTheme();
+  const isMobile = useMediaQuery(mediaQuery);
+
+  function onSubmitCpi(data) {
+    const { newInflationByYear, newCpiData } = getCpi(data);
+    setInflationRate(newInflationByYear);
+    setData(newCpiData);
+  }
   return (
     <>
-      <Box ml={25} mt={200}>
+      <Box ml={isMobile ? 0 : 25} mt={200}>
         <Title>Consumer Price Index</Title>
       </Box>
-      <Box
-        mt={100}
-        mb={50}
-        style={{ display: "flex", justifyContent: "space-between" }}
-      >
-        <Change />
-        <Rate />
-      </Box>
+      {isMobile ? (
+        <Box mt={100} mb={50}>
+          <Change />
+          <Rate />
+        </Box>
+      ) : (
+        <Box
+          mt={100}
+          mb={50}
+          style={{ display: "flex", justifyContent: "space-between" }}
+        >
+          <Change />
+          <Rate />
+        </Box>
+      )}
+
       <Caption>
         Rate of change and inflation in the UK from 1999 to 2020. Source:{" "}
         <a
@@ -58,7 +84,6 @@ export default function CPI() {
       <Center>
         <SubTitle>Price Change</SubTitle>
       </Center>
-
       <Text>
         Prices may increase for a number of reasons. They can be roughly divided
         into two categories: cost-push and demand-pull. Demand-pull inflation is
@@ -69,6 +94,7 @@ export default function CPI() {
         same. Shortages or cost increases in labor, raw materials, and capital
         goods create cost-push inflation.
       </Text>
+      <Caption>Insert explanation of how to use widget</Caption>
       <CpiPrice />
       <br></br>
       <Center>
@@ -91,6 +117,7 @@ export default function CPI() {
         the weights to downgrade the lower level of spending on travel, you
         produce a higher inflation number.
       </Text>
+      <Caption>Insert explanation of how to use widget</Caption>
       <CpiWeight />
       <Text>
         In early 2021, a worldwide increase in inflation began to occur. It has
@@ -100,23 +127,45 @@ export default function CPI() {
         Ukraine. Below is a chart showing the rate of change and the inflation
         rate from 2000 to 2020.
       </Text>
-
-      <Text>
+      <Caption>
         If the bulk of inflation was due solely to price increases (and its
         weighting by economists), how much change must occur to reach the Bank
         of England's estimated peak rate of 11%? And do these prices reflect the
-        prices we see today as consumers?
-      </Text>
-      <CpiPriceWeight setNewCpi={getCpi} cpiData={cpiData} />
+        prices we see today as consumers? Try it out below with the CPI
+        calculator...
+      </Caption>
+      {isMobile ? (
+        <>
+          <CpiPriceWeight
+            setNewCpi={onSubmitCpi}
+            cpiData={data}
+            width="100%"
+            margin="auto"
+          />
+          <ChangeDynamic data={inflationRate} />
 
-      <Box
-        mt={50}
-        mb={50}
-        style={{ display: "flex", justifyContent: "space-between" }}
-      >
-        <Change />
-        <Rate />
-      </Box>
+          <RateDynamic data={inflationRate} />
+        </>
+      ) : (
+        <SimpleGrid cols={2}>
+          <CpiPriceWeight
+            setNewCpi={onSubmitCpi}
+            cpiData={data}
+            width="95%"
+            margin="auto"
+          />
+          <Box style={{ display: "flex", flexDirection: "column" }}>
+            <Box style={{ height: "20rem" }}>
+              <ChangeDynamic data={inflationRate} />
+            </Box>
+
+            <Box mt={20} style={{ height: "20rem" }}>
+              <RateDynamic data={inflationRate} />
+            </Box>
+          </Box>
+        </SimpleGrid>
+      )}
+      <Box style={{ padding: "50px" }}></Box>
     </>
   );
 }
