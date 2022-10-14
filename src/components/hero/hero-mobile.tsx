@@ -29,7 +29,7 @@ export default function HeroDesktop() {
     <>
       <div
         style={{
-          background: `linear-gradient(to left bottom, ${backgroundRed} 50%, ${backgroundViolet} 50%)`,
+          background: `linear-gradient(35deg, ${backgroundViolet} 50%, ${backgroundRed} 50%)`,
           height: "100vh",
         }}
       >

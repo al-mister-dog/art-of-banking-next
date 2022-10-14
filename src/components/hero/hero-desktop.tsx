@@ -108,7 +108,7 @@ export default function HeroDesktop() {
       </SimpleGrid>
       <div
         style={{
-          height: "70vh",
+          height: "100vh",
           backgroundColor: backgroundViolet,
         }}
       >
