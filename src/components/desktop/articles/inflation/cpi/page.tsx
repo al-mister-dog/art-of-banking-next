@@ -1,10 +1,11 @@
-import { Box, Center, Text, SimpleGrid, Title } from "@mantine/core";
+import { Box, Center, SimpleGrid, Title } from "@mantine/core";
 
 import { useMantineTheme } from "@mantine/core";
 
 import { useState } from "react";
 import Caption from "../../texts/Caption";
 import SubTitle from "../../texts/Subtitle";
+import Text from "../../texts/Text";
 import { inflationByYear, cpiData, getCpi } from "./calculator";
 import Change from "./charts/change";
 import ChangeDynamic from "./charts/change-dynamic";
