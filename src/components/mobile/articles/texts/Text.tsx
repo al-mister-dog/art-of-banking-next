@@ -1,15 +1,14 @@
 import { Text } from "@mantine/core";
-import { colors } from "../../../config/colorPalette";
-export default function Caption({ children }) {
+import { colors } from "../../../../config/colorPalette";
+export default function TextComponent({ children }) {
   return (
     <Text
-      size="sm"
-      weight="bold"
+      size="xl"
       style={{
         padding: "30px",
         letterSpacing: "1px",
         marginBottom: "25px",
-        color: colors.text,
+        color: colors.text
       }}
     >
       {children}

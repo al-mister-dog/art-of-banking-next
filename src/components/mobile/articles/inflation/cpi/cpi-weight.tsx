@@ -1,6 +1,4 @@
-import { useMediaQuery } from "@mantine/hooks";
 import { useState, useEffect, useRef } from "react";
-import { mediaQuery } from "../../../../config/media-query";
 import CpiDisplay from "./cpi-display";
 
 const cpiData = [
@@ -25,8 +23,6 @@ export default function CpiWeight() {
   const [indexWeight, setIndexWeight] = useState(0);
   const [valueWeight, setValueWeight] = useState(0);
   const max = 100;
-
-  const isMobile = useMediaQuery(mediaQuery);
 
   function total(arr) {
     return arr.reduce((acc, cur) => ({ weight: acc.weight + cur.weight }));
@@ -119,7 +115,7 @@ export default function CpiWeight() {
       cpi={cpi}
       priceSelected={false}
       weightSelected={true}
-      width={isMobile ? "100%" : "52%"}
+      width={"100%"}
     />
   );
 }

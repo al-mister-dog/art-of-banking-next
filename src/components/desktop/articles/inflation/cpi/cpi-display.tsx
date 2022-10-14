@@ -9,9 +9,8 @@ import {
   Button,
   Stack,
 } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
 import { Percentage } from "tabler-icons-react";
-import { mediaQuery } from "../../../../config/media-query";
+
 interface Props {
   description: string;
   inflationIndex: number;
@@ -41,7 +40,6 @@ export default function CpiDisplay({
   width,
 }: Props) {
   const theme = useMantineTheme();
-  const isMobile = useMediaQuery(mediaQuery);
   const monotone = "#312A45";
   return (
     <>
@@ -54,29 +52,23 @@ export default function CpiDisplay({
       >
         <Card.Section>
           <Text
-            pl={isMobile ? 0 : 10}
+            pl={10}
             pt={10}
-            size={isMobile ? "xs" : "md"}
+            size={"md"}
             weight="bold"
-            align={isMobile ? "center" : "left"}
+            align={"left"}
             style={{ color: monotone }}
           >
             {description}
           </Text>
         </Card.Section>
         <Card.Section pb={10}>
-          <Box
-            p={10}
-            style={{
-              display: isMobile ? "flex" : "",
-              justifyContent: isMobile ? "space-around" : "",
-            }}
-          >
-            <Text size={isMobile ? "xs" : "md"} style={{ color: monotone }}>
+          <Box p={10}>
+            <Text size={"md"} style={{ color: monotone }}>
               Inflation index:{" "}
               <span style={{ fontWeight: "bold" }}>%{inflationIndex}</span>
             </Text>
-            <Text size={isMobile ? "xs" : "md"} style={{ color: monotone }}>
+            <Text size={"md"} style={{ color: monotone }}>
               Inflation rate:{" "}
               <span style={{ fontWeight: "bold" }}>%{inflationRate}</span>
             </Text>
@@ -93,7 +85,7 @@ export default function CpiDisplay({
         >
           <Grid.Col span={3}>
             <Text
-              size={isMobile ? 8 : "xs"}
+              size={"xs"}
               weight="bold"
               style={{ color: monotone }}
               align="center"
@@ -109,7 +101,7 @@ export default function CpiDisplay({
             }}
           >
             <Text
-              size={isMobile ? 8 : "xs"}
+              size={"xs"}
               weight="bold"
               style={{ color: monotone }}
               align="center"
@@ -119,7 +111,7 @@ export default function CpiDisplay({
           </Grid.Col>
           <Grid.Col span={4}>
             <Text
-              size={isMobile ? 8 : "xs"}
+              size={"xs"}
               weight="bold"
               style={{ color: monotone }}
               align="center"
@@ -134,11 +126,7 @@ export default function CpiDisplay({
             <Box key={index}>
               <Grid grow>
                 <Grid.Col span={3}>
-                  <Text
-                    size={isMobile ? 10 : "xs"}
-                    style={{ color: "#927ECE" }}
-                    weight="bold"
-                  >
+                  <Text size={"xs"} style={{ color: "#927ECE" }} weight="bold">
                     {category}
                   </Text>
                 </Grid.Col>
@@ -166,7 +154,7 @@ export default function CpiDisplay({
                     />
                   ) : (
                     <Text
-                      size={isMobile ? 10 : "xs"}
+                      size={"xs"}
                       style={{ color: "#927ECE" }}
                       weight="bold"
                       align="center"
@@ -180,19 +168,19 @@ export default function CpiDisplay({
                     <Grid.Col span={1} style={{ width: "10px" }}>
                       <Text
                         p={0}
-                        size={isMobile ? 10 : "xs"}
+                        size={"xs"}
                         style={{ color: "#927ECE" }}
                         weight="bold"
                       >
                         {parseFloat(weight.toFixed(2))}
                       </Text>
                     </Grid.Col>
-                    <Grid.Col span={isMobile ? 7 : 9} style={{ width: "100%" }}>
+                    <Grid.Col span={9} style={{ width: "100%" }}>
                       <Slider
                         p={0}
                         mt={5}
                         color="violet"
-                        size={isMobile ? "xs" : "sm"}
+                        size={"sm"}
                         value={parseFloat(weight.toFixed(2))}
                         onChange={(value) => {
                           setIndexWeight(index);
