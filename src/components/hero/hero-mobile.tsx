@@ -90,7 +90,7 @@ export default function HeroDesktop() {
       </div>
       <div
         style={{
-          height: "50vh",
+          height: "100vh",
           backgroundColor: backgroundViolet,
         }}
       >

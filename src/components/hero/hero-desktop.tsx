@@ -108,7 +108,7 @@ export default function HeroDesktop() {
       </SimpleGrid>
       <div
         style={{
-          height: "50vh",
+          height: "70vh",
           backgroundColor: backgroundViolet,
         }}
       >
@@ -174,7 +174,7 @@ export default function HeroDesktop() {
                 color: "#312A45",
                 letterSpacing: "3px",
               }}
-              size={50}
+              size={40}
               align="center"
             >
               Learn the Tricks of the Masters. From the Renaissance Bankers to
