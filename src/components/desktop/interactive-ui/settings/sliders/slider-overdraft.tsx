@@ -1,8 +1,8 @@
-import { useAppSelector, useAppDispatch } from "../../../../app/hooks";
+import { useAppSelector, useAppDispatch } from "../../../../../app/hooks";
 import {
   selectSettings,
   setOverdraft,
-} from "../../../../features/settings/settingsSlice";
+} from "../../../../../features/settings/settingsSlice";
 import { Box, Slider, Text } from "@mantine/core";
 import { useEffect } from "react";
 

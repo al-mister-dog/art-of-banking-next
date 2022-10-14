@@ -1,5 +1,3 @@
-import { useAppSelector } from "../../../../../app/hooks";
-import { selectSettings } from "../../../../../features/settings/settingsSlice";
 import { useContext } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 import {
@@ -14,8 +12,6 @@ import {
 } from "@mantine/core";
 import { CurrencyDollar, Percentage } from "tabler-icons-react";
 import { CardInfo } from "../../../types";
-import { DrawerContext } from "../../../cards/card/card-mobile";
-import { mediaQuery } from "../../../../../config/media-query";
 
 interface Props {
   bank: CardInfo;
@@ -52,8 +48,6 @@ export default function SelectAndPay({
   validation,
 }: Props) {
   const theme = useMantineTheme();
-  const isMobile = useMediaQuery(mediaQuery);
-  const setOpened = useContext(DrawerContext);
 
   return (
     <Stack spacing="md">
@@ -71,7 +65,8 @@ export default function SelectAndPay({
       />
       <Input.Wrapper error={validation.errorMessage}>
         <NumberInput
-          size="xs" icon={<CurrencyDollar />}
+          size="xs"
+          icon={<CurrencyDollar />}
           value={amount}
           placeholder="0"
           radius="xs"
@@ -89,26 +84,14 @@ export default function SelectAndPay({
       <Text size="xs" color="dimmed">
         + {interestRate}% interest
       </Text>
-      {isMobile ? (
-        <Button
-          color={`${bank.color}`}
-          onClick={() => {
-            dispatchFunction();
-            setOpened(false);
-          }}
-          disabled={validation.disabled}
-        >
-          {btnText}
-        </Button>
-      ) : (
-        <Button
-          color={`${bank.color}`}
-          onClick={dispatchFunction}
-          disabled={validation.disabled}
-        >
-          {btnText}
-        </Button>
-      )}
+
+      <Button
+        color={`${bank.color}`}
+        onClick={dispatchFunction}
+        disabled={validation.disabled}
+      >
+        {btnText}
+      </Button>
     </Stack>
   );
 }

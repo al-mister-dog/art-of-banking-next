@@ -1,12 +1,14 @@
-import { useAppDispatch } from "../../../../../app/hooks";
 import { useState } from "react";
-import { payDues } from "../../../../../features/banks/banksSlice";
-import { Banks } from "../../../../../domain/services/bank";
+
 import { CardInfo } from "../../../types";
-import { useValidator } from "../../../../../hooks/useValidator/useValidator";
-import { creditData } from "../../../../../domain/structures/objects";
+
 import FixedAmount from "../compositions/fixed-amount";
 import { Text } from "@mantine/core";
+import { useAppDispatch } from "../../../../../../app/hooks";
+import { Banks } from "../../../../../../domain/services/bank";
+import { creditData } from "../../../../../../domain/structures/objects";
+import { payDues } from "../../../../../../features/banks/banksSlice";
+import { useValidator } from "../../../../../../hooks/useValidator/useValidator";
 
 export default function PayDues({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();

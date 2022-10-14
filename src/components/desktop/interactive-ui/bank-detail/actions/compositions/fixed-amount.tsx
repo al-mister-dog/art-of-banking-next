@@ -14,8 +14,6 @@ import {
 } from "@mantine/core";
 import { CurrencyDollar } from "tabler-icons-react";
 import { CardInfo } from "../../../types";
-import { DrawerContext } from "../../../cards/card/card-mobile";
-import { mediaQuery } from "../../../../../config/media-query";
 
 interface Props {
   bank: CardInfo;
@@ -49,8 +47,6 @@ export default function FixedAmount({
   btnText,
   validation,
 }: Props) {
-  const isMobile = useMediaQuery(mediaQuery);
-  const setOpened = useContext(DrawerContext);
   const theme = useMantineTheme();
 
   return (
@@ -70,7 +66,8 @@ export default function FixedAmount({
       />
       <Input.Wrapper error={validation.errorMessage}>
         <NumberInput
-          size="xs" icon={<CurrencyDollar />}
+          size="xs"
+          icon={<CurrencyDollar />}
           value={amount}
           placeholder="0"
           radius="xs"
@@ -79,26 +76,13 @@ export default function FixedAmount({
         />
       </Input.Wrapper>
 
-      {isMobile ? (
-        <Button
-          color={`${bank.color}`}
-          onClick={() => {
-            dispatchFunction();
-            setOpened(false);
-          }}
-          disabled={validation.disabled}
-        >
-          {btnText}
-        </Button>
-      ) : (
-        <Button
-          color={`${bank.color}`}
-          onClick={dispatchFunction}
-          disabled={validation.disabled}
-        >
-          {btnText}
-        </Button>
-      )}
+      <Button
+        color={`${bank.color}`}
+        onClick={dispatchFunction}
+        disabled={validation.disabled}
+      >
+        {btnText}
+      </Button>
     </Stack>
   );
 }

@@ -1,10 +1,11 @@
+import { useAppSelector } from "../../../../../../../app/hooks";
+import { selectSettings } from "../../../../../../../features/settings/settingsSlice";
 import React from "react";
-import { useAppSelector } from "../../../../../../app/hooks";
-import { selectSettings } from "../../../../../../features/settings/settingsSlice";
-import { createStyles, Text, useMantineTheme } from "@mantine/core";
-import useColorSettings from "../../../../../../hooks/useColorSettings";
+import { createStyles, useMantineTheme } from "@mantine/core";
+
 import { setAsSpreadSheet, setAsTAccount } from "../utils/balance-display";
 import BalanceSheetRow from "./balance-sheet-row";
+import useColorSettings from "../../../../../../../hooks/useColorSettings";
 
 const useStyles = createStyles((theme) => ({
   text: {

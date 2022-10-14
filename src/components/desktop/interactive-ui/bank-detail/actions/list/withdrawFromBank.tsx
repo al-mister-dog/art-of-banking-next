@@ -1,15 +1,12 @@
-import { useAppDispatch } from "../../../../../app/hooks";
-import { withdraw } from "../../../../../features/banks/banksSlice";
-
 import { useState } from "react";
-
-import { Banks } from "../../../../../domain/services/bank";
-import { Customer } from "../../../../../domain/services/customer";
-
+import { useAppDispatch } from "../../../../../../app/hooks";
+import { Banks } from "../../../../../../domain/services/bank";
+import { Customer } from "../../../../../../domain/services/customer";
+import { withdraw } from "../../../../../../features/banks/banksSlice";
+import { useValidator } from "../../../../../../hooks/useValidator/useValidator";
 import { CardInfo } from "../../../types";
 
 import SelectAndPay from "../compositions/select-and-pay";
-import { useValidator } from "../../../../../hooks/useValidator/useValidator";
 
 export default function WithdrawFromBank({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();
@@ -27,7 +24,7 @@ export default function WithdrawFromBank({ bank }: { bank: CardInfo }) {
   const banks = Banks.getAllByCustomerId(bank.cardInfo.id).map((bank) => {
     return { value: `${bank.id}`, label: bank.name };
   });
-  
+
   const validation = useValidator("withdraw", bank, amount, selectedBank);
 
   return (

@@ -1,6 +1,6 @@
 import { createStyles } from "@mantine/core";
 import BalanceSheets from "../interactive-ui/cards/card-list";
-import ChartsAndSettings from "../charts-and-settings/desktop";
+import ChartsAndSettings from "./charts-and-settings";
 import Toolbar from "../interactive-ui/settings/toolbar";
 import KeyTerms from "../lectures/article/lecture-index/key-terms";
 import Article from "../lectures/article/Article";
@@ -23,19 +23,14 @@ const useStyles = createStyles((theme) => ({
 export default function LecturePath({
   slug,
   title,
-  paragraphs,
+  text,
   assignment,
   keyTermsIds,
 }) {
   const { classes } = useStyles();
   return (
     <>
-      <Article
-        slug={slug}
-        title={title}
-        text={paragraphs}
-        assignment={assignment}
-      />
+      <Article slug={slug} title={title} text={text} assignment={assignment} />
       {title !== "Introduction" && (
         <>
           <div className={classes.assignmentContainer}>

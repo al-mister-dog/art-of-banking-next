@@ -1,11 +1,11 @@
-import { useAppSelector } from "../../../../app/hooks";
-import { selectSettings } from "../../../../features/settings/settingsSlice";
+import { useAppSelector } from "../../../../../app/hooks";
+import { selectSettings } from "../../../../../features/settings/settingsSlice";
+import { Text, useMantineTheme } from "@mantine/core";
+import { System } from "../../../../../domain/system";
 import BalanceEachRound from "./balance-displays/balance-sheet-rows/round";
 import BalanceEachTurn from "./balance-displays/balance-sheet-rows/static";
 import BalanceFlash from "./balance-displays/balance-sheet-rows/flash";
 import BalanceOff from "./balance-displays/balance-sheet-rows/off";
-import { Text, useMantineTheme } from "@mantine/core";
-import { System } from "../../../../domain/system";
 
 export default function BalanceSheetRowHeading({ side, id, textColor, bank }) {
   const { colorSettings, displaySettings } = useAppSelector(selectSettings);

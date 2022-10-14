@@ -3,7 +3,7 @@ import { setActions } from "../../features/actions/actionsSlice";
 import { setup } from "../../features/banks/banksSlice";
 import { refreshSettings } from "../../features/settings/settingsSlice";
 import { useEffect } from "react";
-import { createStyles } from "@mantine/core";
+import { createStyles, LoadingOverlay } from "@mantine/core";
 import { introductoryTexts } from "../../config/parts";
 import { getRouteObjectData } from "../../helpers/routeMethods";
 import { lectureRoutes } from "../../config/routes/lectureRoutes";
@@ -12,6 +12,12 @@ import ChartsAndSettings from "../../components/charts-and-settings/desktop";
 import Toolbar from "../../components/interactive-ui/settings/toolbar";
 import KeyTerms from "../../components/lectures/article/lecture-index/key-terms";
 import Article from "../../components/lectures/article/Article";
+import { useLoaded } from "../../hooks/useLoaded";
+
+import { mediaQuery } from "../../config/media-query";
+import { useMediaQuery } from "@mantine/hooks";
+import LecturePageDesktop from "../../components/desktop/lecture-page";
+import LecturePageMobile from "../../components/mobile/lecture-page";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {
@@ -44,39 +50,36 @@ export default function LecturePath({
     dispatch(refreshSettings());
   }, []);
 
-  return (
-    <>
-      <Article
+  const loaded = useLoaded();
+  const isMobile = useMediaQuery(mediaQuery);
+
+  if (loaded) {
+    return isMobile ? (
+      <LecturePageMobile
         slug={slug}
         title={title}
         text={paragraphs}
         assignment={assignment}
+        keyTermsIds={keyTermsIds}
       />
-      {title !== "Introduction" && (
-        <>
-          <div className={classes.assignmentContainer}>
-            <div className={classes.balanceSheets}>
-              <div
-                style={{
-                  marginBottom: "25px",
-                  padding: "5px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Toolbar />
-              </div>
-
-              <BalanceSheets />
-              <ChartsAndSettings />
-            </div>
-          </div>
-          <div className={classes.keyTermsContainer}>
-            <KeyTerms ids={keyTermsIds} />
-          </div>
-        </>
-      )}
-    </>
+    ) : (
+      <LecturePageDesktop
+        slug={slug}
+        title={title}
+        text={paragraphs}
+        assignment={assignment}
+        keyTermsIds={keyTermsIds}
+      />
+    );
+  }
+  console.log("Neither desktop or mobile opened");
+  return (
+    <LoadingOverlay
+      loaderProps={{ size: "sm", color: "pink", variant: "bars" }}
+      overlayOpacity={0.3}
+      overlayColor="#c5c5c5"
+      visible
+    />
   );
 }
 

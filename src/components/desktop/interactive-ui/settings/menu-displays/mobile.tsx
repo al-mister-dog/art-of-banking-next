@@ -1,8 +1,8 @@
-import { useAppSelector, useAppDispatch } from "../../../../app/hooks";
-import { selectSettings } from "../../../../features/settings/settingsSlice";
-import { setDisplay } from "../../../../features/settings/settingsSlice";
+import { useAppSelector, useAppDispatch } from "../../../../../app/hooks";
+import { selectSettings } from "../../../../../features/settings/settingsSlice";
+import { setDisplay } from "../../../../../features/settings/settingsSlice";
 import { Box, Radio, Text } from "@mantine/core";
-import { useRadioSettings } from "../../../../hooks/useRadioSettings";
+import { useRadioSettings } from "../../../../../hooks/useRadioSettings";
 
 export default function MenuDisplays() {
   const dispatch = useAppDispatch();

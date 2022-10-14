@@ -1,8 +1,5 @@
-import { useAppSelector } from "../../../../../app/hooks";
-import { selectSettings } from "../../../../../features/settings/settingsSlice";
 import { forwardRef, useContext } from "react";
-import { InterestRates } from "../../../../../domain/calculators/interest-rates";
-import { mediaQuery } from "../../../../../config/media-query";
+
 import {
   Button,
   Group,
@@ -17,8 +14,6 @@ import {
 } from "@mantine/core";
 import { CurrencyDollar } from "tabler-icons-react";
 import { CardInfo } from "../../../types";
-import { DrawerContext } from "../../../cards/card/card-mobile";
-import { useMediaQuery } from "@mantine/hooks";
 
 interface Props {
   bank: CardInfo;
@@ -56,8 +51,6 @@ export default function FixedAmount({
   validation,
   isLoan,
 }: Props) {
-  const isMobile = useMediaQuery(mediaQuery);
-  const setOpened = useContext(DrawerContext);
   const theme = useMantineTheme();
 
   const formatted = parseFloat(`${amount}`);
@@ -95,7 +88,8 @@ export default function FixedAmount({
       </Radio.Group>
       <Input.Wrapper error={validation.errorMessage}>
         <NumberInput
-          size="xs" icon={<CurrencyDollar />}
+          size="xs"
+          icon={<CurrencyDollar />}
           value={amount}
           formatter={() =>
             !Number.isNaN(amount) ? `${formatted}` : `${amount}`
@@ -112,26 +106,13 @@ export default function FixedAmount({
         />
       </Input.Wrapper>
 
-      {isMobile ? (
-        <Button
-          color={`${bank.color}`}
-          onClick={() => {
-            dispatchFunction();
-            setOpened(false);
-          }}
-          disabled={validation.disabled}
-        >
-          {btnText}
-        </Button>
-      ) : (
-        <Button
-          color={`${bank.color}`}
-          onClick={dispatchFunction}
-          disabled={validation.disabled}
-        >
-          {btnText}
-        </Button>
-      )}
+      <Button
+        color={`${bank.color}`}
+        onClick={dispatchFunction}
+        disabled={validation.disabled}
+      >
+        {btnText}
+      </Button>
     </Stack>
   );
 }

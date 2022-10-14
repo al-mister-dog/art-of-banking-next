@@ -7,43 +7,43 @@ import {
   createStyles,
   useMantineTheme,
 } from "@mantine/core";
-import { CardInfo } from "../../types";
-import ActionsPanel from "../actions/panel";
-import React from "react";
-import RecordsPanel from "../records/panel/desktop";
+
+import { CardInfo } from "../types";
+import ActionsPanel from "./actions/panel";
+import RecordsPanel from "./records/panel";
+import LineChart from "../charts/linechartbank";
 
 const useStyles = createStyles((theme) => ({
   header: { padding: "5px" },
+
   grape: {
-    backgroundColor: theme.colors.grape[8],
+    color: theme.colors.grape,
   },
   violet: {
-    backgroundColor: theme.colors.violet[8],
+    color: theme.colors.violet,
   },
   indigo: {
-    backgroundColor: theme.colors.indigo[8],
+    color: theme.colors.indigo,
   },
   blue: {
-    backgroundColor: theme.colors.blue[8],
+    color: theme.colors.blue,
   },
 }));
 
-function SidePanel({ bank }: { bank: CardInfo }) {
+export default function SidePanel({ bank }: { bank: CardInfo }) {
   const { classes } = useStyles();
   const theme = useMantineTheme();
   return (
     <Card
       p="sm"
-      radius="xs"
       style={{
         paddingBottom: "0px",
-        height: "26rem",
-        backgroundColor: theme.colors.violet[1],
+        minHeight: "450px",
       }}
     >
       <Card.Section className={`${classes.header} ${classes[bank.color]}`}>
         <Center>
-          <Title order={2} color="white">
+          <Title order={2} color={`${bank.color}`}>
             {bank.cardInfo.name}
           </Title>
         </Center>
@@ -63,17 +63,16 @@ function SidePanel({ bank }: { bank: CardInfo }) {
         <Tabs.Panel value="records" pt="xs">
           <RecordsPanel bank={bank} />
         </Tabs.Panel>
+
         <Tabs.Panel value="actions" pt="xs">
           <ActionsPanel bank={bank} />
         </Tabs.Panel>
 
         <Tabs.Panel value="charts" pt="xs">
           Charts tab content
-          {/* <LineChart bank={bank} /> */}
+          <LineChart bank={bank} />
         </Tabs.Panel>
       </Tabs>
     </Card>
   );
 }
-
-export default React.memo(SidePanel);

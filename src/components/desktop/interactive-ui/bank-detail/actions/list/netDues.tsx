@@ -1,13 +1,12 @@
-import { useAppDispatch } from "../../../../../app/hooks";
-import { netDues } from "../../../../../features/banks/banksSlice";
 import { useState } from "react";
-import { Banks } from "../../../../../domain/services/bank";
 import { CardInfo } from "../../../types";
-import { useValidator } from "../../../../../hooks/useValidator/useValidator";
-
 import FixedAction from "../compositions/fixed-action";
 import { Text } from "@mantine/core";
-import { creditData } from "../../../../../domain/structures/objects";
+import { useAppDispatch } from "../../../../../../app/hooks";
+import { Banks } from "../../../../../../domain/services/bank";
+import { creditData } from "../../../../../../domain/structures/objects";
+import { netDues } from "../../../../../../features/banks/banksSlice";
+import { useValidator } from "../../../../../../hooks/useValidator/useValidator";
 
 export default function NetDues({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();

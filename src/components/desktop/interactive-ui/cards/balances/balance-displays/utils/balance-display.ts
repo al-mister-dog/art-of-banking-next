@@ -1,4 +1,5 @@
-import useSymbolSettings from "../../../../../../hooks/useSymbolSettings";
+import useSymbolSettings from "../../../../../../../hooks/useSymbolSettings";
+
 
 export function setAsTAccount(account: any, id: number) {
   let info = "";

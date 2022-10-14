@@ -1,25 +1,23 @@
-import { useAppSelector } from "../../../../app/hooks";
-import {
-  selectActions,
-  setActions,
-} from "../../../../features/actions/actionsSlice";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useAppSelector } from "../../../../../app/hooks";
+import { selectActions } from "../../../../../features/actions/actionsSlice";
+import { useState } from "react";
 import { Text, Center, Stack, useMantineTheme } from "@mantine/core";
 import { CardInfo } from "../../types";
 import ActionSelections from "./selections";
 import ActionForms from "./forms";
-import { useCurrentAction } from "../../../../hooks/useCurrentAction";
 
 export default function ActionsPanel({ bank }: { bank: CardInfo }) {
   const { actions } = useAppSelector(selectActions);
   const [action, setAction] = useState<string | null>(null);
-  const theme = useMantineTheme()
+  const theme = useMantineTheme();
   let actionData = actions[bank.cardInfo.type];
 
   if (actionData === undefined || actionData.length === 0) {
     return (
       <Center>
-        <Text weight="bold" color={theme.colors[bank.color][9]}>No Actions to Perform in This Lecture</Text>
+        <Text weight="bold" color={theme.colors[bank.color][9]}>
+          No Actions to Perform in This Lecture
+        </Text>
       </Center>
     );
   }

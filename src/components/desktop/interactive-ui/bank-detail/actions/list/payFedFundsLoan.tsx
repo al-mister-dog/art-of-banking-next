@@ -1,12 +1,15 @@
-import { useAppDispatch } from "../../../../../app/hooks";
-import { repayFedFundsLoan } from "../../../../../features/banks/banksSlice";
+
 import { useState } from "react";
-import { Banks } from "../../../../../domain/services/bank";
+
 import { CardInfo } from "../../../types";
-import { useValidator } from "../../../../../hooks/useValidator/useValidator";
-import { creditData } from "../../../../../domain/structures/objects";
+
 import FixedAmountLoan from "../compositions/fixed-amount-loan";
 import { Text } from "@mantine/core";
+import { useAppDispatch } from "../../../../../../app/hooks";
+import { Banks } from "../../../../../../domain/services/bank";
+import { creditData } from "../../../../../../domain/structures/objects";
+import { repayFedFundsLoan } from "../../../../../../features/banks/banksSlice";
+import { useValidator } from "../../../../../../hooks/useValidator/useValidator";
 
 export default function PayFedFundsLoan({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();

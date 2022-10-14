@@ -1,15 +1,4 @@
-import { useAppDispatch } from "../../../../../app/hooks";
-import {
-  creditBank,
-  debitClearinghouse,
-  creditClearinghouse,
-  debitBank,
-} from "../../../../../features/banks/banksSlice";
 import { forwardRef, useContext, useState } from "react";
-import { useMediaQuery } from "@mantine/hooks";
-import { useValidator } from "../../../../../hooks/useValidator/useValidator";
-import { creditData } from "../../../../../domain/structures/objects";
-import { Banks } from "../../../../../domain/services/bank";
 
 import {
   Button,
@@ -21,11 +10,21 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 
-import { DrawerContext } from "../../../cards/card/card-mobile";
+
+import { System } from "../../../../../../domain/system";
+import { useAppDispatch } from "../../../../../../app/hooks";
+import { Banks } from "../../../../../../domain/services/bank";
+import { Dues } from "../../../../../../domain/services/dues";
+import { creditData } from "../../../../../../domain/structures/objects";
+import {
+  creditBank,
+  debitBank,
+  creditClearinghouse,
+  debitClearinghouse,
+} from "../../../../../../features/banks/banksSlice";
+import { useValidator } from "../../../../../../hooks/useValidator/useValidator";
+import { DrawerContext } from "../../../../../interactive-ui/cards/card/card-mobile";
 import { CardInfo } from "../../../types";
-import { Dues } from "../../../../../domain/services/dues";
-import { System } from "../../../../../domain/system";
-import { mediaQuery } from "../../../../../config/media-query";
 
 export default function SettleDues({ bank }: { bank: CardInfo }) {
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
@@ -111,7 +110,6 @@ const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
 
 function NextStep({ bank, selectedBank }) {
   const dispatch = useAppDispatch();
-  const isMobile = useMediaQuery(mediaQuery);
   const setOpened = useContext(DrawerContext);
   const theme = useMantineTheme();
   const [paymentType, setPaymentType] = useState("credit");
@@ -206,33 +204,20 @@ function NextStep({ bank, selectedBank }) {
         />
       </Radio.Group>
 
-      {isMobile ? (
-        <Button
-          color={`${bank.color}`}
-          onClick={() => {
-            payDuesPayload();
-            setOpened(false);
-          }}
-          disabled={validation.disabled}
-        >
-          Settle Dues
-        </Button>
-      ) : (
-        <Button
-          color={`${bank.color}`}
-          onClick={payDuesPayload}
-          disabled={validation.disabled}
-        >
-          Settle Dues
-        </Button>
-      )}
+      <Button
+        color={`${bank.color}`}
+        onClick={payDuesPayload}
+        disabled={validation.disabled}
+      >
+        Settle Dues
+      </Button>
     </>
   );
 }
 
 function NextStepCH({ bank, selectedBank }) {
   const dispatch = useAppDispatch();
-  const isMobile = useMediaQuery(mediaQuery);
+
   const setOpened = useContext(DrawerContext);
   const theme = useMantineTheme();
 
@@ -280,53 +265,25 @@ function NextStepCH({ bank, selectedBank }) {
         {settlementInfo}
       </Text>
 
-      {isDebtor && (
+      {isDebtor ? (
+        <Button
+          color={`${bank.color}`}
+          onClick={payDuesPayload}
+          disabled={validation.disabled}
+        >
+          Increase {otherBank.name} Balance
+        </Button>
+      ) : (
         <>
-          {isMobile ? (
-            <Button
-              color={`${bank.color}`}
-              onClick={() => {
-                payDuesPayload();
-                setOpened(false);
-              }}
-              disabled={validation.disabled}
-            >
-              Increase {otherBank.name} Balance
-            </Button>
-          ) : (
-            <Button
-              color={`${bank.color}`}
-              onClick={payDuesPayload}
-              disabled={validation.disabled}
-            >
-              Increase {otherBank.name} Balance
-            </Button>
-          )}
-        </>
-      )}
-
-      {!isDebtor && (
-        <>
-          {isMobile ? (
-            <Button
-              color={`${bank.color}`}
-              onClick={() => {
-                payDuesPayload();
-                setOpened(false);
-              }}
-              disabled={validation.disabled}
-            >
-              Decrease {otherBank.name} Balance
-            </Button>
-          ) : (
-            <Button
-              color={`${bank.color}`}
-              onClick={payDuesPayload}
-              disabled={validation.disabled}
-            >
-              Decrease {otherBank.name} Balance
-            </Button>
-          )}
+          (
+          <Button
+            color={`${bank.color}`}
+            onClick={payDuesPayload}
+            disabled={validation.disabled}
+          >
+            Decrease {otherBank.name} Balance
+          </Button>
+          )
         </>
       )}
     </>

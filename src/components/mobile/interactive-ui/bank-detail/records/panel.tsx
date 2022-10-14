@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Record } from "../../../../../domain/services/records";
 import { Box, createStyles } from "@mantine/core";
-import RecordList from "../list/mobile";
-import ToggleOrder from "../settings/orderby/mobile";
+import RecordList from "./list";
+import ToggleOrder from "./settings/order-by";
 
 const useStyles = createStyles(() => ({
   box: {

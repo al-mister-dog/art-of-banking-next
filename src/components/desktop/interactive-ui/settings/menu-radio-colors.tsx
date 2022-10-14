@@ -1,12 +1,12 @@
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 import {
   setColors,
   selectSettings,
-} from "../../../features/settings/settingsSlice";
+} from "../../../../features/settings/settingsSlice";
 import { useState } from "react";
 import { Box, Button, Modal, Radio, Text } from "@mantine/core";
 import AboutColors from "./about/about-colors";
-import { useRadioSettings } from "../../../hooks/useRadioSettings";
+import { useRadioSettings } from "../../../../hooks/useRadioSettings";
 import { useMantineTheme } from "@mantine/core";
 
 export default function ColorsMenu({ setOpened }) {

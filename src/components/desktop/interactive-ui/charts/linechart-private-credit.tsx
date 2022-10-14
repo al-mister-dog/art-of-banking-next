@@ -1,5 +1,4 @@
-import { useAppSelector } from "../../../app/hooks";
-import { selectBanks } from "../../../features/banks/banksSlice";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,6 +13,8 @@ import {
 import { Line } from "react-chartjs-2";
 import { useMantineTheme } from "@mantine/core";
 import ChartContainer from "./chart-container";
+import { useAppSelector } from "../../../../app/hooks";
+import { selectBanks } from "../../../../features/banks/banksSlice";
 
 ChartJS.register(
   CategoryScale,

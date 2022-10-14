@@ -1,7 +1,7 @@
-import { useAppSelector } from "../../../../../../app/hooks";
-import { selectSettings } from "../../../../../../features/settings/settingsSlice";
-import { createStyles, Text, useMantineTheme } from "@mantine/core";
+import { useAppSelector } from "../../../../../../../app/hooks";
+import { selectSettings } from "../../../../../../../features/settings/settingsSlice";
 import React, { useEffect, useRef } from "react";
+import { createStyles, useMantineTheme } from "@mantine/core";
 import { setAsSpreadSheet, setAsTAccount } from "../utils/balance-display";
 import BalanceSheetRow from "./balance-sheet-row";
 

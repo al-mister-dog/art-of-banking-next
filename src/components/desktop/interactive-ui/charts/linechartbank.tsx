@@ -9,8 +9,9 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { Totals } from "../../../domain/analytics/totals";
-import { BankingSystem } from "../../../domain/banking-system";
+import { Totals } from "../../../../domain/analytics/totals";
+import { BankingSystem } from "../../../../domain/banking-system";
+
 import ChartContainer from "./chart-container";
 
 ChartJS.register(

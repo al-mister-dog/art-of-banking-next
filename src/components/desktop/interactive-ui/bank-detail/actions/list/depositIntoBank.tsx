@@ -1,15 +1,12 @@
-import { useAppDispatch } from "../../../../../app/hooks";
-import { deposit } from "../../../../../features/banks/banksSlice";
-
 import { useState } from "react";
-
-import { Banks } from "../../../../../domain/services/bank";
-import { Customer } from "../../../../../domain/services/customer";
-
+import { useAppDispatch } from "../../../../../../app/hooks";
+import { Banks } from "../../../../../../domain/services/bank";
+import { Customer } from "../../../../../../domain/services/customer";
+import { deposit } from "../../../../../../features/banks/banksSlice";
+import { useValidator } from "../../../../../../hooks/useValidator/useValidator";
 import { CardInfo } from "../../../types";
-
 import SelectAndPay from "../compositions/select-and-pay";
-import { useValidator } from "../../../../../hooks/useValidator/useValidator";
+
 
 export default function DepositIntoBank({ bank }: { bank: CardInfo }) {
   const dispatch = useAppDispatch();

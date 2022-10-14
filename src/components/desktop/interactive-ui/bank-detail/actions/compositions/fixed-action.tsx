@@ -10,8 +10,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { CardInfo } from "../../../types";
-import { DrawerContext } from "../../../cards/card/card-mobile";
-import { mediaQuery } from "../../../../../config/media-query";
+
 
 interface Props {
   bank: CardInfo;
@@ -43,8 +42,6 @@ export default function FixedAmount({
   validation,
 }: Props) {
   const theme = useMantineTheme();
-  const isMobile = useMediaQuery(mediaQuery);
-  const setOpened = useContext(DrawerContext);
 
   return (
     <Stack spacing="md">
@@ -62,18 +59,7 @@ export default function FixedAmount({
         onChange={setSubject}
       />
 
-      {isMobile ? (
-        <Button
-          color={`${bank.color}`}
-          onClick={() => {
-            dispatchFunction();
-            setOpened(false);
-          }}
-          disabled={validation.disabled}
-        >
-          {btnText}
-        </Button>
-      ) : (
+
         <Button
           color={`${bank.color}`}
           onClick={dispatchFunction}
@@ -81,7 +67,7 @@ export default function FixedAmount({
         >
           {btnText}
         </Button>
-      )}
+      
     </Stack>
   );
 }
