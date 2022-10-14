@@ -1,13 +1,11 @@
-import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 import { Box, Radio, Text } from "@mantine/core";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 import {
   selectSettings,
   setDisplay,
 } from "../../../../features/settings/settingsSlice";
-import ColorsMenu from "../color-coding/balances/balances-desktop";
-import SpreadsheetMenu from "../color-coding/transactions/transactions-desktop";
 import { useRadioSettings } from "../../../../hooks/useRadioSettings";
-import { useEffect } from "react";
 
 export default function DisplayRadioGroup() {
   const dispatch = useAppDispatch();

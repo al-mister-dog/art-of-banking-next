@@ -1,12 +1,13 @@
-import { useAppSelector } from "../../app/hooks";
+
 import { selectActions } from "../../features/actions/actionsSlice";
 import { Card, Grid, useMantineTheme } from "@mantine/core";
-import ChartPrivateCredit from "../interactive-ui/charts/linechart-private-credit";
-import ChartBalances from "../interactive-ui/charts/barchart-balances";
-import ChartCredit from "../interactive-ui/charts/linechart-credit";
-import SettingsDesktop from "../interactive-ui/settings/container/container-desktop";
-import EffectiveRate from "../interactive-ui/charts/effective-rate-beta";
+import ChartPrivateCredit from "./interactive-ui/charts/linechart-private-credit";
+import ChartBalances from "./interactive-ui/charts/barchart-balances";
+import ChartCredit from "./interactive-ui/charts/linechart-credit";
+import SettingsDesktop from "./interactive-ui/settings/container";
+import EffectiveRate from "./interactive-ui/charts/effective-rate-beta";
 import { charts } from "../../config/charts";
+import { useAppSelector } from "../../app/hooks";
 
 export default function Desktop() {
   const { currentLectureId } = useAppSelector(selectActions);

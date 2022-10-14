@@ -10,8 +10,6 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
-import { useMediaQuery } from "@mantine/hooks";
-
 import { useMantineTheme } from "@mantine/core";
 import ChartContainer from "./chart-container";
 import { useAppSelector } from "../../../../app/hooks";

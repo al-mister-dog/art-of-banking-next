@@ -1,7 +1,8 @@
+import { useAppSelector } from "../../../../../app/hooks";
+import { selectSettings } from "../../../../../features/settings/settingsSlice";
 import { createContext, useState } from "react";
-
-export const DrawerContext = createContext((v: boolean) => {});
-
+import { Record } from "../../../../../domain/services/records";
+import { CardInfo } from "../../types";
 import {
   Card,
   Center,
@@ -12,16 +13,11 @@ import {
   Drawer,
   useMantineTheme,
 } from "@mantine/core";
-
 import BankDetail from "../../bank-detail/panel";
 import BalanceSheetRowHeading from "../balances/balance-sheet-heading";
-
-import { CardInfo } from "../../types";
-
 import SpreadsheetList from "../balances/balance-displays/spreadsheet-list";
-import { useAppSelector } from "../../../../../app/hooks";
-import { selectSettings } from "../../../../../features/settings/settingsSlice";
-import { Record } from "../../../../../domain/services/records";
+
+export const DrawerContext = createContext((v: boolean) => {});
 
 export const useStyles = createStyles((theme) => ({
   card: {

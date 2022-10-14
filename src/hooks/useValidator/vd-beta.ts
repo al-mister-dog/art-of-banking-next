@@ -1,7 +1,7 @@
-import { CardInfo } from "../../components/interactive-ui/types";
 import { Reserves } from "../../domain/services/reserves";
 import { creditData } from "../../domain/structures/objects";
 import { getTransferDetails, getWithdrawDetails } from "../../helpers/getters";
+import { CardInfo } from "../../types";
 import { check } from "./check";
 
 const validatorsByLecture = (

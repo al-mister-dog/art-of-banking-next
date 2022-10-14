@@ -1,8 +1,8 @@
-import { CardInfo } from "../components/interactive-ui/types";
 import { Reserves } from "../domain/services/reserves";
 import { Banks } from "../domain/services/bank";
 import { Accounts } from "../domain/services/accounts";
 import { getTransferDetails, getWithdrawDetails } from "../helpers/getters";
+import { CardInfo } from "../types";
 
 const check = {
   checks: {

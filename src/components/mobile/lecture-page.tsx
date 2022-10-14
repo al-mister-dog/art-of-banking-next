@@ -18,6 +18,7 @@ const useStyles = createStyles((theme) => ({
     padding: 16,
   },
 }));
+
 export default function LecturePageMobile({
   slug,
   title,

@@ -1,10 +1,3 @@
-import { useAppDispatch, useAppSelector } from "../../../../../app/hooks";
-import { useState } from "react";
-import { useRadioSettings } from "../../../../../hooks/useRadioSettings";
-import {
-  selectSettings,
-  setClaveroDisplay,
-} from "../../../../../features/settings/settingsSlice";
 import {
   Box,
   Button,
@@ -14,8 +7,16 @@ import {
   Text,
   useMantineTheme,
 } from "@mantine/core";
+import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../../../app/hooks";
+import {
+  selectSettings,
+  setClaveroDisplay,
+} from "../../../../../features/settings/settingsSlice";
+import { useRadioSettings } from "../../../../../hooks/useRadioSettings";
 import Spreadsheet from "../../../../displays/spreadsheet";
-import SpreadsheetAbout from "../../about/about-spreadsheet";
+
+import SpreadsheetAbout from "../about/about-spreadsheet";
 
 export default function SpreadsheetMenu() {
   const dispatch = useAppDispatch();

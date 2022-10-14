@@ -1,11 +1,11 @@
-import { MantineProvider } from "@mantine/core";
-import { CardInfo } from "../types";
-import Layout from "./layout";
-import React from "react";
 import { useAppSelector } from "../../../../app/hooks";
 import { selectBanks } from "../../../../features/banks/banksSlice";
+import React from "react";
+import { MantineProvider } from "@mantine/core";
+import { CardInfo } from "../types";
 import { Bank } from "../../../../domain/structures/types";
 import { Display } from "../../../../domain/analytics/display";
+import Layout from "./layout";
 
 interface Colors {
   [index: string]: any;

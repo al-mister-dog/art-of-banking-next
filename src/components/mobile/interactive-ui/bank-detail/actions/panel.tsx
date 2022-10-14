@@ -1,10 +1,10 @@
+import { useAppSelector } from "../../../../../app/hooks";
+import { selectActions } from "../../../../../features/actions/actionsSlice";
 import { useState } from "react";
 import { Text, Center, Stack, useMantineTheme } from "@mantine/core";
 import { CardInfo } from "../../types";
 import ActionSelections from "./selections";
 import ActionForms from "./forms";
-import { useAppSelector } from "../../../../../app/hooks";
-import { selectActions } from "../../../../../features/actions/actionsSlice";
 
 export default function ActionsPanel({ bank }: { bank: CardInfo }) {
   const { actions } = useAppSelector(selectActions);

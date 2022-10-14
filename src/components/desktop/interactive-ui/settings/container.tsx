@@ -1,6 +1,3 @@
-import { useAppSelector } from "../../../../app/hooks";
-import { selectActions } from "../../../../features/actions/actionsSlice";
-import { sliderSettings } from "../../../../features/settings/initialState";
 import {
   Box,
   Card,
@@ -10,11 +7,13 @@ import {
   Title,
   useMantineTheme,
 } from "@mantine/core";
-import DisplayRadioGroup from "../menu-displays/desktop";
-import InterestRateSlider from "../sliders/slider-interest-rate";
-import OverdraftSlider from "../sliders/slider-overdraft";
-import ReserveRequirementSlider from "../sliders/slider-reserve-requirement";
-import ColorsMenu from "../menu-colors/desktop";
+import DisplayRadioGroup from "./menu-displays";
+import OverdraftSlider from "./sliders/slider-overdraft";
+import ReserveRequirementSlider from "./sliders/slider-reserve-requirement";
+import ColorsMenu from "./menu-colors";
+import { useAppSelector } from "../../../../app/hooks";
+import { selectActions } from "../../../../features/actions/actionsSlice";
+import { sliderSettings } from "../../../../features/settings/initialState";
 
 export default function Desktop() {
   const { currentLectureId } = useAppSelector(selectActions);

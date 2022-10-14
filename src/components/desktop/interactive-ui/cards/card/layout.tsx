@@ -4,7 +4,7 @@ import { useState, useCallback, useEffect } from "react";
 import { Grid } from "@mantine/core";
 import { CardInfo } from "../../types";
 import CardGrid from "./card-grid";
-import BankDetail from "../../bank-detail/panel";
+import BankDetail from "../../bank-detail/desktop";
 
 export default function LayoutDesktop({
   banksArray,

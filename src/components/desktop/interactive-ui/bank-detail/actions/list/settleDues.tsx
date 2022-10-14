@@ -10,7 +10,6 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 
-
 import { System } from "../../../../../../domain/system";
 import { useAppDispatch } from "../../../../../../app/hooks";
 import { Banks } from "../../../../../../domain/services/bank";
@@ -23,7 +22,6 @@ import {
   debitClearinghouse,
 } from "../../../../../../features/banks/banksSlice";
 import { useValidator } from "../../../../../../hooks/useValidator/useValidator";
-import { DrawerContext } from "../../../../../interactive-ui/cards/card/card-mobile";
 import { CardInfo } from "../../../types";
 
 export default function SettleDues({ bank }: { bank: CardInfo }) {
@@ -110,8 +108,6 @@ const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
 
 function NextStep({ bank, selectedBank }) {
   const dispatch = useAppDispatch();
-  const setOpened = useContext(DrawerContext);
-  const theme = useMantineTheme();
   const [paymentType, setPaymentType] = useState("credit");
 
   const accountInfo = { ...creditData.creditAccounts[selectedBank] };
@@ -217,10 +213,6 @@ function NextStep({ bank, selectedBank }) {
 
 function NextStepCH({ bank, selectedBank }) {
   const dispatch = useAppDispatch();
-
-  const setOpened = useContext(DrawerContext);
-  const theme = useMantineTheme();
-
   const accountInfo = { ...creditData.creditAccounts[selectedBank] };
   const amount = accountInfo.balance;
   let otherBank = null;

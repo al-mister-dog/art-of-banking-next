@@ -1,7 +1,7 @@
-import { CardInfo } from "../components/interactive-ui/types";
 import { Accounts } from "../domain/services/accounts";
 import { Banks } from "../domain/services/bank";
 import { Reserves } from "../domain/services/reserves";
+import { CardInfo } from "../types";
 
 export function getCustomerReserves(customer: CardInfo) {
   const customerReserves = Reserves.getReservesById(customer.cardInfo.id);
