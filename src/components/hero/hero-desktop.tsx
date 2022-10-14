@@ -106,7 +106,7 @@ export default function HeroDesktop() {
           </Text>
         </div>
       </SimpleGrid>
-      <div
+       <div
         style={{
           height: "100vh",
           backgroundColor: backgroundViolet,
@@ -134,7 +134,7 @@ export default function HeroDesktop() {
           </LazyShow>
         </div>
       </div>
-      <div style={{ background: backgroundRed, height: "130vh" }}>
+      <div style={{ background: backgroundRed, height: "200vh", overflowX: "hidden" }}>
         <Divide
           direction="right bottom"
           colorOne={backgroundViolet}
@@ -182,7 +182,7 @@ export default function HeroDesktop() {
             </Title>
           </LazyShow>
         </div>
-      </div>
+      </div> 
     </>
   );
 }

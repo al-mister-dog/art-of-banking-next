@@ -47,7 +47,6 @@ export default function HeroDesktop() {
             }}
             size={50}
             className="hero-headline"
-            pl="5"
           >
             Art of Banking
           </Title>
