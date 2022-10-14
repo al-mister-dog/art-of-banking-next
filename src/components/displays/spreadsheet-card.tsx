@@ -8,7 +8,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { Record } from "../../domain/services/records";
-import SpreadsheetRow from "../interactive-ui/cards/balances/balance-displays/spreadsheet-row";
+import SpreadsheetRow from "./spreadsheet-row";
 
 const useStyles = createStyles((theme) => ({
   card: {

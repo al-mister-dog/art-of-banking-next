@@ -3,7 +3,7 @@ import { Display } from "../../domain/analytics/display";
 import { Bank } from "../../domain/structures/types";
 
 import { selectBanks } from "../../features/banks/banksSlice";
-import { CardInfo } from "../interactive-ui/types";
+import { CardInfo } from "../desktop/interactive-ui/types";
 import SpreadsheetCard from "./spreadsheet-card";
 
 export default function SpreadSheet() {
