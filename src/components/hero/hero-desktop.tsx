@@ -10,6 +10,18 @@ export default function HeroDesktop() {
   const backgroundViolet = theme.colors.violet[0];
   const backgroundRed = theme.colors.red[0];
 
+  const examples = {
+    example1: {
+      title: "See Behind the Numbers",
+      text: `Use the tools that economists use to give us all the figures we see 
+      everyday in the news. Find out how metrics such as inflation and GDP are worked out.`,
+    },
+    example2: {
+      title: "Take Control of the Financial System",
+      text: `Find out how money flows between banks and financial institutions using interactive
+      tools and analysis.`,
+    },
+  };
   return (
     <>
       <SimpleGrid cols={2} spacing={0}>
@@ -114,10 +126,10 @@ export default function HeroDesktop() {
                 color: "#312A45",
                 letterSpacing: "3px",
               }}
-              size={50}
+              size={40}
               align="center"
             >
-              Always and Everywhere, Money is Hierarchical.
+              Understand What Money Is, Where It Goes, and Why It Matters.
             </Title>
           </LazyShow>
         </div>
@@ -129,15 +141,15 @@ export default function HeroDesktop() {
           colorTwo={backgroundRed}
         >
           <Example
-            title="Bla bla bla"
-            body="poasdpopasd"
+            title={examples.example1.title}
+            body={examples.example1.text}
             image={example2}
             direction="right"
           />
           <div style={{ height: "100px" }} />
           <Example
-            title="Bla bla bla"
-            body="poasdpopasd"
+            title={examples.example2.title}
+            body={examples.example2.text}
             image={example1}
             direction="left"
           />
@@ -145,10 +157,32 @@ export default function HeroDesktop() {
       </div>
       <div
         style={{
-          height: "100vh",
+          height: "50vh",
           backgroundColor: backgroundRed,
         }}
-      ></div>
+      >
+        <div
+          style={{
+            position: "relative",
+            top: "50%",
+            transform: "translateY(-50%)",
+          }}
+        >
+          <LazyShow>
+            <Title
+              style={{
+                color: "#312A45",
+                letterSpacing: "3px",
+              }}
+              size={50}
+              align="center"
+            >
+              Learn the Tricks of the Masters. From the Renaissance Bankers to
+              the New York Money Markets.
+            </Title>
+          </LazyShow>
+        </div>
+      </div>
     </>
   );
 }
