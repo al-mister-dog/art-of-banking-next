@@ -109,7 +109,6 @@ export const Loans = {
     if (account) {
       CreditAccounts.decreaseCorrespondingCredit(account, amount);
     } else {
-      console.log("HELLO");
       Loans.create(bank1, bank2, amount, type);
     }
   },

@@ -11,7 +11,7 @@ import { useLoaded } from "../../hooks/useLoaded";
 import { mediaQuery } from "../../config/media-query";
 import { useMediaQuery } from "@mantine/hooks";
 import LecturePageDesktop from "../../components/desktop/lecture-page";
-import LecturePageMobile from "../../components/mobile/lecture-page"
+import LecturePageMobile from "../../components/mobile/lecture-page";
 
 const useStyles = createStyles((theme) => ({
   assignmentContainer: {
@@ -66,10 +66,10 @@ export default function LecturePath({
       />
     );
   }
-  console.log("Neither desktop or mobile opened");
+
   return (
     <LoadingOverlay
-      loaderProps={{ size: "sm", color: "pink", variant: "bars" }}
+      loaderProps={{ size: "xl", color: "violet", variant: "dots" }}
       overlayOpacity={0.3}
       overlayColor="#c5c5c5"
       visible

@@ -38,4 +38,3 @@ const InterestRateGetters = {
   },
 };
 
-// console.log(InterestRateGetters.getSimpleInterest(1000, 1, 10))

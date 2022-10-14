@@ -91,7 +91,7 @@ export const CreditAccounts = {
     newCreditAccount.balance -= amount;
 
     if (newCreditAccount.balance <= 0 && newCreditAccount.type === "loans") {
-      console.log(newCreditAccount);
+      
       let creditAccounts = { ...creditData.creditAccounts };
       let invalidatedAccount = {
         ...creditAccounts,
