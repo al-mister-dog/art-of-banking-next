@@ -1,5 +1,3 @@
-import { useAppSelector } from "../../../../app/hooks";
-import { selectSettings } from "../../../../features/settings/settingsSlice";
 import { useCallback } from "react";
 import {
   Card,
@@ -12,8 +10,11 @@ import {
 } from "@mantine/core";
 import { CardInfo } from "../../types";
 import BalanceSheetRowHeading from "../balances/balance-sheet-heading";
-import { Record } from "../../../../domain/services/records";
+
 import SpreadsheetList from "../balances/balance-displays/spreadsheet-list";
+import { useAppSelector } from "../../../../../app/hooks";
+import { Record } from "../../../../../domain/services/records";
+import { selectSettings } from "../../../../../features/settings/settingsSlice";
 
 const useStyles = createStyles((theme) => ({
   card: {

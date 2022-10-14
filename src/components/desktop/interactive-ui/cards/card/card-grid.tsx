@@ -1,7 +1,7 @@
-import { Grid } from "@mantine/core";
 import React from "react";
-import { splitArray } from "../../../helpers";
-import Card from "./card-desktop";
+import { splitArray } from "../../../../helpers";
+import { Grid } from "@mantine/core";
+import Card from "./card";
 
 function CardGrid({ group, handleSetBankDetail }) {
   const [group1, group2] = splitArray(group);

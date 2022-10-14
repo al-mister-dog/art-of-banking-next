@@ -1,14 +1,11 @@
-import { useAppSelector } from "../../../app/hooks";
-import { selectBanks } from "../../../features/banks/banksSlice";
-import { useMediaQuery } from "@mantine/hooks";
-import { MantineProvider } from "@mantine/core";
-import { CardInfo } from "../types";
-import { Display } from "../../../domain/analytics/display";
-import { Bank } from "../../../domain/structures/types";
-import LayoutMobile from "./card/layout-mobile";
-import LayoutDesktop from "./card/layout-desktop";
+import { useAppSelector } from "../../../../app/hooks";
+import { selectBanks } from "../../../../features/banks/banksSlice";
 import React from "react";
-import { mediaQuery } from "../../../config/media-query";
+import { MantineProvider } from "@mantine/core";
+import { Bank } from "../../../../domain/structures/types";
+import { Display } from "../../../../domain/analytics/display";
+import Layout from "./card/layout";
+import { CardInfo } from "../types";
 
 interface Colors {
   [index: string]: any;
@@ -16,7 +13,6 @@ interface Colors {
 
 function BalanceSheetsContainer() {
   const { banks } = useAppSelector(selectBanks);
-  const isMobile = useMediaQuery(mediaQuery);
   const colors: Colors = {
     customer: "grape",
     bank: "violet",
@@ -27,7 +23,7 @@ function BalanceSheetsContainer() {
   function getCardInfo(bank: Bank): CardInfo {
     const cardInfo = { ...bank };
     const balanceSheet = Display.balanceSheet(cardInfo);
-    const color = colors[`${bank.type}`] as keyof Colors;    
+    const color = colors[`${bank.type}`] as keyof Colors;
     return { cardInfo, balanceSheet, color };
   }
 
@@ -39,11 +35,7 @@ function BalanceSheetsContainer() {
     return (
       <>
         <MantineProvider theme={{ fontFamily: `"Poppins"` }}>
-          {isMobile ? (
-            <LayoutMobile banksArray={banksArray} />
-          ) : (
-            <LayoutDesktop banksArray={banksArray} />
-          )}
+          <Layout banksArray={banksArray} />
         </MantineProvider>
       </>
     );

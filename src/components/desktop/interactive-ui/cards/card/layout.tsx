@@ -1,5 +1,5 @@
-import { useAppSelector } from "../../../../app/hooks";
-import { selectActions } from "../../../../features/actions/actionsSlice";
+import { useAppSelector } from "../../../../../app/hooks";
+import { selectActions } from "../../../../../features/actions/actionsSlice";
 import { useState, useCallback, useEffect } from "react";
 import { Grid } from "@mantine/core";
 import { CardInfo } from "../../types";
