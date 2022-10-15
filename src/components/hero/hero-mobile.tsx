@@ -116,7 +116,7 @@ export default function HeroDesktop() {
           </LazyShow>
         </div>
       </div>
-      <div style={{ background: backgroundRed, height: "130vh" }}>
+      <div style={{ background: backgroundRed, height: "130vh", overflowX: "hidden" }}>
         <Divide
           direction="right bottom"
           colorOne={backgroundViolet}
