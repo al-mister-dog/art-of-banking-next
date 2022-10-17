@@ -168,7 +168,7 @@ export const AnalyticsData = {
   },
 };
 
-export const loanRecords = [];
+export let loanRecords = [];
 
 export function clearBankData() {
   bankData = {
@@ -229,4 +229,5 @@ export function clearBankData() {
     loanAccounts: {} as LoanAccounts,
     allIds: [] as number[],
   };
+  loanRecords = [];
 }

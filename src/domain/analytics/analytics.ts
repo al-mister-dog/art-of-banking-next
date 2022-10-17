@@ -39,6 +39,7 @@ export const Analytics = {
   },
   getVolumeWeightedMedian() {
     const allLoans = loanRecords;
+    console.log(allLoans);
     const data = Calculator.weightedMedian(allLoans);
     const fallbackData = {
       volumeWeightedMedian: 0,

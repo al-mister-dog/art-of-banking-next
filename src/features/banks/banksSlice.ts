@@ -47,7 +47,6 @@ export const banksSlice = createSlice({
       banksSlice.caseReducers.setState(state);
       banksSlice.caseReducers.resetGraphData(state);
       banksSlice.caseReducers.updateAnalytics(state);
-      state.loading = false;
     },
     deposit: (state, { payload }) => {
       const { amount, c1, b1 } = payload;
@@ -180,6 +179,19 @@ export const banksSlice = createSlice({
         credit: [],
         reserves: [],
         privateCredit: [],
+        nationalData: {},
+        loanData: {
+          volumeWeightedMedian: 0,
+          associatedData: [
+            {
+              transactionPercentage: "0",
+              rate: 0,
+              occurences: 0,
+              volume: 0,
+              cumulativeFrequency: 0,
+            },
+          ],
+        },
       };
     },
     updateAnalytics: (state) => {

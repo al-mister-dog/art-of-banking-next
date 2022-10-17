@@ -1,0 +1,12 @@
+store: {
+    banks,
+    actions,
+    currentLectureId
+},
+config: {
+    setupFunctions,
+
+},
+structures: {
+    
+}

@@ -5,7 +5,11 @@ import { Customer } from "../../domain/services/customer";
 import { Display } from "../../domain/analytics/display";
 import { GraphData } from "../../domain/analytics/graph-data";
 import { Record } from "../../domain/services/records";
-import { analytics, bankData, clearBankData } from "../../domain/structures/objects";
+import {
+  analytics,
+  bankData,
+  clearBankData,
+} from "../../domain/structures/objects";
 import { System } from "../../domain/system";
 
 export type SetupFunctions = { [key: string]: any };
@@ -295,7 +299,7 @@ export const setupFunctions: SetupFunctions = {
     BankingSystem.createBank("Bank 4", "bank", 0, 100);
     CentralBank.getLoan(bankData.banks[1], bankData.banks[2], 10, 5, 5);
     CentralBank.transfer(bankData.banks[1], bankData.banks[2], 10);
-    CentralBank.repayLoan(bankData.banks[1], bankData.banks[2], 15)
+    CentralBank.repayLoan(bankData.banks[1], bankData.banks[2], 15);
     CentralBank.getLoan(bankData.banks[2], bankData.banks[3], 10, 10, 10);
     CentralBank.transfer(bankData.banks[2], bankData.banks[3], 10);
     CentralBank.getLoan(bankData.banks[3], bankData.banks[4], 10, 15, 15);

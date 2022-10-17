@@ -36,7 +36,6 @@ export default function LecturePath({
   keyTermsIds,
 }) {
   const { paragraphs, assignment } = introductoryTexts;
-  const { classes } = useStyles();
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(setup({ id }));
